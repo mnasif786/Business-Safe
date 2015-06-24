@@ -1,0 +1,64 @@
+﻿@using BusinessSafe.WebSite.HtmlHelpers
+@using Cassette.Views
+@model BusinessSafe.WebSite.Areas.HazardousSubstanceInventory.ViewModels.AddEditHazardousSubstanceViewModel
+@{
+    ViewBag.Title = "Edit Hazardous Substances";
+}
+<section>
+    <span class="legend">Edit Hazardous Substance</span>
+    <div class="content">
+        <div id="AddEditHazardousSubstance" class="container fixed-content ipad-container">
+            <h2>
+                <span class="tick"></span>Edit Hazardous Substance</h2>
+            <div class="content">
+                @using (@Html.BeginForm("Update", "Inventory", FormMethod.Post, new { id = "AddEditHazardousSubstanceForm", @class = "form-inline" }))
+                {
+                    @Html.Partial("_EditableHazardousSubstanceDetails", Model)
+                
+                    if (Model.HasLinkedRiskAssessments)
+                    {
+                    <fieldset>
+                        <div class="alert alert-message">
+                            <p>
+                                Please Note: Hazardous Substance Risk Assessments are linked to this Hazardous Substance.
+                                Modification to Hazardous Substance may change your Hazardous Substance Risk Assessment.
+                                Please review Hazardous Substance Risk Assessment following modification.</p>
+                        </div>
+                    </fieldset> 
+                    }
+                    @Html.Partial("_EditableHazardousSubstanceCommandButtons", Model)
+                }
+            </div>
+        </div>
+    </div>
+</section>
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("hazardoussubstanceinventory");
+        @Bundles.RenderScripts()  
+    }
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var url = window.globalajaxurls.getSuppliers;
+            var data = {
+                companyId: $("#companyId").val()
+            };
+            var callback = function (result) {
+                BusinessSafe.HazardousSubstance.Inventory(result);
+            };
+            AjaxCall.execute(url, callback, data, "GET");
+
+            
+        });
+    </script>
+}
+<div id="dialogContainer" class="hide" title="Possible Duplicates Already Present in Inventory">
+</div>
+<div id="dialogAddNewSupplierContainer" class="hide" title="New Supplier">
+</div>
+@if (ViewBag.IsReadOnly != null)
+{
+    @Html.Hidden("IsReadOnly", true)
+}

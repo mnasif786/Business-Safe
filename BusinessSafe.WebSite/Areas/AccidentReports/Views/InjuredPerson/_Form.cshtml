@@ -1,0 +1,136 @@
+﻿@using BusinessSafe.WebSite.Areas.AccidentReports.ViewModels
+@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Extensions
+@model InjuredPersonViewModel
+<div class="fixed-content">
+    @Html.Partial("_TitleBar", ViewBag.AccidentRecordSummary as AccidentSummaryViewModel)
+    <form class="row form-inline" method="post" action="@Url.Action("Save")" >
+    @Html.HiddenFor(model => model.AccidentRecordId)
+    @Html.HiddenFor(model => model.CompanyId)
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div>
+            @Html.Partial("_DistinctValidationSummary")
+        </div>
+    }
+    @if (TempData["Notice"] != null)
+    {
+        <div class="alert alert-success">
+            <a id="successmessageanchor" href="#successmessage"></a>
+            @TempData["Notice"].ToString()
+        </div>    
+    }
+    <fieldset>
+        <legend class="span12">Who was involved in the Accident?</legend>
+        <div class="span12">
+            <label class="span">
+            </label>
+            <ul id="person-type" class="row-of-radios clearfix">
+                <li class="span">
+                    <label>
+                        Employee</label>
+                    @Html.RadioButtonFor(model => model.PersonInvolvedType, "Employee", new { id = "PersonInvolvedTypeEmployee" })
+                </li>
+                <li class="span">
+                    <label>
+                        Visitor</label>
+                    @Html.RadioButtonFor(model => model.PersonInvolvedType, "Visitor", new { id = "PersonInvolvedTypeVisitor" })
+                </li>
+                <li class="span">
+                    <label>
+                        Person at work (not employee)</label>
+                    @Html.RadioButtonFor(model => model.PersonInvolvedType, "PersonAtWork", new { id = "PersonInvolvedTypePersonAtWork" })
+                </li>
+                <li class="span">
+                    <label>
+                        Other</label>
+                    @Html.RadioButtonFor(model => model.PersonInvolvedType, "Other", new { id = "PersonInvolvedTypeOther" })
+                </li>
+            </ul>
+        </div>
+        <div id="employee-involved-select" class="span12 hide">
+            <label class="span2" for="EmployeeId">
+                Employee</label>
+            @Html.TextBoxFor(m => m.Employee, new { @class = "span4" })
+            @Html.HiddenFor(m => m.EmployeeId)
+        </div>
+        <div id="other-person-involved-type" class="span12 hide">
+            <label class="span2" for="OtherPersonInvolved">
+                Please specify</label>
+            @Html.TextBoxFor(m => m.PersonInvolvedOtherDescription, new { @class = "span4" })
+            @Html.HiddenFor(m => m.PersonInvolvedOtherDescriptionId)
+        </div>
+        <div id="other-person-involved-other-description" class="span12 hide">
+            <label class="span2" for="OtherPersonInvolvedDescriptionOther"></label>
+            @Html.TextBoxFor(m => m.PersonInvolvedOtherDescriptionOther, new { @class = "span4" })
+        </div>
+    </fieldset>
+    <fieldset id="non-employee-details" class="hide">
+        <legend class="span12">Please complete details of the injured non-employee below.</legend>
+        <div class="span12">
+            <label class="span2" for="Forename">
+                Forename</label>
+            @Html.TextBoxFor(m => m.Forename, new { @class = "span4" })
+        </div>
+        <div class="span12">
+            <label class="span2" for="Surname">
+                Surname</label>
+            @Html.TextBoxFor(m => m.Surname, new { @class = "span4" })
+        </div>
+        <div class="span12">
+            <label class="span2" for="AddressLine1">
+                Address</label>
+            @Html.TextBoxFor(m => m.AddressLine1, new { @class = "span4" })
+        </div>
+        <div class="span12">
+            <label class="span2" for="AddressLine2">
+            </label>
+            @Html.TextBoxFor(m => m.AddressLine2, new { @class = "span4" })
+        </div>
+        <div class="span12">
+            <label class="span2" for="AddressLine3">
+            </label>
+            @Html.TextBoxFor(m => m.AddressLine3, new { @class = "span4" })
+        </div>
+        <div class="span12">
+            <label class="span2" for="County">
+                County</label>
+            @Html.TextBoxFor(m => m.County, new { @class = "span4" })
+        </div>
+        <div class="span12">
+            <label class="span2" for="Postcode">
+                Postcode</label>
+            @Html.TextBoxFor(m => m.Postcode, new { @class = "span2" })
+        </div>
+        <div class="span12">
+            <label class="span2" for="Country">
+                Country</label>
+            @Html.TextBoxFor(m => m.Country, new { @class = "span4" })
+            @Html.HiddenFor(m => m.CountryId)
+        </div>
+        <div class="span12">
+            <label class="span2" for="ContactNo">
+                Contact No</label>
+            @Html.TextBoxFor(m => m.ContactNo, new { @class = "span4" })
+        </div>
+        <div class="span12">
+            <label class="span2" for="Occupation">
+                Occupation</label>
+            @Html.TextBoxFor(m => m.Occupation, new { @class = "span4" })
+        </div>
+    </fieldset>
+    @{
+        var viewName = Html.IsReadOnly() ? "View" : "Index";
+        var urlAction = Url.Action(viewName, "AccidentDetails", new { area = "AccidentReports", companyId = Model.CompanyId, accidentRecordId = Model.AccidentRecordId });
+    }
+    <div class="span12">
+        <label class="span2">
+        </label>
+        <input type="submit" id="saveButton" value="Save" class="btn btn-success" />
+        <a id="nextBtn" class="btn btn-primary" mainurl="" href="@urlAction">Save &amp; Continue
+            <i class="icon-chevron-right icon-white"></i></a>
+        @Html.ActionLink("Cancel", "Index", "Search", null, new { @class = "btn btn-link" })
+    </div>
+    @Html.HiddenFor(x => x.CompanyId)
+    </form>
+</div>

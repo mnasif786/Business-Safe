@@ -1,0 +1,44 @@
+﻿@model BusinessSafe.MessageHandlers.Emails.ViewModels.SendEmployeeChecklistCompletedEmailViewModel
+<head>
+    <style>
+        body
+        {
+            background-color: white;
+            font-size: .85em;
+            font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
+            margin: 0;
+            padding: 0;
+            color: #393939;
+        }
+        
+        h1
+        {
+            font-size: 2em;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        BusinessSafe Online - Checklist Completed
+    </h1>
+    
+<p>
+    The following checklist was completed:
+</p>
+<p>
+    Checklist Name: <b>@Model.ChecklistName</b>
+</p>
+<p>
+    Employee Name: <b>@Model.EmployeeWhoCompleted</b>
+</p>
+<p>
+    Date Completed: <b>@Model.CompletedOn</b>
+</p>
+<p>
+    Link: @Model.BusinessSafeOnlineLink
+</p>
+
+</body>
+

@@ -1,0 +1,184 @@
+﻿@using BusinessSafe.WebSite.Extensions
+@model BusinessSafe.WebSite.Areas.Responsibilities.ViewModels.ResponsibilityViewModel 
+
+@using (Html.BeginForm(@Model.GetPostAction(), "Responsibility", FormMethod.Post, new { @class = "row form-inline", id="EditResponsibiltyForm" }))
+{
+    @Html.HiddenFor(model => model.CompanyId)
+    @Html.HiddenFor(model => model.ResponsibilityId)
+    @Html.HiddenFor(model => model.ShowCreateResponsibilityTaskDialogOnLoad)   
+                                                  
+    <fieldset id="EditResponsibiltyDetail">
+        <legend class="span12">
+            <h3>
+                Details of Responsibility</h3>
+        </legend>
+        <div class="span12">
+            <label class="span3">
+                Responsibility Category:</label>
+            @Html.TextBox("Category", null, new { @class = "span4" })
+            @Html.HiddenFor(m => m.CategoryId)
+        </div>
+        <div class="span12">
+            <label class="span3" for="Title">
+                Responsibility Title:</label>
+            @Html.TextBoxFor(m => m.Title, new { maxlength = 200, @class = "span8" })
+        </div>
+        <div class="span12">
+            <label class="span3" for="Title">
+                Responsibility Description:</label>
+            @Html.TextAreaFor(m => m.Description, new { maxlength = 500, @class = "span8" })
+        </div>
+        <div class="span12">
+            <label class="span3">
+                Site:</label>
+            @Html.TextBoxFor(m => m.Site, new { @class = "span4" })
+            @Html.HiddenFor(m => m.SiteId)
+        </div>
+        <div class="span12">
+            <label class="span3">
+                Reason for Responsibility:</label>
+            @Html.TextBoxFor(m => m.Reason, new { @class = "span4" })
+            @Html.HiddenFor(x => x.ReasonId)
+        </div>
+        @if (!Model.IsExistingResponsibility())
+        {
+            <div class="span12">
+                @Html.HiddenFor(model => model.IsCreatorResponsibilityOwner)
+                <label class="span4" for="ResponsibilityOwnerTrue">
+                    Are you the owner of this responsibility?
+                </label>
+                @Html.RadioButtonFor(model => model.IsCreatorResponsibilityOwner, "true", new { id = "ReasponsibilityOwnerTrue" })
+                <label for="ResponsibilityOwnerTrue">
+                    Yes</label>
+                &nbsp; &nbsp;
+                @Html.RadioButtonFor(model => model.IsCreatorResponsibilityOwner, "false", new { id = "ReasponsibilityOwnerFalse" })
+                <label for="ResponsibilityOwnerTrue">
+                    No</label>
+            </div>
+        }
+        <div class="span12" id="responsibilityOwnerContainer" style="display: none;">
+            <label class="span3" for="Owner">@Model.GetOwnerText()</label>
+            @Html.TextBoxFor(m => m.Owner, new { @class = "span4" })
+            @Html.HiddenFor(x => x.OwnerId)
+        </div>
+        @if (Model.IsExistingResponsibility() && Model.HasMultipleFrequencies)
+        {
+            <div class="span8">
+                <label class="span3">
+                    Frequency</label>
+                <input type="text" value="Multiple" class="span4" readonly="readonly" />
+                 @Html.HiddenFor(x => x.HasMultipleFrequencies)
+            </div>
+        }
+        else
+        {
+            <div class="span8">
+                <label class="span3">
+                    Frequency</label>
+                @Html.TextBoxFor(m => m.Frequency, new { @class = "span4" })
+                @Html.HiddenFor(x => x.FrequencyId)
+            </div>
+        }
+        @if (!Model.IsExistingResponsibility())
+        {
+            <div class="span8">
+                @*@Html.HiddenFor(model => model.CreateResponsibilityTask)*@
+                <label class="span4" for="CreateResponsibilityTaskTrue">
+                    Do you want to create a responsibility task?
+                </label>
+                @Html.RadioButtonFor(model => model.CreateResponsibilityTask, "true", new { id = "CreateResponsibilityTaskTrue" })
+                <label for="CreateResponsibilityTaskTrue">
+                    Yes</label>
+                &nbsp; &nbsp;
+                @Html.RadioButtonFor(model => model.CreateResponsibilityTask, "false", new { id = "CreateResponsibilityTaskFalse" })
+                <label for="CreateResponsibilityTaskFalse">
+                    No</label>
+            </div>
+        }
+        <div class="span4">
+            @if (!Model.IsExistingResponsibility())
+            {
+                <button type="submit" class="btn btn-success btn-large" id="createResponsibility">
+                    Create Responsibility</button>
+            }
+        </div>
+        <div class="span12">
+            @Html.ValidationSummary("")
+        </div>
+    </fieldset>
+    
+    <fieldset id="EditResponsibiltyTasks">
+        @if (Model.IsExistingResponsibility())
+        {
+            <div class="tabs">
+                <div style="margin-bottom:0px;">
+                    <ul class="nav nav-tabs" id="responsibilityTaskTabs">
+                        <li class="active"><a id="outstanding-tab-button" href="#outstanding-tab" data-toggle="tab">
+                            Outstanding</a> </li>
+                        <li><a id="completed-tab-button" href="#completed-tab" data-toggle="tab">Completed</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content" style=" border: 1px solid #ddd;">
+                    <div id="TaskDialog"></div>
+                    <div id="outstanding-tab" class="tab-pane active" style="padding: 10px">
+                        @if (ViewBag.IsReadOnly == null || !ViewBag.IsReadOnly)
+                        {
+                            <div class="row">
+                                <legend class="span5">
+                                    <h3 class="pull-left">
+                                        Add Responsibility Task</h3>
+                                    <button id="add-responsibility-task" class="btn pull-left" data-id="@Model.ReasonId" title="Add Responsibility Task">
+                                        <i class="icon-plus-sign"></i>
+                                    </button>
+                                </legend>
+                                </div>
+                        }
+                        <div class="hide">
+                            <div id="dialogAddEditResponsibilityTask" title="Add Responsibility Task" class="">
+                            </div>
+                            <div id="dialogDeleteResponsibilityTask" title="Delete Responsibility Task">
+                                <p>
+                                    Are you sure you want to delete this responsibility task?</p>
+                            </div>
+                            <div id="dialogDeleteRecurringResponsibilityTask" title="Delete Recurring Task">
+                                <p>
+                                    Deleting this task will also delete all related future scheduled tasks. Do you want
+                                    to proceed?</p>
+                            </div>
+                            <div id="dialogDeleteResponsibilityTaskResponse">
+                            </div>
+                            <div id="dialogHasMultipleFrequencyChangeToTrue" title="Responsibility Task">
+                                <p>
+                                    You have created a number of tasks with different frequencies. The frequency of
+                                    the responsibility will therefore change to multiple.</p>
+                            </div>
+                            <div id="dialogNoLongerRequired" title="Mark Reoccurring Task As No Longer Required">
+                                <p>
+                                    Marking this task as no longer required will prevent any future tasks from being
+                                    scheduled for this task. Do you want to proceed?</p>
+                            </div>
+                        </div>
+                        @Html.Partial("_ResponsibilityTasks", Model.ResponsibilityTasks)
+                    </div>
+                    <div id="completed-tab" class="tab-pane" style="padding: 10px">
+                        @Html.Partial("_ResponsibilityTasks", Model.CompletedResponsibilityTasks)
+                    </div>
+                </div>
+            </div>
+        }
+        @if (ViewBag.IsReadOnly == null || !ViewBag.IsReadOnly)
+        {
+            <div class="">
+                <label class="span3">
+                </label>
+                @if (Model.IsExistingResponsibility())
+                {
+                    <button type="submit" class="btn btn-success" id="saveResponsibility">
+                        Save</button>
+                }
+                <a class="btn btn-link" href="@Url.Action("Index", "Responsibility")">Cancel</a>
+            </div>
+        }
+    </fieldset>
+}

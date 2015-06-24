@@ -1,0 +1,42 @@
+﻿@model BusinessSafe.WebSite.Areas.ActionPlans.ViewModels.ActionIndexViewModel
+@{
+    ViewBag.Title = "Actions Index";
+}
+
+<style>
+    table tr td
+    {
+        border: 1px black solid;
+    }
+</style>
+<h2>Index</h2>
+
+<div> num actions : @Model.Actions.Count() </div>
+
+<div>
+<table>
+    <tr><th>Title</th><th>Action Plan id</th></tr>
+@foreach (var action in Model.Actions)
+{
+    <tr><td>@action.Title</td><td>@action.ActionPlanId</td><td>@action.ActionPlan.Id</td><td>@action.ActionPlan.Id</td></tr>   
+}
+
+</table>
+</div>
+
+       @* public virtual long ActionPlanId { get; set; }
+        public virtual ActionPlan ActionPlan { get; set; }
+
+        // IRN
+        public virtual string Title { get; set; }
+        public virtual string Reference { get; set; }
+        public virtual bool SignificantHazardIdentified { get; set; }
+        public virtual string RecommendedImmediateAction { get; set; }
+
+        public virtual string AreaOfNonCompliance { get; set; }
+        public virtual string ActionRequired { get; set; }
+        public virtual string GuidanceNotes { get; set; }
+        public virtual string TargetTimescale { get; set; }
+        public virtual Guid AssignedTo { get; set; }
+        public virtual DateTime DueDate { get; set; }
+        public virtual string Status { get; set; }*@

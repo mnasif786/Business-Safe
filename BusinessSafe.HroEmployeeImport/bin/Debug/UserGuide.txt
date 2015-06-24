@@ -1,0 +1,95 @@
+﻿Usage
+=====
+
+1 - Unzip application to folder.
+
+2 - Create "C:\EmployeeImportFiles"
+		or
+	(if required)
+	Create Import folder elsewhere
+	Edit configuration so that "EmployeeImportFileDirectory" refers to the import folder
+	(See Configuration section below)
+
+3 - (if required)
+	Update Database connection strings in config
+
+4 - Copy customer CSV file to Import folder (by default, "C:\EmployeeImportFiles")
+
+5 - Run "BusinessSafe.HroEmployeeImport.exe" from command line
+
+6 - At the prompt, select the database server - D(evelopment), U(AT) or L(ive). Pressing return without a selection uses the default (LIVE) database. Using a local DEV database initially 
+	allows any errors in the CSV file to be found and fixed before they reach the live database
+
+7 - At the prompt, enter the Client Account Number (CAN) for the customer whose data is being imported.
+
+8 - The application will attempt to read the CSV file and add the employee data to the [BusinessSafe].[dbo].[Employee] database on the selected server.
+
+9 - Any errors will be displayed on screen and the processing stopped. (See below)
+
+10 - When the processing is complete without error, the CSV file will be moved to the DONE folder
+
+
+Errors
+======
+
+When attempting to import an employee, if an existing employee is found who has the same ClientID, Forename and Surname, then the new employee record will not be imported.
+A warning will be displayed (e.g. "FRED FLINTSTONE already exists for client ABC123 and cannot be imported." )and processing will continue on the rest of the file.
+
+If an employee record does not contain either a Forename or Surname, an error will be raised and processing on the file will stop. 
+
+Employee Data
+=============
+
+The customer will provide employee data in a CSV file, or in an EXCEL file which must be saved as CSV. 
+
+The customer has been provided with a template EXCEL file so the data should be in a recognised format.
+
+The CSV file will consist of a Header row and a series of employee records. The following Header field will be used when creating the BSO employee records
+
+				BSO field				Customer field
+				=========				==============
+				Forename				"Forename"
+				Surname					"Surname"                    
+				EmployeeReference		"EmployeeReference"
+				Title					"Title"  
+				Sex						"Gender"
+				DateOfBirth				"DOB" or "Date of Birth"
+				NationalityId			"NationalityId"
+				NINumber				"NI Number"
+				DrivingLicenseNumber	"Driving Licence No."
+				PPSNumber				"PPSNumber"
+				PassportNumber			"Passport No"
+				WorkVisaNumber			"WorkVisaNumber"
+				WorkVisaExpirationDate	"WorkVisaExpiryDate"
+				HasDisability			"Disabled"
+				HasCompanyVehicle		"CompanyCar"
+				Address1				"Address Line 1"
+				Address2				"Address Line 2"
+				Address3				"Address Line 3"
+				Town					"Town"
+				County					"County"
+				Postcode				"Postcode"
+				Telephone				"Telephone" or "Home Telephone"
+				Mobile					"Mobile" or "Mobile No."
+				Email					"Email"
+				JobTitle				"Job Title" or "Job Role"
+
+Configuration
+=============
+
+The main exe is "BusinessSafe.HroEmployeeImport.exe" which uses the following configuration, found in the "BusinessSafe.HroEmployeeImport.exe.config" file:-
+
+ <appSettings>
+    <add key="EmployeeImportFileDirectory" value="C:\EmployeeImportFiles" />    
+  </appSettings>
+
+  EmployeeImportFileDirectory is the pathname of the folder where the application expects to find the Customer CSV file which is to be imported.
+  The application will create a subfolder within this called "Done". When the CSV file has been processed, it will be moved to the "Done" folder
+
+<connectionStrings>
+	<add name="DevDB" connectionString="Data Source='localhost\SQL2008R2';Initial Catalog=BusinessSafe;Min Pool Size=2;Max Pool Size=60;Connect Timeout=60;User Id=intranetadmin;Password=intadpas;" providerName="System.Data.SqlClient" />
+	<add name="UATDB" connectionString="Data Source='UATSQL2\UAT';Initial Catalog=BusinessSafe;Min Pool Size=2;Max Pool Size=60;Connect Timeout=60;User Id=intranetadmin;Password=intadpas;" providerName="System.Data.SqlClient" />
+	<add name="LiveDB" connectionString="Data Source='PBSPROD2SQL\PROD2';Initial Catalog=BusinessSafe;Min Pool Size=2;Max Pool Size=60;Connect Timeout=60;User Id=intranetadmin;Password=intadpas;" providerName="System.Data.SqlClient" />
+<connectionStrings>
+
+The application allows you to import to one of three databases, Development, UAT or Live. The 3 connection strings above specify their connections.

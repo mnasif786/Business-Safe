@@ -1,0 +1,7 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+<fieldset>
+@if (User.IsInRole(Permissions.AddCompanyDefaults.ToString()))
+{
+    <div><button type="button" class="btn addNonEmployee btn-success">Add New Non-Employee</button>   </div> 
+}
+</fieldset>

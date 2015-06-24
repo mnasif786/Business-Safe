@@ -1,0 +1,31 @@
+﻿@inherits System.Web.Mvc.WebViewPage
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <h2 style="text-align: center;">
+            Health & Safety Site Assessment</h2>
+        <paragraph style="font-family: Helvetica; font-size: 18; font-style: italic;">
+            <chunk red="255" green="0" blue="0">@ViewBag.Title</chunk>
+        </paragraph>
+        <paragraph>
+            <chunk style="font-family:Times;font-weight:bold;">Report Date: </chunk>
+            <chunk style="font-family:Times;">@DateTime.Now.ToString("MM/dd/yyyy")</chunk>
+        </paragraph>
+        <paragraph>
+            <chunk style="font-family:Times;font-weight:bold;">Report Time: </chunk>
+            <chunk style="font-family:Times;">@DateTime.Now.ToString("hh:mm tt")</chunk>
+        </paragraph>
+    </div>
+</body>
+</html>

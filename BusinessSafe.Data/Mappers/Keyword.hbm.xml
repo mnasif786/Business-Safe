@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="Keyword" table="`Keyword`">
+    <id name="Id" type="long" >
+      <generator class="native" />
+    </id>
+    <property name="Text" column="Text" type="string"/>
+    <property name="Deleted" type ="bool"/>
+    <many-to-one name="CreatedBy" class="UserForAuditing" column="CreatedBy"/>
+    <property name="CreatedOn" type ="datetime"/>
+    <many-to-one name="LastModifiedBy" class="UserForAuditing" column="LastModifiedBy"/>
+    <property name="LastModifiedOn" type ="datetime"/>
+  </class>
+</hibernate-mapping>

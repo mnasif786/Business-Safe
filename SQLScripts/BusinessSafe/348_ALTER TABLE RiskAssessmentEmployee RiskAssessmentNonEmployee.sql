@@ -1,0 +1,275 @@
+USE [BusinessSafe]
+GO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentEmployee' AND COLUMN_NAME = 'Id')
+BEGIN
+	ALTER TABLE [RiskAssessmentEmployee]
+	ADD [Id] BIGINT IDENTITY(1,1) NOT NULL 
+END
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentsNonEmployees' AND COLUMN_NAME = 'Id')
+BEGIN
+	ALTER TABLE [RiskAssessmentsNonEmployees]
+	ADD [Id] BIGINT IDENTITY(1,1) NOT NULL 
+END
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentEmployee' AND COLUMN_NAME = 'CreatedOn')
+BEGIN
+	ALTER TABLE [RiskAssessmentEmployee]
+	ADD [CreatedOn] DATETIME NULL
+END
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentsNonEmployees' AND COLUMN_NAME = 'CreatedOn')
+BEGIN
+	ALTER TABLE [RiskAssessmentsNonEmployees]
+	ADD [CreatedOn] DATETIME NULL
+END
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentEmployee' AND COLUMN_NAME = 'CreatedBy')
+BEGIN
+	ALTER TABLE [RiskAssessmentEmployee]
+	ADD [CreatedBy] UNIQUEIDENTIFIER NULL
+END
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentsNonEmployees' AND COLUMN_NAME = 'CreatedBy')
+BEGIN
+	ALTER TABLE [RiskAssessmentsNonEmployees]
+	ADD [CreatedBy] UNIQUEIDENTIFIER NULL
+END
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentEmployee' AND COLUMN_NAME = 'LastModifiedOn')
+BEGIN
+	ALTER TABLE [RiskAssessmentEmployee]
+	ADD [LastModifiedOn] DATETIME NULL
+END
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentsNonEmployees' AND COLUMN_NAME = 'LastModifiedOn')
+BEGIN
+	ALTER TABLE [RiskAssessmentsNonEmployees]
+	ADD [LastModifiedOn] DATETIME NULL
+END
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentEmployee' AND COLUMN_NAME = 'LastModifiedBy')
+BEGIN
+	ALTER TABLE [RiskAssessmentEmployee]
+	ADD [LastModifiedBy] UNIQUEIDENTIFIER NULL
+END
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentsNonEmployees' AND COLUMN_NAME = 'LastModifiedBy')
+BEGIN
+	ALTER TABLE [RiskAssessmentsNonEmployees]
+	ADD [LastModifiedBy] UNIQUEIDENTIFIER NULL
+END
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentEmployee' AND COLUMN_NAME = 'Deleted')
+BEGIN
+	ALTER TABLE [RiskAssessmentEmployee]
+	ADD [Deleted] BIT NOT NULL DEFAULT(0)
+END
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentsNonEmployees' AND COLUMN_NAME = 'Deleted')
+BEGIN
+	ALTER TABLE [RiskAssessmentsNonEmployees]
+	ADD [Deleted] BIT NOT NULL DEFAULT(0)
+END
+GO
+
+DECLARE @now AS DATETIME
+SET @now = GETDATE()
+
+UPDATE [RiskAssessmentEmployee]
+SET [CreatedBy] = 'B03C83EE-39F2-4F88-B4C4-7C276B1AAD99',
+[CreatedOn] = @now
+
+UPDATE [RiskAssessmentsNonEmployees]
+SET [CreatedBy] = 'B03C83EE-39F2-4F88-B4C4-7C276B1AAD99',
+[CreatedOn] = @now
+GO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentEmployee' AND COLUMN_NAME = 'CreatedOn' AND IS_NULLABLE = 'NO')
+BEGIN
+	ALTER TABLE [RiskAssessmentEmployee]
+	ALTER COLUMN [CreatedOn] DATETIME NOT NULL
+END
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentsNonEmployees' AND COLUMN_NAME = 'CreatedOn' AND IS_NULLABLE = 'NO')
+BEGIN
+	ALTER TABLE [RiskAssessmentsNonEmployees]
+	ALTER COLUMN [CreatedOn] DATETIME NOT NULL
+END
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentEmployee' AND COLUMN_NAME = 'CreatedBy' AND IS_NULLABLE = 'NO')
+BEGIN
+	ALTER TABLE [RiskAssessmentEmployee]
+	ALTER COLUMN [CreatedBy] UNIQUEIDENTIFIER NOT NULL
+END
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentsNonEmployees' AND COLUMN_NAME = 'CreatedBy' AND IS_NULLABLE = 'NO')
+BEGIN
+	ALTER TABLE [RiskAssessmentsNonEmployees]
+	ALTER COLUMN [CreatedBy] UNIQUEIDENTIFIER NOT NULL
+END
+GO
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE CONSTRAINT_NAME = 'PK_RiskAssessmentEmployee' )
+BEGIN
+	ALTER TABLE [RiskAssessmentEmployee] 
+	DROP CONSTRAINT [PK_RiskAssessmentEmployee]
+END
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE CONSTRAINT_NAME = 'PK_RiskAssessmentsNonEmployees' )
+BEGIN
+	ALTER TABLE [RiskAssessmentsNonEmployees] 
+	DROP CONSTRAINT [PK_RiskAssessmentsNonEmployees]
+END
+GO
+
+--DECLARE @riskAssessmentId BIGINT
+--DECLARE @employeeId BIGINT
+--DECLARE @id BIGINT
+--DECLARE @nextId BIGINT
+--SET @nextId = 1
+--DECLARE curRiskAssessmentEmployee CURSOR FOR SELECT [RiskAssessmentId], [EmployeeId] FROM [RiskAssessmentEmployee] WHERE [Id] IS NULL
+--OPEN curRiskAssessmentEmployee
+--FETCH NEXT FROM curRiskAssessmentEmployee INTO @riskAssessmentId, @employeeId
+
+--WHILE @@FETCH_STATUS = 0
+--BEGIN 
+--	UPDATE [RiskAssessmentEmployee] SET [Id] = @nextId WHERE [RiskAssessmentId] = @riskAssessmentId AND [EmployeeId] = @employeeId
+--	SET @nextId = @nextId + 1
+--	FETCH NEXT FROM curRiskAssessmentEmployee INTO @riskAssessmentId, @employeeId
+--END
+--GO
+
+--DECLARE @riskAssessmentId BIGINT
+--DECLARE @nonEmployeeId BIGINT
+--DECLARE @id BIGINT
+--DECLARE @nextId BIGINT
+--SET @nextId = 1
+--DECLARE curRiskAssessmentsNonEmployees CURSOR FOR SELECT [RiskAssessmentId], [NonEmployeeId] FROM [RiskAssessmentsNonEmployees] WHERE [Id] IS NULL
+--OPEN curRiskAssessmentsNonEmployees
+--FETCH NEXT FROM curRiskAssessmentsNonEmployees INTO @riskAssessmentId, @nonEmployeeId
+
+--WHILE @@FETCH_STATUS = 0
+--BEGIN 
+--	UPDATE [RiskAssessmentsNonEmployees] SET [Id] = @nextId WHERE [RiskAssessmentId] = @riskAssessmentId AND [NonEmployeeId] = @nonEmployeeId
+--	SET @nextId = @nextId + 1
+--	FETCH NEXT FROM curRiskAssessmentsNonEmployees INTO @riskAssessmentId, @nonEmployeeId
+--END
+--GO
+
+--IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentEmployee' AND COLUMN_NAME = 'Id' AND IS_NULLABLE = 'NO')
+--BEGIN
+--	ALTER TABLE [RiskAssessmentEmployee]
+--	ALTER [Id] BIGINT IDENTITY
+--END
+
+--IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentsNonEmployees' AND COLUMN_NAME = 'Id' AND IS_NULLABLE = 'NO')
+--BEGIN
+--	ALTER TABLE [RiskAssessmentsNonEmployees]
+--	ALTER [Id] BIGINT IDENTITY
+--END
+--GO
+
+--IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE CONSTRAINT_NAME = 'PK_RiskAssessmentEmployee2' )
+--BEGIN
+--	ALTER TABLE [RiskAssessmentEmployee] 
+--	ADD [PK_RiskAssessmentEmployee2] UNIQUEIDENTIFIER PRIMARY KEY ([Id])
+--END
+
+--IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE CONSTRAINT_NAME = 'PK_RiskAssessmentsNonEmployees2' )
+--BEGIN
+--	ALTER TABLE [RiskAssessmentsNonEmployees] 
+--	ADD [PK_RiskAssessmentsNonEmployees2] UNIQUEIDENTIFIER PRIMARY KEY ([Id])
+--END
+--GO
+
+--//@UNDO 
+USE [BusinessSafe]
+GO
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE CONSTRAINT_NAME = 'PK_RiskAssessmentEmployee2' )
+BEGIN
+	ALTER TABLE [RiskAssessmentEmployee] 
+	DROP CONSTRAINT [PK_RiskAssessmentEmployee2] 
+END
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE CONSTRAINT_NAME = 'PK_RiskAssessmentsNonEmployees2' )
+BEGIN
+	ALTER TABLE [RiskAssessmentsNonEmployees] 
+	DROP CONSTRAINT [PK_RiskAssessmentsNonEmployees2] 
+END
+GO
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentEmployee' AND COLUMN_NAME = 'Id')
+BEGIN
+	ALTER TABLE [RiskAssessmentEmployee]
+	DROP COLUMN [Id]
+END
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentsNonEmployees' AND COLUMN_NAME = 'Id')
+BEGIN
+	ALTER TABLE [RiskAssessmentsNonEmployees]
+	DROP COLUMN [Id] 
+END
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentEmployee' AND COLUMN_NAME = 'CreatedOn')
+BEGIN
+	ALTER TABLE [RiskAssessmentEmployee]
+	DROP COLUMN [CreatedOn]
+END
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentsNonEmployees' AND COLUMN_NAME = 'CreatedOn')
+BEGIN
+	ALTER TABLE [RiskAssessmentsNonEmployees]
+	DROP COLUMN  [CreatedOn]
+END
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentEmployee' AND COLUMN_NAME = 'CreatedBy')
+BEGIN
+	ALTER TABLE [RiskAssessmentEmployee]
+	DROP COLUMN [CreatedBy] 
+END
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentsNonEmployees' AND COLUMN_NAME = 'CreatedBy')
+BEGIN
+	ALTER TABLE [RiskAssessmentsNonEmployees]
+	DROP COLUMN [CreatedBy]
+END
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentEmployee' AND COLUMN_NAME = 'LastModifiedOn')
+BEGIN
+	ALTER TABLE [RiskAssessmentEmployee]
+	DROP COLUMN [LastModifiedOn]
+END
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentsNonEmployees' AND COLUMN_NAME = 'LastModifiedOn')
+BEGIN
+	ALTER TABLE [RiskAssessmentsNonEmployees]
+	DROP COLUMN [LastModifiedOn]
+END
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentEmployee' AND COLUMN_NAME = 'LastModifiedBy')
+BEGIN
+	ALTER TABLE [RiskAssessmentEmployee]
+	DROP COLUMN [LastModifiedBy]
+END
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentsNonEmployees' AND COLUMN_NAME = 'LastModifiedBy')
+BEGIN
+	ALTER TABLE [RiskAssessmentsNonEmployees]
+	DROP COLUMN [LastModifiedBy]
+END
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentEmployee' AND COLUMN_NAME = 'Deleted')
+BEGIN
+	ALTER TABLE [RiskAssessmentEmployee]
+	DROP COLUMN [Deleted]
+END
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentsNonEmployees' AND COLUMN_NAME = 'Deleted')
+BEGIN
+	ALTER TABLE [RiskAssessmentsNonEmployees]
+	DROP COLUMN [Deleted]
+END
+GO

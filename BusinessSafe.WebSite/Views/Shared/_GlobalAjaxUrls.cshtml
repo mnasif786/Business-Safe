@@ -1,0 +1,276 @@
+﻿ <script type="text/javascript" language="javascript">
+      (function(window) {
+
+          if (!window.globalajaxurls) {
+              window.globalajaxurls = { };
+          }
+
+         window.globalajaxurls = {
+            // SITES
+            getSites: "@Url.Action("GetSites", "Sites", new { area = "Sites" })",
+            getLinkedSiteDetails: "@Url.Action("GetLinkedSiteDetails", "Sites", new { area = "Sites" })",
+            getUnlinkedSiteDetails: "@Url.Action("GetUnlinkedSiteDetails", "Sites", new { area = "Sites" })",
+            getSiteGroupDetails: "@Url.Action("GetSiteGroup", "SiteGroup", new { area = "Sites" })",
+            delinkSite: "@Url.Action("DelinkSite", "Sites", new { area = "Sites" })",
+            getChildSitesBySiteId: "@Url.Action("GetChildSitesBySiteId", "Sites", new { area = "Sites" })",
+            deleteSiteGroup: "@Url.Action("DeleteSiteGroup", "SiteGroup", new { area = "Sites" })",
+            getSiteAndSiteGroups: "@Url.Action("GetSitesAndSiteGroups","Sites", new { area = "Sites" })",
+
+            // COMPANY DEFAULTS
+            createCompanyDefaults: "@Url.Action("CreateCompanyDefaults", "CompanyDefaults", new { area = "Company" })",
+            updateCompanyDefaults: "@Url.Action("UpdateCompanyDefaults", "CompanyDefaults", new { area = "Company" })",
+            deleteCompanyDefaults: "@Url.Action("DeleteCompanyDefault", "CompanyDefaults", new { area = "Company" })",
+            createNewNonEmployee: "@Url.Action("CreateNonEmployee", "NonEmployeeDefaults", new { area = "" })",
+            updateNewNonEmployee: "@Url.Action("UpdateNonEmployee", "NonEmployeeDefaults", new { area = "" })",
+            markNonEmployeeAsDeleted: "@Url.Action("MarkNonEmployeeAsDeleted", "NonEmployeeDefaults", new { area = "" })",
+            editNonEmployee : "@Url.Action("EditNonEmployee", "NonEmployeeDefaults", new { area = "" })",
+            getEmployeeJobAndSite: "@Url.Action("GetEmployeeJobAndSite", "RiskAssessor", new { area = "Company" })",
+            createRiskAssessmentDefaults: "@Url.Action("CreateRiskAssessmentDefaults", "CompanyDefaults", new { area = "Company" })",
+            addSelectedEmployeesToAccidentRecordDistribution: "@Url.Action("AddSelectedEmployees", "AccidentRecordDistribution", new { area = "Company" })",                          
+            addNonEmployeeToAccidentRecordDistribution: "@Url.Action("AddNonEmployee", "AccidentRecordDistribution", new { area = "Company" })",
+             
+            removeSelectedEmployeeFromAccidentRecordDistribution: "@Url.Action("RemoveSelectedEmployee", "AccidentRecordDistribution", new { area = "Company" })",
+            
+            getEmployeeNotInAccidentRecordDistributionList: "@Url.Action("GetEmployeeMultiSelect", "AccidentRecordDistribution", new { area = "Company" })",
+            updateEmployeeEmails: "@Url.Action("UpdateEmployeeEmails", "AccidentRecordDistribution", new { area = "Company" })",
+             
+            // RISK ASSESSORS
+            searchRiskAssessors : "@Url.Action("Search", "RiskAssessor", new { area = "Company" })",
+            getRiskAssessors : "@Url.Action("Get", "RiskAssessor", new { area = "Company" })",
+            addRiskAssessor: "@Url.Action("Add", "RiskAssessor", new { area = "Company" })",
+            editRiskAssessor: "@Url.Action("Edit", "RiskAssessor", new { area = "Company" })",
+            indexRiskAssessors: "@Url.Action("Index", "RiskAssessor", new { area = "Company" })",
+            
+            // EMPLOYEES
+            getEmployees : "@Url.Action("GetEmployees", "Employees", new { area = "Employees" })",
+            getEmployeesWithNoJobTitle : "@Url.Action("GetEmployeesWithNoJobTitle", "Employees", new { area = "Employees" })",
+            getEmployeesWithSite : "@Url.Action("GetEmployeesWithSite", "Employees", new { area = "Employees" })",
+            getIsEmployeeUser : "@Url.Action("IsEmployeeAUser", "Employees", new { area = "Employees" })",
+            markEmployeeAsDeleted : "@Url.Action("MarkEmployeeAsDeleted", "Employee", new { area = "Employees" })",
+            reinstateDeletedEmployee: "@Url.Action("ReinstateDeletedEmployee", "Employee", new { area = "Employees" })",
+            canDeleteEmployee : "@Url.Action("CanDeleteEmployee", "EmployeeSearch", new { area = "Employees" })",
+            isEmployeeAbleToCompleteReviewTask : "@Url.Action("IsEmployeeAbleToCompleteReviewTask", "Employees", new { area = "Employees" })",
+            addEmergencyContactDetails: "@Url.Action("AddEmergencyContactDetail", "EmployeeEmergencyContact", new { area = "Employees" })",
+            updateEmergencyContactDetails: "@Url.Action("UpdateEmergencyContactDetail", "EmployeeEmergencyContact", new { area = "Employees" })",
+            getEmployeeEmergencyContactDetailsUrl: "@Url.Action("GetEmergencyContactDetail", "EmployeeEmergencyContact", new { area = "Employees" })",
+            viewEmployeeEmergencyContactDetailsUrl: "@Url.Action("ViewEmergencyContactDetail", "EmployeeEmergencyContact", new { area = "Employees" })",
+            markEmployeeEmergencyContactAsDeleted: "@Url.Action("MarkEmergencyContactAsDeleted", "EmployeeEmergencyContact", new { area = "Employees" })",
+         
+            // EMPLOYEE
+            updateEmployeeDetails : "@Url.Action("UpdateOnlineRegistrationDetails", "Employee", new { area = "Employees"})",
+            
+            // USER ROLES
+            loadUserRole: "@Url.Action("Index", "UserRoles", new { area = "Users" })",
+            getUserRolePermissions: "@Url.Action("GetUserRolePermissions", "UserRoles", new { area = "Users" })",
+            updateUserRolePermissions: "@Url.Action("UpdateUserRole", "UserRoles", new { area = "Users" })",
+            createUserRolePermissions: "@Url.Action("CreateUserRole", "UserRoles", new { area = "Users" })",
+            markUserRoleAsDeleted: "@Url.Action("MarkUserRoleAsDeleted", "UserRoles", new { area = "Users" })",
+            getUsersWithRole: "@Url.Action("GetUsersWithRole", "UserRoles", new { area = "Users" })",
+            getUserPermissionsUser: "@Url.Action("GetUserPermissionsEmployee", "AddUsers", new { area = "Users" })",
+            markUserAsEnabledOrDisabled: "@Url.Action("MarkUserAsEnabledOrDisabled", "ViewUsers", new { area = "Users" })",
+            reinstateUser: "@Url.Action("ReinstateUser", "ViewUsers", new { area = "Users" })",
+            resetUserRegistration:  "@Url.Action("ResetUserRegistration", "ViewUsers", new { area = "Users" })",
+            UpdateUserRegistration: "@Url.Action("UpdateUserRegistration", "ViewUsers", new { area = "Users" })",
+
+            
+            getTaskReoccuringTypes: "@Url.Action("GetTaskReoccuringTypes", "TaskList", new { area = "TaskList" })",
+            
+            saveAndNextGeneralRiskAssessmentHazards: "@Url.Action("SaveAndNext", "Hazards", new { area = "GeneralRiskAssessments" })",
+            
+            getGeneralRiskAssessmentEditFurtherControlMeasureTaskUrl: "@Url.Action("Edit", "FurtherControlMeasureTask", new { area = "GeneralRiskAssessments" })",
+
+            getGeneralRiskAssessmentNewFurtherControlMeasureTaskUrl: "@Url.Action("New", "FurtherControlMeasureTask", new { area = "GeneralRiskAssessments" })",
+            
+            getGeneralRiskAssessmentPrintFurtherControlMeasureTaskUrl: "@Url.Action("Print", "FurtherControlMeasureTask", new { area = "GeneralRiskAssessments" })",
+            
+            getGeneralRiskAssessmentCompleteFurtherControlMeasureTaskUrl: "@Url.Action("Complete", "FurtherControlMeasureTask", new { area = "GeneralRiskAssessments" })",
+            getGeneralRiskAssessmentViewFurtherControlMeasureTaskUrl: "@Url.Action("View", "FurtherControlMeasureTask", new { area = "GeneralRiskAssessments" })",
+            getGeneralRiskAssessmentReassignFurtherControlMeasureTaskUrl: "@Url.Action("Reassign", "FurtherControlMeasureTask", new { area = "GeneralRiskAssessments" })",
+            
+            markFurtherActionTaskAsNoLongerRequiredUrl: "@Url.Action("MarkTaskAsNoLongerRequired", "TaskListAction", new { area = "" })",
+            saveFurtherControlMeasureReassignment: "@Url.Action("BulkReassignTask", "TaskListAction", new { area = "" })",
+            checkRiskAssessmentCanBeDeletedUrl: "@Url.Action("CheckRiskAssessmentCanBeDeleted", "RiskAssessmentStatus", new { area = "" })",
+            markRiskAssessmentAsDeletedOrUnDeletedUrl: "@Url.Action("MarkRiskAssessmentAsDeletedOrUnDeleted", "RiskAssessmentStatus", new { area = "" })",
+            copyRiskAssessmentUrl : "@Url.Action("Copy", "RiskAssessment", new { area = "GeneralRiskAssessments" })",
+            copyRiskAssessmentForMultipleSitesUrl : "@Url.Action("CopyForMultipleSites", "RiskAssessment", new { area = "GeneralRiskAssessments" })",
+            copyFireRiskAssessmentUrl : "@Url.Action("Copy", "RiskAssessment", new { area = "FireRiskAssessments" })",
+            copyFireRiskAssessmentForMultipleSitesUrl : "@Url.Action("CopyForMultipleSites", "RiskAssessment", new { area = "FireRiskAssessments" })",
+            copyHazardousSubstanceRiskAssessmentUrl : "@Url.Action("Copy", "RiskAssessment", new { area = "HazardousSubstanceRiskAssessments" })",
+            copyHazardousSubstanceRiskAssessmentForMultipleSitesUrl : "@Url.Action("CopyForMultipleSites", "RiskAssessment", new { area = "HazardousSubstanceRiskAssessments" })",
+
+            // RISK ASSESSMENT REVIEWS            
+            getAddRiskAssessmentReviewUrl : "@VirtualPathUtility.ToAbsolute("~/RiskAssessmentReview/Add")", 
+            getEditRiskAssessmentReviewUrl : "@VirtualPathUtility.ToAbsolute("~/RiskAssessmentReview/Edit")", 
+            getCompleteGeneralRiskAssessmentReviewUrl : "@Url.Action("Complete", "Review", new { area = "GeneralRiskAssessments" })",
+            getCompleteHazardousSubstanceRiskAssessmentReviewUrl : "@Url.Action("Complete", "Review", new { area = "HazardousSubstanceRiskAssessments" })",
+            getCompletePersonalRiskAssessmentReviewUrl : "@Url.Action("Complete", "Review", new { area = "PersonalRiskAssessments" })",
+            getCompleteFireRiskAssessmentReviewUrl : "@Url.Action("Complete", "Review", new { area = "FireRiskAssessments" })",
+
+            getTaskDetailsSummary : "@Url.Action("Index", "FurtherControlMeasureTaskDetailsSummary", new { area = "" })",
+            
+            getEmployeesNotAttachedToRiskAssessment : "@Url.Action("GetEmployees", "RiskAssessmentEmployee", new { area = "" })",
+            attachEmployeeToGeneralRiskAssessment: "@Url.Action("AttachEmployeeToRiskAssessment", "RiskAssessmentEmployee", new { area = "" })",
+            detachEmployeeFromGeneralRiskAssessment: "@Url.Action("DetachEmployeeFromRiskAssessment", "RiskAssessmentEmployee", new { area = "" })",
+            
+            getNonEmployeesNotAttachedToGeneralRiskAssessment : "@Url.Action("GetNonEmployees", "RiskAssessmentNonEmployee", new { area = "" })",
+            attachNonEmployeeToGenerlRiskAssessment: "@Url.Action("AttachNonEmployeeToRiskAssessment", "RiskAssessmentNonEmployee", new { area = "" })",
+            detachNonEmployeeFromGeneralRiskAssessment: "@Url.Action("DetachNonEmployeeFromRiskAssessment", "RiskAssessmentNonEmployee", new { area = "" })",
+            
+            getFurtherActionTaskurl: "@Url.Action("NewFurtherControlMeasureTask", "FurtherControlMeasureTask", new { area = "GeneralRiskAssessments" })",
+            
+            saveRiskAssessmentHazardDescriptionUrl: "@Url.Action("UpdateRiskAssessmentHazardDescription", "ControlMeasures", new { area = "GeneralRiskAssessments" })",
+            saveRiskAssessmentHazardTitleUrl: "@Url.Action("UpdateRiskAssessmentHazardTitle", "ControlMeasures", new { area = "GeneralRiskAssessments" })",
+            addControlMeasureToGeneralRiskAssessmentHazardUrl: "@Url.Action("AddControlMeasureToRiskAssessmentHazard", "ControlMeasures", new { area = "GeneralRiskAssessments" })",
+            updateControlMeasureForGeneralRiskAssessmentHazardUrl: "@Url.Action("UpdateControlMeasureForRiskAssessmentHazard", "ControlMeasures", new { area = "GeneralRiskAssessments" })",
+            removeControlMeasureFromGenerlRiskAssessmentHazardUrl: "@Url.Action("RemoveControlMeasureFromRiskAssessmentHazard", "ControlMeasures", new { area = "GeneralRiskAssessments" })",
+            
+            checkGeneralRiskAssessmentHazardCanBeRemovedUrl: "@Url.Action("CheckRiskAssessmentHazardCanBeRemoved", "Hazards", new { area = "GeneralRiskAssessments" })",
+            markFurtherActionTaskAsDeletedUrl: "@Url.Action("MarkTaskAsDeleted", "TaskListAction", new { area = "" })",
+            saveAndNextGeneralRiskAssessmentPremisesInformation: "@Url.Action("SaveAndNext", "PremisesInformation")",
+            saveAndNextGeneralRiskAssessmentDocuments: "@Url.Action("SaveAndNext", "Documents", new { area = "GeneralRiskAssessments" })",
+            saveAndNextHazardousSubstanceRiskAssessmentDocuments: "@Url.Action("SaveAndNext", "Documents", new { area = "HazardousSubstanceRiskAssessments" })",
+            saveAndNextPersonalRiskAssessmentDocuments: "@Url.Action("SaveAndNext", "Documents", new { area = "PersonalRiskAssessments" })",
+            
+            deleteDocument: "@VirtualPathUtility.ToAbsolute("~/Document/DeleteDocument")",
+            deleteAddedDocument: "@Url.Action("MarkDocumentAsDeleted", "AddedDocumentsLibrary", new { area = "Documents" })",
+            saveGeneralRiskAssessmentReviewUrl: "@Url.Action("SaveRiskAssessmentReview","Review", new { area = "GeneralRiskAssessments" } )",
+            
+            // Task List
+            bulkReassignTasks : "@Url.Action("BulkReassignTask", "TaskListAction", new { area = "TaskList" })",
+            getTaskListSummary : "@Url.Action("GetTaskListSummary", "TaskList", new { area = "TaskList" })",
+
+            // MISC
+            errorPage: "@VirtualPathUtility.ToAbsolute("~/Error.aspx")",
+            
+            // DOCUMENTLIBRARY
+            getDocumentSubTypesByDocumentTypeId: "@Url.Action("GetDocumentSubTypesByDocumentTypeId", "ReferenceDocumentsLibrary", new { area = "Documents" })",
+            getAddNewAddedDocumentsUrl: "@Url.Action("Index", "CreateAddedDocument", new { area = "Documents" })",
+            
+            // HAZARDOUS SUBSTANCE INVENTORY
+            checkForDuplicateHazardousSubstances: "@Url.Action("CheckForDuplicatedSubstance", "Inventory", new { area = "HazardousSubstanceInventory" })",
+            hazardoussubstancesinventory: "@Url.Action("Index", "Inventory", new { area = "HazardousSubstanceInventory" })",
+            getHazardousSubstances : "@Url.Action("GetHazardousSubstances", "Inventory", new { area = "HazardousSubstanceInventory" })",
+            loadNewSupplier : "@Url.Action("CreateNewSupplier", "Supplier", new { area = "HazardousSubstanceInventory" })",
+            canDeleteHazardousSubstance : "@Url.Action("CanDeleteHazardousSubstance", "Inventory", new { area = "HazardousSubstanceInventory" })",
+            markHazardousSubstanceAsDeleted : "@Url.Action("MarkHazardousSubstanceAsDeleted", "Inventory", new { area = "HazardousSubstanceInventory" })",
+            markHazardousSubstanceAsNotDeleted : "@Url.Action("MarkHazardousSubstanceAsNotDeleted", "Inventory", new { area = "HazardousSubstanceInventory" })",            
+                          
+            // HAZARDOUS SUBSTANCE RISK ASSESSMENTS
+            getEmployeesNotAttachedToHazardousSubstanceRiskAssessment : "@Url.Action("GetEmployees", "RiskAssessmentEmployee", new { area = "" })",
+            getNonEmployeesNotAttachedToHazardousSubstanceRiskAssessment: "@Url.Action("GetNonEmployees", "RiskAssessmentNonEmployee", new { area = "" })",
+            attachEmployeeToHazardousSubstanceRiskAssessment:"@Url.Action("AttachEmployeeToRiskAssessment", "RiskAssessmentEmployee", new { area = "" })",
+            detachEmployeeFromHazardousSubstanceRiskAssessment:"@Url.Action("DetachEmployeeFromRiskAssessment", "RiskAssessmentEmployee", new { area = "" })",
+            attachNonEmployeeToHazardousSubstanceRiskAssessment:"@Url.Action("AttachNonEmployeeToRiskAssessment", "RiskAssessmentNonEmployee", new { area = "" })",
+            detachNonEmployeeToHazardousSubstanceRiskAssessment:"@Url.Action("DetachNonEmployeeFromRiskAssessment", "RiskAssessmentNonEmployee", new { area = "" })",
+            createhazardoussubstanceriskassessment: "@Url.Action("Create", "RiskAssessment", new { area = "HazardousSubstanceRiskAssessments" })",
+            getHazardousSubstanceRiskAssessmentNewFurtherControlMeasureTaskUrl: "@Url.Action("New", "FurtherControlMeasureTask", new { area = "HazardousSubstanceRiskAssessments" })",
+            
+            getHazardousSubstanceRiskAssessmentEditFurtherControlMeasureTaskUrl: "@Url.Action("Edit", "FurtherControlMeasureTask", new { area = "HazardousSubstanceRiskAssessments" })",
+            getHazardousSubstanceRiskAssessmentViewFurtherControlMeasureTaskUrl:"@Url.Action("View", "FurtherControlMeasureTask", new { area = "HazardousSubstanceRiskAssessments" })",
+            
+            getHazardousSubstanceRiskAssessmentCompleteFurtherControlMeasureTaskUrl : "@Url.Action("Complete", "FurtherControlMeasureTask", new { area = "HazardousSubstanceRiskAssessments" })",
+            
+            getFireRiskAssessmentReassignFurtherControlMeasureTaskUrl : "@Url.Action("Reassign", "FurtherControlMeasureTask", new { area = "FireRiskAssessments" })",
+            
+            getHazardousSubstanceRiskAssessmentPrintFurtherControlMeasureTaskUrl : "@Url.Action("Print", "FurtherControlMeasureTask", new { area = "HazardousSubstanceRiskAssessments" })",
+
+
+            getHazardousSubstanceRiskAssessmentReassignFurtherControlMeasureTaskUrl: "@Url.Action("Reassign", "FurtherControlMeasureTask", new { area = "HazardousSubstanceRiskAssessments" })",
+
+
+            addControlMeasureToHazardousSubstanceRiskAssessmentUrl : "@Url.Action("AddControlMeasureToRiskAssessment", "ControlMeasures", new { area = "HazardousSubstanceRiskAssessments" })",
+            updateControlMeasureOnHazardousSubstanceRiskAssessmentUrl : "@Url.Action("UpdateControlMeasure", "ControlMeasures", new { area = "HazardousSubstanceRiskAssessments" })",
+            removeControlMeasureFromHazardousSubstanceRiskAssessmentUrl : "@Url.Action("RemoveControlMeasureFromRiskAssessment", "ControlMeasures", new { area = "HazardousSubstanceRiskAssessments" })",
+            
+            getHazardousSubstanceRiskAssessmentControlSystem : "@Url.Action("GetControlSystem", "ControlSystem", new { area = "HazardousSubstanceRiskAssessments" })",
+            
+            getSuppliers : "@Url.Action("GetSuppliers", "Supplier", new { area = "HazardousSubstanceInventory" })",
+            canDeleteSupplier :"@Url.Action("CanDeleteSupplier", "Supplier", new { area = "HazardousSubstanceInventory" })",
+            
+            canDeleteHazard :"@Url.Action("CanDeleteHazard", "CompanyDefaults", new { area = "Company" })",
+            
+            getCompanyDefaultRiskAssessmentTypeApplicable : "@Url.Action("GetDefaultRiskAssessmentTypes", "CompanyDefaults", new { area = "Company" })",
+            
+            //Personal Risk Assessment
+            saveAndNextPersonalRiskAssessmentPremisesInformation: "@Url.Action("SaveAndNext", "PremisesInformation", new { area = "PersonalRiskAssessments" })",
+            saveAndNextPersonalRiskAssessmentHazards: "@Url.Action("SaveAndNext", "Hazards", new { area = "PersonalRiskAssessments" })",
+            checkPersonalRiskAssessmentHazardCanBeRemovedUrl: "@Url.Action("CheckRiskAssessmentHazardCanBeRemoved", "Hazards", new { area = "PersonalRiskAssessments" })",
+            getPersonalRiskAssessmentNewFurtherControlMeasureTaskUrl  : "@Url.Action("New", "FurtherControlMeasureTask", new { area = "PersonalRiskAssessments" })",
+            getPersonalRiskAssessmentEditFurtherControlMeasureTaskUrl: "@Url.Action("Edit", "FurtherControlMeasureTask", new { area = "PersonalRiskAssessments" })",
+            getPersonalRiskAssessmentReassignFurtherControlMeasureTaskUrl: "@Url.Action("Reassign", "FurtherControlMeasureTask", new { area = "PersonalRiskAssessments" })",
+            getPersonalRiskAssessmentViewFurtherControlMeasureTaskUrl : "@Url.Action("View", "FurtherControlMeasureTask", new { area = "PersonalRiskAssessments" })",
+            removeControlMeasureFromPersonalRiskAssessmentHazardUrl: "@Url.Action("RemoveControlMeasureFromRiskAssessmentHazard", "ControlMeasures", new { area = "PersonalRiskAssessments" })",
+            updateControlMeasureForPersonalRiskAssessmentHazardUrl: "@Url.Action("UpdateControlMeasureForRiskAssessmentHazard", "ControlMeasures", new { area = "PersonalRiskAssessments" })",
+            addControlMeasureToPersonalRiskAssessmentHazardUrl: "@Url.Action("AddControlMeasureToRiskAssessmentHazard", "ControlMeasures", new { area = "PersonalRiskAssessments" })",
+            getPersonalRiskAssessmentCompleteFurtherControlMeasureTaskUrl: "@Url.Action("Complete", "FurtherControlMeasureTask", new { area = "PersonalRiskAssessments" })",
+            getPersonalRiskAssessmentPrintFurtherControlMeasureTaskUrl: "@Url.Action("Print", "FurtherControlMeasureTask", new { area = "PersonalRiskAssessments" })",
+            getEmployeeEmail: "@Url.Action("GetEmail", "ChecklistGenerator", new { area = "PersonalRiskAssessments" })",
+            getEmployeeMultiSelect:  "@Url.Action("GetEmployeeMultiSelect", "ChecklistGenerator", new { area = "PersonalRiskAssessments" })",
+            addSelectedEmployees:  "@Url.Action("AddSelectedEmployees", "ChecklistGenerator", new { area = "PersonalRiskAssessments" })",
+            removeEmployeeFromChecklistGenerator:  "@Url.Action("RemoveEmployee", "ChecklistGenerator", new { area = "PersonalRiskAssessments" })",
+            resendPersonalRiskAssessmentChecklist:  "@Url.Action("ResendEmployeeChecklist", "ChecklistGenerator", new { area = "PersonalRiskAssessments" })",
+            viewPersonalRiskAssessmentEmployeeChecklistEmail:  "@Url.Action("ViewSummary", "ChecklistManager", new { area = "PersonalRiskAssessments" })",
+            toggleEmployeeChecklistFurtherActionRequired:  "@Url.Action("ToggleFurtherActionRequired", "ChecklistManagerCommands", new { area = "PersonalRiskAssessments" })",
+            createPersonalRiskAssessmentUrl:  "@Url.Action("CreateFromChecklist", "RiskAssessment", new { area = "PersonalRiskAssessments" })",
+            getPersonalRiskAssessmentIndexUrl: "@Url.Action("Index","RiskAssessment", new { area = "PersonalRiskAssessments" } )",
+            savePersonalRiskAssessmentReviewUrl: "@Url.Action("SaveRiskAssessmentReview","Review", new { area = "PersonalRiskAssessments" } )",
+
+            updateEmployeeChecklistFurtherRequiredUrl:  "@Url.Action("UpdateEmployeeChecklistFurtherRequired", "ChecklistManagerCommands", new { area = "PersonalRiskAssessments" })",
+            
+
+
+            //Fire Risk Assessment
+            saveAndNextFireRiskAssessmentPremisesInformation : "@Url.Action("SaveAndNext", "PremisesInformation", new { area = "FireRiskAssessments" })",
+            saveAndNextFireRiskAssessmentHazards : "@Url.Action("SaveAndNext", "Hazards", new { area = "FireRiskAssessments" })",
+            
+            getFireRiskAssessmentNewFurtherActionTaskUrl: "@Url.Action("New", "FurtherControlMeasureTask", new { area = "FireRiskAssessments" })",
+            getFireRiskAssessmentEditFurtherControlMeasureTaskUrl: "@Url.Action("Edit", "FurtherControlMeasureTask", new { area = "FireRiskAssessments" })",
+            getFireRiskAssessmentCompleteFurtherControlMeasureTaskUrl : "@Url.Action("Complete", "FurtherControlMeasureTask", new { area = "FireRiskAssessments" })",
+            getFireRiskAssessmentViewFurtherControlMeasureTaskUrl: "@Url.Action("View", "FurtherControlMeasureTask", new { area = "FireRiskAssessments" })",
+            getFireRiskAssessmentPrintFurtherControlMeasureTaskUrl: "@Url.Action("Print", "FurtherControlMeasureTask", new { area = "FireRiskAssessments" })",
+            getFireRiskAssessmentValidateChecklistUrl: "@Url.Action("Validate", "Checklist", new { area = "FireRiskAssessments" })",
+            getFireRiskAssessmentSaveChecklistUrl: "@Url.Action("Save", "Checklist", new { area = "FireRiskAssessments" })",
+            getFireRiskAssessmentSavenAndNextChecklistUrl: "@Url.Action("SaveAndNext", "Checklist", new { area = "FireRiskAssessments" })",
+            getFireRiskAssessmentCompleteChecklistUrl: "@Url.Action("Complete", "Checklist", new { area = "FireRiskAssessments" })",
+            getFireRiskAssessmentSaveChecklistOnlyForAuditingUrl: "@Url.Action("SaveChecklistOnlyForAuditing", "Checklist", new { area = "FireRiskAssessments" })",
+            canDeleteRiskAssessor : "@Url.Action("CanDeleteRiskAssessor", "RiskAssessor", new { area = "Company" })",
+            deleteRiskAssessor : "@Url.Action("MarkDeleted", "RiskAssessor", new { area = "Company" })",
+            reinstateRiskAssessor : "@Url.Action("MarkUndeleted", "RiskAssessor", new { area = "Company" })",
+            
+            //responsibilities 
+            getResponsibiltyTask: "@Url.Action("GetResponsibilityTask", "Responsibility", new { area = "Responsibilities" })",
+            getResponsibilityCompleteTaskUrl : "@Url.Action("Complete", "Responsibility", new { area = "Responsibilities" })",
+            checkResponsibilityCanBeDeletedUrl : "@Url.Action("CheckCanBeDeleted", "Responsibility", new { area = "Responsibilities" })",
+            deleteResponsibility : "@Url.Action("Delete", "Responsibility", new { area = "Responsibilities" })",
+            undeleteResponsibility : "@Url.Action("Undelete", "Responsibility", new { area = "Responsibilities" })",
+			markResponsibilityTaskAsDeletedUrl: "@Url.Action("MarkTaskAsDeleted", "Responsibility", new { area = "Responsibilities" })",
+			getResponsibilityViewTaskUrl : "@Url.Action("ViewResponsibilityTask", "Responsibility", new { area = "Responsibilities" })",
+			getRespobsibilityReassignResponsibilityTaskUrl:"@Url.Action("Reassign", "Responsibility", new { area = "Responsibilities" })",
+			editRespobsibilityReassignResponsibilityTaskUrl:"@Url.Action("Edit", "Responsibility", new { area = "Responsibilities" })",
+			markResponsibilityTaskAsNoLongerRequiredUrl:"@Url.Action("MarkTaskAsNoLongerRequired", "Responsibility", new { area = "Responsibilities" })",
+			printResponsibilitiesSearchResults:"@Url.Action("Index", "Responsibilities", new { area = "SqlReports" })",
+            copyResponsibility : "@Url.Action("CopyResponsibility", "Responsibility", new { area = "Responsibilities" })",
+            
+			// responsibilities wizard
+			generateResponsibiltiesFromSiteAndTemplateUrl :"@Url.Action("GenerateResponsibilities", "Wizard", new { area = "Responsibilities" })",
+			generateResponsibiltiesTasksFromSiteAndTemplateUrl :"@Url.Action("GenerateTask", "Wizard", new { area = "Responsibilities" })",
+			bulkGenerateResponsibiltiesTasksFromSiteAndTemplateUrl :"@Url.Action("BulkGenerateTasks", "Wizard", new { area = "Responsibilities" })",
+			
+            // accident records
+            deleteAccidentRecordUrl: "@Url.Action("Delete", "AccidentRecordStatus", new { area = "AccidentReports" })",
+            printAccidentRecordsUrl: "@Url.Action("Pdf", "AccidentRecords", new { area = "SqlReports" })",
+		
+            // assign tasks
+            assignTask : "@Url.Action("AssignTask", "ImmediateRiskNotificationsActions", new { area = "ActionPlans" })",
+            bulkAssignActionTasks : "@Url.Action("BulkAssignTask", "ImmediateRiskNotificationsActions", new { area = "ActionPlans" })",
+             getActionsCompleteTaskUrl: "@Url.Action("Complete", "ImmediateRiskNotificationsActions", new { area = "ActionPlans" })",
+             getActionsCompletedTaskViewUrl: "@Url.Action("CompletedTaskView", "ImmediateRiskNotificationsActions", new { area = "ActionPlans" })",
+
+            reAssignActionTask : "@Url.Action("Reassign", "ImmediateRiskNotificationsActions", new { area = "ActionPlans" })",
+            viewIrnActionTask : "@Url.Action("ViewIrnActionTask", "ImmediateRiskNotificationsActions", new { area = "ActionPlans" })",
+            editActionTask : "@Url.Action("Edit", "ImmediateRiskNotificationsActions", new { area = "ActionPlans" })",
+            reAssignActionTaskWithTaskId :  "@Url.Action("ReassignWithTaskId", "ImmediateRiskNotificationsActions", new { area = "ActionPlans" })"
+          };
+
+      })(this);
+  </script>

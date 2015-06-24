@@ -1,0 +1,27 @@
+﻿@using BusinessSafe.WebSite.Areas.PersonalRiskAssessments.ViewModels
+@model BusinessSafe.WebSite.ViewModels.DocumentsViewModel
+@{
+    ViewBag.Title = "Hazards";
+}
+@{
+    var tabViewModel = ViewBag.TabViewModel as PersonalRiskAssessmentTabViewModel;
+}
+@Html.Partial("_RiskAssessmentSummary", ViewBag.RiskAssessmentSummary as PersonalRiskAssessmentSummaryViewModel)
+<div class="container ipad-container">
+    @Html.Partial("_Tabs", tabViewModel)
+    @Html.HiddenFor(x => x.CompanyId)
+    @Html.HiddenFor(x => x.RiskAssessmentId)
+    <div id="hazardsPeopleWrapper" class="fixed-content">
+        @Html.Partial("_TitleBar", ViewBag.RiskAssessmentSummary as PersonalRiskAssessmentSummaryViewModel)
+        @Html.Partial("_RiskAssessmentDocuments", Model)
+    </div>
+</div>
+@section JavaScriptSection
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var url = window.globalajaxurls.saveAndNextPersonalRiskAssessmentDocuments;
+            riskAssessmentDocumentsManager.initialise(url);
+        });
+    </script>
+}

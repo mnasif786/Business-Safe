@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities.SafeCheck"
+                   assembly="BusinessSafe.Domain">
+
+  <class name="ImpressionType" table="`SafeCheckImpressionType`">
+
+    <id name="Id" column="Id" type="Guid">
+      <generator class="assigned"/>
+    </id>
+
+    <property name="Title" />
+
+    <property name="Comments" />
+
+
+
+    <property name="Deleted" type="bool" />
+    <property name="CreatedOn" />
+    <many-to-one name="CreatedBy" class="BusinessSafe.Domain.Entities.UserForAuditing" column="CreatedBy" lazy="false" />
+    <property name="LastModifiedOn" />
+    <many-to-one name="LastModifiedBy" class="BusinessSafe.Domain.Entities.UserForAuditing" column="LastModifiedBy"/>
+  </class>
+</hibernate-mapping>

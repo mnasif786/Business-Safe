@@ -1,0 +1,412 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B803BE3B-6567-4F33-B1FE-AC16BB188DCB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BusinessSafe.Application.Tests</RootNamespace>
+    <AssemblyName>BusinessSafe.Application.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CI|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\CI\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'UAT|AnyCPU'">
+    <OutputPath>bin\UAT\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LIVE|AnyCPU'">
+    <OutputPath>bin\LIVE\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>true</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr4.StringTemplate, Version=4.0.6.9004, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="AutoMapper, Version=2.1.265.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL" />
+    <Reference Include="FluentValidation, Version=3.3.1.0, Culture=neutral, PublicKeyToken=a82054b837897c66, processorArchitecture=MSIL" />
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.3.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL" />
+    <Reference Include="NServiceBus">
+      <HintPath>..\packages\NServiceBus.3.2.6\lib\net40\NServiceBus.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Peninsula.Online.Messages, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Peninsula.Online.Messages\Peninsula.Online.Messages.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\packages\RestSharp.104.1\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap, Version=2.6.3.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Builder\AddEmployeeEmergencyContactRequestBuilder.cs" />
+    <Compile Include="Builder\AddEmployeeRequestBuilder.cs" />
+    <Compile Include="Builder\AddUserRoleRequestBuilder.cs" />
+    <Compile Include="Builder\CompanyDetailsBuilder.cs" />
+    <Compile Include="Builder\CompanyDetailsDtoBuilder.cs" />
+    <Compile Include="Builder\CompanyDetailsRequestBuilder.cs" />
+    <Compile Include="Builder\DeleteSiteGroupRequestBuilder.cs" />
+    <Compile Include="Builder\DeleteUserRoleRequestBuilder.cs" />
+    <Compile Include="Builder\DelinkSiteRequestBuilder.cs" />
+    <Compile Include="Builder\EmailTemplareBuilder.cs" />
+    <Compile Include="Builder\EmployeeSearchRequestBuilder.cs" />
+    <Compile Include="Builder\SaveCompanyDefaultRequestBuilder.cs" />
+    <Compile Include="Builder\SaveHazardousSubstanceRiskAssessmentRequestBuilder.cs" />
+    <Compile Include="Builder\SaveNonEmployeeRequestBuilder.cs" />
+    <Compile Include="Builder\SaveRiskAssessmentRequestBuilder.cs" />
+    <Compile Include="Builder\SiteGroupDtoBuilder.cs" />
+    <Compile Include="Builder\SiteGroupRequestBuilder.cs" />
+    <Compile Include="Builder\ResponsiblityTaskBuilder.cs" />
+    <Compile Include="Builder\SiteAddressDtoBuilder.cs" />
+    <Compile Include="Builder\SiteAddressRequestBuilder.cs" />
+    <Compile Include="Builder\UpdateEmployeeRequestBuilder.cs" />
+    <Compile Include="Builder\UpdateUserRoleRequestBuilder.cs" />
+    <Compile Include="Common\TemplateEngine\RenderTests.cs" />
+    <Compile Include="DataTransferObjectsTests\SiteAddressDtoTests\SiteContactTests.cs" />
+    <Compile Include="Implementations\AccidentRecordServiceTests\AddAccidentRecordDocumentTest.cs" />
+    <Compile Include="Implementations\AccidentRecordServiceTests\AddDescriptionTests.cs" />
+    <Compile Include="Implementations\AccidentRecordServiceTests\DeleteAccidentRecordTests.cs" />
+    <Compile Include="Implementations\AccidentRecordServiceTests\GetAccidentTypesTest.cs" />
+    <Compile Include="Implementations\AccidentRecordServiceTests\RemoveAccidentRecordDocumentTest.cs" />
+    <Compile Include="Implementations\AccidentRecordServiceTests\SaveAccidentRecordTest.cs" />
+    <Compile Include="Implementations\AccidentRecordServiceTests\SearchAccidentRecordTests.cs" />
+    <Compile Include="Implementations\AccidentRecordServiceTests\SendEmailNotificationTests.cs" />
+    <Compile Include="Implementations\AccidentRecordServiceTests\UpdateInjuryDetailsTests.cs" />
+    <Compile Include="Implementations\ActionServiceTests\AssignActionTaskTests.cs" />
+    <Compile Include="Implementations\ActionServiceTests\SearchActionsTests.cs" />
+    <Compile Include="Implementations\ActionPlanServiceTests\SearchActionPlanTests.cs" />
+    <Compile Include="Implementations\ActionTaskServiceTests\CompleteActionTaskTests.cs" />
+    <Compile Include="Implementations\ActionTaskServiceTests\SendNotificationEmailTests.cs" />
+    <Compile Include="Implementations\BusinessSafeCompanyDetailsServiceTests\GetTests.cs" />
+    <Compile Include="Implementations\BusinessSafeCompanyDetailsServiceTests\SaveTests.cs" />
+    <Compile Include="Implementations\Checklists\EmployeeChecklistServiceTests\BaseEmployeeServiceTests.cs" />
+    <Compile Include="Implementations\Checklists\EmployeeChecklistServiceTests\CompleteTests.cs" />
+    <Compile Include="Implementations\Checklists\EmployeeChecklistServiceTests\GetByPersonalRiskAssessmentIdTests.cs" />
+    <Compile Include="Implementations\Checklists\EmployeeChecklistServiceTests\ToggleFurtherActionRequiredTests.cs" />
+    <Compile Include="Implementations\Checklists\EmployeeChecklistServiceTests\UserIsAuthenticTests.cs" />
+    <Compile Include="Implementations\Checklists\EmployeeChecklistServiceTests\ValidateCompleteTests.cs" />
+    <Compile Include="Implementations\CompanyDefaultServiceTests\GetAllFireSafetyControlMeasuresForCompanyTests.cs" />
+    <Compile Include="Implementations\CompanyDefaultServiceTests\GetAllSourceOfFuelForCompanyTests.cs" />
+    <Compile Include="Implementations\CompanyDefaultServiceTests\GetAllSourceOfIgnitionForCompanyTests.cs" />
+    <Compile Include="Implementations\CompanyDefaultServiceTests\GetHazardForCompanyTests.cs" />
+    <Compile Include="Implementations\CompanyDefaultServiceTests\SaveFireSafetyControlMeasureTests.cs" />
+    <Compile Include="Implementations\CompanyDefaultServiceTests\SaveSourceOfFuelTests.cs" />
+    <Compile Include="Implementations\CompanyDefaultServiceTests\SaveSourceOFIgnitionTests.cs" />
+    <Compile Include="Implementations\Documents\AddedDocumentServiceTests\AddAddedDocumentTest.cs" />
+    <Compile Include="Implementations\CompanyDefaultServiceTests\CompanyDefaultMapperTests\MapTests.cs" />
+    <Compile Include="Implementations\CompanyDefaultServiceTests\GetCompanyHazardsTests.cs" />
+    <Compile Include="Implementations\CompanyDefaultServiceTests\GetCompanyPeopleAtRiskTests.cs" />
+    <Compile Include="Implementations\CompanyDefaultServiceTests\MarkHazardAsDeletedTests.cs" />
+    <Compile Include="Implementations\CompanyDefaultServiceTests\MarkPersonAtRiskAsDeletedTests.cs" />
+    <Compile Include="Implementations\CompanyDefaultServiceTests\SaveHazardTests.cs" />
+    <Compile Include="Implementations\CompanyDefaultServiceTests\SavePeopleAtRiskTests.cs" />
+    <Compile Include="Implementations\CompanyDetailsServiceTests\GetCompanyDetailsTests.cs" />
+    <Compile Include="Implementations\CompanyDetailsServiceTests\SaveTests.cs" />
+    <Compile Include="Implementations\Documents\DocHandlerDocumentTypeServiceTests\DocHandlerDocumentTypeServiceTests.cs" />
+    <Compile Include="Implementations\Documents\DocumentServiceTests\MarkDocumentAsDeletedTests.cs" />
+    <Compile Include="Implementations\DoesCompanyDefaultExistsTests\DoesCompanyDefaultAlreadyExistGuardTests.cs" />
+    <Compile Include="Implementations\EmployeeChecklistEmailServiceTests\GetByIdsTests.cs" />
+    <Compile Include="Implementations\EmployeeChecklistEmailServiceTests\CreateEmployeeChecklistEmail.cs" />
+    <Compile Include="Implementations\EmployeeChecklistServiceTests\GetSummaryByEmployeeChecklistTests.cs" />
+    <Compile Include="Implementations\EmployeeChecklistEmailServiceTests\RegenerateTests.cs" />
+    <Compile Include="Implementations\EmployeeNotificationHelperTests\CanSendTaskOverdueNotificationTests.cs" />
+    <Compile Include="Implementations\EmployeeServicesTests\AddEmployeeTests.cs" />
+    <Compile Include="Implementations\EmployeeServicesTests\CreateUserTests.cs" />
+    <Compile Include="Implementations\EmployeeServicesTests\GetEmployeesForSearchTests.cs" />
+    <Compile Include="Implementations\EmployeeServicesTests\GetEmployeesTests.cs" />
+    <Compile Include="Implementations\EmployeeServicesTests\GetEmployeeTests.cs" />
+    <Compile Include="Implementations\EmployeeServicesTests\MarkEmployeeAsDeletedTests.cs" />
+    <Compile Include="Implementations\EmployeeServicesTests\ReinstateEmployeeAsNotDeletedTests.cs" />
+    <Compile Include="Implementations\EmployeeServicesTests\UpdateEmployeeTests.cs" />
+    <Compile Include="Implementations\EmployeeServicesTests\UpdateEmailAddressTests.cs" />
+    <Compile Include="Implementations\EmployeeServicesTests\ValidateRegisterAsUserTests.cs" />
+    <Compile Include="Implementations\FireRiskAssessmentChecklistServiceTests\SaveTests.cs" />
+    <Compile Include="Implementations\FireRiskAssessmentTests\AddFurtherControlMeasureTaskTests.cs" />
+    <Compile Include="Implementations\FireRiskAssessmentTests\AttachPeopleAtRiskToRiskAssessmentTests.cs" />
+    <Compile Include="Implementations\FireRiskAssessmentTests\AttachFireSafetyControlMeasuresToRiskAssessmentTests.cs" />
+    <Compile Include="Implementations\FireRiskAssessmentTests\AttachSourceOfIgnitionToRiskAssessmentToRiskAssessmentTests.cs" />
+    <Compile Include="Implementations\FireRiskAssessmentTests\AttachSourcesOfFuelToRiskAssessmentTests.cs" />
+    <Compile Include="Implementations\FireRiskAssessmentTests\CompleteFireRiskAssessmentReviewTests.cs" />
+    <Compile Include="Implementations\FireRiskAssessmentTests\MarkChecklistWithCompleteFailureAttemptTests.cs" />
+    <Compile Include="Implementations\FireRiskAssessmentTests\ValidateFireRiskAssessmentReviewTests.cs" />
+    <Compile Include="Implementations\FireRiskAssessmentTests\CreateRiskAssessment.cs" />
+    <Compile Include="Implementations\FireRiskAssessmentTests\DoesFurtherControlMeasureTaskExistForSignificantFindingTests.cs" />
+    <Compile Include="Implementations\FireRiskAssessmentTests\GetRiskAssessmentWithSignificantFindingsTests.cs" />
+    <Compile Include="Implementations\FireRiskAssessmentTests\GetWithLatestFireRiskAssessmentChecklistTests.cs" />
+    <Compile Include="Implementations\FireRiskAssessmentTests\UpdatePremisesInformationTests.cs" />
+    <Compile Include="Implementations\FireRiskAssessmentTests\UpdateRiskAssessmentSummaryTests.cs" />
+    <Compile Include="Implementations\FurtherControlMeasureTaskServiceTests\CompleteFurtherControlMeasureTaskTests.cs" />
+    <Compile Include="Implementations\FurtherControlMeasureTaskServiceTests\AddDocumentsToTaskTests.cs" />
+    <Compile Include="Implementations\FurtherControlMeasureTaskServiceTests\GetByIdAndCompanyIdIncludeDeletedTests.cs" />
+    <Compile Include="Implementations\HazardousSubstanceRiskAssessmentTests\AddControlMeasureToRiskAssessmentTest.cs" />
+    <Compile Include="Implementations\HazardousSubstanceRiskAssessmentTests\ControlSystemCalculateTests.cs" />
+    <Compile Include="Implementations\HazardousSubstanceRiskAssessmentTests\FurtherControlMeasureTaskServiceTests.cs" />
+    <Compile Include="Implementations\HazardousSubstanceRiskAssessmentTests\SaveLastRecommendedControlSystemTests.cs" />
+    <Compile Include="Implementations\HazardousSubstanceRiskAssessmentTests\UpdateRiskAssessmentSummaryTests.cs" />
+    <Compile Include="Implementations\CompanyDefaultServiceTests\IsHazardAttachedToRiskAssessmentsTests.cs" />
+    <Compile Include="Implementations\MultiHazardRiskAssessmentTests\UpdateRiskAssessmentPremisesInformationTests.cs" />
+    <Compile Include="Implementations\PersonalRiskAssessmentServiceTests\CreateRiskAssessment.cs" />
+    <Compile Include="Implementations\PersonalRiskAssessmentServiceTests\CreateRiskAssessmentFromChecklistTests.cs" />
+    <Compile Include="Implementations\PersonalRiskAssessmentServiceTests\CreateWithHazardsTests.cs" />
+    <Compile Include="Implementations\PersonalRiskAssessmentServiceTests\RemoveEmployeeFromCheckListGeneratorTests.cs" />
+    <Compile Include="Implementations\PersonalRiskAssessmentServiceTests\SendEmployeeChecklistEmailCommandToTheQueueTests.cs" />
+    <Compile Include="Implementations\PersonalRiskAssessmentServiceTests\SaveChecklistGeneratorTests.cs" />
+    <Compile Include="Implementations\PersonalRiskAssessmentServiceTests\UpdateRiskAssessmentSummaryTests.cs" />
+    <Compile Include="Implementations\PersonalRiskAssessmentServiceTests\UpdateRiskAssessmentTests.cs" />
+    <Compile Include="Implementations\ResponsibilitiesServiceTests\CheckCanBeDeletedTests.cs" />
+    <Compile Include="Implementations\ResponsibilitiesServiceTests\CopyResponsibilityTests.cs" />
+    <Compile Include="Implementations\ResponsibilitiesServiceTests\CreateManyResponsibilityTaskFromTemplateTests.cs" />
+    <Compile Include="Implementations\ResponsibilitiesServiceTests\CreateResponsibilityFromWizardTests.cs" />
+    <Compile Include="Implementations\ResponsibilitiesServiceTests\CreateResponsibilityTaskFromTemplateTests.cs" />
+    <Compile Include="Implementations\ResponsibilitiesServiceTests\UndeleteTests.cs" />
+    <Compile Include="Implementations\ResponsibilitiesServiceTests\DeleteTests.cs" />
+    <Compile Include="Implementations\ResponsibilitiesServiceTests\GetResponsibilityTests.cs" />
+    <Compile Include="Implementations\ResponsibilitiesServiceTests\SaveResponsiblityTaskTests.cs" />
+    <Compile Include="Implementations\ResponsibilitiesServiceTests\SearchTests.cs" />
+    <Compile Include="Implementations\ResponsibilitiesServiceTests\GetResponsibilityReasonTests.cs" />
+    <Compile Include="Implementations\ResponsibilitiesServiceTests\GetResponsibilityCategoriesTests.cs" />
+    <Compile Include="Implementations\ResponsibilitiesServiceTests\SaveResponsiblityTests.cs" />
+    <Compile Include="Implementations\ResponsibilityTaskServiceTests\CompleteTests.cs" />
+    <Compile Include="Implementations\ResponsibilityTaskServiceTests\GetStatutoryTaskTests.cs" />
+    <Compile Include="Implementations\ResponsibilityTaskServiceTests\GetUncreatedStatutoryTasksTests.cs" />
+    <Compile Include="Implementations\ResponsibilityTaskServiceTests\SendNotificationEmailsTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentReviewServiceTest\BaseRiskAssessmentReviewTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentServiceTests\UpdateRiskAssessmentTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentServiceTests\MarkRiskAssessmentAsDraftTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentServiceTests\MarkRiskAssessmentAsLiveTests.cs" />
+    <Compile Include="Implementations\HazardousSubstanceRiskAssessmentTests\RemoveControlMeasureToRiskAssessmentTest.cs" />
+    <Compile Include="Implementations\HazardousSubstanceRiskAssessmentTests\UpdateControlMeasureToRiskAssessmentTest.cs" />
+    <Compile Include="Implementations\HazardousSubstanceRiskAssessmentTests\UpdateRiskAssessmentTest.cs" />
+    <Compile Include="Implementations\HazardousSubstanceRiskAssessmentTests\GetRiskAssessmentTests.cs" />
+    <Compile Include="Implementations\HazardousSubstanceRiskAssessmentTests\CreateRiskAssessmentTest.cs" />
+    <Compile Include="Implementations\HazardousSubstanceInventory\GetHazardousSubstancesForSearchTermTests.cs" />
+    <Compile Include="Implementations\HazardousSubstanceInventory\Inventory\GetByIdAndCompanyId.cs" />
+    <Compile Include="Implementations\HazardousSubstanceInventory\MarkForDeleteTests.cs" />
+    <Compile Include="Implementations\HazardousSubstanceInventory\Inventory\GetForCompany.cs" />
+    <Compile Include="Implementations\HazardousSubstanceInventory\Inventory\Create.cs" />
+    <Compile Include="Implementations\HazardousSubstanceInventory\Pictogram\GetAll.cs" />
+    <Compile Include="Implementations\NonEmployeeServiceTests\CreateNonEmployeeTests.cs" />
+    <Compile Include="Implementations\DoesNonEmployeeNameExistGuardTests\ExecuteTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentAttachmentService\AttachDocumentsToRiskAssessmentTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentAttachmentService\DetachDocumentsToRiskAssessmentTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentFurtherActionServiceTests\BulkReassignFurtherActionTaskTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentFurtherActionServiceTests\CompleteFurtherActionTaskTest.cs" />
+    <Compile Include="Implementations\RiskAssessmentFurtherActionServiceTests\MarkAsNoLongerRequiredTest.cs" />
+    <Compile Include="Implementations\RiskAssessmentFurtherActionServiceTests\MarkFurtherActionTaskAsDeletedTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentFurtherActionServiceTests\ReassignFurtherActionTaskTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentFurtherActionServiceTests\UpdateFurtherActionTaskToRiskAssessmentHazardTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentHazardService\RemoveControlMeasureFromRiskAssessmentHazardTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentHazardService\UpdateControlMeasureFromRiskAssessmentHazardTests.cs" />
+    <Compile Include="Implementations\GeneralRiskAssessmentLookupServiceTests\GetEmployeesTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentAttachmentService\AttachHazardsToRiskAssessmentTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentAttachmentService\AttachPeopleAtRiskToRiskAssessmentTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentReviewServiceTest\AddRiskAssessmentReviewTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentReviewServiceTest\CompleteRiskAssessmentReviewTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentReviewServiceTest\EditRiskAssessmentReviewTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentReviewServiceTest\RiskAssessmentReviewServiceTest.cs" />
+    <Compile Include="Implementations\RiskAssessmentServiceTests\CanDeleteRiskAssessmentTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentServiceTests\CanRemoveRiskAssessmentHazardTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentServiceTests\CopyRiskAssessmentTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentServiceTests\GetPeopleAtRiskDisplayWarningMessagesTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentServiceTests\MarkRiskAssessmentAsDeletedTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentServiceTests\ReinstateRiskAssessmentAsNotDeletedTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentServiceTests\SearchTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentServiceTests\UpdateRiskAssessmentSummaryTests.cs" />
+    <Compile Include="Implementations\RiskAssessorServiceTests\CreateTests.cs" />
+    <Compile Include="Implementations\RiskAssessorServiceTests\GetByCompanyIdTests.cs" />
+    <Compile Include="Implementations\RiskAssessorServiceTests\GetByIdAndCompanyIdTests.cs" />
+    <Compile Include="Implementations\RiskAssessorServiceTests\MarkRiskAssessorAsDeletedTests.cs" />
+    <Compile Include="Implementations\RiskAssessorServiceTests\MarkRiskAssessorUndeletedTests.cs" />
+    <Compile Include="Implementations\RiskAssessorServiceTests\SearchTests.cs" />
+    <Compile Include="Implementations\RiskAssessorServiceTests\UpdateTests.cs" />
+    <Compile Include="Implementations\SiteServiceTests\AddAccidentRecordNotificationMemberTests.cs" />
+    <Compile Include="Implementations\SiteServiceTests\AddNonEmployeesToAccidentRecordNotificationMembersTests.cs" />
+    <Compile Include="Implementations\SiteServiceTests\GetAccidentRecordNotificationMembersTests.cs" />
+    <Compile Include="Implementations\Users\AuthenticationTokenTests\CreateAuthenticationTokenTests.cs" />
+    <Compile Include="Implementations\Users\AuthenticationTokenTests\DisableAuthenticationTokenTests.cs" />
+    <Compile Include="Implementations\Users\AuthenticationTokenTests\GetAuthenticationTokenTests.cs" />
+    <Compile Include="Implementations\Users\RolesServiceTests\AddTests.cs" />
+    <Compile Include="Implementations\Users\RolesServiceTests\GetAllPermissionsTests.cs" />
+    <Compile Include="Implementations\GeneralRiskAssessmentLookupServiceTests\GetNonEmployeesTests.cs" />
+    <Compile Include="Implementations\NonEmployeeServiceTests\MarkNonEmployeeAsDeletedTests.cs" />
+    <Compile Include="Implementations\NonEmployeeServiceTests\UpdateNonEmployeeTests.cs" />
+    <Compile Include="Implementations\Users\RolesServiceTests\GetAllRolesTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentAttachmentService\AttachNonEmployeeToRiskAssessmentTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentAttachmentService\AttachEmployeeToRiskAssessmentTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentAttachmentService\DetachEmployeeFromRiskAssessmentTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentAttachmentService\DetachNonEmployeeToRiskAssessmentTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentServiceTests\GetRiskAssessmentTests.cs" />
+    <Compile Include="Implementations\RiskAssessmentServiceTests\SaveRiskAssessmentTest.cs" />
+    <Compile Include="Implementations\Users\RolesServiceTests\MarkUserRoleAsDeletedTests.cs" />
+    <Compile Include="Implementations\Users\RolesServiceTests\UpdateTests.cs" />
+    <Compile Include="Implementations\SignificantFindingServiceTests\MarkSignificantFindingAsDeletedTests.cs" />
+    <Compile Include="Implementations\SiteGroupServiceTests\EnsureMainSiteExistsTests.cs" />
+    <Compile Include="Implementations\SiteGroupServiceTests\GetSiteGroup.cs" />
+    <Compile Include="Implementations\SiteGroupServiceTests\UpdateTests.cs" />
+    <Compile Include="Implementations\SiteServiceTests\DeleteSiteGroupTests.cs" />
+    <Compile Include="Implementations\SiteServiceTests\DelinkSiteTests.cs" />
+    <Compile Include="Implementations\SiteServiceTests\MainSiteExistsTests.cs" />
+    <Compile Include="Implementations\SiteServiceTests\GetAllSitesTests.cs" />
+    <Compile Include="Implementations\SiteServiceTests\GetByUserIdAndCompanyIdTests.cs" />
+    <Compile Include="Implementations\SiteServiceTests\UpdateTests.cs" />
+    <Compile Include="Implementations\SiteStructureElementServiceTests\_CAN_GO_GetByUserIdAndCompanyIdTests.cs" />
+    <Compile Include="Implementations\SuppliersServiceTests\CreateSupplierTests.cs" />
+    <Compile Include="Implementations\SuppliersServiceTests\MarkSupplierAsDeletedTests.cs" />
+    <Compile Include="Implementations\SuppliersServiceTests\UpdateteSupplierTests.cs" />
+    <Compile Include="Implementations\TaskServiceTests\GetOutstandingTaskSummaryTests.cs" />
+    <Compile Include="Implementations\TaskServiceTests\HasEmployeeGotOutstandingTasksTests.cs" />
+    <Compile Include="Implementations\TaskServiceTests\SearchTasksTests.cs" />
+    <Compile Include="Implementations\Users\UserServiceTests\CreateNewUserTests.cs" />
+    <Compile Include="Implementations\Users\UserServiceTests\DeleteUserFromEventHandlerTests.cs" />
+    <Compile Include="Implementations\Users\UserServiceTests\CreateAdminUserTests.cs" />
+    <Compile Include="Implementations\Users\UserServiceTests\DeleteUserInOwnCompanyTests.cs" />
+    <Compile Include="Implementations\Users\UserServiceTests\DisableAuthenticationTokensTests.cs" />
+    <Compile Include="Implementations\Users\UserServiceTests\EnableUserTests.cs" />
+    <Compile Include="Implementations\Users\UserServiceTests\SetRoleAndSiteTests.cs" />
+    <Compile Include="Implementations\Users\UserServiceTests\GetByIdAndCompanyIdTests.cs" />
+    <Compile Include="Implementations\Users\UserServiceTests\UserSearchTests.cs" />
+    <Compile Include="Implementations\VisitRequestServiceTests\SendVisitRequestedEmailTest.cs" />
+    <Compile Include="Mappers\AuditedUserDtoMapperTests.cs" />
+    <Compile Include="Mappers\EmployeeContactDetailDtoMapperTests.cs" />
+    <Compile Include="Mappers\ResponsibilityDtoMapperTests.cs" />
+    <Compile Include="Mappers\DocumentDtoMapperTests.cs" />
+    <Compile Include="Mappers\FireRiskAssessmentDtoMapperTests.cs" />
+    <Compile Include="Mappers\HazardousSubstanceRiskAssessmentDtoMapperTests.cs" />
+    <Compile Include="Mappers\RiskAssessmentDtoMapperTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Request\Attributes\AtLeastOneDropDownSelectedMainSite\IsValidTests.cs" />
+    <Compile Include="Request\Attributes\AtLeastOneDropDownSelected\IsValidTests.cs" />
+    <Compile Include="Request\Attributes\OneDropDownSelectedTests\IsValidTests.cs" />
+    <Compile Include="RestAPI\ClientService\GetCompanyDetailsTests.cs" />
+    <Compile Include="RestAPI\RestClient\ExecuteTests.cs" />
+    <Compile Include="Specifications\UniqueRiskAssessmentReferenceSpecificationTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessSafe.Application\BusinessSafe.Application.csproj">
+      <Project>{5DBF972D-D624-4FE6-8483-F9828C37CF52}</Project>
+      <Name>BusinessSafe.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Data\BusinessSafe.Data.csproj">
+      <Project>{0E42764A-6356-461F-9473-D452EFC22AC7}</Project>
+      <Name>BusinessSafe.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Domain\BusinessSafe.Domain.csproj">
+      <Project>{EA0B55F3-6232-400F-8BE0-FEC49883253F}</Project>
+      <Name>BusinessSafe.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Infrastructure\BusinessSafe.Infrastructure.csproj">
+      <Project>{9DD3289E-AA83-483D-88E1-F2FCE53B941C}</Project>
+      <Name>BusinessSafe.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Messages.Emails\BusinessSafe.Messages.Emails.csproj">
+      <Project>{CFC682DE-01ED-45D9-925A-8F764368514A}</Project>
+      <Name>BusinessSafe.Messages.Emails</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Messages\BusinessSafe.Messages.csproj">
+      <Project>{EE24F1BE-1BB4-413F-895D-7DC49325F36A}</Project>
+      <Name>BusinessSafe.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Test.Infrastructure\BusinessSafe.Test.Infrastructure.csproj">
+      <Project>{4EBDA3BB-5D03-4F0C-8B33-7DE400F39AAD}</Project>
+      <Name>BusinessSafe.Test.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="hibernate_BusinessSafeDB.cfg.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="hibernate_PeninsulaDB.cfg.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DataTransferObjectsTests\ActionDtoTests\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!--<Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+   To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

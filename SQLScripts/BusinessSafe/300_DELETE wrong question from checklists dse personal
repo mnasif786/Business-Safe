@@ -1,0 +1,2 @@
+
+DELETE FROM [dbo].[Question] WHERE [text] = 'Have you ever suffered from work related aches or pains in your: '

@@ -1,0 +1,22 @@
+﻿@using BusinessSafe.WebSite.Areas.GeneralRiskAssessments.ViewModels
+@model PremisesInformationViewModel
+@{
+    ViewBag.Title = "Premises Information";
+}
+@Html.Partial("_RiskAssessmentSummary", ViewBag.RiskAssessmentSummary as GeneralRiskAssessmentSummaryViewModel)
+<div class="container ipad-container">
+    @Html.Partial("_Tabs", ViewBag.TabViewModel as GeneralRiskAssessmentTabViewModel)
+
+    @Html.Hidden("SelectedTabIndex", 1)
+    @Html.HiddenFor(x => x.CompanyId)
+    @Html.Hidden("RiskAssessmentId", Model.RiskAssessmentId)
+    @Html.Partial("_DetailsAssessment", Model)
+</div>
+@section JavaScriptSection
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            premisesInformationManager.initialize();
+        });
+    </script>
+}

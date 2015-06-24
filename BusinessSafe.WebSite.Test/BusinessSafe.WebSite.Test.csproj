@@ -1,0 +1,549 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5E34A05E-4690-451A-9147-7F9463ADFC24}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BusinessSafe.WebSite.Tests</RootNamespace>
+    <AssemblyName>BusinessSafe.WebSite.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CI|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\CI\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'UAT|AnyCPU'">
+    <OutputPath>bin\UAT\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LIVE|AnyCPU'">
+    <OutputPath>bin\LIVE\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentValidation, Version=3.3.1.0, Culture=neutral, PublicKeyToken=a82054b837897c66, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.3.3.1.0\lib\Net40\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcContrib.TestHelper">
+      <HintPath>..\packages\MvcContrib.Mvc3.TestHelper-ci.3.0.100.0\lib\MvcContrib.TestHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.3.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\BusinessSafe.WebSite\bin\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus, Version=3.2.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NServiceBus.3.2.6\lib\net40\NServiceBus.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Peninsula.Online.Messages, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Peninsula.Online.Messages\Peninsula.Online.Messages.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhino.Mocks">
+      <HintPath>..\packages\RhinoMocks.3.6.1\lib\net\Rhino.Mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap, Version=2.6.3.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\structuremap.2.6.3\lib\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\Employees\EmployeeControllerTests\CreateUserFromEmployeeTests.cs" />
+    <Compile Include="Controllers\SqlReports\AccdientRecordsControllerTests.cs" />
+    <Compile Include="Controllers\SqlReports\HazardousSubstancesInventoryControllerTests.cs" />
+    <Compile Include="Controllers\VisitRequest\CreateVisitRequestTests.cs" />
+    <Compile Include="ViewModelFactory\CompanyDefaultsTaskFactoryTests\AccidentRecordDistributionListModelFactoryTest.cs" />
+    <Compile Include="Areas\AccidentReports\FakeCustomPrincipal.cs" />
+    <Compile Include="AuthenticationService\CustomPrincipleTests.cs" />
+    <Compile Include="AuthenticationService\ImpersonateGuardTests.cs" />
+    <Compile Include="BootstrapperTests.cs" />
+    <Compile Include="Builder\CreatingRiskAssessmentSummaryViewModelBuilder.cs" />
+    <Compile Include="Builder\DeleteSiteGroupViewModelBuilder.cs" />
+    <Compile Include="Builder\DelinkSiteViewModelBuilder.cs" />
+    <Compile Include="Builder\EmployeeSearchRequestBuilder.cs" />
+    <Compile Include="Builder\EmployeeSearchViewModelBuilder.cs" />
+    <Compile Include="Builder\EmployeeViewModelBuilder.cs" />
+    <Compile Include="Builder\GuardDefaultExistsRequestBuilder.cs" />
+    <Compile Include="Builder\PremisesInformationViewModelBuilder.cs" />
+    <Compile Include="Builder\SaveCompanyDefaultRequestBuilder.cs" />
+    <Compile Include="Builder\SaveCompanyDefaultViewModelBuilder.cs" />
+    <Compile Include="Builder\SaveNonEmployeeRequestBuilder.cs" />
+    <Compile Include="Builder\SiteGroupDetailsViewModelBuilder.cs" />
+    <Compile Include="Builder\SiteDetailsViewModelBuilder.cs" />
+    <Compile Include="Builder\UserRolesViewModelBuilder.cs" />
+    <Compile Include="Controllers\AccidentRecording\AccidentDetails\SaveTests.cs" />
+    <Compile Include="Controllers\AccidentRecording\AccidentDetails\IndexTests.cs" />
+    <Compile Include="Controllers\AccidentRecording\CreateTests.cs" />
+    <Compile Include="Controllers\AccidentRecording\DeleteTests.cs" />
+    <Compile Include="Controllers\AccidentRecording\InjuryDetails\IndexTests.cs" />
+    <Compile Include="Controllers\AccidentRecording\InjuryDetails\SaveTests.cs" />
+    <Compile Include="Controllers\AccidentRecording\OverviewDetails\IndexTests.cs" />
+    <Compile Include="Controllers\AccidentRecording\OverviewDetails\SaveTests.cs" />
+    <Compile Include="Controllers\AccidentRecording\Search\SearchTests.cs" />
+    <Compile Include="Controllers\ActionPlans\AssignTaskTests.cs" />
+    <Compile Include="Controllers\ActionPlans\CompleteTaskTests.cs" />
+    <Compile Include="Controllers\CompanyControllerTests\SaveAndNotifyAdminTests.cs" />
+    <Compile Include="Controllers\CompanyDefaultController\CanDeleteHazardTests.cs" />
+    <Compile Include="Controllers\CompanyDefaultController\CreateCompanyDefaultsTests.cs" />
+    <Compile Include="Controllers\CompanyDefaultController\DeleteCompanyDefaultTests.cs" />
+    <Compile Include="Controllers\CompanyDefaultController\UpdateCompanyDefaultTests.cs" />
+    <Compile Include="Controllers\CompanyDefaults\RiskAssessorTests\AddRiskAssessorTests.cs" />
+    <Compile Include="Controllers\CompanyDefaults\RiskAssessorTests\MarkRiskAssessorAsUndeletedTests.cs" />
+    <Compile Include="Controllers\Employees\EmployeesControllerTests\IsUserAbleToCompleteReviewTaskTests.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\GeneralRiskAssessment\IndexTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\ChecklistGeneratorTests\RemoveEmployeeTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\ChecklistManagerCommandsTests\ToggleFurtherActionRequiredTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\IndexTests.cs" />
+    <Compile Include="Controllers\Reports\PersonalRiskAssessments\IndexTests.cs" />
+    <Compile Include="Controllers\Responsibilities\CheckCanBeDeletedTests.cs" />
+    <Compile Include="Controllers\Responsibilities\ResponsibilityTasks\MarkAsNoLongerRequiredTests.cs" />
+    <Compile Include="Controllers\Responsibilities\ResponsibilityTasks\POST_CompleteTest.cs" />
+    <Compile Include="Controllers\Responsibilities\ResponsibilityTasks\ReassignTest.cs" />
+    <Compile Include="Controllers\Responsibilities\UndeleteTests.cs" />
+    <Compile Include="Controllers\Responsibilities\DeleteTests.cs" />
+    <Compile Include="Controllers\Responsibilities\ResponsibilityTasks\GET_CompleteTest.cs" />
+    <Compile Include="Controllers\Responsibilities\ResponsibilityTasks\MarkForDeleteTest.cs" />
+    <Compile Include="Controllers\Responsibilities\UpdateTests.cs" />
+    <Compile Include="Controllers\Responsibilities\FindTests.cs" />
+    <Compile Include="Controllers\Responsibilities\CreateTests.cs" />
+    <Compile Include="Controllers\Responsibilities\IndexTests.cs" />
+    <Compile Include="Controllers\Responsibilities\Wizard\BulkGenerateTaskTests.cs" />
+    <Compile Include="Controllers\Responsibilities\Wizard\GenerateResponsibilitiesPOSTTests.cs" />
+    <Compile Include="Controllers\Responsibilities\Wizard\GenerateResponsibilitiesGETTests.cs" />
+    <Compile Include="Controllers\Responsibilities\Wizard\GenerateTaskTests.cs" />
+    <Compile Include="Controllers\Responsibilities\Wizard\SelectResponsibilitiesPOSTTests.cs" />
+    <Compile Include="Controllers\RiskAssessor\AddPostTests.cs" />
+    <Compile Include="Controllers\CompanyDefaults\RiskAssessorTests\MarkRiskAssessorAsDeletedTests.cs" />
+    <Compile Include="Controllers\FireRiskAssessmentAttachDocument\IndexTests.cs" />
+    <Compile Include="Controllers\FireRiskAssessmentAttachDocument\SaveAndNextTests.cs" />
+    <Compile Include="Controllers\FireRiskAssessmentAttachDocument\SaveTests.cs" />
+    <Compile Include="Controllers\Documents\AddedDocumentsController\IndexTests.cs" />
+    <Compile Include="Controllers\Documents\AddedDocumentsController\MarkDocumentAsDeleteTests.cs" />
+    <Compile Include="Controllers\Documents\DocumentControllerTests\BaseUploadDocument.cs" />
+    <Compile Include="Controllers\Documents\DocumentControllerTests\DocumentUploadedTests.cs" />
+    <Compile Include="Controllers\Documents\DocumentControllerTests\UploadDocumentTests.cs" />
+    <Compile Include="Controllers\FireRiskAssessments\ChecklistTests\CompleteFireRiskAssessmentTests.cs" />
+    <Compile Include="Controllers\FireRiskAssessments\ChecklistTests\CheckFireAnswerCanBeChangedTests.cs" />
+    <Compile Include="Controllers\FireRiskAssessments\ChecklistTests\SaveFireRiskAssessmentChecklistTests.cs" />
+    <Compile Include="Controllers\FireRiskAssessments\ChecklistTests\IndexTests.cs" />
+    <Compile Include="Controllers\FireRiskAssessments\ChecklistTests\ValidateTests.cs" />
+    <Compile Include="Controllers\FireRiskAssessments\CreateTests.cs" />
+    <Compile Include="Controllers\FireRiskAssessments\FurtherControlMeasureTaskTests\EditTests.cs" />
+    <Compile Include="Controllers\FireRiskAssessments\FurtherControlMeasureTaskTests\SaveNewFurtherControlMeasureTest.cs" />
+    <Compile Include="Controllers\FireRiskAssessments\Hazards\IndexTests.cs" />
+    <Compile Include="Controllers\FireRiskAssessments\Hazards\SaveTests.cs" />
+    <Compile Include="Controllers\FireRiskAssessments\IndexTests.cs" />
+    <Compile Include="Controllers\FireRiskAssessments\FurtherControlMeasureTaskTests\NewTests.cs" />
+    <Compile Include="Controllers\FireRiskAssessments\PremisesInformationTests\IndexTests.cs" />
+    <Compile Include="Controllers\FireRiskAssessments\PremisesInformationTests\SaveAndNextTests.cs" />
+    <Compile Include="Controllers\FireRiskAssessments\PremisesInformationTests\SaveTests.cs" />
+    <Compile Include="Controllers\FireRiskAssessments\Review\IndexTests.cs" />
+    <Compile Include="Controllers\FireRiskAssessments\SignificantFindingsTests\MarkSignificantFindingAsDeletedTests.cs" />
+    <Compile Include="Controllers\FireRiskAssessments\SignificantFindingsTests\IndexTests.cs" />
+    <Compile Include="Controllers\FireRiskAssessments\Summary\IndexTests.cs" />
+    <Compile Include="Controllers\FireRiskAssessments\Summary\SaveAndNextTests.cs" />
+    <Compile Include="Controllers\FireRiskAssessments\Summary\SaveTests.cs" />
+    <Compile Include="Controllers\GeneralRiskAssessmentAttachDocument\IndexTests.cs" />
+    <Compile Include="Controllers\GeneralRiskAssessmentAttachDocument\SaveAndNextTests.cs" />
+    <Compile Include="Controllers\GeneralRiskAssessmentAttachDocument\SaveTests.cs" />
+    <Compile Include="Controllers\BaseControllerAttributesTests.cs" />
+    <Compile Include="Controllers\CompanyControllerTests\IndexTests.cs" />
+    <Compile Include="Controllers\HazardousSubstanceRiskAssessments\ControlSystem\GetControlSystemTests.cs" />
+    <Compile Include="Controllers\RiskAssessmentReview\RiskAssessmentStatus\CheckRiskAssessmentCanBeDeletedTests.cs" />
+    <Compile Include="Controllers\GeneralRiskAssessment\ControlMeasures\IndexTests.cs" />
+    <Compile Include="Controllers\GeneralRiskAssessment\Hazards\CheckRiskAssessmentHazardCanBeRemovedTests.cs" />
+    <Compile Include="Controllers\GeneralRiskAssessment\Hazards\SaveAndNextTests.cs" />
+    <Compile Include="Controllers\HazardousSubstanceRiskAssessments\Summary\SaveAndNextTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\ChecklistGeneratorTests\GenerateTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\ChecklistGeneratorTests\ResendEmployeeChecklistTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\ChecklistGeneratorTests\SaveAndNextTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\ChecklistGeneratorTests\IndexTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\ChecklistGeneratorTests\SaveTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\ChecklistGeneratorTests\ValidateGenerateTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\ChecklistGeneratorTests\ViewTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\ChecklistManagerTests\IndexTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\ChecklistManagerTests\ViewTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\EmployeeChecklistSummaryTests\IndexTests.cs" />
+    <Compile Include="Controllers\Reports\HazardousSubstanceRiskAssessments\IndexTests.cs" />
+    <Compile Include="Controllers\RiskAssessmentReview\RiskAssessmentStatus\MarkRiskAssessmentAsDeletedOrUnDeletedTests.cs" />
+    <Compile Include="Controllers\GeneralRiskAssessment\Review\CompleteTests.cs" />
+    <Compile Include="Controllers\GenericFurtherControlMeasureTask\CreateFurtherControlMeasureTaskTests.cs" />
+    <Compile Include="Controllers\HazardousSubstanceRiskAssessments\Review\CompleteTests.cs" />
+    <Compile Include="Controllers\GeneralRiskAssessment\Hazards\SaveTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\ControlMeasures\AddControlMeasureToRiskAssessmentHazardTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\ControlMeasures\RemoveControlMeasureFromRiskAssessmentHazardTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\ControlMeasures\UpdateControlMeasureForRiskAssessmentHazardTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\CreateTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\Documents\IndexTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\Documents\SaveAndNextTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\Documents\SaveTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\HazardsTests\CheckRiskAssessmentHazardCanBeRemovedTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\HazardsTests\IndexTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\HazardsTests\SaveAndNextTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\HazardsTests\SaveTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\PremisesInformationTests\SaveAndNextTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\PremisesInformationTests\ViewTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\Review\CompleteTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\Review\IndexTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\ControlMeasures\IndexTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\PremisesInformationTests\SaveTests.cs" />
+    <Compile Include="Controllers\RiskAssessmentReview\BaseRiskAssessmentReviewTest.cs" />
+    <Compile Include="Controllers\RiskAssessor\AddTests.cs" />
+    <Compile Include="Controllers\RiskAssessor\EditPostTests.cs" />
+    <Compile Include="Controllers\RiskAssessor\EditTests.cs" />
+    <Compile Include="Controllers\Users\ResendRegistration\ResendRegistrationEmailTests.cs" />
+    <Compile Include="Controllers\Users\UpdateRegistration\UpdateRegistrationTests.cs" />
+    <Compile Include="Controllers\Users\UserPermission\CreateUserTests.cs" />
+    <Compile Include="CustomValidators\EmailAttributeTests.cs" />
+    <Compile Include="Extensions\DateTimeOffsetExtensionsTests.cs" />
+    <Compile Include="Extensions\FireRiskAssessmentChecklistViewModelExtensionTests.cs" />
+    <Compile Include="Extensions\HtmlExtensionsTests.cs" />
+    <Compile Include="Factories\CreateMarkForDeletedTaskTests.cs" />
+    <Compile Include="Controllers\CompanyDefaultController\IndexTests.cs" />
+    <Compile Include="Factories\CreateSaveTaskTests.cs" />
+    <Compile Include="Controllers\Documents\MapperTests.cs" />
+    <Compile Include="Controllers\Documents\BusinessSafeSystemDocumentsLibrary\IndexTests.cs" />
+    <Compile Include="Controllers\Documents\CreateAddedDocument\IndexTests.cs" />
+    <Compile Include="Controllers\Documents\CreateAddedDocument\PostToIndexTests.cs" />
+    <Compile Include="Controllers\Documents\DocumentLibrary\ViewDocumentTests.cs" />
+    <Compile Include="Controllers\EmployeeSearch\IndexTests.cs" />
+    <Compile Include="Controllers\Employees\EmployeeControllerTests\CanDeleteEmployeeTests.cs" />
+    <Compile Include="Controllers\Employees\EmployeeControllerTests\CreateEmployeeTests.cs" />
+    <Compile Include="Controllers\Employees\EmployeeControllerTests\IndexEmployeeTests.cs" />
+    <Compile Include="Controllers\Employees\EmployeeControllerTests\MarkEmployeeAsDeletedTests.cs" />
+    <Compile Include="Controllers\Employees\EmployeeControllerTests\ReinstateEmployeeTests.cs" />
+    <Compile Include="Controllers\Employees\EmployeeControllerTests\UpdateEmployeeTests.cs" />
+    <Compile Include="Controllers\FurtherActionTask\BulkReassignFurtherActionTests.cs" />
+    <Compile Include="Controllers\FurtherActionTask\CompleteTaskTests.cs" />
+    <Compile Include="Controllers\GeneralRiskAssessment\FurtherControlMeasureTasks\NewTests.cs" />
+    <Compile Include="Controllers\FurtherActionTask\MarkForDeleteFurtherActionTests.cs" />
+    <Compile Include="Controllers\FurtherActionTask\EditTests.cs" />
+    <Compile Include="Controllers\FurtherActionTask\MarkTaskAsNoLongerRequiredTests.cs" />
+    <Compile Include="Controllers\FurtherActionTaskDetailsSummary\IndexTests.cs" />
+    <Compile Include="Controllers\FurtherActionTask\PrintTests.cs" />
+    <Compile Include="Controllers\FurtherActionTask\ReassignFurtherActionTests.cs" />
+    <Compile Include="Controllers\FurtherActionTask\ReassignTests.cs" />
+    <Compile Include="Controllers\FurtherActionTask\ViewTests.cs" />
+    <Compile Include="Controllers\GeneralRiskAssessment\FurtherControlMeasureTasks\CompleteTest.cs" />
+    <Compile Include="Controllers\GeneralRiskAssessment\FurtherControlMeasureTasks\ReassignTest.cs" />
+    <Compile Include="Controllers\GeneralRiskAssessment\FurtherControlMeasureTasks\EditTest.cs" />
+    <Compile Include="Controllers\GeneralRiskAssessment\FurtherControlMeasureTasks\PrintTest.cs" />
+    <Compile Include="Controllers\GeneralRiskAssessment\CopyRiskAssessmentTests.cs" />
+    <Compile Include="Controllers\GeneralRiskAssessment\FurtherControlMeasureTasks\ViewTest.cs" />
+    <Compile Include="Controllers\GeneralRiskAssessment\Summary\ViewTests.cs" />
+    <Compile Include="Controllers\GeneralRiskAssessment\Summary\IndexTests.cs" />
+    <Compile Include="Controllers\GeneralRiskAssessment\Summary\SaveTests.cs" />
+    <Compile Include="Controllers\GenericFurtherControlMeasureTask\UpdateFurtherControlMeasureTaskTests.cs" />
+    <Compile Include="Controllers\HazardousSubstanceRiskAssessments\Summary\IndexTests.cs" />
+    <Compile Include="Controllers\HazardousSubstanceRiskAssessments\Summary\SaveTests.cs" />
+    <Compile Include="Controllers\HazardousSubstanceRiskAssessments\Summary\ViewTests.cs" />
+    <Compile Include="Controllers\HazardsousSubstancelRiskAssessmentAttachDocument\IndexTests.cs" />
+    <Compile Include="Controllers\HazardsousSubstancelRiskAssessmentAttachDocument\SaveAndNextTests.cs" />
+    <Compile Include="Controllers\HazardsousSubstancelRiskAssessmentAttachDocument\SaveTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\PremisesInformationTests\IndexTests.cs" />
+    <Compile Include="Controllers\Reports\GeneralRiskAssessments\IndexTests.cs" />
+    <Compile Include="Controllers\RiskAssessmentReview\CompleteTests.cs" />
+    <Compile Include="Controllers\RiskAssessmentReview\EditTests.cs" />
+    <Compile Include="Controllers\RiskAssessmentReview\CreateTests.cs" />
+    <Compile Include="Controllers\HazardousSubstanceInventory\Inventory\SubstanceDetailsForRiskAssessment.cs" />
+    <Compile Include="Controllers\HazardousSubstanceRiskAssessments\AssessmentController\SaveTests.cs" />
+    <Compile Include="Controllers\HazardousSubstanceRiskAssessments\ControlMeasures\AddControlMeasureToRiskAssessmentTests.cs" />
+    <Compile Include="Controllers\HazardousSubstanceRiskAssessments\ControlMeasures\IndexTests.cs" />
+    <Compile Include="Controllers\HazardousSubstanceRiskAssessments\ControlMeasures\RemoveControlMeasureToRiskAssessmentTests.cs" />
+    <Compile Include="Controllers\HazardousSubstanceRiskAssessments\ControlMeasures\UpdateControlMeasureToRiskAssessmentTests.cs" />
+    <Compile Include="Controllers\HazardousSubstanceRiskAssessments\FurtherControlMeasureTasks\CreateFurtherControlMeasureTask.cs" />
+    <Compile Include="Controllers\HazardousSubstanceRiskAssessments\FurtherControlMeasureTasks\NewFurtherControlMeasureTest.cs" />
+    <Compile Include="Controllers\HazardousSubstanceRiskAssessments\HazardousSubstanceRiskAssessmentEmployee\AttachEmployeeToRiskAssessmentTests.cs" />
+    <Compile Include="Controllers\HazardousSubstanceRiskAssessments\HazardousSubstanceRiskAssessmentEmployee\DettachEmployeeFromRiskAssessmentTests.cs" />
+    <Compile Include="Controllers\HazardousSubstanceRiskAssessments\HazardousSubstanceRiskAssessmentEmployee\GetEmployeeTests.cs" />
+    <Compile Include="Controllers\HazardousSubstanceRiskAssessments\HazardousSubstanceRiskAssessmentSummaryTests\MarkGeneralRiskAssessmentIsDraftStatusTests.cs" />
+    <Compile Include="Controllers\HazardousSubstanceRiskAssessments\DescriptionController\SaveTests.cs" />
+    <Compile Include="Controllers\HazardousSubstanceRiskAssessments\DescriptionController\IndexTests.cs" />
+    <Compile Include="Controllers\HazardousSubstanceRiskAssessments\DescriptionController\ViewTests.cs" />
+    <Compile Include="Controllers\HazardousSubstanceRiskAssessments\CreateTests.cs" />
+    <Compile Include="Controllers\HazardousSubstanceRiskAssessments\IndexTests.cs" />
+    <Compile Include="Controllers\HazardousSubstanceInventory\Inventory\Add.cs" />
+    <Compile Include="Controllers\HazardousSubstanceInventory\Inventory\CheckForDuplicatedSubstance.cs" />
+    <Compile Include="Controllers\HazardousSubstanceInventory\Inventory\Edit.cs" />
+    <Compile Include="Controllers\HazardousSubstanceInventory\Inventory\HazardousSubtanceInventoryTest.cs" />
+    <Compile Include="Controllers\HazardousSubstanceInventory\Inventory\Index.cs" />
+    <Compile Include="Controllers\HazardousSubstanceInventory\Inventory\Save.cs" />
+    <Compile Include="Controllers\HazardousSubstanceInventory\Inventory\Delete.cs" />
+    <Compile Include="Controllers\HazardousSubstanceInventory\Inventory\MarkAsDelete.cs" />
+    <Compile Include="Controllers\GeneralRiskAssessment\Hazards\BaseControllersHazardsTests.cs" />
+    <Compile Include="Controllers\GeneralRiskAssessment\Hazards\IndexTests.cs" />
+    <Compile Include="Controllers\NonEmployee\AttachNonEmployeeToRiskAssessmentTests.cs" />
+    <Compile Include="Controllers\NonEmployee\SaveNonEmployeeTests.cs" />
+    <Compile Include="Controllers\GeneralRiskAssessment\CreateTests.cs" />
+    <Compile Include="Controllers\NonEmployee\EditNonEmployeeTests.cs" />
+    <Compile Include="Controllers\NonEmployee\GetNonEmployeeTests.cs" />
+    <Compile Include="Controllers\NonEmployee\MarkNonEmployeeAsDeletedTests.cs" />
+    <Compile Include="Controllers\PremisesInformation\SaveAndNextTests.cs" />
+    <Compile Include="Controllers\Suppliers\CanDeleteSupplierTests.cs" />
+    <Compile Include="Controllers\Suppliers\GetSuppliersTests.cs" />
+    <Compile Include="Controllers\TaskList\TaskListSummaryTests.cs" />
+    <Compile Include="Controllers\TestControllerHelpers.cs" />
+    <Compile Include="Controllers\PremisesInformation\BasePremisesInformationControllerTests.cs" />
+    <Compile Include="Controllers\PremisesInformation\IndexTest.cs" />
+    <Compile Include="Controllers\PremisesInformation\SaveTests.cs" />
+    <Compile Include="Controllers\TaskList\IndexTests.cs" />
+    <Compile Include="Controllers\Sites\DeleteSiteGroupTests.cs" />
+    <Compile Include="Controllers\Sites\DelinkSiteAddressTests.cs" />
+    <Compile Include="Controllers\Sites\GetSiteDetailsTests.cs" />
+    <Compile Include="Controllers\Sites\GetSiteGroupTests.cs" />
+    <Compile Include="Controllers\Sites\IndexTests.cs" />
+    <Compile Include="Controllers\Sites\ParentIdFinderTests.cs" />
+    <Compile Include="Controllers\Sites\SiteOrganisationalChartTests.cs" />
+    <Compile Include="Controllers\Sites\UpdateSiteGroupTests.cs" />
+    <Compile Include="Controllers\Sites\UpdateSiteTests.cs" />
+    <Compile Include="Controllers\ControllerPermissionsTests.cs" />
+    <Compile Include="Controllers\Users\UserPermission\GetUserPermissionUserTests.cs" />
+    <Compile Include="Controllers\Users\UserPermission\IndexTests.cs" />
+    <Compile Include="Controllers\Users\UserPermission\UpdateUserTests.cs" />
+    <Compile Include="Controllers\Users\UserRole\CreateUserRoleTests.cs" />
+    <Compile Include="Controllers\Users\UserRole\GetUserRolePermissionsTests.cs" />
+    <Compile Include="Controllers\Users\UserRole\IndexTests.cs" />
+    <Compile Include="Controllers\Users\UserRole\MarkUserRoleAsDeletedTests.cs" />
+    <Compile Include="Controllers\Users\UserRole\UpdateUserRoleTests.cs" />
+    <Compile Include="Controllers\Users\UserSearch\IndexTests.cs" />
+    <Compile Include="Controllers\Users\UserSearch\MarkUserAsEnabledOrDisabledTests.cs" />
+    <Compile Include="FeatureSwitch\IsFeatureEnabledTests.cs" />
+    <Compile Include="Filters\FakePrincipal.cs" />
+    <Compile Include="Filters\MvcMockHelpers.cs" />
+    <Compile Include="Filters\PermissionsFilterTests.cs" />
+    <Compile Include="Filters\UrlHackingFilterTests.cs" />
+    <Compile Include="Helpers\DocumentLibraryUploaderTests.cs" />
+    <Compile Include="Helpers\ReviewAuditDocumentHelperTests.cs" />
+    <Compile Include="CustomPrincipalFactoryTests.cs" />
+    <Compile Include="Extensions\StringExtensions\TruncateWithEllipsisTests.cs" />
+    <Compile Include="ServiceCompositionGateways\SiteUpdateCompositionGatewayTests.cs" />
+    <Compile Include="ViewModelFactory\AccidentRecord\AccidentDetails\AccidentDetailsViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\AccidentRecord\InjuryDetails\InjuryDetailsViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\AccidentRecord\Overview\AccidentRecordOverviewViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\AccidentRecord\AccidentSummary\AccidentSummaryViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\AccidentRecord\SearchAccidentRecord\SearchAccidentRecordViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\ActionPlan\AssignActionPlanCommandTests.cs" />
+    <Compile Include="ViewModelFactory\ActionPlan\CompleteActionTask\CompleteActionTaskViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\ActionPlan\ReassignActionPlanTask\ReassignActionPlanTaskTests.cs" />
+    <Compile Include="ViewModelFactory\ActionPlan\SearchActionPlan\SearchActionPlanTests.cs" />
+    <Compile Include="ViewModelFactory\ActionPlan\SearchAction\SearchActionViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\CompanyDefaultsTaskFactoryTests\FireSafetyControlMeasureSaveTaskTests.cs" />
+    <Compile Include="ViewModelFactory\CompanyDefaultsTaskFactoryTests\InjurySaveTaskTests.cs" />
+    <Compile Include="ViewModelFactory\CompanyDefaultsTaskFactoryTests\SourceOfFuelSaveTaskTests.cs" />
+    <Compile Include="ViewModelFactory\CompanyDefaultsTaskFactoryTests\SourceOfIgnitionSaveTaskTests.cs" />
+    <Compile Include="ViewModelFactory\Documents\BusinessSafeSystemDocumentLibraryViewModelFactoryTests\GetViewModelTests.cs" />
+    <Compile Include="ViewModelFactory\CompanyDefaultsTaskFactoryTests\HazardMarkAsDeletedTaskTests.cs" />
+    <Compile Include="ViewModelFactory\CompanyDefaultsTaskFactoryTests\HazardSaveTaskTests.cs" />
+    <Compile Include="ViewModelFactory\CompanyDefaultsTaskFactoryTests\PeopleAtRiskMarkAsDeletedTaskTests.cs" />
+    <Compile Include="ViewModelFactory\CompanyDefaultsTaskFactoryTests\PeopleAtRiskSaveTaskTests.cs" />
+    <Compile Include="ViewModelFactory\Documents\AddedDocumentsLibraryViewModelFactoryTests\GetViewModelTests.cs" />
+    <Compile Include="ViewModelFactory\CompanyDefaultsTaskFactoryTests\SupplierSaveTaskTests.cs" />
+    <Compile Include="ViewModelFactory\CompanyDefaultsTaskFactoryTests\SuppliersMarkAsDeletedTaskTests.cs" />
+    <Compile Include="ViewModelFactory\EmployeeSearchViewModelFactoryTests.cs\GetViewModelSearchTests.cs" />
+    <Compile Include="ViewModelFactory\EmployeeViewModelFactoryTests\GetViewModelTests.cs" />
+    <Compile Include="ViewModelFactory\ExistingDocumentsViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\FireRiskAssessmentTests\Factories\AddEditFurtherControlMeasureTaskViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\FireRiskAssessmentTests\Factories\AddFireRiskAssessmentFurtherControlMeasureTaskViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\FireRiskAssessmentTests\Factories\EditSummaryViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\FireRiskAssessmentTests\Factories\FireRiskAssessmentChecklistViewModelFactoryTests\GetViewModelTwoParameterTests.cs" />
+    <Compile Include="ViewModelFactory\FireRiskAssessmentTests\Factories\FireRiskAssessmentChecklistViewModelFactoryTests\GetViewModelSingleParameterTests.cs" />
+    <Compile Include="ViewModelFactory\FireRiskAssessmentTests\Factories\SignificantFindingViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\FurtherControlMeasureTask\AddEditFurtherControlMeasureTaskViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\FurtherControlMeasureTask\CompleteFurtherControlMeasureTaskViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\FurtherControlMeasureTask\ReassignFurtherControlMeasureTaskViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\FurtherControlMeasureTask\ViewFurtherControlMeasureTaskViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\GeneralRiskAssessmentAttachDocumentsViewModelFactoryTests\GetViewModelTests.cs" />
+    <Compile Include="ViewModelFactory\GeneralRiskAssessmentFurtherActionTaskFactoryTests\_CAN_GO_GetViewModelTests.cs" />
+    <Compile Include="ViewModelFactory\GeneralRiskAssessment\Factories\AddGeneralRiskAssessmentFurtherControlMeasureTaskViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\GeneralRiskAssessment\Factories\CompleteGeneralRiskAssessmentFurtherControlMeasureTaskViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\GeneralRiskAssessment\Factories\CompleteRiskAssessmentReviewViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\GeneralRiskAssessment\Factories\EditSummaryViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\FireRiskAssessmentTests\Factories\FireRiskAssessmentReviewsViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\GeneralRiskAssessment\Factories\GeneralRiskAssessmentHazardSummaryViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\GeneralRiskAssessment\Factories\GeneralRiskAssessmentReviewsViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\GeneralRiskAssessment\Factories\ViewGeneralRiskAssessmentFurtherControlMeasureTaskViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\GeneralRiskAssessment\Factories\EditGeneralRiskAssessmentFurtherControlMeasureTaskViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\GeneralRiskAssessment\Factories\GeneralRiskAssessmentViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\GeneralRiskAssessment\Factories\ReassignGeneralRiskAssessmentFurtherControlMeasureTaskViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\HazardousSubstanceRiskAssessementTests\AddHazardousSubstanceRiskAssessmentFurtherControlMeasureTaskViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\HazardousSubstanceRiskAssessementTests\AssessmentViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\HazardousSubstanceRiskAssessementTests\CreateRiskAssessmentViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\HazardousSubstanceRiskAssessementTests\CrontolMeasuresViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\HazardousSubstanceRiskAssessementTests\EditSummaryViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\HazardousSubstances\HazardousSubstanceDescriptionViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\HazardousSubstances\HazardousSunstance.cs" />
+    <Compile Include="ViewModelFactory\HazardousSubstances\Inventory.cs" />
+    <Compile Include="ViewModelFactory\PersonalRiskAssessments\ChecklistGenerator\ChecklistGeneratorViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\PersonalRiskAssessments\ChecklistManager\ChecklistManagerViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\PersonalRiskAssessments\EditPersonalRiskAssessmentSummaryViewModelFactoryTests\GetViewModelTests.cs" />
+    <Compile Include="ViewModelFactory\PersonalRiskAssessments\EmployeeChecklistSummaryTests\EmployeeChecklistSummaryViewModelFactoryTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\Summary\IndexTests.cs" />
+    <Compile Include="ViewModelFactory\PersonalRiskAssessments\PremisesInformationViewModelFactoryTests.cs" />
+    <Compile Include="Controllers\PersonalRiskAssessments\Summary\SaveTests.cs" />
+    <Compile Include="ViewModelFactory\AddEditRiskAssessorViewModelFactoryTests\AddEditRiskAssessorViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\Responsibilities\CompleteResponsibilityViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\Responsibilities\ReassignResponsibilityTaskViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\Responsibilities\ResponsibilitiesIndexViewModelTests.cs" />
+    <Compile Include="ViewModelFactory\Responsibilities\ResponsibilityViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\Responsibilities\Wizard\GenerateResponsibilitiesViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\Responsibilities\Wizard\GenerateResponsibilityTasksViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\Responsibilities\Wizard\SelectResponsibilitiesViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\SiteDetailsViewModelFactoryTests\GetViewModelTests.cs" />
+    <Compile Include="Builder\LinkedSitesDtoBuilder.cs" />
+    <Compile Include="ViewModelFactory\SiteGroupViewModelFactoryTests\GetViewModelTests.cs" />
+    <Compile Include="ViewModelFactory\SiteStructureViewModelFactoryTests\GetViewModelTests.cs" />
+    <Compile Include="ViewModelFactory\SiteStructureViewModelFactoryTests\WithGroupDetailsViewModelTests.cs" />
+    <Compile Include="ViewModelFactory\SiteStructureViewModelFactoryTests\WithSiteDetailsViewModelTest.cs" />
+    <Compile Include="ViewModelFactory\SiteTreeViewBuilderBuildTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModelFactory\TaskListViewModelFactoryTests\TaskListSummaryViewModelFactoryTests.cs" />
+    <Compile Include="ViewModelFactory\TaskListViewModelFactoryTests\TaskListViewModelFactoryTest.cs" />
+    <Compile Include="ViewModelFactory\UnlinkedSitesTreeViewBuilderBuildTests.cs" />
+    <Compile Include="ViewModelFactory\UserPermissionsViewModelFactoryTests\GetViewModelTests.cs" />
+    <Compile Include="ViewModelFactory\UserRolesViewModelFactoryTests\GetViewModelTests.cs" />
+    <Compile Include="ViewModelFactory\UserRolePermissionsViewModelFactoryTests\GetViewModelTests.cs" />
+    <Compile Include="ViewModelFactory\Users\UserSearchViewModelFactoryTests\GetViewModelTests.cs" />
+    <Compile Include="ViewModelFactory\Users\ViewUserViewModelFactoryTests\GetViewModelTests.cs" />
+    <Compile Include="ViewModels\AddedDocumentsLibraryViewModelTests.cs" />
+    <Compile Include="ViewModels\AddHazardousSubstanceRequestTests.cs" />
+    <Compile Include="ViewModels\AddressViewModelTests\PreferedTelephoneNumberTests.cs" />
+    <Compile Include="ViewModels\CompanyDefaultsViewModelTests\CompanyDefaultsViewModelTests.cs" />
+    <Compile Include="ViewModels\DescriptionViewModelTests.cs" />
+    <Compile Include="ViewModels\EmployeeViewModelTests\EmployeeViewModelTests.cs" />
+    <Compile Include="ViewModels\FireRiskAssessmentTests\FireRiskAssessmentSummaryViewModelTests.cs" />
+    <Compile Include="ViewModels\FireRiskAssessmentTests\SearchRiskAssessmentsViewModelTests.cs" />
+    <Compile Include="ViewModels\GeneralRiskAssessments\GeneralRiskAssessmentSummaryViewModelTests.cs" />
+    <Compile Include="ViewModels\GeneralRiskAssessments\SearchRiskAssessmentsViewModelTests.cs" />
+    <Compile Include="ViewModels\HazardousSubstanceRiskAssessmentTests\HazardousSubstanceRiskAssessmentSummaryViewModelTests.cs" />
+    <Compile Include="ViewModels\HazardousSubstanceRiskAssessmentTests\SearchRiskAssessmentsViewModelTests.cs" />
+    <Compile Include="ViewModels\PersonalRiskAssessments\ChecklistGeneratorViewModelTests.cs" />
+    <Compile Include="ViewModels\PersonalRiskAssessments\PersonalRiskAssessmentSummaryViewModelTests.cs" />
+    <Compile Include="ViewModels\PersonalRiskAssessments\SearchRiskAssessmentsViewModelTests.cs" />
+    <Compile Include="ViewModels\Responsibilities\Wizard\StatutoryResponsibilityViewModelTests.cs" />
+    <Compile Include="ViewModels\TaskListTests\TaskListViewModelTests.cs" />
+    <Compile Include="ViewModels\TaskViewModelTests.cs" />
+    <Compile Include="ViewModels\SiteDetailsViewModelTests.cs" />
+    <Compile Include="ViewModels\SiteGroupViewModelTests\DeleteGroupEnabledTests.cs" />
+    <Compile Include="ViewModels\SiteGroupViewModelTests\FormEnabledTests.cs" />
+    <Compile Include="ViewModels\SiteGroupViewModelTests\GetViewModelTests.cs" />
+    <Compile Include="ViewModels\SiteGroupViewModelTests\SectionTitleTests.cs" />
+    <Compile Include="ViewModels\SiteStructureViewModelTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessSafe.Application\BusinessSafe.Application.csproj">
+      <Project>{5DBF972D-D624-4FE6-8483-F9828C37CF52}</Project>
+      <Name>BusinessSafe.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Data\BusinessSafe.Data.csproj">
+      <Project>{0E42764A-6356-461F-9473-D452EFC22AC7}</Project>
+      <Name>BusinessSafe.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Domain\BusinessSafe.Domain.csproj">
+      <Project>{EA0B55F3-6232-400F-8BE0-FEC49883253F}</Project>
+      <Name>BusinessSafe.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Infrastructure\BusinessSafe.Infrastructure.csproj">
+      <Project>{9DD3289E-AA83-483D-88E1-F2FCE53B941C}</Project>
+      <Name>BusinessSafe.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Messages.Emails\BusinessSafe.Messages.Emails.csproj">
+      <Project>{CFC682DE-01ED-45D9-925A-8F764368514A}</Project>
+      <Name>BusinessSafe.Messages.Emails</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Messages\BusinessSafe.Messages.csproj">
+      <Project>{EE24F1BE-1BB4-413F-895D-7DC49325F36A}</Project>
+      <Name>BusinessSafe.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.WebSite\BusinessSafe.WebSite.csproj">
+      <Project>{3CF88FC7-ED75-48C1-A2CE-A16754F3FA0F}</Project>
+      <Name>BusinessSafe.WebSite</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\RiskAssessor\SignificantFindings\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

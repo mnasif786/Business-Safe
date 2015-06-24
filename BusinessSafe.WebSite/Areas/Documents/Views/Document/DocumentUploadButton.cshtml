@@ -1,0 +1,89 @@
+﻿@using BusinessSafe.WebSite.ViewModels
+@model DocumentUploadButtonViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Upload Document</title>
+        <link href="/Content/bootstrap.css" rel="stylesheet" />
+        <style>
+            html { overflow: hidden }
+        </style>
+        <script type='text/javascript' src='@VirtualPathUtility.ToAbsolute("~/scripts/libraries/jquery-1.7.1.js")'></script>
+        <script type="text/javascript">
+
+            var FileDropped = function (data) {
+
+                var response = eval("(" + data + ")");
+
+                if (response.Successful == true) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Document/DocumentUploaded" + "?guid=" + response.Guid + "&fileName=" + response.FileName,
+                        error: function () {
+                            window.location.replace(window.globalajaxurls.errorPage);
+                        },
+                        cache: false
+                    }).done(function (newData) {
+
+                        $("#DocumentsToIncludeTable tr:last").after(newData);
+                    });
+                }
+                else {
+                    alert("Sorry, your file '" + response.FileName + "' could not be uploaded: " + response.FailureReason);
+                }
+            };
+
+            $(function () {
+                $('#DocumentUploadSubmit').click(function () {
+                    if (($('#File').val() === "")) {
+                        return false;
+                    }
+                });
+
+                if ($("#DocumentUploaded").val() == 'True') {
+                    var lastUploadedDocumentFilename = $("#LastUploadedDocumentFilename").val();
+                    var lastUploadedDocumentLibraryId = $("#LastUploadedDocumentLibraryId").val();
+                    var returnView = $("#ReturnView").val();
+                    var documentOriginTypeId = $("#DocumentOriginTypeId").val();
+                    var documentTypeId = $("#DocumentTypeId").val();
+                    var canEditDocumentType = $("#CanEditDocumentType").val();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Document/DocumentUploaded" + "?documentLibraryId=" + lastUploadedDocumentLibraryId + "&fileName=" + lastUploadedDocumentFilename + "&documentOriginTypeId=" + documentOriginTypeId + "&canEditDocumentType=" + canEditDocumentType + "&returnView=" + returnView + "&documentTypeId=" + documentTypeId,
+                        error: function () {
+                            window.location.replace(window.globalajaxurls.errorPage);
+                        },
+                        cache: false
+                    }).done(function (newData) {
+                        parent.addRowToNewlyUploadedDocumentsTable(newData);
+                    });
+                }
+
+                if ($("#Error").val() == 'True') {
+                    alert("Error uploading document: " + $("#ErrorMessage").val());
+                }
+            });
+
+        </script>
+    </head>
+<body>
+    @using (Html.BeginForm("UploadDocument", "Document", FormMethod.Post, new { enctype = "multipart/form-data", name = "UploadDocumentForm", id = "UploadDocumentForm", @class="form-inline" }))
+    {
+        @Html.Hidden("ReturnView", Model.ReturnView)
+        @Html.Hidden("DocumentTypeId", Model.DocumentTypeId)
+        @Html.Hidden("DocumentOriginTypeId", Model.DocumentOriginTypeId)
+        @Html.Hidden("CanEditDocumentType", Model.CanEditDocumentType)
+        <input type="hidden" id="DocumentUploaded" value="@Model.DocumentUploaded"/>
+        <input type="hidden" id="LastUploadedDocumentFilename" value="@Model.LastUploadedDocumentFilename"/>
+        <input type="hidden" id="LastUploadedDocumentLibraryId" value="@Model.LastUploadedDocumentLibraryId"/>
+        <input type="hidden" id="Error" value="@Model.Error"/>
+        <input type="hidden" id="ErrorMessage" value="@Model.ErrorMessage"/>
+        <input id="File" name="File" type="file" value="Select File..." />
+        <input id="DocumentUploadSubmit" class="btn btn-primary" type="submit" value="Upload File..." />
+    }
+</body>
+</html>

@@ -1,0 +1,21 @@
+﻿<div class="validation-summary-errors alert alert-error">
+    <ul>
+        @{
+            string previousError = "";
+
+            foreach (ModelState modelState in (ViewContext.ViewData.ModelState.Values))
+            {
+                foreach (ModelError modelError in modelState.Errors)
+                {
+                    string errorMessage = modelError.ErrorMessage;
+
+                    if (errorMessage != previousError)
+                    {
+                        <li>@modelError.ErrorMessage</li>
+                        previousError = modelError.ErrorMessage;
+                    }
+                }
+            }
+        }
+    </ul>
+</div>

@@ -1,0 +1,36 @@
+﻿@model BusinessSafe.WebSite.Areas.Company.ViewModels.AddEditRiskAssessorViewModel
+<fieldset>
+    <legend>
+        <h3>
+            Send Risk Assessor Notifications for:
+        </h3>
+    </legend>
+    <div class="row">
+        <div class="span9">
+            @Html.CheckBoxFor(model => model.DoNotSendTaskOverdueNotifications)
+            <label for="DoNotSendTaskOverdueNotifications" class="checkbox inline">
+                Do Not Send - Tasks Overdue In Risk Assessment Notifications
+            </label>
+        </div>
+        <div class="span9">
+            @Html.CheckBoxFor(model => model.DoNotSendTaskCompletedNotifications)
+            <label for="DoNotSendTaskCompletedNotifications" class="checkbox inline">
+                Do Not Send - Tasks Completed In Risk Assessment Notifications
+            </label>
+        </div>
+        <div class="span9">
+            @Html.CheckBoxFor(model => model.DoNotSendReviewDueNotification)
+            <label for="DoNotSendReviewDueNotification" class="checkbox inline">
+                Do Not Send - Risk Assessment Due A Review Notifications
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <label class="span9 alert">
+            Note: By selecting 'Do Not Send' Notifications for the above options, the Risk Assessor
+            will not be notified for any Risk Assessments they are assigned to. If you want
+            it to be specific to certain Risk Assessments please untick the above options as
+            you are able to stop notifications per Risk Assessment, in the Risk Assessment Record.
+        </label>
+    </div>
+</fieldset>

@@ -1,0 +1,46 @@
+﻿@model BusinessSafe.WebSite.Areas.ActionPlans.ViewModels.ImmediateRiskNotificationActionsIndexViewModel
+
+
+@using (Html.BeginForm("Index", "ImmediateRiskNotificationsActions", FormMethod.Get, new { id = "formImmediateRiskNotificationsActions", @class = "search-form" }))
+{   <div class="well" style="padding: 5px">
+        <fieldset>
+            <legend>Search Actions / IRNs</legend>
+            <ul>
+                   
+                <li>
+                    <label class="wide" for="Site">Status</label>
+                    @Html.TextBox("Status", null, new { @class = "siteDropDownList" })
+                    @Html.Hidden("StatusId", Model.StatusId)
+                    @*@Html.HiddenFor(model => model.StatusId, new { id = "StatusId", name = "StatusId", @class = "calendar" })*@
+                </li>
+                <li>
+                    <label class="thin" for="DueFrom" class="medium">Due From</label>
+                    @Html.TextBoxFor(model => model.DueFrom, new { id = "DueFrom", name = "DueFrom", @class = "calendar" })
+                </li>
+                <li>
+                    <label for="DueTo">To</label>
+                    @Html.TextBoxFor(model => model.DueTo, new { id = "DueTo", name = "DueTo", @class = "calendar" })
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <label class="wide" for="AssignTo">Assigned To</label>
+                    @Html.TextBox("AssignedTo", "", new { @class = "siteDropDownList" })
+                    @Html.Hidden("AssignedToId", Model.AssignedToId)
+                    @*@Html.HiddenFor(model => model.AssignedToId, new { id = "AssignedToId", name = "AssignedToId", @class = "calendar" })*@
+                </li>
+            </ul>
+            <ul>
+                <li class="buttons wide">
+                    <input type="button" id="ImmediateRiskNotificationsActionsButton" value="Search" class="btn btn-primary" />
+                    <a href="#" class="btn btn-link">Cancel</a>
+                    @*@Html.ActionLink("Reset", "Index", "ImmediateRiskNotificationsActions", new { @class = "btn btn-link", id = "ResetButton" })*@
+                </li>
+            </ul>
+                
+        </fieldset>
+        @*TODO: ADD URL OF REPORT*@
+        <a href="url" style="float: right">View Evaluation Report</a>            
+       
+        </div>
+}

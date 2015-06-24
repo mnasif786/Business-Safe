@@ -1,0 +1,39 @@
+﻿@model BusinessSafe.WebSite.ViewModels.TaskDetailsSummaryViewModel
+<div class="task-details-summary">
+    <h4>Previous Task Dates:</h4>
+    @if (Model.PreviousHistory.Any()) {
+    <table>
+        <tr>
+            <th>Due Date</th>
+            <th>Completed Date</th>
+            <th>Completed By</th>
+        </tr>
+        @foreach (var history in Model.PreviousHistory)
+        {
+            <tr>
+                <td>@history.DueDate.ToShortDateString()</td>
+                <td>@history.CompletedDate</td>
+                <td>@history.CompletedBy</td>
+            </tr>
+        }
+    </table>
+    }
+    else
+    {
+        <p>No tasks have been completed yet.</p>
+    }
+    <h4>Next Scheduled Task Dates:</h4>
+    @if (Model.ReoccurringSchedule.ScheduledDates.Any())
+    {
+        <ol>
+            @foreach (var schedule in Model.ReoccurringSchedule.ScheduledDates)
+            {
+            <li>@schedule</li>
+            }
+        </ol>
+    }
+    else
+    {
+        <p>There are no more scheduled tasks.</p>
+    }
+</div>

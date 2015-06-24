@@ -1,0 +1,253 @@
+﻿@using BusinessSafe.Domain.Entities
+@using BusinessSafe.WebSite.Areas.AccidentReports.ViewModels
+@using BusinessSafe.WebSite.Helpers
+@model NextStepsViewModel
+           
+@* 
+    Whoa! 
+
+    Are you here because you are editing some of the text in one of the sections? If so, and you are correcting a spelling mistake
+    then go ahead, but if you are changing the legal meaning of the text, then you need to create a new version of the section, add
+    it here and in the enumeration(call it, for example Section2_v_v2 or something) and then change the logic in the entity to add the
+    new section to all new entities.
+
+    The reason is that the accident records must display the legal text that was the law when they were created, and if you just go 
+    ahead and change it then you will change what the advice was at the time of creating it.
+
+    There is a possible issue that people could update the advice by saving or switching between tabs - this will need to be addressed.
+
+
+*@
+
+
+@{
+    ViewBag.Title = "Next Steps";
+}
+@Html.Partial("_AccidentRecordSummary", ViewBag.AccidentRecordSummary as AccidentSummaryViewModel)
+<div class="container ipad-container">
+    @Html.Partial("_Tabs", ViewBag.TabViewModel as AccidentRecordTabsViewModel)
+    <div class="fixed-content row">
+        @Html.Partial("_TitleBar", ViewBag.AccidentRecordSummary as AccidentSummaryViewModel)
+        <div class="span11 next-steps">
+            @if (Model.SectionsToShow.Contains(NextStepsSectionEnum.Section1))
+            {
+                <h3>
+                    <img src="/Content/images/red-arrow.gif" />Accident Investigation</h3>
+                <p>
+                    All work related accidents should be investigated to ascertain the underlying causes
+                    and to identify measures that could be taken to prevent a similar accident in the
+                    future. The investigation should be proportionate to the actual or potential severity
+                    of the accident. The <a href='@Url.Action("DownloadClientDocument", "Document", new { area = "Documents", enc = EncryptionHelper.Encrypt("clientDocumentId=" + Model.AccidentInvestigationFormClientDocumentationId) })' >
+                                             accident investigation form </a>is designed to help capture information which
+                    will reveal the underlying cause and help you advisers or insurers deal with any
+                    subsequent personal injury claim. On completion the report should be linked to this
+                    report as an ’attached document’.</p>	
+
+            }
+            @if (Model.SectionsToShow.Contains(NextStepsSectionEnum.Section2_1))
+            {
+                <h3>
+                    <img src="/Content/images/red-arrow.gif" />Further Information</h3>
+                <p>
+                    Detailed information about the reporting requirements and associated legislation
+                    can be found in 
+                    <a href='@Url.Action("DownloadClientDocument", "Document", new { area = "Documents", enc = EncryptionHelper.Encrypt("clientDocumentId=" + Model.GbAccidentReportGuidanceNoteClientDocumentationId) })' >
+                        Guidance Note 1-3. 
+                    </a>
+                </p>	
+            }
+            @if (Model.SectionsToShow.Contains(NextStepsSectionEnum.Section2_2))
+            {
+                <h3>
+                    <img src="/Content/images/red-arrow.gif" />Further Information</h3>
+                <p>
+                    Detailed information about the reporting requirements and associated legislation
+                    can be found in
+                    <a href='@Url.Action("DownloadClientDocument", "Document", new { area = "Documents", enc = EncryptionHelper.Encrypt("clientDocumentId=" + Model.RoiAccidentReportGuidanceNoteClientDocumentationId) })' >
+                        Guidance Note 1-3.
+                    </a>
+                </p>	
+            }
+            @if (Model.SectionsToShow.Contains(NextStepsSectionEnum.Section2_3))
+            {
+                <h3>
+                    <img src="/Content/images/red-arrow.gif" />Further Information</h3>
+                <p>
+                    Detailed information about the reporting requirements and associated legislation
+                    can be found in
+                    <a href='@Url.Action("DownloadClientDocument", "Document", new { area = "Documents", enc = EncryptionHelper.Encrypt("clientDocumentId=" + Model.NiAccidentReportGuidanceNoteClientDocumentationId) })' >
+                        Guidance Note 1-3.
+                    </a>
+                </p>	
+            }
+            @if (Model.SectionsToShow.Contains(NextStepsSectionEnum.Section3_1))
+            {
+                <h3>
+                    <img src="/Content/images/red-arrow.gif" />Advice</h3>
+                <p>
+                    In the event of fatal or major accident, whatever the time of day or night, you
+                    should contact the Peninsula 24 Hour Advice Line (0844 892 2772) so that they can
+                    guide you through management of the incident.<br />
+                    The Advice Line is also available to help you in the event of other incidents however
+                    large or small.</p>	
+            }
+            @if (Model.SectionsToShow.Contains(NextStepsSectionEnum.Section3_2))
+            {
+                <h3>
+                    <img src="/Content/images/red-arrow.gif" />Advice</h3>
+                <p>
+                    In the event of fatal or major accident, whatever the time of day or night, you
+                    should contact the Peninsula 24 Hour Advice Line (01 855 5050) so that they can
+                    guide you through management of the incident.<br />
+                    The Advice Line is also available to help you in the event of other incidents however
+                    large or small.</p>	
+            }
+            @if (Model.SectionsToShow.Contains(NextStepsSectionEnum.Section3_3))
+            {
+                <h3>
+                    <img src="/Content/images/red-arrow.gif" />Advice</h3>
+                <p>
+                    In the event of fatal or major accident, whatever the time of day or night, you
+                    should contact the Peninsula 24 Hour Advice Line (0844 892 2786) so that they can
+                    guide you through management of the incident.<br />
+                    The Advice Line is also available to help you in the event of other incidents however
+                    large or small.
+                </p>
+            }
+            @if (Model.SectionsToShow.Contains(NextStepsSectionEnum.Section4_1))
+            {
+                <h3>
+                    <img src="/Content/images/red-arrow.gif" />Reporting to the Enforcing Authorities</h3>
+                <h4>
+                    In England, Scotland and Wales</h4>
+                <p>
+                    Fatal and major injuries and those that make the injured employee absent from or
+                    unable to carry out their normal work for more than 7 days must be reported to the
+                    enforcing authorities. Injuries to people who are not employed which result in them
+                    being taken from the site of an accident directly to hospital must also be reported.<br />
+                    Fatal injuries, major injuries and injuries to members of the public should be reported
+                    by phone as soon as it is practicably possible. The number for the HSE’s Incident
+                    Reporting Line is 0845 300 9923; Out of hours fatal and multiple injuries should
+                    be reported to the HSE duty officer on 0151 922 9235, Subsequently, and within 10
+                    days, the initial report must be supplemented by a more detailed report submitted
+                    online.<br />
+                    Injuries which lead to an employee being unable to work or do their normal duties
+                    for more than 7 days have to be reported online within 15 days of the accident.<br />
+                    <br />
+                    Go to the <a href="https://extranet.hse.gov.uk/lfserver/external/F2508IE">HSE Incident
+                                  Reporting Website</a> and make your report. Before you do so you may wish to
+                    open a <a href='@Url.Action("DownloadClientDocument", "Document", new { area = "Documents", enc = EncryptionHelper.Encrypt("clientDocumentId=" + Model.GbOnlineAccidentReportFormClientDocumentationId) })'>
+                               template </a>of the form that you will be required to complete. It will help
+                    ensure that you have all of the required information to hand and can complete the
+                    report in one go.
+                </p>
+            }
+            @if (Model.SectionsToShow.Contains(NextStepsSectionEnum.Section4_2))
+            {
+                <h3>
+                    <img src="/Content/images/red-arrow.gif" />Reporting to the Enforcing Authorities</h3>
+                <h4>
+                    In Northern Ireland</h4>
+                <p>
+                    Fatal injuries and those that make the injured employee absent from or unable to
+                    carry out their normal work for more than 3 days must be reported to the HSENI.
+                    Injuries to people who are not employed which result in them being taken from the
+                    site of an accident directly to hospital must also be reported.<br />
+                    Fatal injuries, major injuries and injuries to members of the public should be reported
+                    by phone as soon as it is practicably possible. Subsequently, and within 10 days,
+                    the initial report must be supplemented by a more detailed report online at the
+                    <a href="https://www.secure.hseni.gov.uk/forms/NI2508.aspx">HSENI Incident Reporting Website</a>
+                    or as hard copy on <a href='@Url.Action("DownloadClientDocument", "Document", new { area = "Documents", enc = EncryptionHelper.Encrypt("clientDocumentId=" + Model.NiOnlineAccidentReportFormClientDocumentationId) })'>
+                                           Form NI2508. </a>
+                    <br />
+                    Injuries which lead to an employee being unable to work or do their normal duties
+                    for more than 3 days must also be reported <a href="https://www.secure.hseni.gov.uk/forms/NI2508.aspx">
+                                                                   online</a> or on <a href='@Url.Action("DownloadClientDocument", "Document", new { area = "Documents", enc = EncryptionHelper.Encrypt("clientDocumentId=" + Model.NiOnlineAccidentReportFormClientDocumentationId) })'>
+                                                                                        Form NI2508 </a>within 10 days of the accident.
+                </p>
+            }
+            @if (Model.SectionsToShow.Contains(NextStepsSectionEnum.Section4_3))
+            {
+                <h3>
+                    <img src="/Content/images/red-arrow.gif" />Advice</h3>
+                <h4>
+                    In Ireland</h4>
+                <p>
+                    Fatal injuries and those that make the injured employee absent from or unable to
+                    carry out their normal work for more than 3 days must be reported to the HSA. Injuries
+                    to people who are not employed which result in them receiving treatment by a registered
+                    medical practitioner or at a hospital must also be reported.<br />
+                    Brief details about fatal injuries should be reported by phone on 1890 289 389 as
+                    soon as it is practicably possible. A written report on <a href='@Url.Action("DownloadClientDocument", "Document", new { area = "Documents", enc = EncryptionHelper.Encrypt("clientDocumentId=" + Model.RoiOnlineAccidentReportFormClientDocumentationId) })'>
+                                                                                Form IR1 </a>or an <a href="https://webapps.hsa.ie/CIRW/index.php">online report</a>
+                    giving further detail should be made as soon as possible after the incident. Other
+                    reportable accidents should also be notified <a href="https://webapps.hsa.ie/CIRW/index.php">
+                                                                     online</a> or on <a href='@Url.Action("DownloadClientDocument", "Document", new { area = "Documents", enc = EncryptionHelper.Encrypt("clientDocumentId=" + Model.RoiOnlineAccidentReportFormClientDocumentationId) })'>
+                                                                                          Form IR1 </a>as soon as possible.
+                </p> 
+            }
+            @if (Model.SectionsToShow.Contains(NextStepsSectionEnum.Section4_4))
+            {
+                <h3>
+                    <img src="/Content/images/red-arrow.gif" />Reporting to the Enforcing Authorities</h3>
+                <h4>
+                    In Guernsey</h4>
+                <p>
+                    Fatal injuries and those that make the injured employee absent from or unable to
+                    carry out their normal work for more than 3 days must be reported to the Guernsey
+                    HSE. Injuries to people who are not employed which result in them being taken from
+                    the site of an accident directly to hospital must also be reported.<br />
+                    Fatal injuries and injuries to members of the public should be reported by phone
+                    as soon as it is practicably possible. Subsequently, and within 7 days, the initial
+                    report must be supplemented in writing on an <a href="http://www.hse.gg/PDFs/HSEReportIDDO1.pdf">
+                                                                     official form</a>. Injuries which lead to an employee being unable to work or
+                    do their normal duties for more than 3 days must also be reported within 7 days
+                    on the <a href="http://www.hse.gg/PDFs/HSEReportIDDO1.pdf">official form</a>.
+                </p>
+            }
+            @if (Model.SectionsToShow.Contains(NextStepsSectionEnum.Section4_5))
+            {
+                <h3>
+                    <img src="/Content/images/red-arrow.gif" />Reporting to the Enforcing Authorities</h3>
+                <h4>
+                    In Jersey</h4>
+                <p>
+                    There is no reporting requirement.
+                </p>
+            }
+            @if (Model.SectionsToShow.Contains(NextStepsSectionEnum.Section4_6))
+            {
+                <h3>
+                    <img src="/Content/images/red-arrow.gif" />Reporting to the Enforcing Authorities</h3>
+                <h4>
+                    In the Isle of Man</h4>
+                <p>
+                    Fatal and major injuries to any person and those that cause an employee to be absent
+                    from or unable to carry out their normal work for more than 3 days must be reported
+                    to the Isle of Man Health and Safety at Work Inspectorate.
+                    <br />
+                    Fatal and major injuries should be reported by phone as soon as it is practicably
+                    possible; call 01624 685881 or 07624 313626 out of hours or <a href="http://www.gov.im/transport/msd/healthandsafety/injuryreport.aspx">
+                                                                                    online</a>. Subsequently, and within 7 days, the initial report must be supplemented
+                    in writing on an <a href='@Url.Action("DownloadClientDocument", "Document", new { area = "Documents", enc = EncryptionHelper.Encrypt("clientDocumentId=" + Model.IomOnlineAccidentReportFormClientDocumentationId) })' >
+                                         official form </a>.<br />
+                    Injuries which lead to an employee being unable to work or do their normal duties
+                    for more than 3 days must also be reported within 7 days on the <a href='@Url.Action("DownloadClientDocument", "Document", new { area = "Documents", enc = EncryptionHelper.Encrypt("clientDocumentId=" + Model.IomOnlineAccidentReportFormClientDocumentationId) })' >
+                                                                                        official form </a>.
+                </p>
+            }
+                <div class="offset10">
+                @Html.ActionLink("Ok", "Index", "Search", null, new { @class = "btn btn-success" })
+                </div>
+        </div>
+     
+    </div>
+</div>
+@section JavaScriptSectionForPageInitialisation
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        });
+    </script>
+}

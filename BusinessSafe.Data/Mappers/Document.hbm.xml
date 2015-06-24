@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="Document" table="`Document`">
+    <id name="Id" type="long" >
+      <generator class="native" />
+    </id>
+    <property name="ClientId" type="long" />
+    <property name="DocumentLibraryId" type="long" />
+    <property name="Filename" column="`Filename`" type="string" />
+    <property name="Extension" type="string" />
+    <property name="FilesizeByte" type="long" />
+    <property name="Description" column="`Description`" type="string" />
+    <many-to-one name="DocumentType" class="DocumentType" column="DocumentTypeId"/>
+    <property name="Title" type="string" />
+    <property name="Deleted" type ="bool"/>
+    <many-to-one name="CreatedBy" class="UserForAuditing" column="CreatedBy" update="false" cascade="none"/>
+    <property name="CreatedOn" type ="datetime" update="false"/>
+    <many-to-one name="LastModifiedBy" class="UserForAuditing" column="LastModifiedBy"/>
+    <property name="LastModifiedOn" type ="datetime"/>
+
+    <bag name="DocumentKeywords" cascade="save-update">
+      <key column="DocumentId"/>
+      <one-to-many class="DocumentKeyword"/>
+    </bag>
+    
+    <joined-subclass name="TaskDocument">
+      <key column="Id"/>
+      <many-to-one name="Task" class="Task" column="TaskId"/>
+      <property name="DocumentOriginType" column="DocumentOriginTypeId" />
+    </joined-subclass>
+
+    <joined-subclass name="RiskAssessmentDocument" table="`RiskAssessmentDocument`">
+      <key column="Id"/>
+      <many-to-one name="RiskAssessment" class="RiskAssessment" column="RiskAssessmentId"/>
+    </joined-subclass>
+
+    
+    <joined-subclass name="AddedDocument">
+      <key column="Id"/>
+      <many-to-one name="Site" class="Site" column="SiteId" />
+    </joined-subclass>
+
+    <joined-subclass name="AccidentRecordDocument">
+      <key column="Id"/>
+      <many-to-one name="AccidentRecord" class="AccidentRecord" column="AccidentRecordId" />
+    </joined-subclass>
+  </class>
+</hibernate-mapping>

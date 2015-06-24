@@ -1,0 +1,41 @@
+﻿@using BusinessSafe.WebSite.Areas.FireRiskAssessments.ViewModels
+@model FireRiskAssessmentTabViewModel
+@Html.Hidden("CurrentStatus", (int)Model.CurrentTab)
+<ul class="nav nav-pills" id="myTab">
+    <li class="@Model.IsTabActive(FireRiskAssessmentTabs.Summary.ToString())">
+        @Html.ActionLink("Summary", Model.IsReadOnly ? "View" : "Index", "Summary", new { area = "FireRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId }, new { id = "summary", @class = "riskassessment-tab-links", @mainUrl = "Summary", @tabIndex = "1" })
+    </li>
+    <li class="@Model.IsTabActive(FireRiskAssessmentTabs.PremisesInformation.ToString())">
+        @Html.ActionLink("Premises Information", Model.IsReadOnly ? "View" : "Index", "PremisesInformation", new { area = "FireRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId }, new { id = "premisesinformation", @class = "riskassessment-tab-links", @mainUrl = "PremisesInformation", @tabIndex = "2" })
+    </li>
+    <li class="@Model.IsTabActive(FireRiskAssessmentTabs.Hazards.ToString())">
+        @Html.ActionLink("Hazards", Model.IsReadOnly ? "View" : "Index", "Hazards", new { area = "FireRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId }, new { id = "hazards", @class = "riskassessment-tab-links", @mainUrl = "Hazards", @tabIndex = "3" })
+    </li>
+    <li class="@Model.IsTabActive(FireRiskAssessmentTabs.FireChecklist.ToString())">
+        @Html.ActionLink("Fire Checklists", Model.IsReadOnly ? "View" : "Index", "Checklist", new { area = "FireRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId }, new { id = "firechecklist", @class = "riskassessment-tab-links", @mainUrl = "FireChecklist", @tabIndex = "4" })
+    </li>
+    <li class="@Model.IsTabActive(FireRiskAssessmentTabs.SignificantFindings.ToString())">
+        @Html.ActionLink("Significant Findings", Model.IsReadOnly ? "View" : "Index", "SignificantFindings", new { area = "FireRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId }, new { id = "significantfindings", @class = "riskassessment-tab-links", @mainUrl = "SignificantFindings", @tabIndex = "5" })
+    </li>
+    <li class="@Model.IsTabActive(FireRiskAssessmentTabs.Documents.ToString())">
+        @if (Model.Id > 0)
+        {
+            @Html.ActionLink("Attach Documents", Model.IsReadOnly ? "View" : "Index", "Documents", new { area = "FireRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId }, new { id = "attachdocuments", @class = "riskassessment-tab-links attachdocumentslink", @mainUrl = "AttachDocument", @tabIndex = "6" })
+        }
+        else
+        {
+            <a href="#" class="riskassessment-tab-links">Attach Documents</a>
+        }
+    </li>
+    <li class="@Model.IsTabActive(FireRiskAssessmentTabs.Review.ToString())">
+        @if (Model.Id > 0)
+        {
+            @Html.ActionLink("Review", Model.IsReadOnly ? "View" : "Index", "Review", new { area = "FireRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId }, new { id = "review", @class = "riskassessment-tab-links reviewlink", @mainUrl = "Review", @tabIndex = "7" })
+        }
+        else
+        {
+            <a href="#" class="riskassessment-tab-links">Review</a>
+        }
+    </li>
+  
+</ul>

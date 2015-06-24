@@ -1,0 +1,77 @@
+﻿@using BusinessSafe.WebSite.Areas.Responsibilities.ViewModels.Wizard
+@using Cassette.Views
+@model BusinessSafe.WebSite.Areas.Responsibilities.ViewModels.Wizard.GenerateResponsibilitiesViewModel
+@{
+    ViewBag.Title = "Generate Responsibilities";     
+}
+
+<div id="responsibilities-wizard">
+    <div class="content">        
+        @Html.ActionLink(" Go To Generated Tasks", "GenerateTasks", "Wizard", new { selectedResponsibilityTemplateIds = ViewBag.TabViewModel.SelectedResponsiblityTemplateIds }, new { @class = "nav-responsibilities-index btn btn-primary pull-right hide", @id = "nextBtn" })
+    </div>
+    @Html.Partial("_Nav")
+    <div class="content">
+        <h2><span class="tick"></span>@ViewBag.Title</h2>
+
+        <div id="validation-message" class="alert alert-error hide"></div>
+
+        @using (Html.BeginForm("SelectResponsibilities", "Wizard", FormMethod.Post))
+        {
+            <fieldset>
+                <legend>Select the Sites you wish to create Responsibilities for</legend>
+                <div class="row">
+                    <div id="sites-multi-select" class="search-and-multi-select ca">
+                        <div class="row">
+                            <label class="span4">Available Sites</label>
+                            <label class="span4">Selected Sites</label>
+                        </div>
+                        <div class="row">
+                            <ul id="SiteOptions" class="available-options options span4">
+                                @foreach (var option in Model.Sites)
+                                {
+                                    <li data-value="@option.Id">@option.Name</li>
+                                }
+                            </ul>
+                            <div class="buttons">
+                                <input type="button" class="add-to-selected btn" value="&gt;" />
+                                <input type="button" class="remove-from-selected btn" value="&lt;" />
+                            </div>
+                            <select id="SiteIds" name="SiteIds" class="selected-options options span4"
+                                    multiple="multiple">
+                            </select>
+                        </div>
+                        <div class="row span4">
+                            <label class="span1"></label>
+                            <input type="button" id="reset" class="btn span2" value="Reset Sites"/>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset id="select-responsibilities">
+                <div>
+                <span class="pull-left"><legend>Select the Responsibilities you wish to generate for the selected Sites</legend></span>
+              
+                </div>
+                @Html.Partial("_ResponsibilitySelectTable_DescriptionInColumn")
+            </fieldset>
+            <fieldset>
+                @Html.ActionLink("Cancel", "Index", "Responsibility", null, new {@class = "btn btn-link  pull-right"})
+                <input type="submit" value="Generate" class="btn btn-success pull-right" />
+            </fieldset>
+        }
+    </div>
+</div>
+
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("responsibilitiesWizard");
+    }
+    <script type="text/javascript">
+        $(function() {
+            var employees = @Html.Raw((Json.Encode(Model.Employees)));
+            var frequencyOptions = @Html.Raw((Json.Encode(Model.FrequencyOptions)));
+            BusinessSafe.Responsibilities.Wizard.AssignResponsibilities.initialise(employees, frequencyOptions);
+           
+        });
+    </script>

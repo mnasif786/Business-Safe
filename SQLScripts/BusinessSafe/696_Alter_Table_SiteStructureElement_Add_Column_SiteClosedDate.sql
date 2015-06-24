@@ -1,0 +1,18 @@
+USE [BusinessSafe]
+GO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'SiteStructureElement' AND COLUMN_NAME = 'SiteClosedDate')
+BEGIN
+	ALTER TABLE [SiteStructureElement]
+	ADD [SiteClosedDate] [DateTime] NULL
+END
+GO	
+
+
+--//@UNDO 
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'SiteStructureElement' AND COLUMN_NAME = 'SiteClosedDate')
+BEGIN
+	ALTER TABLE [SiteStructureElement]
+	DROP COLUMN [SiteClosedDate]
+END
+GO

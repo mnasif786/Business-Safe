@@ -1,0 +1,19 @@
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Action' AND COLUMN_NAME = 'QuestionStatus')
+BEGIN
+	ALTER TABLE	[dbo].[Action] ADD QuestionStatus [int] NULL DEFAULT 0
+END
+GO
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	

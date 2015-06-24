@@ -1,0 +1,26 @@
+USE [BusinessSafe]
+GO
+
+IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'PREVIOUS_PermissionGroup')
+BEGIN
+	EXEC  SP_RENAME 'PermissionGroup', 'PREVIOUS_PermissionGroup'
+END
+
+IF NOT EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'PREVIOUS_PermissionGroupsPermissions')
+BEGIN
+	EXEC  SP_RENAME 'PermissionGroupsPermissions', 'PREVIOUS_PermissionGroupsPermissions'
+END
+GO
+
+--//@UNDO 
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'PREVIOUS_Permission')
+BEGIN
+	EXEC SP_RENAME 'PREVIOUS_PermissionGroup', 'PermissionGroup'
+END
+GO
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'PREVIOUS_PermissionGroupsPermissions')
+BEGIN
+	EXEC SP_RENAME 'PREVIOUS_PermissionGroupsPermissions', 'PermissionGroupsPermissions'
+END
+GO

@@ -1,0 +1,17 @@
+USE [BusinessSafe]
+GO 
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG = 'BusinessSafe' AND TABLE_NAME = 'SafeCheckCheckListAnswer' AND COLUMN_NAME = 'QaComments')
+BEGIN
+	ALTER TABLE [SafeCheckCheckListAnswer]
+	ADD [QaComments] [nvarchar](500) NULL 
+END
+GO
+
+--//@UNDO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG = 'BusinessSafe' AND TABLE_NAME = 'SafeCheckCheckListAnswer' AND COLUMN_NAME = 'QaComments')
+BEGIN
+	ALTER TABLE [SafeCheckCheckListAnswer]
+	DROP COLUMN [QaComments]
+END 

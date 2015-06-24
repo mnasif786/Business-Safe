@@ -1,0 +1,5 @@
+﻿@model BusinessSafe.WebSite.Areas.HazardousSubstanceRiskAssessments.ViewModels.AddHazardousSubstanceFurtherControlMeasureTaskViewModel
+<form id="FurtherControlMeasureTaskForm" class="form-inline" method="POST" action="@Url.Action("NewFurtherControlMeasureTask", "FurtherControlMeasureTask")">
+@Html.HiddenFor(x => x.RiskAssessmentId)
+@Html.Partial("_FurtherControlMeasureDetails", Model)
+</form>

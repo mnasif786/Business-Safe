@@ -1,0 +1,11 @@
+﻿@model BusinessSafe.WebSite.Areas.Responsibilities.ViewModels.Wizard.EmployeeViewModel
+
+@{
+    var owner = "Owner" + Model.Id;
+    var ownerId = "Owner" + Model.Id + "Id";
+}
+
+<div class="owner responsibilities-auto-select-container">
+    <input id="@owner" class="owner" type="text" data-initial-value="--Select Option--" value="@Model.Name"/>
+    <input id="@ownerId" class="owner" type="hidden" value="@Model.Id" data-initial-value="" />
+</div>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities.SafeCheck"
+                   assembly="BusinessSafe.Domain">
+
+  <class name="ChecklistAnswer" table="`SafeCheckCheckListAnswer`" dynamic-update="true">
+    <id name="Id" column="Id" type="Guid">
+      <generator class="assigned"/>
+    </id>
+
+    <property name="SupportingEvidence"/>
+    <property name="ActionRequired"/>
+    <property name="GuidanceNotes"/>
+    <property name="EmployeeNotListed"/>
+    <property name="QaComments"/>
+
+    <many-to-one name="Timescale" class="Timescale" column="TimescaleId" />
+    <many-to-one name="AssignedTo" class=" BusinessSafe.Domain.Entities.Employee" column="AssignedTo" cascade="none"/>
+    <many-to-one name="Response" column="ResponseId" cascade="none"/>
+    <many-to-one name="Checklist" column="ChecklistId" lazy="false" />
+    <many-to-one name="Question" column="QuestionId" lazy="false"  />
+
+    <property name="Deleted" />
+    <property name="CreatedOn" update="false" />
+    <many-to-one name="CreatedBy" class="BusinessSafe.Domain.Entities.UserForAuditing" column="CreatedBy" lazy="false" update="false" cascade="none" />
+    <property name="LastModifiedOn" />
+    <many-to-one name="LastModifiedBy" class="BusinessSafe.Domain.Entities.UserForAuditing" column="LastModifiedBy" cascade="none"/>
+    <property name="QaSignedOffBy"  column="QaSignedOffBy"/>
+    <property name="QaSignedOffDate" />
+    <property name="QaCommentsResolved"/>
+    <property name="AreaOfNonCompliance"/>
+    <property name="SupportingDocumentationStatus"/>
+    <property name="SupportingDocumentationDate"/>
+  </class>
+</hibernate-mapping>

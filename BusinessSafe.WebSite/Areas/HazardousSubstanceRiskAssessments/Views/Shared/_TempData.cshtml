@@ -1,0 +1,7 @@
+﻿@if (TempData["Notice"] != null)
+{
+    <div id="TempDataAlert" class="alert alert-success">
+        <a id="successmessageanchor" href="#successmessage"></a>
+        @TempData["Notice"].ToString()
+    </div>    
+}

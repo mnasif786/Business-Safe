@@ -1,0 +1,18 @@
+<Project ToolsVersion="4.0" DefaultTargets="Demo" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<UsingTask TaskName="TransformXml" AssemblyFile="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\Web\Microsoft.Web.Publishing.Tasks.dll"/>
+	<Target Name="All">
+		<CallTarget Targets="CI;UAT;LIVE;STAGE" />
+	</Target>
+	<Target Name="CI">
+    <TransformXml Source="app.config" Transform="app.CI.config" Destination="bin\Debug\BusinessSafe.API.IntegrationTests.dll.config"/>
+	</Target>
+	<Target Name="UAT">
+		<TransformXml Source="app.config" Transform="app.UAT.config" Destination="bin\Debug\BusinessSafe.API.IntegrationTests.dll.config"/>
+	</Target>
+	<Target Name="LIVE">
+    <TransformXml Source="app.config" Transform="app.LIVE.config" Destination="bin\Debug\BusinessSafe.API.IntegrationTests.dll.config"/>
+	</Target>
+  <Target Name="STAGE">
+    <TransformXml Source="app.config" Transform="app.STAGE.config" Destination="bin\Debug\BusinessSafe.API.IntegrationTests.dll.config"/>
+  </Target>
+</Project>

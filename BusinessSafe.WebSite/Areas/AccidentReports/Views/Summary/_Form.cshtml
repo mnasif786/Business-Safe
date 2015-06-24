@@ -1,0 +1,72 @@
+﻿@using BusinessSafe.WebSite.Areas.AccidentReports.ViewModels
+@model AccidentSummaryViewModel
+<div class="fixed-content">
+    @Html.Partial("_TitleBar", ViewBag.AccidentRecordSummary as AccidentSummaryViewModel)
+    <form class="row form-inline" method="post" action="@Url.Action("Save")" >
+        @Html.HiddenFor(m=>m.AccidentRecordId)
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div>
+                @*@Html.Partial("_DistinctValidationSummary")*@
+            </div>
+        }
+        @if (TempData["Notice"] != null)
+        {
+            <div class="alert alert-success">
+                <a id="successmessageanchor" href="#successmessage"></a>
+                @TempData["Notice"].ToString()
+            </div>
+        }
+        <fieldset>
+            <legend class="span12">Accident Record Summary</legend>
+            <div class="span12">
+                <label class="span2" for="Title">
+                    Title</label>
+                @Html.TextBoxFor(m => m.Title, new {@class = "span4"})
+            </div>
+            <div class="span12">
+                <label class="span2" for="Reference">
+                    Reference</label>
+                @Html.TextBoxFor(model => model.Reference, new {@class = "span4"})
+            </div>
+        
+            <div class="span12">
+                <label class="span2">Jurisdiction</label>
+                <ul id="jurisdiction-type" class="row-of-radios clearfix">
+                    <li class="span">
+                        <label>GB</label>
+                        @Html.RadioButtonFor(x => x.JurisdictionId, 1)
+                    </li>
+                    <li class="span">
+                        <label>NI</label>
+                        @Html.RadioButtonFor(x => x.JurisdictionId, 3)
+                    </li>
+                    <li class="span">
+                        <label>ROI</label>
+                        @Html.RadioButtonFor(x => x.JurisdictionId, 2)
+                    </li>
+                    <li class="span">
+                        <label>IoM</label>
+                        @Html.RadioButtonFor(x => x.JurisdictionId, 9)
+                    </li>
+                    <li class="span">
+                        <label>Guernsey</label>
+                        @Html.RadioButtonFor(x => x.JurisdictionId, 8)
+                    </li>
+                    <li class="span">
+                        <label>Jersey</label>
+                        @Html.RadioButtonFor(x => x.JurisdictionId, 5)
+                    </li>
+                </ul>
+            </div>
+        
+        </fieldset>
+        <div class="span12">
+            <label class="span2"></label>
+            <input type="submit" id="saveButton" value="Save" class="btn btn-success" />
+            <a id="nextBtn" class="btn btn-primary" mainurl="" href="@Url.Action("Index", "InjuredPerson", new { area = "AccidentReports", companyId = Model.CompanyId, accidentRecordId = Model.AccidentRecordId })">Save &amp; Continue <i class="icon-chevron-right icon-white"></i></a>
+            @Html.ActionLink("Cancel", "Index", "Search", null, new {@class = "btn btn-link"})
+        </div>
+        @Html.HiddenFor(x => x.AccidentRecordId)
+    </form>
+</div>

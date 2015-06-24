@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="NonEmployee" table="`NonEmployee`">
+    <id name="Id" column="Id" type="long">
+      <generator class="identity"/>
+    </id>
+    <property name="Name" type="string" />
+    <property name="Company" type="string" />
+    <property name="Position" type="string" />
+    <property name="LinkToCompanyId" column="ClientId" type="long" />
+            
+    <property name="Deleted" type="bool" />
+    <property name="CreatedOn" type="datetime" />
+    <property name="LastModifiedOn" type="datetime" />
+    
+    <many-to-one name="LastModifiedBy" class="UserForAuditing" column="LastModifiedBy" />
+    <many-to-one name="CreatedBy" class="UserForAuditing" column="CreatedBy" />
+    
+  </class>
+</hibernate-mapping>

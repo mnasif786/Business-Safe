@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="HazardousSubstance" table="`HazardousSubstance`" lazy="false" dynamic-update="true">
+    <id name="Id" column="Id" type="long">
+      <generator class="identity"/>
+    </id>
+    <property name="Name" column="`Name`" type="string" />
+    <property name="Reference" type="string" />
+    <!--Supplier-->
+    <property name="Standard" column="HazardousSubstanceStandardId"/>
+
+    <property name="SdsDate" column="`SDSDate`"  />
+    <property name="DetailsOfUse" type="string" />
+    <property name="AssessmentRequired" type="bool" />
+    <property name="CompanyId" type="long" />
+    <many-to-one name="Supplier" class="Supplier" column="SupplierId"/>
+    
+    <bag name="HazardousSubstancePictograms" lazy="false" inverse="true" cascade="save-update" where="Deleted = 0">
+      <key column="HazardousSubstanceId"  ></key>
+      <one-to-many class="HazardousSubstancePictogram" />
+    </bag>
+
+    <bag name="HazardousSubstanceSafetyPhrases" table="HazardousSubstanceSafetyPhrase" inverse="true" lazy="false" cascade="save-update" where="Deleted = 0">
+      <key column="HazardousSubstanceId"  ></key>
+      <one-to-many class="HazardousSubstanceSafetyPhrase"   />
+    </bag>
+    
+    <bag name="HazardousSubstanceRiskPhrases" table="HazardousSubstanceRiskPhrase" inverse="true" lazy="false" cascade="save-update" where="Deleted = 0">
+      <key column="HazardousSubstanceId"  ></key>
+      <one-to-many class="HazardousSubstanceRiskPhrase"   />
+    </bag>
+    
+    <!--<bag name="RiskPhrases" table="HazardousSubstanceRiskPhrase" lazy="false" cascade="none">
+      <key column="HazardousSubstanceId"  ></key>
+      <many-to-many column="RiskPhraseId" class="RiskPhrase"   />
+    </bag>-->
+    
+    
+    <property name="Deleted" type="bool" />
+    <property name="CreatedOn" />
+    <many-to-one name="CreatedBy" class="UserForAuditing" column="CreatedBy"/>
+    <property name="LastModifiedOn" />
+    <many-to-one name="LastModifiedBy" class="UserForAuditing" column="LastModifiedBy"/>
+    
+    <bag name="HazardousSubstanceRiskAssessments" cascade="none">
+      <key column="HazardousSubstanceId"/>
+      <one-to-many class="HazardousSubstanceRiskAssessment"/>
+    </bag>
+
+  </class>
+  
+</hibernate-mapping>
+

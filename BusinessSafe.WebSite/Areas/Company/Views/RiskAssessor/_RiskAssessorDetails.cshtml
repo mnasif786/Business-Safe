@@ -1,0 +1,29 @@
+﻿@model BusinessSafe.WebSite.Areas.Company.ViewModels.AddEditRiskAssessorViewModel
+<div class="row">
+    <label class="span1">
+        Job title:</label>
+    <label class="span4 viewValue" id="EmployeeJobTitle">
+    </label>
+    <label class="span1">
+        Site:</label>
+    <label class="span4 viewValue" id="EmployeeSite">
+    </label>
+</div>
+<div class="row hide" id="EmployeeNotAUserWarning">
+    <label class="span9 alert">
+        Employee selected does not have a user account and therefore will be unable to view
+        Risk Assessment records or receive notifications relating to risk assessments. Please
+        create a user account for employee if you wish for them to have this functionality.
+    </label>
+</div>
+<div class="row auto-complete-dropdown">
+    <label class="span4">
+        Site Employee Can Be Risk Assessor<br />
+        (All/Specific)</label>
+    <span id="site-dropdown-container">
+    @Html.TextBoxFor(m => m.Site, new { @class = "span3" })
+    @Html.HiddenFor(x => x.SiteId)
+    </span>
+    <span class="span">@Html.LabelFor(x => x.HasAccessToAllSites, "All Sites")</span>
+    <span class="span1">@Html.CheckBoxFor(x => x.HasAccessToAllSites)</span>
+</div>

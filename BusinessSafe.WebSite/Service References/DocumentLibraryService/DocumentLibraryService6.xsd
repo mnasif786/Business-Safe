@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://pbswebtest2:8056/DocumentLibraryService.svc?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="GetFolderByIdRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Ascending" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="FolderId" type="xs:long" />
+      <xs:element minOccurs="0" name="OrderBy" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetFolderByIdRequest" nillable="true" type="tns:GetFolderByIdRequest" />
+  <xs:complexType name="GetFoldersByIdsRequest">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="FolderIds" nillable="true" type="q1:ArrayOflong" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetFoldersByIdsRequest" nillable="true" type="tns:GetFoldersByIdsRequest" />
+  <xs:complexType name="SearchFoldersRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Ascending" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedOnFrom" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreatedOnTo" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ModifiedOnFrom" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ModifiedOnTo" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="NameLike" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OrderBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParentFolderId" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="Recursive" nillable="true" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SearchFoldersRequest" nillable="true" type="tns:SearchFoldersRequest" />
+  <xs:complexType name="CreateFolderRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FolderName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParentFolderId" nillable="true" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreateFolderRequest" nillable="true" type="tns:CreateFolderRequest" />
+  <xs:complexType name="DeleteFolderRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FolderId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeleteFolderRequest" nillable="true" type="tns:DeleteFolderRequest" />
+  <xs:complexType name="RestoreFolderRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FolderId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RestoreFolderRequest" nillable="true" type="tns:RestoreFolderRequest" />
+  <xs:complexType name="RenameFolderRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FolderId" type="xs:long" />
+      <xs:element minOccurs="0" name="NewName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RenameFolderRequest" nillable="true" type="tns:RenameFolderRequest" />
+  <xs:complexType name="MoveFolderRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FolderId" type="xs:long" />
+      <xs:element minOccurs="0" name="TargetParentFolderId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MoveFolderRequest" nillable="true" type="tns:MoveFolderRequest" />
+  <xs:complexType name="GetDocumentByIdWithContentRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DocumentId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetDocumentByIdWithContentRequest" nillable="true" type="tns:GetDocumentByIdWithContentRequest" />
+  <xs:complexType name="GetDocumentByIdWithArchiveDocumentsRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DocumentId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetDocumentByIdWithArchiveDocumentsRequest" nillable="true" type="tns:GetDocumentByIdWithArchiveDocumentsRequest" />
+  <xs:complexType name="GetDocumentsByIdsRequest">
+    <xs:sequence>
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="DocumentIds" nillable="true" type="q2:ArrayOflong" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetDocumentsByIdsRequest" nillable="true" type="tns:GetDocumentsByIdsRequest" />
+  <xs:complexType name="GetFolderStructureFromRootRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TargetFolderId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetFolderStructureFromRootRequest" nillable="true" type="tns:GetFolderStructureFromRootRequest" />
+  <xs:complexType name="SearchDocumentsRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Ascending" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedOnFrom" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreatedOnTo" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Extension" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FilenameLike" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FilesizeFrom" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="FilesizeTo" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="IncludeDeleted" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ModifiedOnFrom" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ModifiedOnTo" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="OrderBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParentFolderId" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="Recursive" nillable="true" type="xs:boolean" />
+      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Tags" nillable="true" type="q3:ArrayOfstring" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SearchDocumentsRequest" nillable="true" type="tns:SearchDocumentsRequest" />
+  <xs:complexType name="CreateDocumentFromBytesRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ApplicationId" type="xs:long" />
+      <xs:element minOccurs="0" name="FileBytes" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="Filename" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParentFolderId" nillable="true" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreateDocumentFromBytesRequest" nillable="true" type="tns:CreateDocumentFromBytesRequest" />
+  <xs:complexType name="CreateDocumentFromPathRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ApplicationId" type="xs:long" />
+      <xs:element minOccurs="0" name="FilePath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Filename" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParentFolderId" nillable="true" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreateDocumentFromPathRequest" nillable="true" type="tns:CreateDocumentFromPathRequest" />
+  <xs:complexType name="DeleteDocumentRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DocumentId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeleteDocumentRequest" nillable="true" type="tns:DeleteDocumentRequest" />
+  <xs:complexType name="RestoreDocumentRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DocumentId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RestoreDocumentRequest" nillable="true" type="tns:RestoreDocumentRequest" />
+  <xs:complexType name="RenameDocumentRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DocumentId" type="xs:long" />
+      <xs:element minOccurs="0" name="NewName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RenameDocumentRequest" nillable="true" type="tns:RenameDocumentRequest" />
+  <xs:complexType name="MoveDocumentRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DocumentId" type="xs:long" />
+      <xs:element minOccurs="0" name="TargetParentFolderId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="MoveDocumentRequest" nillable="true" type="tns:MoveDocumentRequest" />
+  <xs:complexType name="UpdateDocumentContentFromBytesRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DocumentId" type="xs:long" />
+      <xs:element minOccurs="0" name="Extension" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FileBytes" nillable="true" type="xs:base64Binary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UpdateDocumentContentFromBytesRequest" nillable="true" type="tns:UpdateDocumentContentFromBytesRequest" />
+  <xs:complexType name="UpdateDocumentContentFromPathRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DocumentId" type="xs:long" />
+      <xs:element minOccurs="0" name="Extension" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FilePath" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UpdateDocumentContentFromPathRequest" nillable="true" type="tns:UpdateDocumentContentFromPathRequest" />
+  <xs:complexType name="GetPreviousVersionWithContentRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ContentVersion" type="xs:int" />
+      <xs:element minOccurs="0" name="DocumentId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GetPreviousVersionWithContentRequest" nillable="true" type="tns:GetPreviousVersionWithContentRequest" />
+  <xs:complexType name="RestoreDocumentContentToPreviousVersionRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ContentVersion" type="xs:int" />
+      <xs:element minOccurs="0" name="DocumentId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RestoreDocumentContentToPreviousVersionRequest" nillable="true" type="tns:RestoreDocumentContentToPreviousVersionRequest" />
+  <xs:complexType name="AddTagsToDocumentRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DocumentId" type="xs:long" />
+      <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="TagTextList" nillable="true" type="q4:ArrayOfstring" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AddTagsToDocumentRequest" nillable="true" type="tns:AddTagsToDocumentRequest" />
+  <xs:complexType name="RemoveTagRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DocumentId" type="xs:long" />
+      <xs:element minOccurs="0" name="TagId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RemoveTagRequest" nillable="true" type="tns:RemoveTagRequest" />
+</xs:schema>

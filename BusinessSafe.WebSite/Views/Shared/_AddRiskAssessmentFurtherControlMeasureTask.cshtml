@@ -1,0 +1,9 @@
+﻿@model BusinessSafe.WebSite.ViewModels.AddRiskAssessmentFurtherControlMeasureTaskViewModel
+
+@Html.Partial("_RiskAssessmentHazardSummary", Model.HazardSummary)
+<form id="FurtherControlMeasureTaskForm" class="form-inline" method="POST" action="@Url.Action("CreateFurtherControlMeasureTask", "GenericFurtherControlMeasureTask", new {area = ""})">
+@Html.HiddenFor(x => x.RiskAssessmentHazardId)
+@Html.HiddenFor(x => x.FurtherControlMeasureTaskCategory)
+@Html.Partial("_FurtherControlMeasureDetails", Model)
+
+</form>

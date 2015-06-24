@@ -1,0 +1,25 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Extensions
+@model BusinessSafe.WebSite.Areas.TaskList.ViewModels.TaskViewModel
+@if (User.IsInRole(Permissions.ViewRiskAssessmentTasks.ToString()))
+{
+
+    if (Model.IsViewAvailable() && !Model.IsReviewTask())
+    {
+        <a data-id="@Model.Id" class="icon-search" href="#" 
+           title="View Task" 
+           data-task-type="@Model.GetTaskType()" 
+           data-is-review-task="@Model.GetIsReviewTask()"
+           >
+    </a>
+    }
+    else if (Model.IsReviewTask())
+    {
+        <a href="@Url.Action("View", Model.GetRiskAssessmentControllerForViewAction(), new { riskAssessmentId = @Model.RiskAssessmentId, companyId = Html.GetUsersCompanyId(User), area = Model.GetRiskAssessmentArea() })"
+           title="View Task"
+           data-task-type="@Model.GetTaskType()"
+           data-is-review-task="@Model.GetIsReviewTask()">
+            <i class="icon-search"></i>
+        </a>                
+    }
+}

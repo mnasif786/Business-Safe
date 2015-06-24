@@ -1,0 +1,22 @@
+﻿/* FIXES FOR IE7 */
+a:hover { cursor: pointer }
+
+.fixed-content { width: 960px }
+
+ul.ui-autocomplete { width: 259px; overflow-x: hidden }
+
+#RolePermissionsResult td strong { display: block; text-align: left }
+
+.form-inline fieldset { clear: both }
+
+.add-remove-buttons button { margin: 4px 4px 0 0 }
+
+h4 button { margin-left: 10px!important }
+
+fieldset.well legend { display: block; padding: 0px 0 40px 10px; margin: 0 0 -20px -20px; }
+
+ul.form-inline { list-style: none }
+ul.form-inline li { display: block;float:left }
+
+#FurtherControlMeasureTasksTable td.fcm-status { width: 140px }
+

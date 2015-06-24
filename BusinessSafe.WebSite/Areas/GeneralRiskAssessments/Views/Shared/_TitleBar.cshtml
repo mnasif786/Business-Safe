@@ -1,0 +1,20 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Extensions
+@model BusinessSafe.WebSite.Areas.GeneralRiskAssessments.ViewModels.GeneralRiskAssessmentSummaryViewModel
+<h2>
+    <a class="btn" href="@Url.Action("Index", "RiskAssessment", new { area = "GeneralRiskAssessments", companyId = @Html.GetUsersCompanyId(User) })" title="Close Risk Assessment">
+        <i class="icon-remove"></i></a>
+        
+    <a class="btn" href="@Url.Action("Index", "GeneralRiskAssessments", new { area = "SqlReports", riskAssessmentId = @Model.Id })" title="Print Risk Assessment" title="Print General Risk Assessment">
+        <i class="icon-print"></i>
+    </a>
+    
+    @if (Model.IsEditEnabled(User) && !Model.IsArchived)
+    {
+        <a class="btn" href="@Url.Action("Index", @ViewBag.CurrentController, new { riskAssessmentId = Model.Id, companyId = @Html.GetUsersCompanyId(User) })" title="Edit Risk Assessment">
+            <i class="icon-edit"></i>
+        </a>
+    }
+    General Risk Assessment
+    @Html.Partial("_AssessmentStatus", Model.RiskAssessmentStatus)
+</h2>

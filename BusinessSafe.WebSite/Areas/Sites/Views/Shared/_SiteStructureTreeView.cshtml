@@ -1,0 +1,61 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Extensions
+@using BusinessSafe.WebSite.HtmlHelpers
+@using NHibernate.Mapping
+@model BusinessSafe.WebSite.Areas.Sites.ViewModels.SiteStructureViewModel
+<div class="row">
+    <fieldset>
+        <div class="page-header">
+            <h1>
+                <div class="pull-right">
+                    @if (User.IsInRole(Permissions.ViewSiteDetails.ToString()))
+                    {
+                        if (FeatureSwitchChecker.Enabled(FeatureSwitches.FeatureSwitch_ClosedSites, User.GetCustomPrinciple()))
+                        {
+                            if (Model.ShowClosedSites)
+                            {
+                                <a href="@Url.Action("Index", "SitesStructure")" class="show-hide-closed-sites-text" style="">Show/Hide Closed Sites <img src="/Content/images/ticked.png" /></a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("GetAllSites", "SitesStructure")" class="show-hide-closed-sites-text" style="">Show/Hide Closed Sites <img src="/Content/images/unticked.png" /></a>
+                            }
+                        }
+                    }
+                    @if (User.IsInRole(Permissions.AddSiteDetails.ToString()))
+                    {
+                        <a id="AddSiteGroupLink" href="#" class="btn btn-success">Add Group</a>
+                    }
+                    <a id="ShowOrganisationChartButton" href="@Url.Action("SiteOrganisationalChart", "SitesStructure", new { siteOrganistionalChartId  = Model.ClientId})" class="btn btn-primary">Show Site Structure</a>
+                </div>
+                Site Structure
+                @if (Model.HasUnlinkedSites)
+                {
+                    <span class="label label-warning">You have unlinked sites</span>
+                }
+                else
+                {
+                    <span class="label label-success">All sites linked</span>
+                }
+            </h1>
+        </div>
+        <div id="sidetreecontrol">
+            <span class="label">Sites:</span>
+            <ul id="tree" class="treeview-black treeview">
+                @Model.SiteChartsHtml
+            </ul>
+        </div>
+
+        @if (Model.HasUnlinkedSites)
+        {
+            <div class="alert alert-block" id="unlinkedSites">
+                <div id="sidetreecontrolunlinkedsites">
+                    <span class="label label-warning">Please link the following sites:</span> <span class="badge badge-warning">@Model.UnlinkedSitesCount</span>
+                    <ul id="tree-unlinked-sites" class="treeview-black treeview">
+                        @Model.UnlinkedSitesHtml
+                    </ul>
+                </div>
+            </div>
+        }
+    </fieldset>
+</div>

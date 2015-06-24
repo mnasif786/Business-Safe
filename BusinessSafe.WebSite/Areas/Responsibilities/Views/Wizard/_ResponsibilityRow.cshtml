@@ -1,0 +1,11 @@
+﻿@model BusinessSafe.WebSite.Areas.Responsibilities.ViewModels.Wizard.StatutoryResponsibilityViewModel
+
+<tr class="responsibilityTemplateRow">
+    <td>
+        <input name="selectedResponsibilities" value="@(Model.Id)" type="checkbox" @if(Model.IsSelected) { <text>checked="checked"</text>} />
+    </td>
+    @*<td>@resp.Category</td>*@
+    <td>@Model.Title</td>
+    <td>@Model.Description</td>
+    <td>@Model.ResponsibilityReason</td>
+</tr>

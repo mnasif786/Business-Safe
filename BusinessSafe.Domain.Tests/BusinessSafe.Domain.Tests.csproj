@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B4E76CE0-CBDB-4A86-B610-1CB817BF357A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BusinessSafe.Domain.Tests</RootNamespace>
+    <AssemblyName>BusinessSafe.Domain.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CI|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\CI\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'UAT|AnyCPU'">
+    <OutputPath>bin\UAT\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LIVE|AnyCPU'">
+    <OutputPath>bin\LIVE\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentValidation">
+      <HintPath>..\packages\FluentValidation.3.3.1.0\lib\Net40\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap, Version=2.6.3.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDependentAssemblyPaths Condition=" '$(VS100COMNTOOLS)' != '' " Include="$(VS100COMNTOOLS)..\IDE\PrivateAssemblies">
+      <Visible>False</Visible>
+    </CodeAnalysisDependentAssemblyPaths>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DomainServiceTests\ControlSystemCalculationServiceTests.cs" />
+    <Compile Include="Entities\AccidentRecords\AddInjuryTests.cs" />
+    <Compile Include="Entities\AccidentRecords\AddBodyPartTests.cs" />
+    <Compile Include="Entities\AccidentRecords\AdditionalInjuryDescriptionTests.cs" />
+    <Compile Include="Entities\AccidentRecords\IsReportableTest.cs" />
+    <Compile Include="Entities\AccidentRecords\NextStepsAvailableTests.cs" />
+    <Compile Include="Entities\AccidentRecords\NextStepsSectionsTests.cs" />
+    <Compile Include="Entities\AccidentRecords\RemoveBodyPartTests.cs" />
+    <Compile Include="Entities\AccidentRecords\RemoveInjuryTests.cs" />
+    <Compile Include="Entities\ActionPlanTests\CreateTests.cs" />
+    <Compile Include="Entities\ActionTests\GetStatusFromActionsTests.cs" />
+    <Compile Include="Entities\ActionTests\CreateActionTests.cs" />
+    <Compile Include="Entities\ActionTests\GetStatusFromTasksTests.cs" />
+    <Compile Include="Entities\AddedAccidentRecordDocumentTests\Create.cs" />
+    <Compile Include="Entities\AddedDocumentTests\Create.cs" />
+    <Compile Include="Entities\AddedDocumentTests\DocumentReferenceTests.cs" />
+    <Compile Include="Entities\AddedDocumentTests\SiteReferenceTests.cs" />
+    <Compile Include="Entities\AnswerTests\CreateTests.cs" />
+    <Compile Include="Entities\AnswerTests\UpdateTests.cs" />
+    <Compile Include="Entities\AuthenticationTokenTests\Create.cs" />
+    <Compile Include="Entities\EmployeeTests\NotificationTest.cs" />
+    <Compile Include="Entities\EmployeeTests\RiskAssessorTests.cs" />
+    <Compile Include="Entities\FireRiskAssessmenrChecklistTests\UpdateAnswersTest.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\CanMarkAsLiveRiskAssessmentTests.cs" />
+    <Compile Include="Entities\SafeCheckTests\ChecklistTemplateTests\AddQuestionTests.cs" />
+    <Compile Include="Entities\SafeCheckTests\ChecklistTemplateTests\RemoveQuestionTests.cs" />
+    <Compile Include="Entities\SafeCheckTests\ChecklistTests\AddOtherEmailTests.cs" />
+    <Compile Include="Entities\SafeCheckTests\ChecklistTests\AddPersonSeenTests.cs" />
+    <Compile Include="Entities\SafeCheckTests\ChecklistTests\RemoveOtherEmailTests.cs" />
+    <Compile Include="Entities\SafeCheckTests\ChecklistTests\RemovePersonsSeenNotInList.cs" />
+    <Compile Include="Entities\SafeCheckTests\ChecklistTests\RemovePersonSeenTests.cs" />
+    <Compile Include="Entities\SafeCheckTests\ChecklistTests\RevertSubmittedChecklistTests.cs" />
+    <Compile Include="Entities\SafeCheckTests\ChecklistTests\UpdateChecklistAnswersTests.cs" />
+    <Compile Include="Entities\SafeCheckTests\ChecklistTests\CreateChecklistTests.cs" />
+    <Compile Include="Entities\EmployeeChecklistEmailTests\GenerateTests.cs" />
+    <Compile Include="Entities\EmployeeChecklistsTests\AreAllQuestionsAnsweredTests.cs" />
+    <Compile Include="Entities\EmployeeChecklistsTests\LastRecipientEmailTests.cs" />
+    <Compile Include="Entities\EmployeeChecklistsTests\ValidateCompleteTests.cs" />
+    <Compile Include="Entities\EmployeeContactDetailTests\CreateTests.cs" />
+    <Compile Include="Entities\EmployeeTests\CreateTests.cs" />
+    <Compile Include="Entities\EmployeeTests\MarkForDeleteTests.cs" />
+    <Compile Include="Entities\FireAnswerTests\IsValidateForCompleteChecklistTests.cs" />
+    <Compile Include="Entities\FireAnswerTests\UpdateTests.cs" />
+    <Compile Include="Entities\FireRiskAssessmenrChecklistTests\CompleteTests.cs" />
+    <Compile Include="Entities\FireRiskAssessmenrChecklistTests\CopyWithYesAnswers.cs" />
+    <Compile Include="Entities\FireRiskAssessmenrChecklistTests\MarkChecklistWithCompleteFailureAttemptTests.cs" />
+    <Compile Include="Entities\FireRiskAssessmenrChecklistTests\SaveTests.cs" />
+    <Compile Include="Entities\FireRiskAssessmentFurtherControlMeasureTaskTests\CloneForReoccurringTests.cs" />
+    <Compile Include="Entities\FireRiskAssessmentTests\AttachFireSafetyControlMeasuresToRiskAssessmentTests.cs" />
+    <Compile Include="Entities\FireRiskAssessmentTests\AttachPeopleAtRiskToRiskAssessmentTests.cs" />
+    <Compile Include="Entities\FireRiskAssessmentTests\AttachSourceOfFuelsToRiskAssessmentTests.cs" />
+    <Compile Include="Entities\FireRiskAssessmentTests\AttachSourceOfIgnitionsToRiskAssessmentTests.cs" />
+    <Compile Include="Entities\FireRiskAssessmentTests\Clone.cs" />
+    <Compile Include="Entities\FireRiskAssessmentTests\CompleteTests.cs" />
+    <Compile Include="Entities\FireRiskAssessmentTests\CompletionDueDateTests.cs" />
+    <Compile Include="Entities\FireRiskAssessmentTests\CopyForMultipleSitesTests.cs" />
+    <Compile Include="Entities\FireRiskAssessmentTests\CreateTests.cs" />
+    <Compile Include="Entities\FireRiskAssessmentTests\LatestFireRiskAssessmentChecklistTests.cs" />
+    <Compile Include="Entities\FireRiskAssessmentTests\UpdatePremisesInformationTests.cs" />
+    <Compile Include="Entities\FireRiskAssessmentTests\UpdateSummary.cs" />
+    <Compile Include="Entities\FireSafetyControlMeasureTests\CreateTests.cs" />
+    <Compile Include="Entities\GeneralRiskAssessmentFurtherActionTasksTests\CanUserCompleteTaskTests.cs" />
+    <Compile Include="Entities\GeneralRiskAssessmentFurtherActionTasksTests\DefaultDocumentTypeTests.cs" />
+    <Compile Include="Entities\GeneralRiskAssessmentTests\CloneForRiskAssessmentTemplatingRiskAssessmentTests.cs" />
+    <Compile Include="Entities\GeneralRiskAssessmentTests\CopyForMultipleSitesTests.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentTests\CanDeleteRiskAssessmentTest.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentTests\CompletionDueDateTests.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentTests\SetLastRecommendedControlSystemTests.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentTests\CopyTests.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentTests\HasUncompletedTasksTest.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentTests\UpdateSummary.cs" />
+    <Compile Include="Entities\HazardousSubstanceTests\UpdateTests.cs" />
+    <Compile Include="Entities\MultiHazardRiskAssessmentTests\CompletionDueDateTests.cs" />
+    <Compile Include="Entities\PersonalRiskAssessmentTests\CanUserAccessTests.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentTests\CopyForMultipleSitesTests.cs" />
+    <Compile Include="Entities\PersonalRiskAssessmentTests\CreateTests.cs" />
+    <Compile Include="Entities\PersonalRiskAssessmentTests\PrefixTests.cs" />
+    <Compile Include="Entities\PersonalRiskAssessmentTests\ResetAfterGeneratingEmployeeChecklistsTests.cs" />
+    <Compile Include="Entities\PersonalRiskAssessmentTests\SaveChecklistGeneratorTests.cs" />
+    <Compile Include="Entities\PersonalRiskAssessmentTests\UpdateSummaryTests.cs" />
+    <Compile Include="Entities\Responsibilities\CopyTests.cs" />
+    <Compile Include="Entities\Responsibilities\GetUncreatedStatutoryResponsibilityTaskTemplatesTests.cs" />
+    <Compile Include="Entities\Responsibilities\HasMultipleFrequenciesTests.cs" />
+    <Compile Include="Entities\Responsibilities\HasUndeletedTasks.cs" />
+    <Compile Include="Entities\Responsibilities\StatusDerivedFromTasksTests.cs" />
+    <Compile Include="Entities\Responsibilities\CreateTests.cs" />
+    <Compile Include="Entities\Responsibilities\NextDueDateTests.cs" />
+    <Compile Include="Entities\ResponsibilityTaskTests\CompleteTests.cs" />
+    <Compile Include="Entities\ResponsibilityTaskTests\IsTaskCompletedNotificationRequiredTests.cs" />
+    <Compile Include="Entities\RiskAssessmentControlMeasureTests\MarkAsDeletedTests.cs" />
+    <Compile Include="Entities\RiskAssessmentReviewTaskTests\IsTaskCompletedNotificationRequiredTests.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\IsDifferentRiskAssessorTests.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\NextReviewDateTests.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\RiskAssessmentMarkAsArchivedTest.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\UpdateSummary.cs" />
+    <Compile Include="Entities\RiskAssessorTests\UpdateTests.cs" />
+    <Compile Include="Entities\SafeCheckTests\ChecklistTests\CopyChecklistTests.cs" />
+    <Compile Include="Entities\SafeCheckTests\ChecklistTests\UpdateChecklistTests.cs" />
+    <Compile Include="Entities\SafeCheckTests\QuestionTests\AddQuestionResponseTests.cs" />
+    <Compile Include="Entities\SafeCheckTests\QuestionTests\CopyQuestionTests.cs" />
+    <Compile Include="Entities\SafeCheckTests\QuestionTests\IsNotApplicableAnswerEnabled.cs" />
+    <Compile Include="Entities\SafeCheckTests\QuestionTests\QuestionIndustryTests.cs" />
+    <Compile Include="Entities\SignificantFindingTests\AddFurtherControlMeasureTaskTests.cs" />
+    <Compile Include="Entities\SignificantFindingTests\CreateTests.cs" />
+    <Compile Include="Entities\FireAnswerTests\CreateTests.cs" />
+    <Compile Include="Entities\SignificantFindingTests\MarkSignificantFindingAsDeletedTests.cs" />
+    <Compile Include="Entities\SiteTests\AddAccidentRecordNotificationMemberTests.cs" />
+    <Compile Include="Entities\SiteTests\GetThisAndAllAncestorsTests.cs" />
+    <Compile Include="Entities\SiteTests\RemoveAccidentRecordNotificationMemberTests.cs" />
+    <Compile Include="Entities\SourceOfFuelsTests\CreateTests.cs" />
+    <Compile Include="Entities\FurtherControlMeasureTaskTests\IsTaskCompletedNotificationRequiredTests.cs" />
+    <Compile Include="Entities\TaskTests\DerivedDisplayStatusTests.cs" />
+    <Compile Include="Entities\TaskTests\EmployeeTaskNotificationTests.cs" />
+    <Compile Include="Entities\TaskTests\HasCompletedTasksTests.cs" />
+    <Compile Include="Entities\TaskTests\ReoccurringScheduleTests.cs" />
+    <Compile Include="Entities\EnsurePublicMethodsAreMarkedAsVirtualTests.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentFurtherActionTasksTests\CloneForReoccurringTests.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentFurtherActionTasksTests\CompleteTests.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentFurtherActionTasksTests\CreateTests.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentFurtherActionTasksTests\GetPreviousHistoryTests.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentFurtherActionTasksTests\GetReoccurringScheduleTests.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentFurtherActionTasksTests\MarkAsNoLongeerRequiredTests.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentFurtherActionTasksTests\MarkForDeleteTests.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentFurtherActionTasksTests\ReassignTests.cs" />
+    <Compile Include="Entities\DocumentTests\RiskAssessmentDocumentTest.cs" />
+    <Compile Include="Entities\EmailTemplateTests\CreateTests.cs" />
+    <Compile Include="Entities\EmployeeTests\EmployeeTests.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentTests\AddControlMeasureToRiskAssessmentTest.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentTests\AddFurtherControlMeasureTaskTest.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentTests\AttachEmployeeToRiskAssessmentTests.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentTests\AttachNonEmployeeToRiskAssessmentTests.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentTests\CreateTests.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentTests\DetachEmployeeFromRiskAssessmentTests.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentTests\DetachNonEmployeeToRiskAssessmentTests.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentTests\MarkAsDraftTest.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentTests\MarkAsLiveTest.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentTests\RemoveControlMeasureFromRiskAssessmentTest.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentTests\UpdateControlMeasureToRiskAssessmentTest.cs" />
+    <Compile Include="Entities\HazardousSubstanceTests\CreateTests.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentTests\GroupTests.cs" />
+    <Compile Include="Entities\HazardousSubstanceTests\MarkForDeleteTests.cs" />
+    <Compile Include="Entities\RiskAssessmentDocumentTests\Create.cs" />
+    <Compile Include="Entities\RiskAssessmentReviewTests\CreateFollowUpTests.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\GetDefaultDateOfNextReviewTests.cs" />
+    <Compile Include="Entities\SiteTests\GetThisAndAllDescendantsTests.cs" />
+    <Compile Include="Entities\Suppliers\CreateTests.cs" />
+    <Compile Include="Entities\Suppliers\MarkForDeleteTests.cs" />
+    <Compile Include="Entities\Suppliers\UpdateTests.cs" />
+    <Compile Include="Entities\TaskDocumentTests\Create.cs" />
+    <Compile Include="Entities\TaskDocumentTests\DocumentReferenceTests.cs" />
+    <Compile Include="Entities\TaskDocumentTests\MarkForDeleteTests.cs" />
+    <Compile Include="Entities\TaskDocumentTests\CloneForReoccurringTests.cs" />
+    <Compile Include="Entities\TaskDocumentTests\SiteReferenceTests.cs" />
+    <Compile Include="Entities\HazardTests\CreateTests.cs" />
+    <Compile Include="Entities\HazardTests\MarkForDeleteTests.cs" />
+    <Compile Include="Entities\HazardTests\UpdateTests.cs" />
+    <Compile Include="Entities\NonEmployeeTests\CreateTests.cs" />
+    <Compile Include="Entities\NonEmployeeTests\MarkForDeleteTests.cs" />
+    <Compile Include="Entities\NonEmployeeTests\UpdateTests.cs" />
+    <Compile Include="Entities\PeopleAtRiskTests\CreateTests.cs" />
+    <Compile Include="Entities\PeopleAtRiskTests\MarkForDeleteTests.cs" />
+    <Compile Include="Entities\PeopleAtRiskTests\UpdateTests.cs" />
+    <Compile Include="Entities\RiskAssessmentControlMeasureTests\CloneForRiskAssessmentTemplatingTests.cs" />
+    <Compile Include="Entities\RiskAssessmentControlMeasureTests\CreateTests.cs" />
+    <Compile Include="Entities\RiskAssessmentDocumentTests\CloneForRiskAssessmentTemplatingTests.cs" />
+    <Compile Include="Entities\RiskAssessmentDocumentTests\SiteReferenceTests.cs" />
+    <Compile Include="Entities\GeneralRiskAssessmentFurtherActionTasksTests\CloneForReoccurringTests.cs" />
+    <Compile Include="Entities\GeneralRiskAssessmentFurtherActionTasksTests\CompleteTests.cs" />
+    <Compile Include="Entities\GeneralRiskAssessmentFurtherActionTasksTests\GetPreviousHistoryTests.cs" />
+    <Compile Include="Entities\GeneralRiskAssessmentFurtherActionTasksTests\GetReoccurringScheduleTests.cs" />
+    <Compile Include="Entities\GeneralRiskAssessmentFurtherActionTasksTests\MarkAsNoLongeerRequiredTests.cs" />
+    <Compile Include="Entities\GeneralRiskAssessmentFurtherActionTasksTests\MarkForDeleteTests.cs" />
+    <Compile Include="Entities\GeneralRiskAssessmentFurtherActionTasksTests\ReassignTests.cs" />
+    <Compile Include="Entities\GeneralRiskAssessmentFurtherActionTasksTests\UpdateTests.cs" />
+    <Compile Include="Entities\RiskAssessmentHazardTests\AddFurtherActionTaskTests.cs" />
+    <Compile Include="Entities\GeneralRiskAssessmentFurtherActionTasksTests\CreateTests.cs" />
+    <Compile Include="Entities\RiskAssessmentHazardTests\CanDeleteHazardTests.cs" />
+    <Compile Include="Entities\RiskAssessmentHazardTests\CloneForRiskAssessmentTemplatingTests.cs" />
+    <Compile Include="Entities\RiskAssessmentReviewTaskTests\CompleteTests.cs" />
+    <Compile Include="Entities\RiskAssessmentReviewTaskTests\MarkAsDeletedTests.cs" />
+    <Compile Include="Entities\RiskAssessmentReviewTaskTests\MarkAsNoLongerRequiredTests.cs" />
+    <Compile Include="Entities\RiskAssessmentReviewTests\CompleteTests.cs" />
+    <Compile Include="Entities\RiskAssessmentReviewTests\EditTests.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\AttachControlMeasureToRiskAssessmentHazardTest.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\AttachDocumentToRiskAssessmentTest.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\AttachHazardsToRiskAssessmentTests.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\AttachNonEmployeeToRiskAssessmentTests.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\AttachEmployeeToRiskAssessmentTests.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\AttachPeopleAtRiskToRiskAssessmentTests.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\CanDeleteRiskAssessmentTest.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\CloneRiskAssessmentTest.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\DetachDocumentToRiskAssessmentTest.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\DetachEmployeeFromRiskAssessmentTests.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\CreateTests.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\DetachHazardsFromRiskAssessmentTests.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\DetachNonEmployeeToRiskAssessmentTests.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\FindRiskAssessmentHazardTests.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\MarkAsArchivedTest.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\MarkAsDraftTest.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\MarkAsLiveTest.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\MarkForDeleteTest.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\RemoveControlMeasureFromRiskAssessmentHazardTest.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\UpdateControlMeasureForRiskAssessmentHazardTest.cs.cs" />
+    <Compile Include="Entities\RiskAssessmentTests\UpdatePremisesInformation.cs" />
+    <Compile Include="Entities\RoleTests\AmendTests.cs" />
+    <Compile Include="Entities\RoleTests\CreateTests.cs" />
+    <Compile Include="Entities\RoleTests\MarkAsDeleteTests.cs" />
+    <Compile Include="Entities\SiteAddressTests\ValidateTests.cs" />
+    <Compile Include="Entities\SiteTests\DeleteTests.cs" />
+    <Compile Include="Entities\UserTests\AllowedSiteStructureElementIdsTests.cs" />
+    <Compile Include="Entities\UserTests\CreateTests.cs" />
+    <Compile Include="Entities\UserTests\DeleteUserTests.cs" />
+    <Compile Include="Entities\UserTests\DisableAuthenticationTokensTests.cs" />
+    <Compile Include="Entities\UserTests\ReinstateFromDeleteTests.cs" />
+    <Compile Include="Entities\UserTests\RegisterAdminTests.cs" />
+    <Compile Include="Entities\UserTests\SetRoleAndSiteTests.cs" />
+    <Compile Include="Factories\RiskAssessmentReviewFactoryTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Entities\RiskAssessmentDocumentTests\DocumentReferenceTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessSafe.Domain\BusinessSafe.Domain.csproj">
+      <Project>{EA0B55F3-6232-400F-8BE0-FEC49883253F}</Project>
+      <Name>BusinessSafe.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Test.Infrastructure\BusinessSafe.Test.Infrastructure.csproj">
+      <Project>{4EBDA3BB-5D03-4F0C-8B33-7DE400F39AAD}</Project>
+      <Name>BusinessSafe.Test.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Builders\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

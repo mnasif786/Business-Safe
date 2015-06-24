@@ -1,0 +1,52 @@
+﻿@model BusinessSafe.WebSite.ViewModels.RiskAssessmentReviewsViewModel
+@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Helpers
+@using Telerik.Web.Mvc.UI
+<div class="row">
+    <div class="span12 ipad-97-width">
+        @Html.Partial("_TempData")
+    </div>
+    @if (Model.CanAddReview)
+    {
+        <div class="content">
+            <a id="AddReview" class="btn btn-success btn-large pull-right" data-ra-id="@Model.RiskAssessmentId" href="" title="Add Review">
+                Add Review</a>
+        </div>
+    }
+</div>
+<div class="content">
+    <h2>
+        Past Reviews</h2>
+    @Html.Telerik().Grid(Model.RiskAssessmentReviews).Name("RiskAssessmentReviewsGrid").DataKeys(keys => keys.Add(c => c.Id)).DataBinding(dataBinding => dataBinding.Server()
+        .Delete("Delete", "Reviews")).Columns(
+            columns =>
+            {
+                columns.Bound(o => o.Id).HeaderTemplate("Id").Visible(false);
+                columns.Template(@<text>@item.CompletionDueDate.Value.ToShortDateString()</text>).Title("Due Date").Width(50);
+                columns.Bound(o => o.ReviewAssignedTo.FullName).Title("Review Assigned To").Width(50);
+                columns.Template(o => Model.GetCompletedReviewDate(o)).Title("Date Reviewed").Width(150);
+                columns.Bound(o => o.CompletedBy.FullName).Title("Reviewed By").Width(150);
+                columns.Template(@<text>
+                    @if (item.IsReviewOutstanding)
+                    {
+                        if (ViewBag.IsReadOnly == null)
+                        {
+                        <a class="completeReview icon-ok" data-id="@item.Id" data-risk-assessment-type="@Model.RiskAssessmentType" href="" title="Complete Review">
+                            <i class="icon-check"></i></a>
+                        <a class="editRiskAssessmentReview icon-edit" data-id="@item.Id" href="" title="Edit Review">
+                            <i class="icon-edit"></i></a>
+                        }
+                    }
+                    @{
+                        var riskAssessmentDocument = item.RiskAssessmentReviewTask.Documents.FirstOrDefault();
+                    }
+                    @if (User.IsInRole(Permissions.ViewGeneralandHazardousSubstancesRiskAssessments.ToString()) && !item.IsReviewOutstanding && riskAssessmentDocument != null)
+                    {
+                        <a class="viewRiskAssessmentDocument" data-id="@item.Id" href="@Url.Action("DownloadDocument", "Document", new { area = "Documents", enc = EncryptionHelper.Encrypt("documentLibraryId=" + riskAssessmentDocument.DocumentLibraryId) })" title="View Risk Assessment">
+            
+                            <i class="icon-search"></i>
+                        </a>
+                    }
+                </text>).Width(60);
+            }).Pageable(page => page.PageSize(10))
+</div>

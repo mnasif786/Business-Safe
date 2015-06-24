@@ -1,0 +1,67 @@
+﻿@using BusinessSafe.WebSite.Areas.SqlReports.Helpers
+@model BusinessSafe.WebSite.Areas.SqlReports.ViewModels.SqlReportViewModel
+<div class="well">    
+    @using (Html.BeginForm("View", "SqlReports", FormMethod.Post, new { id = "sqlReports", @class = "search-form" })) 
+    {
+        @Html.HiddenFor(x => x.CompanyId)
+
+        <fieldset>
+            <legend>Reports</legend>
+            <div class="validation-summary-errors @ViewBag.HideClass" style="padding:5px" id="validation-error">@ViewBag.ErrorString</div>
+          
+            <div>               
+                <ul>    
+                    <p><strong>Select a Report (Required)</strong></p>
+                    <li>
+                        <label class="thin" for="Report">Report</label>
+                        @Html.TextBox("Report")
+                        @Html.Hidden("ReportId", Model.ReportId)                      
+                    </li>
+                </ul>
+            </div>
+              
+            <div>
+            <ul>
+                <p><strong>Select a Site or Site Group</strong></p>
+                <li>
+                    <label class="thin" for="Site">Site</label>
+                    @Html.TextBox("Site")
+                    @Html.Hidden("SiteId", Model.SiteId)
+                </li>
+
+                <li>
+                    <label class="thin" for="SiteGroup">Site Group</label>
+                    @Html.TextBox("SiteGroup")
+                    @Html.Hidden("SiteGroupId", Model.SiteGroupId)
+                </li>                         
+            </ul>
+            </div>
+            <br/>
+            <div>            
+            <ul>
+                <p><strong>Select a Date Range (Required)</strong></p>
+                <li>
+                    <label class="thin" for="DateStart">Start</label>
+                    @Html.TextBoxFor(model => model.DateStart, new { id = "DateStart", @class = "calendar" })
+                </li>
+                
+                 <li>
+                    <label class="thin" for="DateEnd">End</label>
+                    @Html.TextBoxFor(model => model.DateEnd, new { id = "DateEnd", @class = "calendar" })
+                </li>
+            </ul>
+            </div>
+
+            <br/>
+          
+            
+                              
+            <ul>
+                <li>
+                    <input type="submit" id="submit" title="Get Report" value="Get Report"/>            
+                </li>
+            </ul>    
+
+        </fieldset>    
+    }
+</div>

@@ -1,0 +1,4 @@
+﻿@model string
+@{ var hideClass = " hide";}
+<span class="label label-warning closed-label@(Model != "Open" ? hideClass : string.Empty)">Closed</span>
+<span class="label label-success open-label@(Model != "Closed" ? hideClass : string.Empty)">Open</span>

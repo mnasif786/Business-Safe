@@ -1,0 +1,49 @@
+﻿@using BusinessSafe.WebSite.Areas.Documents.ViewModels
+@using (Html.BeginForm("Index", "CreateAddedDocument", FormMethod.Post, new { id = "SaveAddedDocumentsForm" }))
+{
+    <fieldset>
+        <p class="initial-prompt">To upload documents, click on 'Choose file' and select the files you wish to upload to BusinessSafe. Then click 'Upload File&hellip;' to begin uploading the file(s).</p>
+        <p class="set-fields-prompt">You can now enter additional information about the files you are about to upload. When you are happy, click 'Save'.</p>
+        <div class="t-widget t-grid">
+            <table id="DocumentsToIncludeTable" cellspacing="0">
+                <thead class="t-grid-header">
+                    <tr>
+                        <th class="t-header filename" scope="col">
+                            Filename
+                        </th>
+                        <th class="t-header doc-type" scope="col">
+                            Document Type
+                        </th>
+                        <th class="t-header site" scope="col">
+                            Site
+                        </th>
+                        <th class="t-header title" scope="col">
+                            Title
+                        </th>
+                        <th class="t-header description" scope="col">
+                            Description
+                        </th>
+                        <th class="t-header delete" scope="col">
+                            Delete
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="visibility: hidden">
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <iframe src="@VirtualPathUtility.ToAbsolute("~/Document/ShowUploadButton?canEditDocumentType=true&returnView=" + AttachDocumentReturnView.AddedDocuments)" style="height:40px;width:500px;border-style:none;" scrolling="no" id="DocumentUploadFrame">
+        </iframe>
+    </fieldset>
+    <div class="validation-summary-errors hide" data-valmsg-summary="true">
+        <ul>
+        </ul>
+    </div>
+    <div class="row">
+        <label class="span2"></label>
+        <button id="SaveAddedDocuments" class="btn btn-primary" type="submit">Save</button>
+        <button id="CancelButton" class="btn btn-link">Cancel</button>
+    </div>
+}

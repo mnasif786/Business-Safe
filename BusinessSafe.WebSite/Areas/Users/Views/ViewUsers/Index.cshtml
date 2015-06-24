@@ -1,0 +1,51 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Extensions
+@using Cassette.Views
+@model BusinessSafe.WebSite.Areas.Users.ViewModels.UserSearchViewModel
+@{
+    ViewBag.Title = "Search Users";
+}
+<section>
+    <div class="major-index-actions">
+    @if (User.IsInRole(Permissions.AddUsers.ToString()))
+    {
+        <a id="UserSearchAddUserLink" class="btn btn-success btn-large pull-right" href="@Url.Action("Index", "AddUsers", new { companyId = @Html.GetUsersCompanyId(User) })" title="Add New User">Add New User</a>
+    }
+    </div>
+    <span class="legend">View Users</span>
+    <div class="content">
+        @Html.Partial("_UserSearchCriteria", Model)
+        @Html.Partial("_UserSearchResults", Model)
+    </div>
+</section>
+<div class="hide">
+    <div id="dialogDeleteUser" title="Delete User">
+        <p>Are you sure you want to delete this user?</p>
+    </div>
+    <div id="dialogReinstateDeletedUser" title="Reinstate Deleted User">
+        <p>Are you sure you want to reinstate this deleted user?</p>
+    </div>
+    <div id="dialogReinstateDeletedUserWithPendingRegistration" title="Reinstate Deleted User">
+        <p>This user had a deleted pending registration. Do you wish to reinstate and resend the registration?</p>
+    </div>
+    <div id="dialogResendUserRegistration" title="Resend User Registration">
+        <p>Are you sure you want to resend registration?</p>
+    </div>
+    <div id="dialogResendUserRegistrationConfirmation" title="Resend User Registration">
+        <p>Registration has been successfully resent.</p>
+    </div>
+</div>
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("users");
+        @Bundles.RenderScripts()  
+    }
+    
+    <script type="text/javascript">
+        var sites = @Html.Raw(Json.Encode(Model.Sites));
+        $(function () {
+            userSearchForm.initialise(sites);
+        });
+    </script>
+}

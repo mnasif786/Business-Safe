@@ -1,0 +1,103 @@
+﻿@model BusinessSafe.WebSite.Areas.GeneralRiskAssessments.ViewModels.GeneralRiskAssessmentArchiveDetailsViewModel
+@{
+    ViewBag.Title = "General Risk Assessments Audit History (Proof Of Concept)";
+}
+<section>
+    <span class="legend">@ViewBag.Title</span>
+    <div class="sectionContainer centredContent">
+        <div class="page-header">
+            <h1>
+                General Risk Assessment Audit History</h1>
+        </div>
+        <h2>
+            General Information</h2>
+        <div class="well">
+            <table class="table">
+                <tr>
+                    <th>@Html.LabelFor(m => m.Title)
+                    </th>
+                    <td>@Html.DisplayFor(m => m.Title)
+                    </td>
+                </tr>
+                <tr>
+                    <th>@Html.LabelFor(m => m.Reference)
+                    </th>
+                    <td>@Html.DisplayFor(m => m.Reference)
+                    </td>
+                </tr>
+                <tr>
+                    <th>@Html.LabelFor(m => m.CreatedOn)
+                    </th>
+                    <td>@Html.DisplayFor(m => m.CreatedOn)
+                    </td>
+                </tr>
+                <tr>
+                    <th>@Html.LabelFor(m => m.DateOfAssessment)
+                    </th>
+                    <td>@Html.DisplayFor(m => m.DateOfAssessment)
+                    </td>
+                </tr>
+                <tr>
+                    <th>@Html.LabelFor(m => m.RiskAssessor)
+                    </th>
+                    <td>@Html.DisplayFor(m => m.RiskAssessor)
+                    </td>
+                </tr>
+                <tr>
+                    <th>@Html.LabelFor(m => m.Site)
+                    </th>
+                    <td>@Html.DisplayFor(m => m.Site)
+                    </td>
+                </tr>
+                <tr>
+                    <th>@Html.LabelFor(m => m.LocationAreaDepartment)
+                    </th>
+                    <td>@Html.DisplayFor(m => m.LocationAreaDepartment)
+                    </td>
+                </tr>
+                <tr>
+                    <th>@Html.LabelFor(m => m.TaskProcessDescription)
+                    </th>
+                    <td>@Html.DisplayFor(m => m.TaskProcessDescription)
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <h2>
+            Affected Personnel</h2>
+        <div class="well">
+            <div class="page-header">
+                <h3>
+                    Employees</h3>
+            </div>
+            @if (Model.Employees.Any())
+            {
+                @Html.Partial("_ListPeople", Model.Employees)
+            }
+            else
+            {
+                <p>
+                    There are no non-employees related to this General Risk Assessment</p>
+            }
+            <div class="page-header">
+                <h3>
+                    Non-Employees</h3>
+            </div>
+            @if (Model.NonEmployees.Any())
+            {
+                @Html.Partial("_ListPeople", Model.NonEmployees)
+            }
+            else
+            {
+                <p>
+                    There are no non-employees related to this General Risk Assessment</p>
+            }
+        </div>
+        <h2>
+            Hazards</h2>
+        @foreach (var hazard in Model.Hazards)
+        {
+            @Html.Partial("_Hazard", hazard)    
+        }
+    </div>
+</section>

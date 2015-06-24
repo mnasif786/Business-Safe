@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="19463c93-9c62-4a34-b884-74c598bef5f4" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://pbsemailpusher/EmailPusherService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="EmailPusherService.xsd" MetadataType="Schema" ID="463a9f5d-5f21-4605-a268-7263c97eb7f6" SourceId="1" SourceUrl="http://pbsemailpusher/EmailPusherService.svc?xsd=xsd1" />
+    <MetadataFile FileName="EmailPusherService1.xsd" MetadataType="Schema" ID="d7c23d7d-549e-4e8c-a908-f7340cf6ba6a" SourceId="1" SourceUrl="http://pbsemailpusher/EmailPusherService.svc?xsd=xsd0" />
+    <MetadataFile FileName="EmailPusherService2.xsd" MetadataType="Schema" ID="cd52fa99-9651-4d3f-ae31-0b1d2feb8f76" SourceId="1" SourceUrl="http://pbsemailpusher/EmailPusherService.svc?xsd=xsd3" />
+    <MetadataFile FileName="EmailPusherService3.xsd" MetadataType="Schema" ID="e35310e5-abaa-4914-a645-ffb3ede25971" SourceId="1" SourceUrl="http://pbsemailpusher/EmailPusherService.svc?xsd=xsd2" />
+    <MetadataFile FileName="EmailPusherService.disco" MetadataType="Disco" ID="426c44d6-267d-4c9c-9867-cd2d3a41837a" SourceId="1" SourceUrl="http://pbsemailpusher/EmailPusherService.svc?disco" />
+    <MetadataFile FileName="EmailPusherService.wsdl" MetadataType="Wsdl" ID="7e5182d4-089f-45b9-ace9-d23f3d5fa4e1" SourceId="1" SourceUrl="http://pbsemailpusher/EmailPusherService.svc?wsdl" />
+    <MetadataFile FileName="EmailPusherService1.wsdl" MetadataType="Wsdl" ID="4bf3c7a4-b20a-49a3-b205-7df62b667615" SourceId="1" SourceUrl="http://pbsemailpusher/EmailPusherService.svc?wsdl=wsdl0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

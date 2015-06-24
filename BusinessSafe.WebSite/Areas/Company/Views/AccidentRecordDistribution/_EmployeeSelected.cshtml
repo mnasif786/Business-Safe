@@ -1,0 +1,38 @@
+﻿@using Telerik.Web.Mvc.UI
+@using BusinessSafe.WebSite.Areas.PersonalRiskAssessments.ViewModels
+@model BusinessSafe.WebSite.Areas.Company.ViewModels.AccidentRecordDistributionListViewModel 
+  
+
+
+<div class="row">
+    <div class="span11">    
+        @Html.Telerik().Grid(Model.SelectedEmployees).Name("SelectedEmployeesGrid").DataKeys(keys => keys.Add(c => c.EmployeeId)).DataBinding(dataBinding => dataBinding.Server()).Columns(columns =>
+                                       {
+                                           columns.Template(@<text> @item.Name <input type="hidden" id='@("MultiSelectedEmployeeId_" + @item.EmployeeId)' name='@("MultiSelectedEmployeeId_" + @item.EmployeeId)'  value="selected" /> </text>).Title("Name");
+                                           columns.Template(@<text>
+                                                                 @if(string.IsNullOrEmpty(item.Email))
+                                                                 {
+                                                                     <input type="text" id='@("MultiSelectedEmployeeEmail_" + @item.EmployeeId)' name='@("MultiSelectedEmployeeEmail_" + @item.EmployeeId)' class=".multi-selected-employee-new-email" />
+                                                                 } 
+                                                                 else
+                                                                 {
+                                                                     @item.Email
+                                                                 }
+                                                             </text>).HtmlAttributes(new {style = "text-align:left;"}).HeaderTemplate("Email");
+                                           columns.Template(@<text>
+                                                                 <a class="icon-remove" href="#" title="Remove" data-id=@item.EmployeeId data-email=@item.Email ></a>
+                                                             </text>);
+                                       }
+           ).Sortable()
+    </div>
+</div>
+  
+<div class="row">
+    <div class="span3">        
+        <button type="button" id="addNonEmployeeToDistrbutionListButton" class="btn btn-success">Add New Non-Employee</button>
+    </div>
+    <div class="span8">
+        <input type="button" class="btn pull-right btn-success" id="updateEmployeeEmailsButton" value="Save" />
+    </div>
+</div>   
+

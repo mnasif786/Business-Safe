@@ -1,0 +1,223 @@
+﻿@using System.Globalization
+@using BusinessSafe.WebSite.Areas.AccidentReports.ViewModels
+@using BusinessSafe.WebSite.Extensions
+@using BusinessSafe.WebSite.Helpers
+@model InjuryDetailsViewModel
+<div class="fixed-content">
+    @Html.Partial("_TitleBar", ViewBag.AccidentRecordSummary as AccidentSummaryViewModel)
+    <form class="form-inline injurydetails" id="InjuryDetailsForm" method="post" action="@Url.Action("Save", new { accidentRecordId = @Model.AccidentRecordId, companyId = @Model.CompanyId })" >
+    @Html.HiddenFor(model => model.AccidentRecordId)
+    @Html.HiddenFor(model => model.CompanyId)
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div>
+            @Html.Partial("_DistinctValidationSummary")
+        </div>
+    }
+    @if (TempData["Notice"] != null)
+    {
+        <div class="alert alert-success">
+            <a id="successmessageanchor" href="#successmessage"></a>
+            @TempData["Notice"].ToString()
+        </div>    
+    }
+    
+    <fieldset>
+        <legend class="span12">What was the severity of the Injury?</legend>
+        <div style="padding-left: 10px">
+            <ul class="row-of-radios clearfix">
+                <li>
+                    <label>
+                        Fatal</label>
+                    @Html.RadioButtonFor(model => model.SeverityOfInjury, "Fatal", new { id = "SeverityOfInjuryFatal" })
+                </li>
+                <li>
+                    <label>
+                        Major</label>
+                    @Html.RadioButtonFor(model => model.SeverityOfInjury, "Major", new { id = "SeverityOfInjuryMajor" })
+                </li>
+                <li>
+                    <label>
+                        Minor</label>
+                    @Html.RadioButtonFor(model => model.SeverityOfInjury, "Minor", new { id = "SeverityOfInjuryMinor" })
+                </li>
+                <li>
+                    <label>
+                        No apparent injury</label>
+                    @Html.RadioButtonFor(model => model.SeverityOfInjury, "NoApparentInjury", new { id = "SeverityOfInjuryNoInjury" })
+                </li>
+                <li>  
+                 @if (Model.GuidanceNotesId != String.Empty)
+                 {
+                     <a id="GuidanceNotes" 
+                        class="hide"                     
+                        href="@Url.Action("DownloadClientDocument", "Document", new {area = "Documents", enc = EncryptionHelper.Encrypt("clientDocumentId=" + @Model.GuidanceNotesId)})" >  
+                         View Guidance Notes
+                     </a>                                         
+                 }
+                </li>
+            </ul>
+        </div>
+    </fieldset>
+
+
+    <fieldset id="InjuriesSection">
+        <legend class="span12">What injuries did the injured person suffer?</legend>
+        <div>
+            <div>
+                <label class="span2">
+                    Injury</label><input type="text" id="NewInjury" class="input-xlarge" placeholder="Add New Injury" />
+                <button id="AddNewInjury" class="btn">
+                    +</button>
+                &nbsp;
+            </div>
+            <div id="injury-multi-select" class="search-and-multi-select">
+                <ul id="InjuryOptions" class="available-options options span4" style="margin-left: 152px">
+                    @foreach (var option in Model.Injuries)
+                    {
+                        <li data-value="@option.Id">@option.Name</li>
+                    }
+                </ul>
+                <div class="span1 span1fix">
+                    <input type="button" class="add-to-selected btn" name="AddSelectedInjuries" id="AddSelectedInjuries"
+                        value="&gt;" />
+                    <input type="button" class="remove-from-selected btn" name="RemoveSelectedInjuries"
+                        id="RemoveSelectedInjuries" value="&lt;" />
+                </div>
+                <select id="SelectedInjuryIds" name="SelectedInjuryIds" class="selected-options options span4"
+                    multiple="multiple">
+                    @foreach (var option in Model.SelectedInjuries)
+                    {
+                        <option data-value="@option.Id" value="@option.Id">@option.Name</option>
+                    }
+                </select>
+            </div>
+            <div style="line-height: 0px">
+                &nbsp;</div>
+            <div id="otherInjuryDescription" class="hide">
+                <label class="span2">Please describe</label>
+                @Html.TextBoxFor(m => m.CustomInjuryDescription)
+            </div>
+        </div>
+    </fieldset>
+    <fieldset id="BodyPartsSection">
+        <legend class="span12">What part(s) of the body have been injured?</legend>
+        <div>
+            <div>
+                <label class="span2">
+                    Body part</label>&nbsp;
+            </div>
+            <div id="bodypart-multi-select" class="search-and-multi-select">
+                <ul id="BodyPartOptions" class="available-options options span4" style="margin-left: 152px">
+                    @foreach (var option in Model.BodyParts)
+                    {
+                        <li data-value="@option.Id">@option.Name</li>
+                    }
+                </ul>
+                <div class="span1 span1fix">
+                    <input type="button" class="add-to-selected btn" name="AddSelectedBodyParts" id="AddSelectedBodyParts"
+                        value="&gt;" />
+                    <input type="button" class="remove-from-selected btn" name="RemoveSelectedBodyParts"
+                        id="RemoveSelectedBodyParts" value="&lt;" />
+                </div>
+                <select id="SelectedBodyPartIds" name="SelectedBodyPartIds" class="selected-options options span4"
+                    multiple="multiple">
+                    @foreach (var option in Model.SelectedBodyParts)
+                    {
+                        <option data-value="@option.Id" value="@option.Id">@option.Name</option>
+                    }
+                </select>
+            </div>
+            <div style="line-height: 0px">
+                &nbsp;</div>
+            <div>
+                <div id="otherBodyPartDescription" class="hide">
+                    <label class="span2">
+                        Please describe</label>
+                        @Html.TextBoxFor(m => m.CustomBodyPartyDescription)
+                </div>
+            </div>
+        </div>
+    </fieldset>
+        <fieldset id="TakenToHospitalSection">
+            <legend id="takenToHospitalMessage" class="span12">@Model.TakenToHospitalMessage</legend>
+            <div style="padding-left: 10px">
+                <ul class="row-of-radios clearfix">
+                    <li>
+                        <label>
+                            Yes</label>
+                        @Html.RadioButtonFor(model => model.InjuredPersonWasTakenToHospital, "true", new { id = "InjuredPersonWasTakenToHospitalTrue" })
+                    </li>
+                    <li>
+                        <label>
+                            No</label>
+                        @Html.RadioButtonFor(model => model.InjuredPersonWasTakenToHospital, "false", new { id = "InjuredPersonWasTakenToHospitalFalse" })
+                    </li>
+                </ul>
+            </div>
+        </fieldset>
+        @Html.HiddenFor(m=>m.ShowInjuredPersonAbleToCarryOutWorkSection)
+        @if (Model.ShowInjuredPersonAbleToCarryOutWorkSection)
+        {
+            <fieldset id="InjuredPersonAbleToCarryOutWorkSection">
+                <legend class="span12">Has the injured person been able to carry out their normal work
+                    activity?</legend>
+                <div style="padding-left: 10px">
+                    <ul class="row-of-radios clearfix">
+                        <li>
+                            <label for="InjuredPersonAbleToCarryOutWorkYes">
+                                Yes</label>
+                            @Html.RadioButtonFor(model => model.InjuredPersonAbleToCarryOutWork, "Yes", new {id = "InjuredPersonAbleToCarryOutWorkYes"})
+                        </li>
+                        <li>
+                            <label for="InjuredPersonAbleToCarryOutWorkNo">
+                                No</label>
+                            @Html.RadioButtonFor(model => model.InjuredPersonAbleToCarryOutWork, "No", new {id = "InjuredPersonAbleToCarryOutWorkNo"})
+                        </li>
+                         <li>
+                            <label for="InjuredPersonAbleToCarryOutWorkUnknown">
+                                Unknown at this stage</label>
+                            @Html.RadioButtonFor(model => model.InjuredPersonAbleToCarryOutWork, "Unknown", new {id = "InjuredPersonAbleToCarryOutWorkUnknown"})
+                        </li>
+                    </ul>
+                </div>
+            </fieldset>
+            <fieldset id="time-off" class="hide">
+                <legend>How long was the injured person unable to carry out their normal work activity?</legend>
+                <div style="padding-left: 10px">
+                    <ul class="row-of-radios clearfix">
+                        <li>
+                            <label for="LengthOfTimeUnableToCarryOutWork_1">
+                                3 or less days</label>
+                            @Html.RadioButtonFor(model => model.LengthOfTimeUnableToCarryOutWork, "ThreeOrLessDays", new {id = "LengthOfTimeUnableToCarryOutWork1"})
+                        </li>
+                        <li>
+                            <label for="LengthOfTimeUnableToCarryOutWork_2">
+                                4 to 7 days</label>
+                            @Html.RadioButtonFor(model => model.LengthOfTimeUnableToCarryOutWork, "FourToSevenDays", new {id = "LengthOfTimeUnableToCarryOutWork2"})
+                        </li>
+                        <li>
+                            <label for="LengthOfTimeUnableToCarryOutWork_3">
+                                8 or more days</label>
+                            @Html.RadioButtonFor(model => model.LengthOfTimeUnableToCarryOutWork, "MoreThanSevenDays", new {id = "LengthOfTimeUnableToCarryOutWork3"})
+                        </li>
+                    </ul>
+                </div>
+            </fieldset>
+        }
+        <fieldset>
+            @{
+        var viewName = Html.IsReadOnly() ? "View" : "Index";
+        var urlAction = Url.Action(viewName, "Overview", new { area = "AccidentReports", companyId = Model.CompanyId, accidentRecordId = Model.AccidentRecordId });
+    }
+            <div class="span12">
+                <label class="span2">
+                </label>
+                <input type="submit" id="saveButton" value="Save" class="btn btn-success" />
+                <a id="nextBtn" class="btn btn-primary" mainurl="" href="@urlAction">Save &amp; Continue
+                    <i class="icon-chevron-right icon-white"></i></a>
+                @Html.ActionLink("Cancel", "Index", "Search", null, new { @class = "btn btn-link" })
+            </div>
+        </fieldset>
+    </form>
+</div>

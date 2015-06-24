@@ -1,0 +1,66 @@
+﻿@model BusinessSafe.MessageHandlers.Emails.ViewModels.AccidentRecordEmailViewModel
+<head>
+    <style>
+        body
+        {
+            background-color: white;
+            font-size: .85em;
+            font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
+            margin: 0;
+            padding: 0;
+            color: #393939;
+        }       
+         h1
+        {
+            font-size: 1em;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <p>
+       <h3>Please be informed that an accident occurred.</h3>
+    </p>
+    <p>
+        <h1>Details of Accident are as follows:</h1>
+    </p>
+    <p>
+        Date of Accident: @Model.DateOfAccident &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+	    Time of Accident: @Model.TimeOfAccident
+	</p>   
+    <p>Site: @Model.Site</p>   
+    <p>Location: @Model.Location</p>
+    <p>
+        Who was involved in the accident: @Model.PersonInvolved
+    </p>
+    <p>
+        Injuries were: @Model.SeverityOfInjury
+    </p>
+    <p>
+        What injuries had the person suffered: @Model.Injuries
+    </p>
+    @if (Model.TakenToHospital == true)
+    {
+        <p>Has the injured person been taken to hospital: Yes</p>
+    }
+    else
+    {
+        <p>Has the injured person been taken to hospital: No</p>  
+    }
+    <p>
+        Chain of Events: @Model.ChainOfEvents
+    </p>
+    @if (Model.RiddorReportable)
+    {
+        <p>Reportable to RIDDOR: Yes</p>
+    }
+    else
+    {
+        <p>Reportable to RIDDOR: No</p>
+    }
+    <p>
+        <br/>
+        Full accident record is available online at @Model.BusinessSafeOnlineLink
+    </p>
+</body>

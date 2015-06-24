@@ -1,0 +1,54 @@
+﻿@model BusinessSafe.MessageHandlers.Emails.ViewModels.TaskOverdueViewModel
+<head>
+    <style>
+        body
+        {
+            background-color: white;
+            font-size: .85em;
+            font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
+            margin: 0;
+            padding: 0;
+            color: #393939;
+        }
+        
+        h1
+        {
+            font-size: 2em;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        BusinessSafe Online - @Model.Subject
+    </h1>
+    <p>
+        The completion date for @Model.TaskTypeDescription Task has passed 
+    </p>
+    <p>
+        @Model.ReferenceLabel: @Model.TaskReference
+    </p>
+    
+    @if (Model.IsIRN)
+    {
+        <p>
+            Title: @Model.Title
+        </p>
+    }
+    else
+    {
+        <p>
+            Area of Non Compliance: @Model.AreaOfNonCompliance
+        </p>
+    }
+    <p>
+        @Model.ActionRequiredLabel: @Model.ActionRequired
+    </p>
+    <p>
+        Assigned To: @Model.TaskAssignedTo
+    </p>
+    <p>
+        The @Model.TaskTypeDescription Task should have been completed by @Model.TaskCompletionDueDate. As this task has not been completed, it is now overdue. To view and complete the task, please log into BusinessSafe Online on the following link.   @Model.BusinessSafeOnlineLink
+    </p>
+</body>

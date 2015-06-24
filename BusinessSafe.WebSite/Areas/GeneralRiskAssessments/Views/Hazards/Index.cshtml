@@ -1,0 +1,30 @@
+﻿@using BusinessSafe.WebSite.Areas.GeneralRiskAssessments.ViewModels
+@model BusinessSafe.WebSite.ViewModels.HazardsViewModel
+@{
+    ViewBag.Title = "Hazards";
+}
+@Html.Partial("_RiskAssessmentSummary", ViewBag.RiskAssessmentSummary as GeneralRiskAssessmentSummaryViewModel)
+<form method="post" action="@Url.Action("Save", "Hazards")">
+<div class="container ipad-container">
+    @Html.Partial("_Tabs", ViewBag.TabViewModel as GeneralRiskAssessmentTabViewModel)
+    @Html.Hidden("SelectedTabIndex", 2)
+    @Html.HiddenFor(x => x.CompanyId)
+    @Html.HiddenFor(x => x.RiskAssessmentId)
+    @Html.Partial("_Hazards")
+</div>
+<div class="hide">
+    <div id="dialogCannotRemoveRiskAssessmentHazard" title="<span id='warning'></span>Cannot Delete Hazard">
+        <p>
+            This hazard cannot be removed as it has control measures/further control measure tasks associated
+            with it.</p>
+    </div>
+</div>
+</form>
+@section JavaScriptSection
+{
+    <script type="text/javascript">
+        $(document).ready(function() {
+            hazardsManager.initialize(@Model.DisplayWarningMessageForPeopleAtRisk);
+        });
+    </script>
+}

@@ -1,0 +1,26 @@
+﻿@using BusinessSafe.WebSite.Areas.AccidentReports.ViewModels
+@model AccidentRecordTabsViewModel
+@Html.Hidden("CurrentStatus", (int)Model.CurrentTab)
+<ul class="nav nav-pills">
+    <li class="@Model.IsTabActive(AccidentRecordTabs.Summary.ToString())">
+        @Html.ActionLink("Summary", Model.IsReadOnly ? "View" : "Index", "Summary", new { area = "AccidentReports", accidentRecordId = Model.Id, Model.CompanyId }, new { id = "summary", @class = "riskassessment-tab-links summarylink", @mainUrl = "Summary", @tabIndex = "1" })
+    </li>
+    <li class="@Model.IsTabActive(AccidentRecordTabs.InjuredPerson.ToString())">
+        @Html.ActionLink("Injured Person", Model.IsReadOnly ? "View" : "Index", "InjuredPerson", new { area = "AccidentReports", accidentRecordId = Model.Id, Model.CompanyId }, new { id = "injuredperson", @class = "riskassessment-tab-links summarylink", @mainUrl = "InjuredPerson", @tabIndex = "2" })
+    </li>
+    <li class="@Model.IsTabActive(AccidentRecordTabs.Accident.ToString())">
+        @Html.ActionLink("Accident", Model.IsReadOnly ? "View" : "Index", "AccidentDetails", new { area = "AccidentReports", accidentRecordId = Model.Id, Model.CompanyId }, new { id = "accidentdetails", @class = "riskassessment-tab-links summarylink", @mainUrl = "AccidentDetails", @tabIndex = "3" })
+    </li>
+    <li class="@Model.IsTabActive(AccidentRecordTabs.Injury.ToString())">
+        @Html.ActionLink("Injury", Model.IsReadOnly ? "View" : "Index", "InjuryDetails", new { area = "AccidentReports", accidentRecordId = Model.Id, Model.CompanyId }, new { id = "injurydetails", @class = "riskassessment-tab-links summarylink", @mainUrl = "InjuryDetails", @tabIndex = "4" })
+    </li>
+    <li class="@Model.IsTabActive(AccidentRecordTabs.Overview.ToString())">
+        @Html.ActionLink("Overview", Model.IsReadOnly ? "View" : "Index", "Overview", new { area = "AccidentReports", accidentRecordId = Model.Id, Model.CompanyId }, new { id = "overview", @class = "riskassessment-tab-links summarylink", @mainUrl = "Overview", @tabIndex = "5" })
+    </li>
+    @if (Model.NextStepsVisible)
+    {
+        <li class="@Model.IsTabActive(AccidentRecordTabs.NextSteps.ToString())">
+            @Html.ActionLink("Next Steps", Model.IsReadOnly ? "View" : "Index", "NextSteps", new {area = "AccidentReports", accidentRecordId = Model.Id, Model.CompanyId}, new {id = "nextsteps", @class = "riskassessment-tab-links summarylink", @mainUrl = "NextSteps", @tabIndex = "6"})
+        </li>
+    }
+</ul>

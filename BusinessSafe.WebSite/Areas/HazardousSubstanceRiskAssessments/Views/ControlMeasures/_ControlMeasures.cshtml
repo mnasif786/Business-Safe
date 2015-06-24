@@ -1,0 +1,28 @@
+﻿@model BusinessSafe.WebSite.Areas.HazardousSubstanceRiskAssessments.ViewModels.ControlMeasuresViewModel 
+<form id="@Model.RiskAssessmentId" class="form-horizontal hazardContainer">
+    <fieldset>
+        <div><h3>Control Measures Already In Place
+            <button class="btn add-control-measure" data-id="@Model.RiskAssessmentId" title="Add Control Measure">
+                <i class="icon-plus-sign"></i>
+            </button>
+        </h3></div>
+    <table id="control-measure-table" class="table table-striped control-measure-table">
+        <thead>
+            <tr>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var controlMeasure in Model.ControlMeasures)
+            {
+                <tr>
+                    <td data-id="@controlMeasure.Id" data-text="@controlMeasure.ControlMeasure">
+                        <div class="controlMeasureText">
+                            <span class="controlCount">@controlMeasure.ControlCount. </span>@controlMeasure.ControlMeasure</div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</fieldset>
+</form>

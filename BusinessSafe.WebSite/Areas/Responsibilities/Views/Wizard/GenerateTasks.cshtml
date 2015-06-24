@@ -1,0 +1,72 @@
+﻿@using BusinessSafe.WebSite.Areas.Responsibilities.ViewModels.Wizard
+@using Cassette.Views
+@model GenerateResponsibilityTasksViewModel
+@{
+    ViewBag.Title = "Generate Tasks";     
+}
+<div id="responsibilities-wizard">
+    <div class="content">        
+        @Html.ActionLink("Go to Index","Index", "Responsibility", new { area = "Responsibilities"}, new {@class = "nav-responsibilities-index btn btn-primary pull-right hide" })
+    </div>
+    @Html.Partial("_Nav")
+    <div class="content">
+        <h2><span class="tick"></span>Generate Tasks</h2>
+        <p>Please note that any task marked <i class="icon-ok"></i> has already been generated for the specified site and can be viewed in  @Html.ActionLink("My Responsibilites Planner", "Index", "Responsibility")</p>
+        <div id="validation-message" class="alert alert-error hide"></div>
+        <form method="POST" action="">
+            @{var i = 0;}
+            @foreach (var site in Model.SelectedSites)
+            {
+                i++;
+                
+                @Html.Partial("_GenerateTasksTableHeader", site.Name)
+                <tbody>
+                    
+                    @foreach (var responsibility in site.Responsibilities)
+                    {
+                        foreach (var task in responsibility.StatutoryResponsibilityTasks)
+                        {
+                            var id = i*1000 + task.Id;
+
+                            <tr data-site-id="@site.Id" data-rid="@responsibility.Id" data-task-id="@task.Id" data-created="@task.IsCreated">
+                                <td>@task.Title</td>
+                                <td class="description-icon"><a class="icon-question-sign" data-title="@task.Title" data-content="@task.Description"></a></td>
+                                <td>@Html.Partial("_FrequencyDropdown", new FrequencyViewModel {Id = id, Frequencies = task.Frequencies})</td>
+                                <td>@Html.Partial("_EmployeeDropdown", new EmployeeViewModel {Id = id, Name = task.Assignee})</td>
+                                <td>@Html.TextBox("StartDate",@task.StartDate, new {@class = "span calendar", id = "start" + id})</td>
+                                <td>@Html.TextBox("EndDate", @task.EndDate, new {@class = "span calendar", id = "end" + id})</td>
+                                <td>
+                                    
+                                    <input type="button"  class="create-task btn btn-success pull-right" value="Create"/>
+                                    <div class="task-created hide">
+                                        <i class="icon-ok"></i>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+                @Html.Partial("_GenerateTasksTableFooter")
+
+            }
+            <fieldset>
+                @Html.ActionLink("Cancel", "Index", "Responsibility", null, new { @class = "btn btn-link  pull-right" })
+                @Html.ActionLink("Generate", "Index", "Responsibility", new { area = "Responsibilities" }, new { @class = "generate-task-button btn btn-success pull-right"})
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("responsibilitiesWizard");
+    }
+    <script type="text/javascript">
+        $(function () {
+            var employees = @Html.Raw((Json.Encode(Model.Employees)));
+            var frequencyOptions = @Html.Raw((Json.Encode(Model.FrequencyOptions)));
+            BusinessSafe.Responsibilities.Wizard.GenerateTasks.initialise(employees,frequencyOptions);
+        });
+    </script>
+}

@@ -1,0 +1,28 @@
+USE [BusinessSafe]
+GO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Task' AND COLUMN_NAME = 'TaskGuid')
+BEGIN
+	ALTER TABLE [Task]
+	ADD [TaskGuid] [uniqueidentifier] NULL
+	
+	--ALTER TABLE [Task]
+	--ADD CONSTRAINT [DF_Task_TaskGuid] DEFAULT(newid()) for [TaskGuid]
+END
+GO
+
+UPDATE [Task] 
+SET [TaskGuid] = newid() 
+WHERE [TaskGuid] IS NULL
+
+--//@UNDO 
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Task' AND COLUMN_NAME = 'TaskGuid')
+BEGIN
+	ALTER TABLE [Task]
+	DROP CONSTRAINT [DF_Task_TaskGuid]
+	
+	--ALTER TABLE [Task]
+	--DROP COLUMN [TaskGuid] 
+END
+GO

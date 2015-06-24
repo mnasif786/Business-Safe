@@ -1,0 +1,36 @@
+﻿@using BusinessSafe.WebSite.Areas.FireRiskAssessments.ViewModels
+@model FireRiskAssessmentReviewsViewModel
+@{
+    ViewBag.Title = "Review";
+}
+@Html.Partial("_RiskAssessmentSummary", ViewBag.RiskAssessmentSummary as FireRiskAssessmentSummaryViewModel)
+<div class="container ipad-container">
+    
+    @{
+        var fireRiskAssessmentTabViewModel = ViewBag.TabViewModel as FireRiskAssessmentTabViewModel;
+    }
+    @Html.Partial("_Tabs", fireRiskAssessmentTabViewModel)
+    @Html.Hidden("SelectedTabIndex", 5)
+    <div id="review-wrapper" class="fixed-content">
+        @Html.Partial("_TitleBar", ViewBag.RiskAssessmentSummary as FireRiskAssessmentSummaryViewModel)
+        <div class="risk-assessment-review-index">
+            @Html.Hidden("RiskAssessmentId", @Model.ReviewViewModel.RiskAssessmentId)
+            @Html.Hidden("CompanyId", @Model.ReviewViewModel.CompanyId)
+            @Html.Partial("_RiskAssessmentReviews", Model.ReviewViewModel)
+        </div>
+    </div>
+</div>
+<div class="hide">
+    <div id="AddRiskAssessmentReviewDialog" title="Risk Assessment Review">
+    </div>
+    <div id="completeTaskDialog" title="Risk Assessment Review">
+    </div>
+</div>
+@section JavaScriptSection
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            riskAssessmentReviewsManager.initialize();
+        });        
+   </script>
+}

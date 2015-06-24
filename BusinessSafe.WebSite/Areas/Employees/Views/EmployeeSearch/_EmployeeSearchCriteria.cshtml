@@ -1,0 +1,34 @@
+﻿@using BusinessSafe.WebSite.Extensions
+@model BusinessSafe.WebSite.Areas.Employees.ViewModels.EmployeeSearchViewModel
+<div class="well">
+    <form class="search-form" method="get" action="@Url.Action("Index", "EmployeeSearch")">
+        <fieldset>
+            <legend>Search Employees</legend>
+            <ul>
+                <li>
+                    <label for="Forename" class="thin">Forename</label>
+                    @Html.TextBoxFor(model => model.Forename)
+                </li>
+                <li>
+                    <label for="Surname" class="thin">Surname</label>
+                    @Html.TextBoxFor(model => model.Surname)
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <label for="Site" class="thin">Site</label>
+                    @Html.TextBox("Site")
+                    @Html.Hidden("SiteId", Model.SiteId)
+                </li>
+            </ul>
+            <ul>
+                <li class="buttons thin">
+                    <input id="Search" type="submit" value="Search" class="btn-primary" />
+                    <a class="btn-link" href="@Url.Action("Index", "EmployeeSearch", new { companyId = Html.GetUsersCompanyId(User) })">Reset</a>
+                </li>
+            </ul>
+        </fieldset>
+        <input type="checkbox" id="ShowDeleted" class="hide" name="ShowDeleted" value="true" />
+        @Html.Hidden("CompanyId", @Model.CompanyId)
+    </form>
+</div>

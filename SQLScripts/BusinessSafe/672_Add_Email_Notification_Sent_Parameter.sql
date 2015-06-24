@@ -1,0 +1,17 @@
+USE [BusinessSafe]
+GO 
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG = 'BusinessSafe' AND TABLE_NAME = 'AccidentRecord' AND COLUMN_NAME = 'EmailNotificationSent')
+BEGIN
+	ALTER TABLE [AccidentRecord]
+	ADD [EmailNotificationSent] [BIT] NOT NULL DEFAULT 0
+END
+GO
+
+--//@UNDO
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG = 'BusinessSafe' AND TABLE_NAME = 'AccidentRecord' AND COLUMN_NAME = 'EmailNotificationSent')
+BEGIN
+	ALTER TABLE [AccidentRecord]
+	DROP COLUMN [EmailNotificationSent]
+END
+GO

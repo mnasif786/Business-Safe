@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="HazardousSubstanceRiskAssessmentControlMeasure" table="`HazardousSubstanceRiskAssessmentControlMeasure`">
+    <id name="Id" column="Id" type="long">
+      <generator class="identity"/>
+    </id>
+
+    <many-to-one name="HazardousSubstanceRiskAssessment" class="HazardousSubstanceRiskAssessment" column="HazardousSubstanceRiskAssessmentId" />
+    <property name="ControlMeasure" type="string" />
+    <property name="Deleted" type="bool" />
+    <property name="CreatedOn" />
+    <many-to-one name="CreatedBy" class="UserForAuditing" column="CreatedBy"/>
+    <property name="LastModifiedOn" />
+    <many-to-one name="LastModifiedBy" class="UserForAuditing" column="LastModifiedBy"/>
+    
+  </class>
+</hibernate-mapping>

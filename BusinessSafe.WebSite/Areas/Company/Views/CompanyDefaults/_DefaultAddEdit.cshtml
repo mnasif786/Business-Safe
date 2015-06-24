@@ -1,0 +1,62 @@
+﻿@model BusinessSafe.WebSite.Areas.Company.ViewModels.DefaultAddEdit
+@using BusinessSafe.WebSite.AuthenticationService
+<h3>@Model.SectionHeading</h3>
+<form id="@Model.FormId" class="well form-inline">
+<label>@Model.Label</label>
+<div class="validation-summary-errors hide">
+    <ul>
+        <li>Value required</li>
+    </ul>
+</div>
+@Html.HiddenFor(x => x.DefaultType)
+@Html.Partial(@Model.AddHeaderViewName)
+@Html.Partial("_MatchingDefaults")
+<div class="defaults-table-container">
+    <table class="table table-bordered table-striped">
+        <colgroup>
+            <col class="span5" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th colspan="2">@Model.ColumnHeaderText</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="template hide">
+                <td></td>
+                <td>
+                    @if (User.IsInRole(Permissions.EditCompanyDefaults.ToString()))
+                    {
+                        <a class="icon-edit @Model.EditLinkClassName" href="#" title="edit" data-id="0"></a>
+                    }
+                    @if (User.IsInRole(Permissions.DeleteCompanyDefaults.ToString()))
+                    {
+                        <a class="icon-remove delete confirmLink" href="#" title="delete" data-id="0"></a>
+                    }
+                </td>
+            </tr>
+            @foreach (var companyDefault in Model.Defaults)
+            {
+            <tr class="company-default-command-row">
+                <td>
+                    @companyDefault.Name
+                </td>
+                <td>
+                    @if (companyDefault.IsSystemDefault == false)
+                    {
+                        if (User.IsInRole(Permissions.EditCompanyDefaults.ToString()))
+                        {
+                            <a class="icon-edit @Model.EditLinkClassName" href="#" title="edit" data-id="@companyDefault.Id"rel="tooltip"></a>     
+                        }
+                        if (User.IsInRole(Permissions.DeleteCompanyDefaults.ToString()))
+                        {
+                            <a class="icon-remove delete confirmLink" href="#" title="delete" data-id="@companyDefault.Id" rel="tooltip"/>        
+                        }
+                    }
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+</form>

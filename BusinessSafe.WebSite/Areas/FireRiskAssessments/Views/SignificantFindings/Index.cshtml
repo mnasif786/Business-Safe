@@ -1,0 +1,72 @@
+﻿@using BusinessSafe.WebSite.Areas.FireRiskAssessments.ViewModels
+@using Cassette.Views
+@model RiskAssessmentSignificantFindingsViewModel
+@{
+    ViewBag.Title = "Significant Findings";
+}
+@Html.Partial("_RiskAssessmentSummary", ViewBag.RiskAssessmentSummary as FireRiskAssessmentSummaryViewModel)
+<div class="container ipad-container">
+    
+    @{
+        var fireRiskAssessmentTabViewModel = ViewBag.TabViewModel as FireRiskAssessmentTabViewModel;
+    }
+
+    @Html.Partial("_Tabs", fireRiskAssessmentTabViewModel)
+    @Html.Hidden("SelectedTabIndex", 5)
+    @Html.HiddenFor(x => x.CompanyId)
+    @Html.HiddenFor(x => x.RiskAssessmentId)
+    <div id="significant-findings-wrapper" class="fixed-content">
+        @Html.Partial("_TitleBar", ViewBag.RiskAssessmentSummary as FireRiskAssessmentSummaryViewModel)
+        @if (!Model.SignificantFindings.Any())
+        {
+            <fieldset class="row">
+                <legend class="span12">
+                    <h3>
+                        No Significant Findings Identified</h3>
+                </legend>
+            </fieldset>
+            <div class="alert row">
+                <p>
+                    From the answers given for this Fire Risk Assessment no significant findings have been identified.</p>
+            </div>
+        }
+        @foreach (var significantFinding in Model.SignificantFindings)
+        {
+            @Html.Partial("_SignificantFinding", significantFinding)
+        }
+    </div>
+</div>
+<div id="dialogFurtherControlMeasureTask" title="Further Control Measure Task">
+</div>
+<div class="hide">
+    <div id="dialogDeleteFurtherControlMeasureTask" title="Delete Further Control Measure">
+        <p>
+            Are you sure you want to delete this further control measure task?</p>
+    </div>
+    <div id="dialogDeleteReoccurringFurtherControlMeasureTask" title="Delete Further Control Measure">
+        <p>
+            Deleting this task will also delete all related future scheduled tasks. Do you want
+            to proceed?</p>
+    </div>
+    <div id="dialogNoLongerRequired" title="Mark Reoccurring Task As No Longer Required">
+        <p>
+            Marking this task as no longer required will prevent any future tasks from being
+            scheduled for this task. Do you want to proceed?</p>
+    </div>
+    <div id="dialogDeleteFurtherControlMeasureTaskResponse" title="Existing Completed Tasks">
+    </div>
+</div>
+
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("tasks");
+        
+    }
+    <script type="text/javascript">
+        
+        $(document).ready(function () {
+            BusinessSafe.RiskAssessment.Tasks.Grid.ViewModel(BusinessSafe.Tasks.FireRiskAssessment.Options);
+        });
+    </script>
+}

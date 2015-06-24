@@ -1,0 +1,581 @@
+﻿@model BusinessSafe.MessageHandlers.Emails.ViewModels.SendEmployeeDigestEmailViewModel
+<head>
+    <style>
+        body
+        {
+            background-color: white;
+            font-size: .85em;
+            font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
+            margin: 0;
+            padding: 0;
+            color: #393939;
+        }
+        
+        h1
+        {
+            font-size: 2em;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        table {
+            margin-bottom: 4px;
+        }
+
+        table thead,tr,th {
+            text-align: left;
+        }
+        
+        table tbody,tr, td {
+                text-align: left;
+            }
+    </style>
+</head>
+<body>
+    @* Overdue Tasks Section *@
+    @if (Model.IsAnyOverdueTaskToNotify)
+    {
+        <p>
+            Following tasks are overdue:
+        </p>
+        
+        if (Model.OverdueGeneralRiskAssessmentsTasksViewModel.Any())
+        {
+            <h4>General Risk Assessment Tasks</h4>
+            foreach (var task in Model.OverdueGeneralRiskAssessmentsTasksViewModel)
+            {
+                <table>
+                    <tr>
+                        <td><strong>Reference:</strong></td>
+                        <td>@task.TaskReference</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Title:</strong></td>
+                        <td>@task.Title</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Due Date:</strong></td><td>@task.CompletionDueDate &nbsp;<strong>Assigned To: &nbsp;</strong>@task.TaskAssignedTo</td>
+                    </tr>
+                    <tr>
+                        <td style="margin:0; padding:0; vertical-align:top;"><strong> Description: &nbsp;</strong></td>
+                        <td>@task.Description</td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+            }
+        }
+
+        if (Model.OverduePersonalRiskAssessmentsTasksViewModel.Any())
+        {
+            <h4>Personal Risk Assessment Tasks</h4>
+            foreach (var task in Model.OverduePersonalRiskAssessmentsTasksViewModel)
+            {
+               <table>
+                    <tr>
+                        <td><strong>Reference:</strong></td>
+                        <td>@task.TaskReference</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Title:</strong></td>
+                        <td>@task.Title</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Due Date:</strong></td><td>@task.CompletionDueDate &nbsp;<strong>Assigned To: &nbsp;</strong>@task.TaskAssignedTo</td>
+                    </tr>
+                    <tr>
+                        <td style="margin:0; padding:0; vertical-align:top;"><strong> Description: &nbsp;</strong></td>
+                        <td>@task.Description</td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+            }
+        }
+
+        if (Model.OverdueFireRiskAssessmentsTasksViewModel.Any())
+        {
+            <h4>Fire Risk Assessment Tasks</h4>
+            foreach (var task in Model.OverdueFireRiskAssessmentsTasksViewModel)
+            {
+               <table>
+                    <tr>
+                        <td><strong>Reference:</strong></td>
+                        <td>@task.TaskReference</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Title:</strong></td>
+                        <td>@task.Title</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Due Date:</strong></td><td>@task.CompletionDueDate &nbsp;<strong>Assigned To: &nbsp;</strong>@task.TaskAssignedTo</td>
+                    </tr>
+                    <tr>
+                        <td style="margin:0; padding:0; vertical-align:top;"><strong> Description: &nbsp;</strong></td>
+                        <td>@task.Description</td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+            }
+        }
+
+        if (Model.OverdueHazardousSubstanceRiskAssessmentsTasksViewModel.Any())
+        {
+            <h4>Hazardous Substance Risk Assessment Tasks</h4>
+            foreach (var task in Model.OverdueHazardousSubstanceRiskAssessmentsTasksViewModel)
+            {
+               <table>
+                    <tr>
+                        <td><strong>Reference:</strong></td>
+                        <td>@task.TaskReference</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Title:</strong></td>
+                        <td>@task.Title</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Due Date:</strong></td><td>@task.CompletionDueDate &nbsp;<strong>Assigned To: &nbsp;</strong>@task.TaskAssignedTo</td>
+                    </tr>
+                    <tr>
+                        <td style="margin:0; padding:0; vertical-align:top;"><strong> Description: &nbsp;</strong></td>
+                        <td>@task.Description</td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+            }
+        }
+
+        if (Model.OverdueReviewRiskAssessmentsTasksViewModel.Any())
+        {
+            <h4>Review Tasks</h4>
+            foreach (var task in Model.OverdueReviewRiskAssessmentsTasksViewModel)
+            {
+               <table>
+                    <tr>
+                        <td><strong>Reference:</strong></td>
+                        <td>@task.TaskReference</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Title:</strong></td>
+                        <td>@task.Title</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Due Date:</strong></td><td>@task.CompletionDueDate &nbsp;<strong>Assigned To: &nbsp;</strong>@task.TaskAssignedTo</td>
+                    </tr>
+                    <tr>
+                        <td style="margin:0; padding:0; vertical-align:top;"><strong> Description: &nbsp;</strong></td>
+                        <td>@task.Description</td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+            }
+        }
+
+        if (Model.OverdueResponsibilitiesTasksViewModel.Any())
+        {
+            <h4>Responsibilities Tasks</h4>
+            foreach (var task in Model.OverdueResponsibilitiesTasksViewModel)
+            {
+               <table>
+                    <tr>
+                        <td><strong>Reference:</strong></td>
+                        <td>@task.TaskReference</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Title:</strong></td>
+                        <td>@task.Title</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Due Date:</strong></td><td>@task.CompletionDueDate &nbsp;<strong>Assigned To: &nbsp;</strong>@task.TaskAssignedTo</td>
+                    </tr>
+                    <tr>
+                        <td style="margin:0; padding:0; vertical-align:top;"><strong> Description: &nbsp;</strong></td>
+                        <td>@task.Description</td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+            }
+         }
+         
+        if (Model.OverdueActionTasksViewModel.Any())
+        {
+            <h4>Action Tasks</h4>
+            foreach (var task in Model.OverdueActionTasksViewModel)
+            {
+               <table>
+                    <tr>
+                        <td><strong>Reference:</strong></td>
+                        <td>@task.TaskReference</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Title:</strong></td>
+                        <td>@task.Title</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Due Date:</strong></td><td>@task.CompletionDueDate &nbsp;<strong>Assigned To: &nbsp;</strong>@task.TaskAssignedTo</td>
+                    </tr>
+                    <tr>
+                        <td style="margin:0; padding:0; vertical-align:top;"><strong> Description: &nbsp;</strong></td>
+                        <td>@task.Description</td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+            }
+         }
+         
+        <p>To view your overdue tasks, please log into BusinessSafe Online on the following link. @Model.BusinessSafeOnlineLink </p>
+        <hr>
+    }
+
+    @* Completed Tasks Section *@
+    @if (Model.IsAnyCompletedTaskToNotify)
+    {
+        <p>
+            Following tasks are completed:
+        </p>
+        
+        if (Model.CompletedGeneralRiskAssessmentTasksViewModel.Any())
+        {
+            <h4>General RiskAssessment Tasks</h4>
+            foreach (var task in Model.CompletedGeneralRiskAssessmentTasksViewModel)
+            {
+               <table>
+                    <tr>
+                        <td><strong>Reference:</strong></td>
+                        <td>@task.TaskReference</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Title:</strong></td>
+                        <td>@task.Title</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Due Date:</strong></td><td>@task.CompletionDueDate &nbsp;<strong>Assigned To: &nbsp;</strong>@task.TaskAssignedTo</td>
+                    </tr>
+                    <tr>
+                        <td style="margin:0; padding:0; vertical-align:top;"><strong> Description: &nbsp;</strong></td>
+                        <td>@task.Description</td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+            }
+        }
+
+        if (Model.CompletedPersonalRiskAssessmentTasksViewModel.Any())
+        {
+            <h4>Personal RiskAssessment Tasks</h4>
+            foreach (var task in Model.CompletedPersonalRiskAssessmentTasksViewModel)
+            {
+               <table>
+                    <tr>
+                        <td><strong>Reference:</strong></td>
+                        <td>@task.TaskReference</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Title:</strong></td>
+                        <td>@task.Title</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Due Date:</strong></td><td>@task.CompletionDueDate &nbsp;<strong>Assigned To: &nbsp;</strong>@task.TaskAssignedTo</td>
+                    </tr>
+                    <tr>
+                        <td style="margin:0; padding:0; vertical-align:top;"><strong> Description: &nbsp;</strong></td>
+                        <td>@task.Description</td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+            }
+         }
+         
+        if (Model.CompletedFireRiskAssessmentTasksViewModel.Any())
+        {
+            <h4>Fire Risk Assessment Tasks</h4>
+            foreach (var task in Model.CompletedFireRiskAssessmentTasksViewModel)
+            {
+               <table>
+                    <tr>
+                        <td><strong>Reference:</strong></td>
+                        <td>@task.TaskReference</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Title:</strong></td>
+                        <td>@task.Title</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Due Date:</strong></td><td>@task.CompletionDueDate &nbsp;<strong>Assigned To: &nbsp;</strong>@task.TaskAssignedTo</td>
+                    </tr>
+                    <tr>
+                        <td style="margin:0; padding:0; vertical-align:top;"><strong> Description: &nbsp;</strong></td>
+                        <td>@task.Description</td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+            }
+         }
+         
+        if (Model.CompletedHazardousSubstanceTasksViewModel.Any())
+        {
+            <h4>Hazardous Substance Tasks</h4>
+            foreach (var task in Model.CompletedHazardousSubstanceTasksViewModel)
+            {
+               <table>
+                    <tr>
+                        <td><strong>Reference:</strong></td>
+                        <td>@task.TaskReference</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Title:</strong></td>
+                        <td>@task.Title</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Due Date:</strong></td><td>@task.CompletionDueDate &nbsp;<strong>Assigned To: &nbsp;</strong>@task.TaskAssignedTo</td>
+                    </tr>
+                    <tr>
+                        <td style="margin:0; padding:0; vertical-align:top;"><strong> Description: &nbsp;</strong></td>
+                        <td>@task.Description</td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+            }
+         }
+        
+         if (Model.CompletedReviewRiskAssessmentTasksViewModel.Any())
+        {
+            <h4>Review Tasks</h4>
+            foreach (var task in Model.CompletedReviewRiskAssessmentTasksViewModel)
+            {
+               <table>
+                    <tr>
+                        <td><strong>Reference:</strong></td>
+                        <td>@task.TaskReference</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Title:</strong></td>
+                        <td>@task.Title</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Due Date:</strong></td><td>@task.CompletionDueDate &nbsp;<strong>Assigned To: &nbsp;</strong>@task.TaskAssignedTo</td>
+                    </tr>
+                    <tr>
+                        <td style="margin:0; padding:0; vertical-align:top;"><strong> Description: &nbsp;</strong></td>
+                        <td>@task.Description</td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+            }
+         }
+         
+        <p>To view your completed tasks, please log into BusinessSafe Online on the following link. @Model.BusinessSafeOnlineLink </p>
+        <hr>
+    }
+
+    @* Due Tomorrow Tasks Section *@
+    @if (Model.IsAnyDueTomorrowTaskToNotify)
+    {
+        <p>
+            Following tasks are due:
+        </p>
+        
+        if (Model.DueTomorrowGeneralRiskAssessmentsTasksViewModel.Any())
+        {
+            <h4>General RiskAssessment Tasks</h4>
+            foreach (var task in Model.DueTomorrowGeneralRiskAssessmentsTasksViewModel)
+            {
+               <table>
+                    <tr>
+                        <td><strong>Reference:</strong></td>
+                        <td>@task.TaskReference</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Title:</strong></td>
+                        <td>@task.Title</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Due Date:</strong></td><td>@task.CompletionDueDate &nbsp;<strong>Assigned To: &nbsp;</strong>@task.TaskAssignedTo</td>
+                    </tr>
+                    <tr>
+                        <td style="margin:0; padding:0; vertical-align:top;"><strong> Description: &nbsp;</strong></td>
+                        <td>@task.Description</td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+            }
+        }
+        
+        if (Model.DueTomorrowPersonalRiskAssessmentsTasksViewModel.Any())
+        {
+            <h4>Personal RiskAssessment Tasks</h4>
+            foreach (var task in Model.DueTomorrowPersonalRiskAssessmentsTasksViewModel)
+            {
+               <table>
+                    <tr>
+                        <td><strong>Reference:</strong></td>
+                        <td>@task.TaskReference</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Title:</strong></td>
+                        <td>@task.Title</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Due Date:</strong></td><td>@task.CompletionDueDate &nbsp;<strong>Assigned To: &nbsp;</strong>@task.TaskAssignedTo</td>
+                    </tr>
+                    <tr>
+                        <td style="margin:0; padding:0; vertical-align:top;"><strong> Description: &nbsp;</strong></td>
+                        <td>@task.Description</td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+            }
+        }
+        
+        if (Model.DueTomorrowFireRiskAssessmentsTasksViewModel.Any())
+        {
+            <h4>Fire RiskAssessment Tasks</h4>
+            foreach (var task in Model.DueTomorrowFireRiskAssessmentsTasksViewModel)
+            {
+               <table>
+                    <tr>
+                        <td><strong>Reference:</strong></td>
+                        <td>@task.TaskReference</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Title:</strong></td>
+                        <td>@task.Title</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Due Date:</strong></td><td>@task.CompletionDueDate &nbsp;<strong>Assigned To: &nbsp;</strong>@task.TaskAssignedTo</td>
+                    </tr>
+                    <tr>
+                        <td style="margin:0; padding:0; vertical-align:top;"><strong> Description: &nbsp;</strong></td>
+                        <td>@task.Description</td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+            }
+        }
+        
+        if (Model.DueTomorrowHazardousSubstanceRiskAssessmentsTasksViewModel.Any())
+        {
+            <h4>Hazardous Substance RiskAssessment Tasks</h4>
+            foreach (var task in Model.DueTomorrowHazardousSubstanceRiskAssessmentsTasksViewModel)
+            {
+               <table>
+                    <tr>
+                        <td><strong>Reference:</strong></td>
+                        <td>@task.TaskReference</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Title:</strong></td>
+                        <td>@task.Title</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Due Date:</strong></td><td>@task.CompletionDueDate &nbsp;<strong>Assigned To: &nbsp;</strong>@task.TaskAssignedTo</td>
+                    </tr>
+                    <tr>
+                        <td style="margin:0; padding:0; vertical-align:top;"><strong> Description: &nbsp;</strong></td>
+                        <td>@task.Description</td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+            }
+        }
+        
+        if (Model.DueTomorrowReviewRiskAssessmentsTasksViewModel.Any())
+        {
+            <h4>Review Tasks</h4>
+            foreach (var task in Model.DueTomorrowReviewRiskAssessmentsTasksViewModel)
+            {
+               <table>
+                    <tr>
+                        <td><strong>Reference:</strong></td>
+                        <td>@task.TaskReference</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Title:</strong></td>
+                        <td>@task.Title</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Due Date:</strong></td><td>@task.CompletionDueDate &nbsp;<strong>Assigned To: &nbsp;</strong>@task.TaskAssignedTo</td>
+                    </tr>
+                    <tr>
+                        <td style="margin:0; padding:0; vertical-align:top;"><strong> Description: &nbsp;</strong></td>
+                        <td>@task.Description</td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+            }
+        }
+        
+        if (Model.DueTomorrowResponsibilitiesTasksViewModel.Any())
+        {
+            <h4>Responsibilities Tasks</h4>
+            foreach (var task in Model.DueTomorrowResponsibilitiesTasksViewModel)
+            {
+               <table>
+                    <tr>
+                        <td><strong>Reference:</strong></td>
+                        <td>@task.TaskReference</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Title:</strong></td>
+                        <td>@task.Title</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Due Date:</strong></td><td>@task.CompletionDueDate &nbsp;<strong>Assigned To: &nbsp;</strong>@task.TaskAssignedTo</td>
+                    </tr>
+                    <tr>
+                        <td style="margin:0; padding:0; vertical-align:top;"><strong> Description: &nbsp;</strong></td>
+                        <td>@task.Description</td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+            }
+        }
+        
+        if (Model.DueTomorrowActionTasksViewModel.Any())
+        {
+            <h4>Action Tasks</h4>
+            foreach (var task in Model.DueTomorrowActionTasksViewModel)
+            {
+               <table>
+                    <tr>
+                        <td><strong>Reference:</strong></td>
+                        <td>@task.TaskReference</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Title:</strong></td>
+                        <td>@task.Title</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Due Date:</strong></td><td>@task.CompletionDueDate &nbsp;<strong>Assigned To: &nbsp;</strong>@task.TaskAssignedTo</td>
+                    </tr>
+                    <tr>
+                        <td style="margin:0; padding:0; vertical-align:top;"><strong> Description: &nbsp;</strong></td>
+                        <td>@task.Description</td>
+                    </tr>
+                </table>
+                <br/>
+                <br/>
+            }
+        }
+        
+        <p>To view your tasks due, please log into BusinessSafe Online on the following link. @Model.BusinessSafeOnlineLink </p>
+        <hr>
+    }
+    
+</body>

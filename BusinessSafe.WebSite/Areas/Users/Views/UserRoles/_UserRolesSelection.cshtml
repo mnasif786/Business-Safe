@@ -1,0 +1,15 @@
+﻿@model BusinessSafe.WebSite.Areas.Users.ViewModels.UserRolesViewModel
+<div class="well">
+    <div class="container-fluid content">
+        @Html.Hidden("CompanyId", @Model.CompanyId)
+        <div class="row"><legend><h3>Select Role to Edit</h3></legend></div>
+        <div class="row">
+            <div>
+                <div class="span10">
+                    <label for="UserRoles" class="span2">Role:</label>
+                    @Html.TextBox("UserRoles", "", new { @class = "input-large" })
+                    @Html.Hidden("UserRolesId", Model.RoleId)
+                </div>
+            </div>
+    </div></div>
+</div>

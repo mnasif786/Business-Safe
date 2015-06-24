@@ -1,0 +1,130 @@
+﻿/* Responsiblity Planner
+-----------------------------------------------------------*/
+
+#responsibilityPlannerSummaryWrapper {
+    width: 57%;
+    float: left;
+}
+
+#responsibilityPlannerSearchWrapper fieldset {
+    height: 148px;
+}
+
+.responsibilityPlannerSummaryRow {
+    vertical-align: middle;
+    bottom: 0px;
+    margin: 8px 0px;
+}
+
+.responsibilityPlannerSummaryRow input {
+    bottom: -2px;
+}
+
+#responsibilityPlannerSearchWrapper {
+    width: 40%;
+    margin-bottom: 10px;
+    margin-left: 15px;
+    float: left;
+}
+#responsibilityPlannerSearchWrapper img, #ticked img {
+    vertical-align: middle;
+    margin: 5px;
+}
+.responsibilityPlannerSearchCalendar {
+    width: 70px;
+    padding: .405em 2.1em .405em 1em;
+    outline: none;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+.responsibilityPlannerSearchAlignLeft 
+{
+    text-align: left;
+    float: left;    
+}
+.responsibilityPlannerSearchAlignLeft label, .responsibilityPlannerSummaryRow label
+{    
+    float: left;
+    display: block;
+    width: 135px;
+    line-height: 34px;
+    font-size: 12px;
+    font-weight: bold;
+    color: black;
+}
+.responsibilityPlannerSearchAlignRight {
+    float: right;
+}
+
+.statusWrapper {
+    float: left;
+    height: 36px;
+    margin: 0px 0px 5px 5px;
+    vertical-align: middle;
+}
+
+.statusWrapperGeneral {
+    display: block;
+    background-image: url('images/ImageFile.png');
+    width: 35px;
+    height: 35px;
+    float: left;
+    margin: 1px;
+    vertical-align: middle;
+    line-height: 32px;
+    text-align: center;
+    font-size: 10px;
+    color: black;    
+}
+
+.statusWrapperRed {
+    background-position: 0px -72px;
+}
+.statusWrapperAmber {
+    background-position: 0px -37px;
+}
+.statusWrapperGreen {
+    background-position: 0px -107px;
+}
+.statusWrapperGray {
+    background-position: 0px -1px;
+}
+
+#btnAddTask {
+    color: white;
+    line-height: 29px;
+    margin: 0px 5px;
+    font-size: 13px;
+    font-weight: bold; 
+}
+
+div#filterWrapper.form-horizontal .control-label{
+    width: 285px;
+
+}
+
+fieldset#addTaskWrapper label.control-label 
+{
+   width: 150px;
+}
+
+.dropDownResponsibilityPlanner 
+{
+    height: 30px;
+    width: 170px;
+}
+
+.btn-medium {
+    padding: 8px 9px;
+    font-size: 12px;
+    line-height: normal;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.spantext{
+    line-height: 30px;
+    margin-left: 0px;
+}

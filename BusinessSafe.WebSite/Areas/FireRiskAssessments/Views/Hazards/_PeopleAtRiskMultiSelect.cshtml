@@ -1,0 +1,40 @@
+﻿@model BusinessSafe.WebSite.ViewModels.HazardsViewModel
+<fieldset class="">
+    <legend class="span12">
+        <h3>
+            People at Risk</h3>
+    </legend>
+    <div class="row">
+        <div class="span2">
+            <label style="margin-left: 30px;">
+                People At Risk</label>
+        </div>
+        <div id="people-at-risk-multi-select" class="search-and-multi-select">
+            <div class="row">
+                <input type="text" id="AddPersonAtRisk" name="AddPersonAtRisk" class="input-xlarge"
+                    placeholder="Add New Person At Risk" />
+                <button id="AddNewPersonAtRisk" type="submit" class="btn">
+                    +</button>
+            </div>
+            <div class="row">
+                <ul id="PeopleAtRiskOptions" class="available-options options span4 offset2">
+                    @foreach (var option in Model.PeopleAtRisk)
+                    {
+                        <li data-value="@option.Id">@option.Name</li>
+                    }
+                </ul>
+                <div class="span1 span1fix">
+                    <input type="button" class="add-to-selected btn" value="&gt;" />
+                    <input type="button" class="remove-from-selected btn" value="&lt;" />
+                </div>
+                <select id="PeopleAtRiskIds" name="PeopleAtRiskIds" class="selected-options options span4"
+                    multiple="multiple">
+                    @foreach (var option in Model.SelectedPeopleAtRisk)
+                    {
+                        <option data-value="@option.Id" value="@option.Id">@option.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+</fieldset>

@@ -1,0 +1,28 @@
+﻿@using BusinessSafe.WebSite.Areas.Responsibilities.ViewModels.Wizard
+@model BusinessSafe.WebSite.Areas.Responsibilities.ViewModels.Wizard.GenerateResponsibilitiesViewModel
+
+<table>
+    <thead>
+        <tr>
+            <th><input class="responsibilitySelector" type="checkbox" /></th>
+            <th>Category</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Monitoring Frequency</th>
+            <th>Responsible Person</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var resp in Model.ResponsibilityTemplates)
+        {
+            <tr class="responsibilityTemplateRow">
+                <td><input type="checkbox" value="@resp.Id"/></td>
+                <td>@resp.Category</td>
+                <td>@resp.Title</td>
+                <td>@resp.Description</td>
+                <td>@Html.Partial("_FrequencyDropdown", new FrequencyViewModel{Id=resp.Id, Frequencies = resp.Frequencies})</td>
+                <td>@Html.Partial("_EmployeeDropdown",new EmployeeViewModel{Id=resp.Id})</td>
+            </tr>
+        }
+    </tbody>
+</table>

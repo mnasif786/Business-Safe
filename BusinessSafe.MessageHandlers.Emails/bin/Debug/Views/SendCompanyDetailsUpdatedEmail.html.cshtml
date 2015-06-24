@@ -1,0 +1,28 @@
+﻿@model BusinessSafe.MessageHandlers.Emails.ViewModels.SendCompanyDetailsUpdatedEmailViewModel
+<p>@Model.ActioningUserName has requested the following details to be changed to their
+    Main Company Details.</p>
+<p>CAN: @Model.CAN</p>
+
+<p><strong>Change to:</strong></p>
+<p> Company Name: @Model.CompanyName<br />
+Main Address:<br /> @Model.AddressLine1<br />
+    @Model.AddressLine2<br />
+    @Model.AddressLine3<br />
+    @Model.AddressLine4<br />
+    Postcode: @Model.Postcode<br />
+    Telephone: @Model.Telephone<br />
+    Website: @Model.Website<br />
+    Main Contact: @Model.MainContact<br />
+    BusinessSafe Contact: @Model.BusinssSafeContactName</p>
+
+<p><strong>Change from:</strong></p>
+<p>Company Name: @Model.OldCompanyName<br />
+    Main Address:<br /> @Model.OldAddressLine1<br />
+    @Model.OldAddressLine2<br />
+    @Model.OldAddressLine3<br />
+    @Model.OldAddressLine4<br />
+    Postcode: @Model.OldPostcode<br />
+    Telephone: @Model.OldTelephone<br />
+    Website: @Model.OldWebsite<br />
+    Main Contact: @Model.OldMainContact<br />
+    BusinessSafe Contact: @Model.OldBusinssSafeContactName</p>

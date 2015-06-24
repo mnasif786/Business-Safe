@@ -1,0 +1,92 @@
+﻿@model BusinessSafe.WebSite.Areas.VisitRequest.ViewModels.VisitRequestViewModel
+
+<div class="well">
+    @using (Html.BeginForm("Create", "VisitRequest", FormMethod.Get, new { id = "formVisitRequest", @class = "search-form" }))
+    {
+
+        <fieldset>
+            <legend>Visit Details</legend>
+            <ul>
+                <li>
+                    <label class="x-wide" for="PersonNameToVisit">Name of person to visit</label>
+                    @Html.TextBoxFor(model => model.PersonNameToVisit, new { @class = "two-date-pickers-and-a-button-wide" })
+                </li>
+                <li>
+                    <label for="ContactNumber" class="wide">Contact number</label>
+                    @Html.TextBoxFor(model => model.ContactNumber, new { @class = "site-dropdown-wide" })
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <label for="EmailAddress" class="x-wide">Contact email address  </label>
+                    @Html.TextBoxFor(model => model.EmailAddress, new { @class = "two-date-pickers-and-a-button-wide" })
+                </li>
+                <li>
+                    <label class="wide" for="Site">Site</label>
+                    @Html.TextBox("Site", null, new { @class = "siteDropDownList" })
+                    @Html.Hidden("SiteId", Model.SiteId)
+                </li>
+
+            </ul>
+            <ul>
+                <li>
+                    <label class="x-wide">Preferred dates of visit:</label>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <label for="createdFrom" class="x-wide">From</label>
+                    @Html.TextBoxFor(model => model.VisitFrom, new { id = "createdFrom", name = "VisitFrom", @class = "disabled calendar" })
+                </li>
+                <li>
+                    <label class="" for="createdTo">To</label>
+                    @Html.TextBoxFor(model => model.VisitTo, new { id = "createdTo", name = "VisitTo", @class = "disabled calendar" })
+                </li>
+            </ul>
+            <ul class="row-of-radios clearfix">
+                <li>
+                    <label class="x-wide">Preferred time of visit:</label>
+                </li>
+                <li style="margin-top: 4px;">
+                    @Html.RadioButtonFor(model => model.VisitTimePreference, "AM")
+                </li>
+                <li>
+                    <label>AM</label>
+                </li>
+                <li style="margin-top: 4px;">
+                    @Html.RadioButtonFor(model => model.VisitTimePreference, "PM")
+                </li>
+                <li>
+                    <label> PM</label>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <label class="x-wide" for="Comments">Comments</label>
+                    @Html.TextAreaFor(model => model.Comments, new { maxlength = 1000, @class = "input-xxxlarge", rows = 7 })
+                </li>
+            </ul>
+            <ul>
+                <li class="buttons x-wide">
+                    <input type="submit" id="RequestVisit" value="Request Visit " class="btn btn-primary" />
+                    @Html.ActionLink("Cancel", "Index", "TaskList", new { area = "TaskList" }, new { @class = "btn btn-link", id = "ResetButton" })
+                </li>
+            </ul>
+            <div class="span11" style="padding-top: 20px;">
+            <ul>
+
+                @if (@ViewBag.Message != null)
+                {
+                    <div class="alert alert-success">
+                        @ViewBag.Message
+                    </div>
+                }
+                @Html.ValidationSummary()
+            
+            </ul>
+            </div>
+        </fieldset>
+    }
+   
+</div>
+

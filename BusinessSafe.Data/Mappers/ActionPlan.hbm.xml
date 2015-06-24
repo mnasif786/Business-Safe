@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="ActionPlan" table="`ActionPlan`">
+    <id name="Id" column="Id" type="long">
+      <generator class="identity"/>
+    </id>
+    <property name="CompanyId" />
+    <property name="Title" column="`Title`" />
+    <many-to-one name="Site" class="Site" column="SiteId" cascade="none"  />
+    <property name="DateOfVisit" />
+    <property name="VisitBy" column="`VisitBy`" />
+    <property name="SubmittedOn" />
+    <property name="CreatedOn" update="false" />
+    <many-to-one name="CreatedBy" class="UserForAuditing" column="CreatedBy" lazy="false" update="false" />
+    <property name="LastModifiedOn" />
+    <many-to-one name="LastModifiedBy" class="UserForAuditing" column="LastModifiedBy"/>
+    <property name="Deleted" type="bool" />
+
+    <property name="ExecutiveSummaryDocumentLibraryId"/>
+
+    <property name="NoLongerRequired" column="`NoLongerRequired`" />
+
+    <bag name="Actions" table="Action"  lazy="true" cascade="save-update" where="deleted = 0">
+      <key column="ActionPlanId"></key>
+      <one-to-many class="BusinessSafe.Domain.Entities.Action, BusinessSafe.Domain.Entities" />
+    </bag>
+    <property name ="AreasVisited" column="AreasVisited"/>
+    <property name ="AreasNotVisited" column ="AreasNotVisited"/>
+    <!--<property name ="Checklist" />-->
+    <one-to-one name ="Checklist" class="BusinessSafe.Domain.Entities.SafeCheck.Checklist" property-ref="ActionPlan" cascade="save-update"/>
+  </class>
+</hibernate-mapping>   
+    
+  

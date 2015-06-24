@@ -1,0 +1,31 @@
+USE [BusinessSafe]
+GO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Answer' AND COLUMN_NAME = 'Discriminator')
+BEGIN
+	ALTER TABLE [Answer]
+	ADD [Discriminator] [varchar](50) NULL
+END
+GO	
+
+IF EXISTS (SELECT * FROM [Answer] WHERE [Discriminator] IS NULL)
+BEGIN
+	UPDATE [Answer] SET [Discriminator] = 'PersonalAnswer' WHERE [Discriminator] IS NULL
+END
+GO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Answer' AND COLUMN_NAME = 'Discriminator' AND IS_NULLABLE = 'NO')
+BEGIN
+	ALTER TABLE [Answer]
+	ALTER COLUMN [Discriminator] [varchar](50) NOT NULL
+END
+GO	
+
+--//@UNDO 
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Answer' AND COLUMN_NAME = 'Discriminator')
+BEGIN
+	ALTER TABLE [Answer]
+	DROP COLUMN [Discriminator]
+END
+GO

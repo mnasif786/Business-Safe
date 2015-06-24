@@ -1,0 +1,9 @@
+﻿@model BusinessSafe.WebSite.Areas.Responsibilities.ViewModels.Wizard.GenerateResponsibilityTasksViewModel
+
+<select name="ResponsiblePerson">
+                                    <option value="">--Select Option--</option>
+                                @foreach (var emp in Model.Employees)
+                                {
+                                    <option value="@emp.Id">@emp.Name</option>
+                                }
+                            </select>

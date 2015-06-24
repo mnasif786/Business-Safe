@@ -1,0 +1,113 @@
+﻿.riskAssessmentCalendar {
+    width: 70px;
+    padding: .405em 2.1em .405em 1em;
+    outline: none;
+    text-decoration: none;
+    vertical-align: middle;   
+}
+
+#myTab.nav.nav-tabs .disable {
+    color: gray;
+}
+
+.nav > li.disable > a:hover {
+    background-color: white;
+    border-color: white white #DDD;
+}
+.nav-tabs > li.disable > a:hover {
+    background-color: white;
+    border-color: white white #DDD;
+}
+
+
+/*#GeneralRiskAssessmentSummaryHolder input#dateCreated {
+    width: 28%;
+}*/
+
+#tabContentHolder .form-horizontal .control-label {
+    width: 160px;
+}
+
+
+.well {
+    padding: 15px;
+}
+
+
+/***** Hazards Tab *******/
+
+#hazardsPeopleWrapper .row {
+    margin-left: 0px;
+}
+
+#employeeContainer, #nonemployeeContainer{
+    margin-top: 20px;
+}
+
+#employeeContainer input, #employeeContainer select {
+    margin-left: 0px;
+}
+
+#employeeTitle #nonEmployeeTitle{
+    margin-left:0px;
+}
+
+.create-general-risk-assessment-errors-display {
+    margin-top: 20px;
+}
+
+.risk-assessment-section {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.risk-assessment-section h4 {
+    border-bottom: 1px solid #EEEEEE;
+    margin: 18px 0;
+    padding-bottom: 17px;
+}
+
+.form-actions a {
+    margin-left: 20px;
+}
+
+.row {
+    margin-bottom: 10px;
+}
+
+
+.ui-combobox {
+		position: relative;
+		display: inline-block;
+	}
+	.ui-combobox-toggle {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		margin-left: -1px;
+		padding: 0;
+		/* adjust styles for IE 6/7 */
+		*height: 1.7em;
+		*top: 0.1em;
+	}
+	.ui-combobox-input {
+		margin: 0;
+		padding: 0.3em;
+	}
+
+
+#RiskAssessmentSummaryView label, #PremisesInformationTabContentHolder label, #CreateRiskAssessmentSummary label {
+    font-size: 14px;
+}
+
+#PremisesInformationTabContentHolder .input-large, select  {
+    width: 440px; 
+}
+
+#CreateRiskAssessmentSummary label, #CreateRiskAssessmentSummary input, #CreateRiskAssessmentSummary button {
+    margin-left: 20px;
+}
+
+#createSummary {
+    width: 220px;
+}

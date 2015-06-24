@@ -1,0 +1,55 @@
+﻿@model BusinessSafe.MessageHandlers.Emails.ViewModels.SendIRNNotificationEmailViewModel
+           
+<head>
+    <style>
+        body
+        {
+            background-color: white;
+            font-size: .85em;
+            font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
+            margin: 0;
+            padding: 0;
+            color: #393939;
+        }
+        
+        h1
+        {
+            font-size: 2em;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+        
+    </style>
+</head>
+<body>      
+
+    <h1>SafeCheck - Immediate Risk Notification(s) has been issued</h1>
+    
+    <p>CAN: <b>@Model.CAN</b></p>
+
+    <p>Visit date: <b>@Model.VisitDate</b></p>
+
+    <p>Consultant: <b>@Model.CompletedBy</b></p>
+
+    <p>Completed: <b>@Model.CompletedOn</b></p>
+
+    @foreach ( var irn in @Model.IRNList )
+    {         
+        if( !irn.Deleted )
+        {
+            <HR/>
+            <div>
+                <h5>Immediate Risk Notification reference: @irn.Reference</h5>
+                <p>Title: @irn.Title</p>
+                <p>Significant Hazard Identified (material breaches of legislation) : @irn.SignificantHazardIdentified</p>
+                <p>Recommended Immediate Action: @irn.RecommendedImmediateAction</p>
+            </div>
+        }
+    }
+
+    <HR/>
+
+     
+    <p>Please note that a copy of the IRN(s) issued will be sent in by the Consultant.</p>
+     
+</body>

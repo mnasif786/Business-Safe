@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities.SafeCheck"
+                   assembly="BusinessSafe.Domain">
+
+  <class name="ChecklistUpdatesRequired" table="`SafeCheckChecklistUpdatesRequired`">
+    <id name="Id" column="Id" type="long">
+      <generator class="identity"/>
+    </id>
+    <many-to-one name="Checklist" column="ChecklistId" lazy="false" />
+    <many-to-one name="QaAdvisor" column="QaAdvisorId" />
+    <property name="UpdatesRequiredOn"/>
+  </class>
+</hibernate-mapping>

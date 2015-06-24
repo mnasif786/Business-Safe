@@ -1,0 +1,68 @@
+﻿@using BusinessSafe.WebSite.Areas.ActionPlans.ViewModels
+@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Extensions
+@using NHibernate.Mapping
+@using Telerik.Web.Mvc.UI
+@model BusinessSafe.WebSite.Areas.ActionPlans.ViewModels.ImmediateRiskNotificationActionsIndexViewModel
+
+<h2>
+    <a id="show-deleted" class="btn @(Model.IsShowDeleted ? "disabled" : string.Empty)" href="#">Show Deleted</a>
+    <span class="tick"></span>Immediate Risk Notifications
+</h2>
+<div id="immediaterisknotifications-validation-message" class="alert alert-error hide"></div>
+<table>
+    <thead>
+        <tr>
+            @*<th><input class="responsibilitySelector" type="checkbox" /></th>*@
+            <th>Reference</th>
+            <th>Title</th>
+            <th>Significant Hazard Identified</th>
+            <th>Recommended Immediate Action</th>
+            <th>Status</th>
+            <th>Assigned To</th>
+            <th class="action-grid-fixed-date-column">Due Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var notification in Model.ImmediateRiskNotification)
+        {
+            var assignButton = "button_assign_" + @notification.Id;
+            <tr class="actionTaskRow" data-has-task="@notification.HasTask">
+                <td>@notification.Reference</td>
+                <td>@notification.Title</td>
+                <td>@notification.SignificantHazardIdentified</td>
+                <td>@notification.RecommendedImmediateAction</td>
+                <td>@notification.Status</td> 
+                <td>@Html.Partial("_AssignedToDropdown", new AssignedToViewModel { Id = notification.Id, SelectedAssignedToId = notification.AssignedTo })</td>
+                <td class="action-grid-fixed-date-column">@Html.TextBox("DueDate", @notification.DueDateFormatted, new { @class = "span calendar action-grid", id = "dueDate" + notification.Id })</td>
+                
+                <td nowrap="nowrap">
+                    <input class="assign-btn btn btn-success" type="button" value="Assign" id="@assignButton"   data-id="@notification.Id" data-validationmessage="#immediaterisknotifications-validation-message" />
+                
+                    @if (@notification.HasTask == false && @Model.CanEdit(User) == false)
+                    {
+                        <p class="centredContent">Not Assigned</p>
+                    }
+                    else
+                    {
+                        if (@notification.HasTask)
+                        {
+                            <div class="task-created hide">
+                                <a class="reassign-action-task-link"  data-id="@notification.Id" data-actionplan-id="@Model.ActionPlanId" data-mode="View" data-title="View IRN Task" href="" title="View">
+                                    <i class="icon-search"></i></a>
+                                @if (@Model.CanEdit(User) && @Model.StatusId != 0)
+                                {
+                                    <a class="reassign-action-task-link" data-id="@notification.Id" data-actionplan-id="@Model.ActionPlanId" data-mode="Edit" data-title="Edit IRN Task" href="" title="Edit Task">
+                                        <i class="icon-edit"></i></a>
+                                    <a class="reassign-action-task-link" data-id="@notification.Id" data-actionplan-id="@Model.ActionPlanId" data-mode="Reassign" data-title="Reassign IRN Task" href="" title="Reassign Task">
+                                        <i class="icon-share"></i></a>
+                                }
+                            </div>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

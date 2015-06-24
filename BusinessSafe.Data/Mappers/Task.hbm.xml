@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="Task" table="`Task`">
+    <id name="Id" column="Id" type="long">
+      <generator class="identity" />
+    </id>
+    <discriminator column="Discriminator" type="string" />
+    <property name="Title" type="string" />
+    <property name="Description" type="string" />
+    <property name="Reference" type="string" />
+    <many-to-one name="TaskAssignedTo" class="Employee" column="TaskAssignedToId" lazy="false" />
+    <property name="TaskCompletionDueDate" />
+    <property name="TaskStatus" column="TaskStatusId" />
+    <many-to-one name="TaskCompletedBy" class="UserForAuditing" column="TaskCompletedBy"/>
+    <property name="TaskCompletedComments" />
+    <property name="TaskCompletedDate" />
+    <property name="Deleted" type="bool" />
+    <property name="CreatedOn" update="false" />
+    <many-to-one name="CreatedBy" class="UserForAuditing" column="CreatedBy" update="false" />
+    <property name="LastModifiedOn" />
+    <many-to-one name="LastModifiedBy" class="UserForAuditing" column="LastModifiedBy" />
+    <many-to-one name="Category" class="TaskCategory" column="TaskCategoryId" />
+    <many-to-one name="Site" class="SiteStructureElement" column="SiteId" lazy="false"/>
+    <bag name="Documents" lazy="true" cascade="save-update">
+      <key column="TaskId"></key>
+      <one-to-many class="TaskDocument" />
+    </bag>
+  
+    <property name="TaskReoccurringType" column="TaskReoccurringTypeId" />
+    <property name="TaskReoccurringEndDate" />
+    <many-to-one name="FollowingTask" class="Task" column="FollowingTaskId" lazy="proxy" cascade="save-update" />
+    <!--TODO: property-ref seems to ignore eager loading.  Possible solution to add PreceedingTaskId-->
+    <one-to-one name="PrecedingTask" class="Task" property-ref="FollowingTask" lazy="proxy" cascade="save-update" />
+    <many-to-one name="OriginalTask" class="Task" column="OriginalTaskId" lazy="proxy" cascade="save-update" />
+    <property name="TaskGuid" />
+    <property name="SendTaskNotification" type="bool" not-null="false" />
+    <property name="SendTaskCompletedNotification" type="bool" not-null="true" />
+    <property name="SendTaskOverdueNotification" type="bool" not-null="true" />
+    <property name="SendTaskDueTomorrowNotification" type="bool" not-null="true"/>
+
+    <bag name="EmployeeTaskNotificationHistory" table="EmployeeTaskNotification" inverse="true" cascade="all-delete-orphan">
+      <key column="TaskId"></key>
+      <one-to-many class="EmployeeTaskNotification" />
+    </bag>
+    
+    <subclass name="MultiHazardRiskAssessmentFurtherControlMeasureTask"
+              discriminator-value="MultiHazardRiskAssessmentFurtherControlMeasureTask">
+      <many-to-one name="MultiHazardRiskAssessmentHazard" class="MultiHazardRiskAssessmentHazard"
+                   column="MultiHazardRiskAssessmentHazardId" />
+    </subclass>
+
+    <subclass name="HazardousSubstanceRiskAssessmentFurtherControlMeasureTask"
+              discriminator-value="HazardousSubstanceRiskAssessmentFurtherControlMeasureTask">
+      <many-to-one name="HazardousSubstanceRiskAssessment" class="HazardousSubstanceRiskAssessment"
+                   column="HazardousSubstanceRiskAssessmentId" lazy="false" />
+    </subclass>
+
+    <subclass name="RiskAssessmentReviewTask" discriminator-value="RiskAssessmentReviewTask">
+      <many-to-one name="RiskAssessmentReview" class="RiskAssessmentReview" column="RiskAssessmentReviewId" />
+    </subclass>
+
+    <subclass name="FireRiskAssessmentFurtherControlMeasureTask"
+              discriminator-value="FireRiskAssessmentFurtherControlMeasureTask">
+      <many-to-one name="SignificantFinding" class="SignificantFinding" column="SignificantFindingId" />
+    </subclass>
+
+    <subclass name="ResponsibilityTask" discriminator-value="ResponsibilityTask">
+      <many-to-one name="Responsibility" class="Responsibility" column="ResponsibilityId" />
+      <many-to-one name="StatutoryResponsibilityTaskTemplateCreatedFrom" class="StatutoryResponsibilityTaskTemplate" column="StatutoryResponsibilityTaskTemplateCreatedFromId" cascade="none" />
+    </subclass>
+
+    <subclass name="ActionTask" discriminator-value="ActionTask">
+      <many-to-one name="Action" class="Action" column="ActionId" />
+    </subclass>
+
+    
+    
+  </class>
+</hibernate-mapping>

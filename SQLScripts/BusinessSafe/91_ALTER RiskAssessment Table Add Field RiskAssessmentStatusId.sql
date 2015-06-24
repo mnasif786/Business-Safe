@@ -1,0 +1,41 @@
+USE [BusinessSafe]
+GO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessment' AND COLUMN_NAME = 'RiskAssessmentStatusId')
+BEGIN
+	ALTER TABLE [RiskAssessment]
+	ADD [RiskAssessmentStatusId] SMALLINT NULL
+END
+GO
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessment' AND COLUMN_NAME = 'IsDraft')
+BEGIN
+	UPDATE
+		[RiskAssessment]
+	SET
+		[RiskAssessmentStatusId] = CASE IsDraft WHEN 1 THEN 0 ELSE 1 END
+
+	ALTER TABLE [RiskAssessment]
+	DROP COLUMN [IsDraft]
+END
+GO
+
+--//@UNDO
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessment' AND COLUMN_NAME = 'IsDraft')
+BEGIN
+	ALTER TABLE [RiskAssessment]
+	ADD [IsDraft] BIT NULL
+END
+GO
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessment' AND COLUMN_NAME = 'RiskAssessmentStatusId')
+BEGIN
+	UPDATE
+		[RiskAssessment]
+	SET
+		[IsDraft] = CASE [RiskAssessmentStatusId] WHEN 0 THEN 1 ELSE 0 END
+
+	ALTER TABLE [RiskAssessment]
+	DROP COLUMN [RiskAssessmentStatusId]
+END
+GO

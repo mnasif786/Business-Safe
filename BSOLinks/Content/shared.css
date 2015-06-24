@@ -1,0 +1,315 @@
+﻿
+/* typography.css */
+.mainbody
+{
+    background-image:url(images/body.png); 
+    background-repeat:repeat;
+    margin: 0;
+    position:relative;
+    text-align:left;
+    color: #62675F;
+    line-height: 1.5;
+}
+
+#tick {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-top: -1px;
+    margin-left: -5px;
+    margin-right: 3px;
+    margin-bottom: -5px;
+    background-image:url('images/tick.png')
+}
+
+#ticked 
+{    
+    background: url('images/bg-tick.png') bottom right;
+    background-repeat: no-repeat;
+    background-color: #FFF;
+}
+
+.clearBoth 
+{
+    display: block;
+    clear: both;
+    margin: 3px 0px;
+}
+
+.floatLeft {
+    float: left;
+    margin-left: 5px;
+}
+
+.floatRight {
+    float: right;
+}
+
+.error, .warning, .success, .info
+{
+    padding: 10px 5px 10px 5px;
+    margin-bottom: 1em;
+    border: 2px solid #DDD;
+    width: 99%;
+    display: block;
+    float: left;
+}
+
+/* Container Styling
+-----------------------------------------------------------*/
+
+
+.InfoMessage 
+{
+    color: white;
+    width: 100%;
+    clear: both;
+    display: block;
+    position: relative;
+    background-color: #bd2c31;
+    float: left;
+    margin-bottom: 15px;
+    border: 1px solid #861518;
+    font-weight: bold;
+    padding-left: 3px;
+}
+
+.InfoMessage label 
+{
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    float: left;
+    margin: 5px;
+}
+
+.InfoMessage a {
+    color: white;
+    line-height: 29px;
+    margin: 0px 5px;
+    font-size: 13px;
+    font-weight: bold; 
+}
+
+/* Icons
+-----------------------------------------------------------*/
+
+.gridIcon {
+    display: block;
+    background-image: url('images/ImageFile.png');
+    width: 35px;
+    height: 35px;
+    float: left;
+    margin: 1px;
+    vertical-align: middle;    
+}
+
+.iconReassign {
+    background-position: 0px -141px;
+}
+
+.iconDelete {
+    background-position: 0px -175px;
+}
+
+.iconPrint {
+    background-position: 0px -208px;
+}
+
+.iconEdit {
+    background-position: 0px -241px;
+}
+
+.iconComplete {
+    background-position: 0px -274px;
+}
+
+.iconUrgent {
+    background-position: 0px -307px;
+}
+
+
+/* Styles for basic forms
+-----------------------------------------------------------*/
+
+.formRow {
+    max-width: 35px;
+    display: inline-block;   
+}
+
+legend 
+{
+    font-size:1em;
+    font-weight: bold;
+}
+
+textarea 
+{
+    min-height: 75px;
+}
+
+.editor-label 
+{
+    margin: 10px 0 0 0;
+    width: 140px;
+    display: inline-block;
+    height:30px
+}
+
+.editor-field 
+{
+    margin: 10px 0 0 0;
+    width: 32%;
+    display: inline-block;
+    height:30px
+}
+
+.textArea-field 
+{
+    width: 98%;
+}
+
+div.center 
+{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error
+{
+    color: #ff0000;
+}
+
+.field-validation-valid
+{
+    display: none;
+}
+
+.input-validation-error
+{
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors
+{
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid
+{
+    display: none;
+}
+
+/* jQuery Controls 
+-----------------------------------------------------------*/
+
+.ui-datepicker-header {
+    color: white;
+}
+
+img.ui-datepicker-trigger:hover {
+    cursor:pointer;
+}
+
+
+/* Container 
+----------------------------------------------------------*/
+
+#mainPanel {
+    float: left;
+    width: 96%;
+}
+
+.section {
+    padding: 0px;
+    margin: 0 0 20px;
+    background-color: white;
+    min-height: 750px;
+}
+
+.legend {
+    font: 1.1em "Segoe UI", Arial, sans-serif;
+    background-image: url(images/secBg.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    padding: 6px 30px 6px 10px;
+    background-color: #ce1c22;
+    color: white;
+    display: inline-block;
+}
+
+.sectionContainer {
+    padding: 10px;
+    clear: both;
+    min-height: 735px;
+}
+
+.round {
+    -webkit-border-bottom-right-radius: 4px;
+    -khtml-border-bottom-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+    -khtml-border-bottom-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    -webkit-border-top-right-radius: 4px;
+    -khtml-border-top-right-radius: 4px;
+    border-top-right-radius: 4px;
+    -webkit-border-top-left-radius: 4px;
+    -khtml-border-top-left-radius: 4px;
+    border-top-left-radius: 4px; 
+}
+
+#ajaxClientFailDisplay {
+    height: 70px;
+    text-align: center;
+    font-size: 30px;
+    padding-top: 10px;
+}
+
+/* Cookies 
+----------------------------------------------------------*/
+#businesssafecookiesheader {
+    color: white;
+    float: left;
+    width: 140px;
+    font-size: 1.8em;
+    font-weight: bold;
+    text-align: right;
+    line-height: 1.12;        
+}
+#businesssafecookieholder 
+{
+    z-index: 100;
+    display: block;
+    float: left;
+    top: 0px;
+    background-color: #323232;
+    width: 100%;
+}
+
+#businesssafecookiewrapper {
+    margin: 10px auto;
+    width: 800px;
+}
+#businesssafecookiemessage p{
+    float: left;        
+    color: #BEBEBE;
+    font-size: 15px;
+    line-height: 1.24;
+}
+#businesssafecookiemessage a {
+    color: #F6A21D;
+    font-size: 1em;
+    font-weight: bold;
+    line-height: 1.24;
+    text-decoration: none;
+}
+#businesssafecookiemessage a:hover {
+    color: white;
+}
+

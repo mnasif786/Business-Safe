@@ -1,0 +1,51 @@
+﻿@using BusinessSafe.WebSite.Areas.GeneralRiskAssessments.ViewModels
+@model GeneralRiskAssessmentTabViewModel
+@Html.Hidden("CurrentStatus", (int)Model.CurrentTab)
+<ul class="nav nav-pills" id="myTab">
+    <li class="@Model.IsTabActive(GeneralRiskAssessmentTabs.Summary.ToString())">
+        @Html.ActionLink("Summary", Model.IsReadOnly ? "View" : "Index", "Summary", new { area = "GeneralRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId }, new { id = "summary", @class = "riskassessment-tab-links summarylink", @mainUrl = "Summary", @tabIndex = "1" })
+    </li>
+    <li class="@Model.IsTabActive(GeneralRiskAssessmentTabs.PremisesInformation.ToString())">
+        @Html.ActionLink("Premises Information", Model.IsReadOnly ? "View" : "Index", "PremisesInformation", new { area = "GeneralRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId }, new { id = "premisesinformation", @class = "riskassessment-tab-links premisesinformationlink", @mainUrl = "PremisesInformation", @tabIndex = "2" })
+    </li>
+    <li class="@Model.IsTabActive(GeneralRiskAssessmentTabs.Hazards.ToString())">
+        @if (Model.Id > 0)
+        {
+            @Html.ActionLink("Hazards / People", Model.IsReadOnly ? "View" : "Index", "Hazards", new { area = "GeneralRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId }, new { id = "hazardspeople", @class = "riskassessment-tab-links hazardspeoplelink ", @mainUrl = "Hazards", @tabIndex = "3" })
+        }
+        else
+        {
+            <a href="#" class="riskassessment-tab-links">Hazards/People</a>
+        }
+    </li>
+    <li class="@Model.IsTabActive(GeneralRiskAssessmentTabs.ControlMeasures.ToString())">
+        @if (Model.Id > 0)
+        {
+            @Html.ActionLink("Control Measures", Model.IsReadOnly ? "View" : "Index", "ControlMeasures", new { area = "GeneralRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId }, new { id = "controlmeasures", @class = "riskassessment-tab-links actionslink ", @mainUrl = "RAActions", @tabIndex = "4" })
+        }
+        else
+        {
+            <a href="#" class="riskassessment-tab-links">Control Measures</a>
+        }
+    </li>
+    <li class="@Model.IsTabActive(GeneralRiskAssessmentTabs.Documents.ToString())">
+        @if (Model.Id > 0)
+        {
+            @Html.ActionLink("Attach Documents", Model.IsReadOnly ? "View" : "Index", "Documents", new { area = "GeneralRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId }, new { id = "attachdocuments", @class = "riskassessment-tab-links attachdocumentslink", @mainUrl = "AttachDocument", @tabIndex = "5" })
+        }
+        else
+        {
+            <a href="#" class="riskassessment-tab-links">Attach Documents</a>
+        }
+    </li>
+    <li class="@Model.IsTabActive(GeneralRiskAssessmentTabs.Review.ToString())">
+        @if (Model.Id > 0)
+        {
+            @Html.ActionLink("Review", Model.IsReadOnly ? "View" : "Index","Review", new { area = "GeneralRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId }, new { id = "review", @class = "riskassessment-tab-links reviewlink", @mainUrl = "Review", @tabIndex = "6" })
+        }
+        else
+        {
+            <a href="#" class="riskassessment-tab-links">Review</a>
+        }
+    </li>
+</ul>

@@ -1,0 +1,125 @@
+﻿@using System.Web.Mvc.Html
+@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Extensions
+@using Cassette.Views
+@model BusinessSafe.WebSite.ViewModels.SearchRiskAssessmentsViewModel
+@{
+    ViewBag.Title = "Fire Risk Assessments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section>
+    <span class="legend">Fire Risk Assessments</span>
+    <div class="major-index-actions">
+        @if (User.IsInRole(Permissions.AddGeneralandHazardousSubstancesRiskAssessments.ToString()))
+        { 
+            <a id="AddNewRiskAssessmentLink" class="btn btn-success btn-large" href="@Url.Action("Create", "RiskAssessment", new { companyId = Html.GetUsersCompanyId(User) })" title="Add New General Risk Assessment">
+                Add New Risk Assessment</a> 
+        }
+    </div>
+    <div class="content">
+
+     <div>
+        @if (TempData["Notice"] != null)
+        {
+            <div class="alert alert-success">
+                <a id="successmessageanchor" href="#successmessage"></a>
+                @TempData["Notice"].ToString()
+            </div>
+        }
+    </div>    
+
+        <div class="well">
+            @using (Html.BeginForm("Index", "RiskAssessment", FormMethod.Get, new { @class = "search-form" }))
+            {
+                @Html.Partial("_SearchRiskAssessmentFormFieldset", Model)
+            }
+        </div>
+        @Html.Partial("_FRASearchResults", Model)
+    </div>
+</section>
+<div class="hide">
+    <div id="dialogDeleteRiskAssessmentWithAssociatedTasks" title="<span id='warning'></span>Delete Fire Risk Assessment Warning!">
+        <p>
+            This fire risk assessment has tasks associated with it which will also be deleted.
+            Are you sure you want to delete this fire risk assessment?</p>
+    </div>
+    <div id="dialogDeleteRiskAssessment" title="Delete Fire Risk Assessment">
+        <p>
+            Are you sure you want to delete this fire risk assessment?</p>
+    </div>
+    <div id="dialogUnDeleteRiskAssessment" title="Reinstate Fire Risk Assessment">
+        <p>
+            Are you sure you want to reinstate this fire risk assessment?</p>
+    </div>
+</div>
+<div class="hide">
+    <div id="dialogCopyRiskAssessment" title="<span id='warning'></span>Copy Fire Risk Assessment">
+        <form>
+        <fieldset>
+            <legend><h3>New Risk Assessment Details</h3></legend>
+            <div class="alert alert-error hide"></div>
+            <div class="row">
+                <label class="span2">New Title: </label><input type="text" id="Title" name="Title" />
+            </div>
+            <div class="row">
+                <label class="span2">New Reference: </label><input type="text" id="Reference" name="Reference" />
+            </div>
+        </fieldset>
+        </form>
+    </div>
+</div>
+<div class="hide">
+    <div id="dialogCopyRiskAssessmentMenu" title="<span id='warning'></span>Copy General Risk Assessment" >
+        <h1>Would you like to:</h1>
+        <div class="well">
+            <ul>
+                <li><a id="copySingleSiteRiskAssessmentLink" href="#" data-id="" data-url="">Copy for a single site</a></li>
+                <li><a id="copyMultipleSitesRiskAssessmentLink" href="#" data-id="" data-url="">Copy for multiple sites</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="dialogCopyRiskAssessment" title="<span id='warning'></span>Copy Fire Risk Assessment">
+        <form>
+            <fieldset>
+                <legend><h3>New Risk Assessment Details</h3></legend>
+                <div class="alert alert-error hide"></div>
+                <div class="row">
+                    <label class="span2">New Title: </label><input type="text" id="Title" name="Title" />
+                </div>
+                <div class="row">
+                    <label class="span2">New Reference: </label><input type="text" id="Reference" name="Reference" />
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div id="dialogCopyMultipleSitesRiskAssessment" title="<span id='warning'></span>Copy General Risk Assessment">
+        <form id="formCopyMultipleSitesRiskAssessment">
+            <fieldset>
+                <legend><h3>New Risk Assessment Details</h3></legend>
+                <div class="alert alert-error hide"></div>
+                <div class="row">
+                    <label class="span2">New Title: </label><input type="text" id="Title" name="Title" />
+                </div>
+                <div class="row">
+                    <label class="span2">Sites: </label>
+                    @Html.Partial("_SitesMultiSelect", Model.MultiSelectSites)
+                </div>  
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("sharedriskassessment");
+        @Bundles.RenderScripts()  
+    }
+    <script type="text/javascript">
+        $(function () {
+            var sites = @Html.Raw(Json.Encode(Model.Sites));
+            var siteGroups = @Html.Raw(Json.Encode(Model.SiteGroups));
+            riskAssessmentsSearch.initialise(fireRiskAssessmentsViewModel, siteGroups, sites);
+        });
+    </script>
+}

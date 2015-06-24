@@ -1,0 +1,23 @@
+USE [BusinessSafe]
+GO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'PersonalRiskAssessment' AND COLUMN_NAME = 'Sensitive')
+BEGIN
+	ALTER TABLE [PersonalRiskAssessment]
+	ADD [Sensitive] [bit] NULL
+END
+GO
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'PersonalRiskAssessment' AND COLUMN_NAME = 'Sensitive')
+BEGIN
+	UPDATE [PersonalRiskAssessment] SET [Sensitive] = 0
+END
+GO
+
+--//@UNDO
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'PersonalRiskAssessment' AND COLUMN_NAME = 'Sensitive')
+BEGIN
+	ALTER TABLE [PersonalRiskAssessment]
+	DROP COLUMN [Sensitive] 
+END

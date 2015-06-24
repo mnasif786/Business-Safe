@@ -1,0 +1,1959 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3CF88FC7-ED75-48C1-A2CE-A16754F3FA0F}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BusinessSafe.WebSite</RootNamespace>
+    <AssemblyName>BusinessSafe.WebSite</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DeployIisAppPath>businesssafe</DeployIisAppPath>
+    <DefineConstants>DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CI|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'UAT|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LIVE|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxMin, Version=4.60.4609.17023, Culture=neutral, PublicKeyToken=21ef50ce11b5d80f, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxMin.4.60.4609.17023\lib\net20\AjaxMin.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=2.1.265.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL" />
+    <Reference Include="Cassette, Version=2.0.0.17974, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cassette.2.0.0\lib\net40-client\Cassette.dll</HintPath>
+    </Reference>
+    <Reference Include="Cassette.Aspnet">
+      <HintPath>..\packages\Cassette.Aspnet.2.0.0\lib\net40\Cassette.Aspnet.dll</HintPath>
+    </Reference>
+    <Reference Include="Cassette.Views">
+      <HintPath>..\packages\Cassette.Views.2.0.0\lib\net40\Cassette.Views.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah.Mvc">
+      <HintPath>..\packages\Elmah.MVC.2.0.2\lib\net40\Elmah.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation, Version=3.3.1.0, Culture=neutral, PublicKeyToken=a82054b837897c66, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.3.3.1.0\lib\Net40\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation.Mvc">
+      <HintPath>..\packages\FluentValidation.MVC3.3.3.1.0\lib\Net40\FluentValidation.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="HibernatingRhinos.Profiler.Appender.v4.0">
+      <HintPath>..\Lib\HibernatingRhinos.Profiler.Appender.v4.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.SHDocVw">
+      <HintPath>..\packages\WatiN.2.1.0\lib\net40\Interop.SHDocVw.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NServiceBus.3.2.6\lib\net40\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <Private>True</Private>
+      <HintPath>..\packages\WatiN.2.1.0\lib\net40\Microsoft.mshtml.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcContrib">
+      <HintPath>..\packages\MvcContrib.2.0.95.0\lib\MvcContrib.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.3.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL" />
+    <Reference Include="NServiceBus, Version=3.2.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL" />
+    <Reference Include="NServiceBus.Core">
+      <HintPath>..\packages\NServiceBus.3.2.6\lib\net40\NServiceBus.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus.NHibernate">
+      <HintPath>..\packages\NServiceBus.NHibernate.3.2.6\lib\net40\NServiceBus.NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Peninsula.Online.Messages">
+      <HintPath>..\Lib\Peninsula.Online.Messages\Peninsula.Online.Messages.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=104.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="RouteDebugger">
+      <HintPath>..\packages\routedebugger.2.1.3\lib\net40\RouteDebugger.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap, Version=2.6.3.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
+      <HintPath>..\packages\structuremap.2.6.3\lib\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\System.Web.Optimization\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Telerik.Web.Mvc">
+      <HintPath>..\Lib\Telerik.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="WatiN.Core">
+      <HintPath>..\packages\WatiN.2.1.0\lib\net40\WatiN.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Areas\AccidentReports\AccidentReportsAreaRegistration.cs" />
+    <Compile Include="Areas\AccidentReports\Controllers\AccidentDetailsController.cs" />
+    <Compile Include="Areas\AccidentReports\Controllers\AccidentRecordStatusController.cs" />
+    <Compile Include="Areas\AccidentReports\Factories\AccidentDetailsViewModelFactory.cs" />
+    <Compile Include="Areas\AccidentReports\Factories\AccidentRecordOverviewViewModelFactory.cs" />
+    <Compile Include="Areas\AccidentReports\Factories\IAccidentRecordOverviewViewModelFactory.cs" />
+    <Compile Include="Areas\AccidentReports\Factories\INextStepsViewModelFactory.cs" />
+    <Compile Include="Areas\AccidentReports\Factories\InjuryDetailsViewModelFactory.cs" />
+    <Compile Include="Areas\AccidentReports\Factories\NextStepsViewModelFactory.cs" />
+    <Compile Include="Areas\AccidentReports\ViewModels\AccidentSummaryViewModel.cs" />
+    <Compile Include="Areas\AccidentReports\Factories\IAccidentSummaryViewModelFactory.cs" />
+    <Compile Include="Areas\AccidentReports\Factories\AccidentSummmaryViewModelFactory.cs" />
+    <Compile Include="Areas\AccidentReports\Factories\IAccidentDetailsViewModelFactory.cs" />
+    <Compile Include="Areas\AccidentReports\Controllers\InjuryDetailsController.cs" />
+    <Compile Include="Areas\AccidentReports\Controllers\NextStepsController.cs" />
+    <Compile Include="Areas\AccidentReports\Factories\ISearchAccidentRecordViewModelFactory.cs" />
+    <Compile Include="Areas\AccidentReports\Factories\SearchAccidentRecordViewModelFactory.cs" />
+    <Compile Include="Areas\AccidentReports\ViewModels\InjuryDetailsViewModel.cs" />
+    <Compile Include="Areas\AccidentReports\Factories\IInjuredPersonViewModelFactory.cs" />
+    <Compile Include="Areas\AccidentReports\Factories\InjuredPersonViewModelFactory.cs" />
+    <Compile Include="Areas\AccidentReports\ViewModels\OverviewViewModel.cs" />
+    <Compile Include="Areas\AccidentReports\ViewModels\AccidentRecordsIndexViewModel.cs" />
+    <Compile Include="Areas\AccidentReports\Controllers\OverviewController.cs" />
+    <Compile Include="Areas\AccidentReports\ViewModels\AccidentRecordTabs.cs" />
+    <Compile Include="Areas\AccidentReports\ViewModels\AccidentRecordTabsViewModel.cs" />
+    <Compile Include="Areas\AccidentReports\ViewModels\NextStepsViewModel.cs" />
+    <Compile Include="Areas\AccidentReports\ViewModels\AccidentDetailsViewModel.cs" />
+    <Compile Include="Areas\AccidentReports\Controllers\SummaryController.cs" />
+    <Compile Include="Areas\AccidentReports\Controllers\InjuredPersonController.cs" />
+    <Compile Include="Areas\AccidentReports\Controllers\SearchController.cs" />
+    <Compile Include="Areas\AccidentReports\Controllers\CreateController.cs" />
+    <Compile Include="Areas\AccidentReports\ViewModels\CreateAccidentRecordSummaryViewModel.cs" />
+    <Compile Include="Areas\AccidentReports\ViewModels\InjuredPersonViewModel.cs" />
+    <Compile Include="Areas\ActionPlans\ActionPlanAreaRegistration.cs" />
+    <Compile Include="Areas\ActionPlans\Controllers\ActionPlanController.cs" />
+    <Compile Include="Areas\ActionPlans\Controllers\ActionsController.cs" />
+    <Compile Include="Areas\ActionPlans\Factories\IReassignActionTaskViewModelFactory.cs" />
+    <Compile Include="Areas\ActionPlans\Factories\ReassignActionTaskViewModelFactory.cs" />
+    <Compile Include="Areas\ActionPlans\ViewModels\ReassignActionTaskViewModel.cs" />
+    <Compile Include="Areas\ActionPlans\Factories\CompleteActionTaskViewModelFactory.cs" />
+    <Compile Include="Areas\ActionPlans\Factories\ICompleteActionTaskViewModelFactory.cs" />
+    <Compile Include="Areas\ActionPlans\Factories\ISearchActionPlanViewModelFactory.cs" />
+    <Compile Include="Areas\ActionPlans\Factories\ISearchActionViewModelFactory.cs" />
+    <Compile Include="Areas\ActionPlans\Factories\IViewActionTaskViewModelFactory.cs" />
+    <Compile Include="Areas\ActionPlans\Factories\SearchActionPlanViewModelFactory.cs" />
+    <Compile Include="Areas\ActionPlans\Factories\SearchActionViewModelFactory.cs" />
+    <Compile Include="Areas\ActionPlans\Factories\ViewActionTaskViewModelFactory.cs" />
+    <Compile Include="Areas\ActionPlans\Tasks\AssignActionPlanTaskCommand.cs" />
+    <Compile Include="Areas\ActionPlans\Tasks\IAssignActionPlanTaskCommand.cs" />
+    <Compile Include="Areas\ActionPlans\ViewModels\ActionSummaryViewModel.cs" />
+    <Compile Include="Areas\ActionPlans\ViewModels\AssignActionPlanTaskViewModel.cs" />
+    <Compile Include="Areas\ActionPlans\ViewModels\CompleteActionTaskViewModel.cs" />
+    <Compile Include="Areas\ActionPlans\ViewModels\SearchActionPlanResultViewModel.cs" />
+    <Compile Include="Areas\ActionPlans\ViewModels\SearchActionResultViewModel.cs" />
+    <Compile Include="Areas\ActionPlans\Controllers\ImmediateRiskNotificationsActionsController.cs" />
+    <Compile Include="Areas\ActionPlans\ViewModels\ActionPlanIndexViewModel.cs" />
+    <Compile Include="Areas\ActionPlans\ViewModels\AssignedToViewModel.cs" />
+    <Compile Include="Areas\ActionPlans\ViewModels\ImmediateRiskNotificationActionsIndexViewModel.cs" />
+    <Compile Include="Areas\ActionPlans\ViewModels\SearchImmediateRiskNotificationResultViewModel.cs" />
+    <Compile Include="Areas\ActionPlans\ViewModels\ViewActionTaskViewModel.cs" />
+    <Compile Include="Areas\Company\CompanyAreaRegistration.cs" />
+    <Compile Include="Areas\Company\Controllers\AccidentRecordDistributionController.cs" />
+    <Compile Include="Areas\Company\Controllers\RiskAssessorController.cs" />
+    <Compile Include="Areas\Company\Factories\AccidentRecordDistributionListModelFactory.cs" />
+    <Compile Include="Areas\Company\Factories\AddEditRiskAssessorViewModelFactory.cs" />
+    <Compile Include="Areas\Company\Factories\IAccidentRecordDistributionListModelFactory.cs" />
+    <Compile Include="Areas\Company\Factories\IAddEditRiskAssessorViewModelFactory.cs" />
+    <Compile Include="Areas\Company\Tasks\FireSafetyControlMeasureSaveTask.cs" />
+    <Compile Include="Areas\Company\Tasks\InjurySaveTask.cs" />
+    <Compile Include="Areas\Company\Tasks\SourceOfFuelSaveTask.cs" />
+    <Compile Include="Areas\Company\Tasks\SourceOfIgnitionSaveTask.cs" />
+    <Compile Include="Areas\Company\ViewModels\AccidentRecordDistributionListViewModel.cs" />
+    <Compile Include="Areas\Company\ViewModels\AddEditRiskAssessorViewModel.cs" />
+    <Compile Include="Areas\Company\ViewModels\CanDeleteRiskAssessorViewModel.cs" />
+    <Compile Include="Areas\Company\ViewModels\CompanyDetailsViewModel.cs" />
+    <Compile Include="Areas\Company\ViewModels\DeleteCompanyDefaultViewModel.cs" />
+    <Compile Include="Areas\Company\Factories\IRiskAssessorsDefaultAddEditViewModelFactory.cs" />
+    <Compile Include="Areas\Company\Factories\RiskAssessorsDefaultAddEditViewModelFactory.cs" />
+    <Compile Include="Areas\Company\ViewModels\RiskAssessorsDefaults.cs" />
+    <Compile Include="Areas\Company\ViewModels\SaveCompanyDefaultViewModel.cs" />
+    <Compile Include="Areas\Contact\ContactUsAreaRegistration.cs" />
+    <Compile Include="Areas\Contact\Controllers\ContactUsController.cs" />
+    <Compile Include="Areas\Contact\ViewModels\ContactUsViewModel.cs" />
+    <Compile Include="Areas\Documents\Controllers\AddedDocumentsLibraryController.cs" />
+    <Compile Include="Areas\Documents\DocumentsAreaRegistration.cs" />
+    <Compile Include="Areas\Documents\Factories\IExistingDocumentsViewModelFactory.cs" />
+    <Compile Include="Areas\Employees\EmployeesAreaRegistration.cs" />
+    <Compile Include="Areas\Employees\Factories\IViewEmergencyContactViewModelFactory.cs" />
+    <Compile Include="Areas\Employees\Factories\ViewEmergencyContactViewModelFactory.cs" />
+    <Compile Include="Areas\Employees\ViewModels\ResendUserRegistrationEmailViewModel.cs" />
+    <Compile Include="Areas\Employees\ViewModels\ViewEmergencyContactDetailViewModel.cs" />
+    <Compile Include="Areas\FireRiskAssessments\Controllers\ChecklistController.cs" />
+    <Compile Include="Areas\FireRiskAssessments\Controllers\DocumentsController.cs" />
+    <Compile Include="Areas\FireRiskAssessments\Controllers\FurtherControlMeasureTaskController.cs" />
+    <Compile Include="Areas\FireRiskAssessments\Controllers\HazardsController.cs" />
+    <Compile Include="Areas\FireRiskAssessments\Controllers\PremisesInformationController.cs" />
+    <Compile Include="Areas\FireRiskAssessments\Controllers\ReviewController.cs" />
+    <Compile Include="Areas\FireRiskAssessments\Controllers\SignificantFindingsController.cs" />
+    <Compile Include="Areas\FireRiskAssessments\Controllers\SummaryController.cs" />
+    <Compile Include="Areas\FireRiskAssessments\Factories\AddFireRiskAssessmentFurtherControlMeasureTaskViewModelFactory.cs" />
+    <Compile Include="Areas\FireRiskAssessments\Factories\EditFireRiskAssessmentSummaryViewModelFactory.cs" />
+    <Compile Include="Areas\FireRiskAssessments\Factories\EditHazardousSubstanceFurtherControlMeasureTaskViewModelFactory.cs" />
+    <Compile Include="Areas\FireRiskAssessments\Factories\FireRiskAssessmentChecklistViewModelFactory.cs" />
+    <Compile Include="Areas\FireRiskAssessments\Factories\IAddFireRiskAssessmentFurtherControlMeasureTaskViewModelFactory.cs" />
+    <Compile Include="Areas\FireRiskAssessments\Factories\IEditFireRiskAssessmentFurtherControlMeasureTaskViewModelFactory.cs" />
+    <Compile Include="Areas\FireRiskAssessments\Factories\IEditFireRiskAssessmentSummaryViewModelFactory.cs" />
+    <Compile Include="Areas\FireRiskAssessments\Factories\IFireRiskAssessmentChecklistViewModelFactory.cs" />
+    <Compile Include="Areas\FireRiskAssessments\Factories\IPremisesInformationViewModelFactory.cs" />
+    <Compile Include="Areas\FireRiskAssessments\Factories\ISearchRiskAssessmentViewModelFactory.cs" />
+    <Compile Include="Areas\FireRiskAssessments\Factories\ISignificantFindingViewModelFactory.cs" />
+    <Compile Include="Areas\FireRiskAssessments\Factories\PremisesInformationViewModelFactory.cs" />
+    <Compile Include="Areas\SqlReports\Factories\AccidentRecordsFactory.cs" />
+    <Compile Include="Areas\SqlReports\Factories\SqlReportsViewModelFactory.cs" />
+    <Compile Include="Areas\SqlReports\ViewModels\SqlReportViewModel.cs" />
+    <Compile Include="Areas\SqlReports\Controllers\AccidentRecordController.cs" />
+    <Compile Include="Areas\SqlReports\Controllers\AccidentRecordsController.cs" />
+    <Compile Include="Areas\SqlReports\Controllers\HazardousSubstancesInventoryController.cs" />
+    <Compile Include="Areas\TermsAndConditions\Controllers\DataProtectionPolicyController.cs" />
+    <Compile Include="Areas\TermsAndConditions\Controllers\TermsOfServiceController.cs" />
+    <Compile Include="Areas\TermsAndConditions\TermsAndConditionsAreaRegistration.cs" />
+    <Compile Include="Areas\VisitRequest\Controllers\VisitRequestController.cs" />
+    <Compile Include="Areas\VisitRequest\Factories\VisitRequestViewModelFactory.cs" />
+    <Compile Include="Areas\VisitRequest\ViewModels\VisitRequestResultViewModel.cs" />
+    <Compile Include="Areas\VisitRequest\ViewModels\VisitRequestViewModel.cs" />
+    <Compile Include="Areas\VisitRequest\VisitRequestAreaRegistration.cs" />
+    <Compile Include="Contracts\ISqlReportsViewModelFactory.cs" />
+    <Compile Include="Contracts\SqlReports\IAccidentRecordsFactory.cs" />
+    <Compile Include="Controllers\AutoMappers\AddUserForEmployeeMapper.cs" />
+    <Compile Include="Controllers\AutoMappers\AutoMapperConfiguration.cs" />
+    <Compile Include="Helpers\RiskAssessmentTelerikOrderByHelper.cs" />
+    <Compile Include="Areas\FireRiskAssessments\Factories\SearchRiskAssessmentViewModelFactory.cs" />
+    <Compile Include="Areas\FireRiskAssessments\Factories\SignificantFindingViewModelFactory.cs" />
+    <Compile Include="Areas\FireRiskAssessments\FireRiskAssessmentsAreaRegistration.cs" />
+    <Compile Include="Areas\FireRiskAssessments\Controllers\RiskAssessmentController.cs" />
+    <Compile Include="Areas\FireRiskAssessments\ViewModels\AddEditFireRiskAssessmentFurtherControlMeasureTaskViewModel.cs" />
+    <Compile Include="Areas\FireRiskAssessments\ViewModels\DoesAnswerHaveFurtherControlMeasureTasksViewModel.cs" />
+    <Compile Include="Areas\FireRiskAssessments\ViewModels\FireRiskAssessmentChecklistViewModelExtension.cs" />
+    <Compile Include="Areas\FireRiskAssessments\ViewModels\MarkSignificantFindingAsDeletedViewModel.cs" />
+    <Compile Include="Areas\FireRiskAssessments\ViewModels\SignificantFindingViewModel.cs" />
+    <Compile Include="Areas\FireRiskAssessments\ViewModels\EditSummaryViewModel.cs" />
+    <Compile Include="Areas\FireRiskAssessments\ViewModels\CreatingRiskAssessmentSummaryViewModel.cs" />
+    <Compile Include="Areas\FireRiskAssessments\ViewModels\FireAnswerViewModel.cs" />
+    <Compile Include="Areas\FireRiskAssessments\ViewModels\FireRiskAssessmentChecklistViewModel.cs" />
+    <Compile Include="Areas\FireRiskAssessments\ViewModels\FireRiskAssessmentTabs.cs" />
+    <Compile Include="Areas\FireRiskAssessments\ViewModels\FireRiskAssessmentTabViewModel.cs" />
+    <Compile Include="Areas\FireRiskAssessments\ViewModels\PremisesInformationViewModel.cs" />
+    <Compile Include="Areas\FireRiskAssessments\ViewModels\QuestionViewModel.cs" />
+    <Compile Include="Areas\FireRiskAssessments\ViewModels\SectionViewModel.cs" />
+    <Compile Include="Areas\FireRiskAssessments\ViewModels\RiskAssessmentSignificantFindingsViewModel.cs" />
+    <Compile Include="Areas\FireRiskAssessments\ViewModels\ValidateCompleteFireRiskAssessmentChecklistViewModel.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\Controllers\FurtherControlMeasureTaskController.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\Controllers\ReviewController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Areas\GeneralRiskAssessments\Controllers\SummaryController.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\Factories\EditGeneralRiskAssessmentSummaryViewModelFactory.cs" />
+    <Compile Include="Areas\FireRiskAssessments\Factories\FireRiskAssessmentReviewsViewModelFactory.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\Factories\IEditGeneralRiskAssessmentSummaryViewModelFactory.cs" />
+    <Compile Include="Areas\FireRiskAssessments\ViewModels\FireRiskAssessmentSummaryViewModel.cs" />
+    <Compile Include="Areas\FireRiskAssessments\Factories\IFireRiskAssessmentReviewsViewModelFactory.cs" />
+    <Compile Include="Areas\FireRiskAssessments\ViewModels\FireRiskAssessmentReviewsViewModel.cs" />
+    <Compile Include="Areas\Responsibilities\ViewModels\CopyResponsibilityViewModel.cs" />
+    <Compile Include="CustomModelBinders\CopyRiskAssessmentForMultipleSitesViewModelBinder.cs" />
+    <Compile Include="ViewModels\CopyRiskAssessmentForMultipleSitesViewModel.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\ViewModels\CopyRiskAssessmentViewModel.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Controllers\ChecklistManagerCommandsController.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Factories\ISelectedEmployeeViewModel.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Factories\SelectedEmployeeViewModelFactory.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\ViewModels\SelectedEmployeeViewModel.cs" />
+    <Compile Include="Areas\Responsibilities\ViewModels\Wizard\ResponsibilityWizardTabs.cs" />
+    <Compile Include="Areas\SafeCheck\Controllers\SafeCheckController.cs" />
+    <Compile Include="Areas\SafeCheck\Models\CheckListViewModel.cs" />
+    <Compile Include="Areas\SafeCheck\SafeCheckAreaRegistration.cs" />
+    <Compile Include="Areas\SqlReports\Controllers\ResponsibilitiesController.cs" />
+    <Compile Include="Controllers\LiveCheckController.cs" />
+    <Compile Include="Filters\AccidentRecordCurrentTabActionFilter.cs" />
+    <Compile Include="Filters\AccidentRecordContextFilter.cs" />
+    <Compile Include="Filters\FireRiskAssessmentCurrentTabActionFilter.cs" />
+    <Compile Include="Filters\GeneralRiskAssessmentCurrentTabActionFilter.cs" />
+    <Compile Include="Filters\HazardousSubstanceRiskAssessmentCurrentTabActionFilter.cs" />
+    <Compile Include="Filters\PersonalRiskAssessmentCurrentTabActionFilter.cs" />
+    <Compile Include="Filters\ResponsibilityWizardTabActionFilterAttribute.cs" />
+    <Compile Include="Areas\Responsibilities\ViewModels\Wizard\GenerateResponsibilityTaskViewModel.cs" />
+    <Compile Include="Areas\Responsibilities\Factories\OLD_GenerateResponsibilityTasksViewModelFactory.cs" />
+    <Compile Include="Areas\Responsibilities\Factories\GenerateResponsibilityTasksViewModelFactory.cs" />
+    <Compile Include="Areas\Responsibilities\Factories\IGenerateResponsibilityTasksViewModelFactory.cs" />
+    <Compile Include="Areas\Responsibilities\ViewModels\Wizard\EmployeeViewModel.cs" />
+    <Compile Include="Areas\Responsibilities\ViewModels\Wizard\CreateResponsibilityFromSiteAndResponsibilityTemplateModel.cs" />
+    <Compile Include="Areas\Responsibilities\Factories\IGenerateResponsibilitiesViewModelFactory.cs" />
+    <Compile Include="Areas\Responsibilities\Factories\IReassignResponsibilityTaskViewModelFactory.cs" />
+    <Compile Include="Areas\Responsibilities\Factories\IViewResponsibilityTaskViewModelFactory.cs" />
+    <Compile Include="Areas\Responsibilities\Factories\ReassignResponsibilityTaskViewModelFactory.cs" />
+    <Compile Include="Areas\Responsibilities\Factories\ViewResponsibilityTaskViewModelFactory.cs" />
+    <Compile Include="Areas\Responsibilities\ViewModels\CompleteResponsibilityTaskViewModel.cs" />
+    <Compile Include="Areas\Responsibilities\Factories\CompleteResponsibilityTaskViewModelFactory.cs" />
+    <Compile Include="Areas\Responsibilities\Factories\ICompleteResponsibilityTaskViewModelFactory.cs" />
+    <Compile Include="Areas\Responsibilities\Factories\CreateUpdateResponsibilityTaskViewModelFactory.cs" />
+    <Compile Include="Areas\Responsibilities\Factories\GenerateResponsibilitiesViewModelFactory.cs" />
+    <Compile Include="Areas\Responsibilities\Factories\ICreateUpdateResponsibilityTaskViewModelFactory.cs" />
+    <Compile Include="Areas\Responsibilities\ViewModels\ReassignResponsibilityTaskViewModel.cs" />
+    <Compile Include="Areas\Responsibilities\ViewModels\ViewResponsibilityTaskViewModel.cs" />
+    <Compile Include="Areas\Responsibilities\ViewModels\ResponsibilitySummaryViewModel.cs" />
+    <Compile Include="Areas\Responsibilities\ViewModels\Wizard\FrequencyViewModel.cs" />
+    <Compile Include="Areas\Responsibilities\ViewModels\Wizard\GenerateResponsibilitiesViewModel.cs" />
+    <Compile Include="Areas\Responsibilities\ViewModels\Wizard\StatutoryResponsibilityTaskViewModel.cs" />
+    <Compile Include="Areas\Responsibilities\ViewModels\Wizard\SelectResponsibilitiesViewModel.cs" />
+    <Compile Include="Areas\Responsibilities\Factories\ISelectResponsibilitiesViewModelFactory.cs" />
+    <Compile Include="Areas\Responsibilities\Factories\SelectResponsibilitiesViewModelFactory.cs" />
+    <Compile Include="Areas\Responsibilities\ViewModels\ResponsibilityTasksViewModel.cs" />
+    <Compile Include="Areas\Responsibilities\ViewModels\Wizard\StatutoryResponsibilityViewModel.cs" />
+    <Compile Include="Areas\Responsibilities\ViewModels\Wizard\GenerateResponsibilityTasksViewModel.cs" />
+    <Compile Include="Areas\Responsibilities\Controllers\WizardController.cs" />
+    <Compile Include="Areas\Responsibilities\Factories\ResponsibilityViewModelFactory.cs" />
+    <Compile Include="Areas\Responsibilities\Factories\IResponsibilityViewModelFactory.cs" />
+    <Compile Include="Areas\Responsibilities\Factories\ISearchResponsibilityViewModelFactory.cs" />
+    <Compile Include="Areas\Responsibilities\Factories\SearchResponsibilityViewModelFactory.cs" />
+    <Compile Include="Areas\Responsibilities\ViewModels\CreateUpdateResponsibilityTaskViewModel.cs" />
+    <Compile Include="Areas\Responsibilities\ViewModels\ResponsibilityViewModel.cs" />
+    <Compile Include="Areas\Responsibilities\Controllers\ResponsibilityController.cs" />
+    <Compile Include="Areas\Responsibilities\ResponsibilitiesAreaRegistration.cs" />
+    <Compile Include="Areas\Responsibilities\ViewModels\ResponsibilitiesIndexViewModel.cs" />
+    <Compile Include="Areas\Responsibilities\ViewModels\SearchResponsibilitiesResultViewModel.cs" />
+    <Compile Include="Areas\TaskList\ViewModels\MarkResponsibilityTaskAsNoLongerRequiredViewModel.cs" />
+    <Compile Include="Areas\TaskList\ViewModels\MarkResponsibilityTaskAsDeletedViewModel.cs" />
+    <Compile Include="Extensions\DateTimeOffsetExtensions.cs" />
+    <Compile Include="Helpers\BusinessSafeLogOut.cs" />
+    <Compile Include="ServiceProxies\PeninsulaOnlineRegistrationService.cs" />
+    <Compile Include="ViewModels\RiskAssessmentSearchViewModel.cs" />
+    <Compile Include="Areas\SqlReports\Controllers\PersonalRiskAssessmentsController.cs" />
+    <Compile Include="Areas\Users\Controllers\ResendRegistrationEmailController.cs" />
+    <Compile Include="AuthenticationService\Permissions.cs" />
+    <Compile Include="CacheTime.cs" />
+    <Compile Include="Custom Exceptions\BusinessSafeUnauthorisedException.cs" />
+    <Compile Include="CustomPrincipalFactory.cs" />
+    <Content Include="Areas\ActionPlans\Views\ImmediateRiskNotificationsActions\_ActionSummary.cshtml" />
+    <Content Include="Areas\ActionPlans\Views\ImmediateRiskNotificationsActions\_CompleteActionTaskDetails.cshtml" />
+    <Content Include="Areas\ActionPlans\Views\ImmediateRiskNotificationsActions\_ReadOnlyActionTaskDetail.cshtml" />
+    <Content Include="Content\images\ticked.png" />
+    <Content Include="Content\images\unticked.png" />
+    <Content Include="Content\images\phone.png" />
+    <Content Include="Content\images\red-arrow.gif" />
+    <EmbeddedResource Include="Documents\1.Sites Setup Video.mp4" />
+    <EmbeddedResource Include="Documents\2.Adding My Employees Video.mp4" />
+    <EmbeddedResource Include="Documents\3.Adding Users Video.mp4" />
+    <EmbeddedResource Include="Documents\4.Responsibilities Wizard Video.mp4" />
+    <EmbeddedResource Include="Documents\5.General Risk Assessment Video.mp4" />
+    <EmbeddedResource Include="Documents\6.Fire Risk Assessment Video.mp4" />
+    <EmbeddedResource Include="Documents\7.Personal Risk Assessment Video.mp4" />
+    <EmbeddedResource Include="Documents\8.Hazardous Substances Video.mp4" />
+    <Content Include="Content\themes\bso_v1.5\ipad.css" />
+    <Content Include="Error404.aspx" />
+    <Content Include="Error401.aspx" />
+    <Content Include="Error.aspx" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.sqlreports.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.actionplan.reassign.task.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.accidentrerecord.injuredperson.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.actionplan.search.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.companydefaults.riskassessors.dommanipulation.js" />
+    <Compile Include="ViewModels\SiteMultiSelectViewModel.cs" />
+    <Compile Include="ViewModels\UpdateHazardTitleViewModel.cs" />
+    <Compile Include="CustomValidators\MustNotBeNullAttribute.cs" />
+    <Compile Include="ViewModels\ISearchRiskAssessmentsViewModel.cs" />
+    <Compile Include="ViewModels\RiskAssessmentSearchResultTitleBarMessages.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Controllers\ChecklistGeneratorController.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Controllers\ChecklistManagerController.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Factories\EmployeeChecklistGeneratorViewModelFactory.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Factories\ChecklistManagerViewModelFactory.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Factories\EmployeeChecklistSummaryViewModelFactory.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Factories\IChecklistManagerViewModelFactory.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Factories\IEmployeeChecklistSummaryViewModelFactory.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\ViewModels\ChecklistGeneratorChecklistViewModel.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\ViewModels\EmployeeChecklistGeneratorViewModel.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\ViewModels\ChecklistManagerViewModel.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\ViewModels\ChecklistsToGenerateViewModel.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\ViewModels\CreatingRiskAssessmentSummaryViewModel.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\ViewModels\EmployeeChecklistSummaryViewModel.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\ViewModels\EmployeeChecklistViewModel.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\ViewModels\ViewEmployeeChecklistViewModel.cs" />
+    <Compile Include="Areas\SqlReports\Controllers\SqlReportsController.cs" />
+    <Compile Include="Areas\Reports\ReportsAreaRegistration.cs" />
+    <Compile Include="Areas\SqlReports\Controllers\FireRiskAssessmentsController.cs" />
+    <Compile Include="Areas\SqlReports\Controllers\HazardousSubstanceRiskAssessmentController.cs" />
+    <Compile Include="CassetteConfiguration.cs" />
+    <Compile Include="Controllers\HealthStatusController.cs" />
+    <Compile Include="Controllers\HelpController.cs" />
+    <Compile Include="Extensions\FurtherControlMeasureTaskDtoExtensions.cs" />
+    <Compile Include="Helpers\ImpersonateGuard.cs" />
+    <Compile Include="CustomModelBinders\FireRiskAssessmentChecklistViewModelBinder.cs" />
+    <Compile Include="CustomValidators\EmailAttribute.cs" />
+    <Compile Include="Helpers\EventPublisher.cs" />
+    <Compile Include="Helpers\IReviewAuditDocumentHelper.cs" />
+    <Compile Include="Helpers\ReviewAuditDocumentHelper.cs" />
+    <Compile Include="CustomModelBinders\ChecklistGeneratorViewModelBinder.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\ViewModels\ResendEmployeeChecklistViewModel.cs" />
+    <Compile Include="CustomValidators\MustBeNotEmptyGuidAttribute.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Factories\IEmployeeChecklistGeneratorViewModelFactory.cs" />
+    <Compile Include="Factories\IReassignFurtherControlMeasureTaskWithHazardSummaryViewModelFactory.cs" />
+    <Compile Include="Factories\ReassignFurtherControlMeasureTaskWithHazardSummaryViewModelFactory.cs" />
+    <Compile Include="Factories\ICompleteFurtherControlMeasureTaskWithHazardSummaryViewModelFactory.cs" />
+    <Compile Include="Factories\IViewRiskAssessmentFurtherControlMeasureTaskViewModelFactory.cs" />
+    <Compile Include="Factories\IAddFurtherControlMeasureTaskViewModelFactory.cs" />
+    <Compile Include="Factories\AddFurtherControlMeasureTaskViewModelFactory.cs" />
+    <Compile Include="Factories\CompleteFurtherControlMeasureTaskWithHazardSummaryViewModelFactory.cs" />
+    <Compile Include="Factories\IEditFurtherControlMeasureTaskViewModelFactory.cs" />
+    <Compile Include="Factories\IRiskAssessmentHazardSummaryViewModelFactory.cs" />
+    <Compile Include="Factories\EditFurtherControlMeasureTaskViewModelFactory.cs" />
+    <Compile Include="Factories\RiskAssessmentHazardSummaryViewModelFactory.cs" />
+    <Compile Include="Factories\ViewRiskAssessmentFurtherControlMeasureTaskViewModelFactory.cs" />
+    <Compile Include="Filters\FireRiskAssessmentContextFilter.cs" />
+    <Compile Include="Filters\PersonralRiskAssessmentContextFilter.cs" />
+    <Compile Include="Helpers\Log4NetHelper.cs" />
+    <Compile Include="HtmlHelpers\FeatureSwitchChecker.cs" />
+    <Compile Include="HtmlHelpers\FeatureSwitches.cs" />
+    <Compile Include="HtmlHelpers\IsImpersonatingUserHelper.cs" />
+    <Compile Include="ViewModels\EditRiskAssessmentFurtherControlMeasureTaskViewModel.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Controllers\FurtherControlMeasureTaskController.cs" />
+    <Compile Include="ViewModels\AddRiskAssessmentFurtherControlMeasureTaskViewModel.cs" />
+    <Compile Include="ViewModels\CompleteRiskAssessmentFurtherControlMeasureTaskViewModel.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\ViewModels\EditSummaryViewModel.cs" />
+    <Compile Include="ViewModels\RiskAssessmentHazardSummaryViewModel.cs" />
+    <Compile Include="ViewModels\ReassignRiskAssessmentFurtherControlMeasureTaskViewModel.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Controllers\ControlMeasuresController.cs" />
+    <Compile Include="ViewModels\SaveHazardsViewModel.cs" />
+    <Compile Include="ViewModels\ViewRiskAssessmentFurtherControlMeasureTaskViewModel.cs" />
+    <Compile Include="Areas\HazardousSubstanceInventory\Controllers\SupplierController.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\Controllers\DocumentsController.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\Controllers\SummaryController.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\Factories\EditHazardousSubstanceRiskAssessmentSummaryViewModelFactory.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\Factories\IAddHazardousSubstanceFurtherControlMeasureTaskViewModelFactory.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\Factories\AddHazardousSubstanceFurtherControlMeasureTaskViewModelFactory.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\Factories\IEditHazardousSubstanceRiskAssessmentSummaryViewModelFactory.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\ViewModels\AddHazardousSubstanceFurtherControlMeasureTaskViewModel.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\ViewModels\EditSummaryViewModel.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Controllers\DocumentsController.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Controllers\HazardsController.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Controllers\PremisesInformationController.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Controllers\ReviewController.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Controllers\RiskAssessmentController.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Controllers\SummaryController.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Factories\EditPersonalRiskAssessmentSummaryViewModelFactory.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Factories\IEditPersonalRiskAssessmentSummaryViewModelFactory.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Factories\IPersonalRiskAsessmentReviewsViewModelFactory.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Factories\IPremisesInformationViewModelFactory.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Factories\ISearchPersonalRiskAssessmentsViewModelFactory.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Factories\PersonalRiskAsessmentReviewsViewModelFactory.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Factories\PremisesInformationViewModelFactory.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\Factories\SearchPersonalRiskAssessmentsViewModelFactory.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\ViewModels\EditSummaryViewModel.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\ViewModels\PersonalRiskAssessmentReviewsViewModel.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\PersonalRiskAssessmentsAreaRegistration.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\ViewModels\PersonalRiskAssessmentSummaryViewModel.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\ViewModels\PersonalRiskAssessmentTabs.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\ViewModels\PersonalRiskAssessmentTabViewModel.cs" />
+    <Compile Include="Areas\PersonalRiskAssessments\ViewModels\PremisesInformationViewModel.cs" />
+    <Compile Include="Areas\SqlReports\Controllers\GeneralRiskAssessmentsController.cs" />
+    <Compile Include="Areas\SqlReports\Factories\SqlReportDefinitionFactory.cs" />
+    <Compile Include="Areas\SqlReports\Helpers\ISqlReportExecutionServiceFacade.cs" />
+    <Compile Include="Areas\SqlReports\Helpers\SqlReportExecutionServiceFacade.cs" />
+    <Compile Include="Areas\SqlReports\ViewModels\SqlReportDefinition.cs" />
+    <Compile Include="Areas\SqlReports\Helpers\SqlReportHelper.cs" />
+    <Compile Include="Areas\SqlReports\SqlReportsAreaRegistration.cs" />
+    <Compile Include="Areas\SqlReports\ViewModels\DocumentViewModel.cs" />
+    <Compile Include="Areas\TaskList\ViewModels\TaskListSummaryViewModel.cs" />
+    <Content Include="Content\images\asc.gif" />
+    <Content Include="Content\images\bg.gif" />
+    <Content Include="Content\images\desc.gif" />
+    <Content Include="Content\themes\bso_v1.5\checklists.css" />
+    <Content Include="Content\themes\bso_v1.5\siteOrgChart.css" />
+    <Compile Include="Controllers\GenericFurtherControlMeasureTaskController.cs" />
+    <Compile Include="Controllers\FurtherControlMeasureTaskDetailsSummaryController.cs" />
+    <Compile Include="Areas\HazardousSubstanceInventory\ViewModels\SafetyPhraseAdditionalInformationViewModel.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\Factories\HazardousSubstanceRiskAssessmentReviewsViewModelFactory.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\Factories\IHazardousSubstanceRiskAssessmentReviewsViewModelFactory.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\ViewModels\HazardousSubstanceRiskAssessmentReviewsViewModel.cs" />
+    <Compile Include="Areas\Sites\ViewModels\CompositeSiteViewModel.cs" />
+    <Compile Include="Controllers\RiskAssessmentEmployeeController.cs" />
+    <Compile Include="Controllers\RiskAssessmentNonEmployeeController.cs" />
+    <Compile Include="Controllers\RiskAssessmentStatusController.cs" />
+    <Compile Include="Custom Exceptions\CompanyNotValidForUserException.cs" />
+    <Compile Include="Custom Exceptions\NoMainSiteAvailableException.cs" />
+    <Compile Include="Custom Exceptions\SitePermissionsInvalidForUserException.cs" />
+    <Compile Include="CustomValidators\ClassLevelRequiredAttribute.cs" />
+    <Compile Include="CustomValidators\FurtherControlMeasureTasks\DateNotInPastIfNotReoccurringAttribute.cs" />
+    <Compile Include="CustomValidators\FurtherControlMeasureTasks\DateNotInPastIfReoccurringAttribute.cs" />
+    <Compile Include="CustomValidators\FurtherControlMeasureTasks\NotZeroIfReoccurringAttribute.cs" />
+    <Compile Include="CustomValidators\FurtherControlMeasureTasks\RequiredIfNotReoccurringAttribute.cs" />
+    <Compile Include="CustomValidators\FurtherControlMeasureTasks\RequiredIfReoccurringAttribute.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\Factories\EditHazardousSubstanceFurtherControlMeasureTaskViewModelFactory.cs" />
+    <Compile Include="CustomModelBinders\SaveDocumentViewModelBinder.cs" />
+    <Compile Include="Extensions\AutoCompleteViewModelExtensions.cs" />
+    <Compile Include="Factories\CompleteReviewViewModelFactory.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\Factories\GeneralRiskAssessmentReviewsViewModelFactory.cs" />
+    <Compile Include="Areas\Documents\Factories\ExistingDocumentsViewModelFactory.cs" />
+    <Compile Include="Factories\CompleteRiskAssessmentReviewRequestBuilder.cs" />
+    <Compile Include="Factories\CreateDocumentRequestBuilder.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\Factories\IEditHazardousSubstanceFurtherControlMeasureTaskViewModelFactory.cs" />
+    <Compile Include="Factories\ICompleteReviewViewModelFactory.cs" />
+    <Compile Include="Factories\DocumentsViewModelFactory.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\Factories\IGeneralRiskAssessmentReviewsViewModelFactory.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\Factories\SearchRiskAssessmentViewModelFactory.cs" />
+    <Compile Include="Factories\IDocumentsViewModelFactory.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\Factories\ISearchRiskAssessmentViewModelFactory.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\ViewModels\GeneralRiskAssessmentReviewsViewModel.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\Controllers\ControlSystemController.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\Controllers\ReviewController.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\ViewModels\GeneralRiskAssessmentArchiveDetailsViewModel.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\ViewModels\HazardousSubstanceRiskAssessmentControlMeasureViewModel.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\ViewModels\HazardousSubstanceRiskAssessmentFurtherControlMeasureViewModel.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\ViewModels\HazardousSubstanceSummaryViewModel.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\ViewModels\PersonAtRiskViewModel.cs" />
+    <Compile Include="ViewModels\FurtherControlMeasureTaskViewModel.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\Controllers\DocumentsController.cs" />
+    <Compile Include="ViewModels\SaveControlMeasureViewModel.cs" />
+    <Compile Include="Areas\HazardousSubstanceInventory\Factories\HazardousSubstanceViewModelFactory.cs" />
+    <Compile Include="Areas\HazardousSubstanceInventory\Factories\IHazardousSubstanceViewModelFactory.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\Controllers\ControlMeasuresController.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\Controllers\FurtherControlMeasureTaskController.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\Factories\AssessmentViewModelFactory.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\Factories\ControlMeasuresViewModelFactory.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\Factories\IAssessmentViewModelFactory.cs" />
+    <Compile Include="Areas\HazardousSubstanceInventory\ViewModels\HazardousSubstanceSummaryViewModel.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\Factories\IControlMeasuresViewModelFactory.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\ViewModels\ControlMeasuresViewModel.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\ViewModels\HazardousSubstanceRiskAssessmentTabViewModel.cs" />
+    <Compile Include="Areas\Sites\Controllers\SiteGroupController.cs" />
+    <Compile Include="Areas\Sites\Controllers\SitesController.cs" />
+    <Compile Include="Areas\Sites\Controllers\SitesStructureController.cs" />
+    <Compile Include="Areas\Sites\SitesAreaRegistration.cs" />
+    <Compile Include="Areas\Sites\ViewModels\DeleteSiteGroupViewModel.cs" />
+    <Compile Include="Areas\Sites\ViewModels\DelinkSiteViewModel.cs" />
+    <Compile Include="Areas\Sites\ViewModels\SiteDetailsViewModel.cs" />
+    <Compile Include="Areas\Sites\ViewModels\SiteGroupDetailsViewModel.cs" />
+    <Compile Include="Areas\Sites\ViewModels\SiteStructureViewModel.cs" />
+    <Compile Include="Areas\TaskList\ViewModels\CompleteTaskViewModel.cs" />
+    <Compile Include="ViewModels\RiskAssessmentHazardControlMeasureViewModel.cs" />
+    <Compile Include="Areas\HazardousSubstanceInventory\Factories\InventoryViewModelFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\Controllers\AssessmentController.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\Controllers\DescriptionController.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\Controllers\RiskAssessmentController.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\Factories\CreateRiskAssessmentViewModelFactory.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\Factories\ICreateRiskAssessmentViewModelFactory.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\HazardousSubstanceRiskAssessmentsAreaRegistration.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\ViewModels\CreateRiskAssessmentViewModel.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\ViewModels\HazardousSubstancesTabs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Areas\HazardousSubstanceInventory\Factories\HazardousSubstanceDescriptionViewModelFactory.cs" />
+    <Compile Include="Areas\HazardousSubstanceInventory\Factories\IHazardousSubstanceDescriptionViewModelFactory.cs" />
+    <Compile Include="Areas\HazardousSubstanceInventory\ViewModels\AddEditHazardousSubstanceViewModel.cs" />
+    <Compile Include="Areas\HazardousSubstanceInventory\ViewModels\HazardousSubstancesViewModel.cs" />
+    <Compile Include="Areas\HazardousSubstanceInventory\ViewModels\InventorySubstanceViewModel.cs" />
+    <Compile Include="Areas\HazardousSubstanceInventory\ViewModels\InventoryViewModel.cs" />
+    <Content Include="Content\themes\bso_v1.5\ie8.css" />
+    <Content Include="Content\images\glyphicons-halflings-white.png" />
+    <Content Include="Content\images\hazardousSubstances\european_hazard_symbols.png" />
+    <Content Include="Content\images\hazardousSubstances\global_hazard_symbols.png" />
+    <Compile Include="Areas\TaskList\TaskListAreaRegistration.cs" />
+    <Compile Include="Areas\TaskList\ViewModels\MarkTaskAsDeletedViewModel.cs" />
+    <Compile Include="Areas\TaskList\ViewModels\MarkTaskAsNoLongerRequiredViewModel.cs" />
+    <Compile Include="Areas\Users\Factories\IViewUserViewModelFactory.cs" />
+    <Compile Include="Areas\Users\UsersAreaRegistration.cs" />
+    <Compile Include="Areas\Users\ViewModels\ViewUserViewModel.cs" />
+    <Compile Include="Controllers\AccountController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\RiskAssessmentReviewController.cs" />
+    <Compile Include="Factories\IRiskAssessmentReviewsViewModelFactory.cs" />
+    <Compile Include="Factories\ICompleteFurtherControlMeasureTaskViewModelFactory.cs" />
+    <Compile Include="Factories\IReassignFurtherControlMeasureTaskViewModelFactory.cs" />
+    <Compile Include="Factories\RiskAssessmentReviewsViewModelFactory.cs" />
+    <Compile Include="Factories\CompleteFurtherControlMeasureTaskViewModelFactory.cs" />
+    <Compile Include="Factories\ReassignFurtherControlMeasureTaskViewModelFactory.cs" />
+    <Compile Include="Filters\GeneralRiskAssessmentContextFilter.cs" />
+    <Compile Include="Filters\HazardousSubstanceRiskAssessmentContextFilter.cs" />
+    <Compile Include="Filters\RiskAssessmentContextFilterHelper.cs" />
+    <Compile Include="Helpers\CommaSeparatedStringHelper.cs" />
+    <Content Include="Content\images\Icons\glyphicon-calendar.png" />
+    <Content Include="Content\themes\bso_v1.5\core.css" />
+    <Content Include="Content\themes\bso_v1.5\images\bgnd-bs.gif" />
+    <Content Include="Content\themes\bso_v1.5\images\bgnd-header.jpg" />
+    <Content Include="Content\themes\bso_v1.5\images\bgnd-heading.png" />
+    <Content Include="Content\themes\bso_v1.5\images\bgnd-legend.gif" />
+    <Content Include="Content\themes\bso_v1.5\images\bs-tick.png" />
+    <Content Include="Content\themes\bso_v1.5\images\icon-refresh.png" />
+    <Content Include="Content\themes\bso_v1.5\images\ImageFile.png" />
+    <Content Include="Content\themes\bso_v1.5\images\logo.png" />
+    <Content Include="Content\themes\bso_v1.5\images\tab-arrow.png" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.fireriskassessment.hazards.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.fireriskassessment.checklist.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.hazardoussubstance.inventory.search.js" />
+    <Content Include="Scripts\BusinessSafe\Application\help.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.immediaterisknotificationsactions.action.assignedto.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.immediaterisknotificationsactions.search.js" />
+    <Content Include="Scripts\BusinessSafe\BusinessSafe.PersonalRiskAssessment.Checklists.Manager.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.personalriskassessment.hazards.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.riskassessment.controlmeasures.descriptions.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.riskassessment.documents.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.riskassessment.furthercontrolmeasuretasks.bulkreassign.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.riskassessment.search.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.riskassessment.tasks.grid.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.hazardoussubstance.assessment.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.riskassessment.controlmeasures.js" />
+    <Content Include="Scripts\BusinessSafe\Application\pbs.plugins.multiselectandsearch.js" />
+    <Compile Include="Areas\Company\Tasks\SuppliersMarkAsDeletedTask.cs" />
+    <Compile Include="Areas\Company\Tasks\SuppliersSaveTask.cs" />
+    <Compile Include="Areas\HazardousSubstanceInventory\ViewModels\CanDeleteHazardousSubstanceViewModel.cs" />
+    <Compile Include="Helpers\DocumentLibraryUploader.cs" />
+    <Compile Include="Helpers\IDocumentLibraryUploader.cs" />
+    <Compile Include="Helpers\IVirtualPathUtilityWrapper.cs" />
+    <Compile Include="Helpers\ISaveFileStreamHelper.cs" />
+    <Compile Include="Helpers\SaveFileStreamHelper.cs" />
+    <Compile Include="Helpers\VirtualPathUtilityWrapper.cs" />
+    <Compile Include="HtmlHelpers\LoginDisplayHelper.cs" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.riskassessment.summarytab.js" />
+    <Compile Include="Models\RiskAssessmentType.cs" />
+    <Compile Include="Service References\SqlReportExecutionService\IReportExecutionServiceSoapClient.cs" />
+    <Compile Include="Service References\SqlReportExecutionService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceCompositionGateways\ISiteUpdateCompositionGateway.cs" />
+    <Compile Include="ServiceCompositionGateways\SiteUpdateCompositionGateway.cs" />
+    <Compile Include="ViewModels\AddEditFurtherControlMeasureTaskViewModel.cs" />
+    <Compile Include="Factories\IViewFurtherControlMeasureTaskViewModelFactory.cs" />
+    <Compile Include="ViewModels\CompleteFurtherControlMeasureTaskViewModel.cs" />
+    <Compile Include="Areas\Documents\ViewModels\ExistingDocumentsViewModel.cs" />
+    <Compile Include="ViewModels\ViewFurtherControlMeasureTaskViewModel.cs" />
+    <Compile Include="ViewModels\ErrorColumn.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\Controllers\ControlMeasuresController.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\Controllers\RiskAssessmentController.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\ViewModels\GeneralRiskAssessmentArchiveIndexViewModel.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\ViewModels\GeneralRiskAssessmentArchiveSummaryViewModel.cs" />
+    <Compile Include="ViewModels\RiskAssessmentReviewsViewModel.cs" />
+    <Compile Include="ViewModels\SearchRiskAssessmentsViewModel.cs" />
+    <Compile Include="ViewModels\SearchRiskAssessmentResultViewModel.cs" />
+    <Compile Include="ViewModels\HazardViewModel.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\ViewModels\MarkRiskAssessmentIsDraftStatusViewModel.cs" />
+    <Compile Include="Areas\TaskList\ViewModels\ReassignTaskViewModel.cs" />
+    <Compile Include="ViewModels\CompleteReviewResultViewModel.cs" />
+    <Compile Include="ViewModels\CompleteReviewViewModel.cs" />
+    <Compile Include="ViewModels\AddEditRiskAssessmentReviewViewModel.cs" />
+    <Compile Include="ViewModels\ControlMeasuresViewModel.cs" />
+    <Compile Include="ViewModels\DocumentsToSaveViewModel.cs" />
+    <Compile Include="ViewModels\TaskDetailsSummaryViewModel.cs" />
+    <Compile Include="ViewModels\UpdateHazardDescriptionViewModel.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\Factories\SearchRiskAssessmentsViewModelFactory.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\Factories\ISearchRiskAssessmentsViewModelFactory.cs" />
+    <Compile Include="Areas\HazardousSubstanceInventory\HazardousSubstancesAreaRegistration.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\ViewModels\AssessmentViewModel.cs" />
+    <Compile Include="Areas\HazardousSubstanceRiskAssessments\ViewModels\DescriptionViewModel.cs" />
+    <Compile Include="Areas\HazardousSubstanceInventory\ViewModels\HazardousSubstanceTabViewModel.cs" />
+    <Compile Include="AutoMappers\UserRolePermissionsViewModelMapper.cs" />
+    <Compile Include="Areas\Documents\Factories\IDocumentLibraryViewModelFactory.cs" />
+    <Compile Include="Areas\HazardousSubstanceInventory\Factories\IInventoryViewModelFactory.cs" />
+    <Compile Include="Controllers\AutoMappers\DelinkSiteRequestMapper.cs" />
+    <Compile Include="Controllers\AutoMappers\DocumentRequestMapper.cs" />
+    <Compile Include="Controllers\AutoMappers\EmployeeEmergencyContactRequestMapper.cs" />
+    <Compile Include="Controllers\AutoMappers\EmployeeRequestMapperBase.cs" />
+    <Compile Include="Controllers\AutoMappers\RegisterEmployeeAsUserRequestMapper.cs" />
+    <Compile Include="Controllers\AutoMappers\SetUserRoleAndSiteRequestMapper.cs" />
+    <Compile Include="Controllers\AutoMappers\SiteAddressRequestMapper.cs" />
+    <Compile Include="Controllers\AutoMappers\SiteGroupRequestMapper.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\AutoMappers\ParentIdFinder.cs" />
+    <Compile Include="Areas\Documents\Controllers\BusinessSafeSystemDocumentsLibraryController.cs" />
+    <Compile Include="Areas\Documents\Controllers\CreateAddedDocumentController.cs" />
+    <Compile Include="Areas\Documents\Factories\IAddedDocumentsLibraryViewModelFactory.cs" />
+    <Compile Include="Areas\HazardousSubstanceInventory\Controllers\InventoryController.cs" />
+    <Compile Include="Areas\Documents\Factories\AddedDocumentsLibraryViewModelFactory.cs" />
+    <Compile Include="Areas\Documents\Factories\DocumentLibraryViewModelFactory.cs" />
+    <Compile Include="Helpers\CacheHelper.cs" />
+    <Compile Include="Helpers\ContentTypeHelper.cs" />
+    <Compile Include="Helpers\StreamHelper.cs" />
+    <Compile Include="Areas\Documents\ViewModels\AttachDocumentReturnView.cs" />
+    <Compile Include="Areas\Documents\ViewModels\AddedDocumentsLibraryViewModel.cs" />
+    <Compile Include="Areas\Documents\ViewModels\BusinessSafeSystemDocumentsLibraryViewModel.cs" />
+    <Compile Include="ViewModels\SupplierViewModel.cs" />
+    <Compile Include="ViewModels\TabViewModel.cs" />
+    <Compile Include="Areas\Users\Factories\ViewUserViewModelFactory.cs" />
+    <Compile Include="Factories\ViewFurtherControlMeasureTaskViewModelFactory.cs" />
+    <Compile Include="ViewModels\ReassignFurtherControlMeasureTaskViewModel.cs" />
+    <Compile Include="WebsiteMoqs\DocumentSubTypeServiceFactory.cs" />
+    <Compile Include="Service References\DocumentSubTypeService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Employees\ViewModels\CanDeleteEmployeeViewModel.cs" />
+    <Compile Include="Areas\Documents\Controllers\DocumentController.cs" />
+    <Compile Include="Areas\Documents\Controllers\ReferenceDocumentsLibraryController.cs" />
+    <Compile Include="Areas\Employees\Controllers\EmployeesController.cs" />
+    <Compile Include="Areas\TaskList\Controllers\TaskListActionController.cs" />
+    <Compile Include="Custom Exceptions\MultipleReassignToIdsSpecifiedInBulkReassignRequestException.cs" />
+    <Compile Include="CustomModelBinders\BulkReassignRequestBinder.cs" />
+    <Compile Include="CustomValidators\MustBeTrueAttribute.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\ModelStateExtensions.cs" />
+    <Compile Include="Helpers\EnumHelper.cs" />
+    <Compile Include="Helpers\EncryptionHelper.cs" />
+    <Compile Include="Models\BusinessSafeSignOutLinkBaseUrlConfiguration.cs" />
+    <Compile Include="Areas\Employees\Controllers\EmployeeEmergencyContactController.cs" />
+    <Compile Include="Service References\ClientDocumentService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\DocumentLibraryService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\DocumentTypeService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\PeninsulaOnline\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\StreamingClientDocumentService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\StreamingDocumentLibraryService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Documents\ViewModels\DocumentLibraryViewModel.cs" />
+    <Compile Include="ViewModels\DocumentUploadButtonViewModel.cs" />
+    <Compile Include="Areas\Documents\ViewModels\DocumentViewModel.cs" />
+    <Compile Include="ViewModels\DocumentsViewModel.cs" />
+    <Compile Include="Areas\Documents\ViewModels\PreviouslyAddedDocumentGridRowViewModel.cs" />
+    <Compile Include="Areas\Users\ViewModels\DeleteUserRoleResultViewModel.cs" />
+    <Compile Include="Areas\Documents\ViewModels\NewlyAddedDocumentGridRowViewModel.cs" />
+    <Compile Include="Areas\Employees\ViewModels\EmergencyContactDetailViewModel.cs" />
+    <Compile Include="Areas\TaskList\ViewModels\MarkTaskForDeleteResultViewModel.cs" />
+    <Compile Include="Areas\TaskList\ViewModels\ReassignTaskResultViewModel.cs" />
+    <Compile Include="Areas\TaskList\ViewModels\SaveTaskResultViewModel.cs" />
+    <Compile Include="Areas\TaskList\ViewModels\MarkTaskAsNoLongerRequiredResultViewModel.cs" />
+    <Compile Include="Areas\Users\ViewModels\SaveUserRoleResultViewModel.cs" />
+    <Compile Include="Areas\Users\ViewModels\SaveUserRoleViewModel.cs" />
+    <Compile Include="Areas\Users\Controllers\AddUsersController.cs" />
+    <Compile Include="Areas\Users\Controllers\ViewUsersController.cs" />
+    <Compile Include="Areas\Users\Controllers\UserRolesController.cs" />
+    <Compile Include="Custom Exceptions\CurrentUserNotSetException.cs" />
+    <Compile Include="Custom Exceptions\EmploymentStatusNotFoundForEmployeeException.cs" />
+    <Compile Include="CustomModelBinders\UserRolePermissionsRequestBinder.cs" />
+    <Compile Include="Extensions\CustomPrincipalExtensions.cs" />
+    <Compile Include="AuthenticationService\CustomPrincipal.cs" />
+    <Compile Include="AuthenticationService\ICustomPrincipal.cs" />
+    <Compile Include="AuthenticationService\IFormsAuthenticationService.cs" />
+    <Compile Include="Controllers\AutoMappers\AddEmployeeRequestMapper.cs" />
+    <Compile Include="Controllers\AutoLogInFromPeninsulaController.cs" />
+    <Compile Include="Controllers\AutoMappers\UpdateEmployeeRequestMapper.cs" />
+    <Compile Include="Custom Exceptions\CompanyIdNotFoundOnAuthenticationCookieException.cs" />
+    <Compile Include="Custom Exceptions\SiteNotFoundForEmployeeException.cs" />
+    <Compile Include="Areas\Employees\Factories\EmployeeSearchViewModelFactory.cs" />
+    <Compile Include="AuthenticationService\FormsAuthenticationService.cs" />
+    <Compile Include="Areas\Employees\Factories\IEmployeeSearchViewModelFactory.cs" />
+    <Compile Include="Areas\Employees\Factories\IEmployeeViewModelFactory.cs" />
+    <Compile Include="Areas\Users\Factories\IAddUsersViewModelFactory.cs" />
+    <Compile Include="Areas\Users\Factories\IUserSearchViewModelFactory.cs" />
+    <Compile Include="Areas\Users\Factories\UserSearchViewModelFactory.cs" />
+    <Compile Include="Areas\Users\Factories\IUserRolePermissionsViewModelFactory.cs" />
+    <Compile Include="Areas\Users\Factories\IUserRolesViewModelFactory.cs" />
+    <Compile Include="Areas\Users\Factories\AddUsersViewModelFactory.cs" />
+    <Compile Include="Areas\Users\Factories\UserRolePermissionsViewModelFactory.cs" />
+    <Compile Include="Areas\Users\Factories\UserRolesViewModelFactory.cs" />
+    <Compile Include="Filters\UrlHackingFilter.cs" />
+    <Compile Include="Custom Exceptions\UserAuthenticationFilterException.cs" />
+    <Compile Include="Filters\PermissionFilterAttribute.cs" />
+    <Compile Include="Helpers\ModelStateErrorHelper.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\ViewModels\HazardsJsonViewModel.cs" />
+    <Compile Include="ViewModels\CreatingRiskAssessmentSummaryViewModel.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\ViewModels\GeneralRiskAssessmentSummaryViewModel.cs" />
+    <Compile Include="ViewModels\HazardsViewModel.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\ViewModels\PremisesInformationViewModel.cs" />
+    <Compile Include="ViewModels\AutoCompleteViewModel.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\Controllers\HazardsController.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\Controllers\PremisesInformationController.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\GeneralRiskAssessmentAreaRegistration.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\ViewModels\GeneralRiskAssessmentTabs.cs" />
+    <Compile Include="Areas\GeneralRiskAssessments\ViewModels\GeneralRiskAssessmentTabViewModel.cs" />
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Contracts\ITaskListViewModelFactory.cs" />
+    <Compile Include="Contracts\ISiteDetailsViewModelFactory.cs" />
+    <Compile Include="Contracts\ISiteGroupViewModelFactory.cs" />
+    <Compile Include="Contracts\ISiteStructureViewModelFactory.cs" />
+    <Compile Include="Areas\Employees\Controllers\EmployeeController.cs" />
+    <Compile Include="Areas\Employees\Factories\EmployeeViewModelFactory.cs" />
+    <Compile Include="Areas\Company\Tasks\INonEmployeeSaveTask.cs" />
+    <Compile Include="Areas\Employees\ViewModels\EmergencyContactViewModel.cs" />
+    <Compile Include="Areas\Employees\ViewModels\EmployeeViewModel.cs" />
+    <Compile Include="Areas\Employees\Controllers\EmployeeSearchController.cs" />
+    <Compile Include="Areas\Employees\ViewModels\EmployeesSearchEmployeeViewModel.cs" />
+    <Compile Include="Areas\Employees\ViewModels\EmployeeSearchViewModel.cs" />
+    <Compile Include="Controllers\NonEmployeeDefaultsController.cs" />
+    <Compile Include="Areas\Company\Tasks\CompanyDefaultDeleteTask.cs" />
+    <Compile Include="Areas\Company\Tasks\CompanyDefaultsSaveTask.cs" />
+    <Compile Include="Areas\Company\Factories\CompanyDefaultsTaskFactory.cs" />
+    <Compile Include="Areas\Company\Factories\ICompanyDefaultsTaskFactory.cs" />
+    <Compile Include="Areas\Company\Tasks\HazardMarkAsDeletedTask.cs" />
+    <Compile Include="Areas\Company\Tasks\HazardSaveTask.cs" />
+    <Compile Include="Areas\Company\Tasks\NonEmployeeSaveTask.cs" />
+    <Compile Include="Areas\Company\Tasks\PeopleAtRiskSaveTask.cs" />
+    <Compile Include="Areas\Company\Tasks\PersonAtRiskMarkAsDeletedTask.cs" />
+    <Compile Include="Areas\Company\ViewModels\RiskAssessorsDefaultAddEdit.cs" />
+    <Compile Include="Areas\Company\Controllers\CompanyDefaultsController.cs" />
+    <Compile Include="Areas\Company\Controllers\CompanyController.cs" />
+    <Compile Include="Areas\Company\ViewModels\DefaultAddEdit.cs" />
+    <Compile Include="Areas\Company\ViewModels\Defaults.cs" />
+    <Compile Include="Areas\Company\ViewModels\EmployeeGroupsDefaultAddEdit.cs" />
+    <Compile Include="Areas\Company\ViewModels\HazardsDefaultAddEdit.cs" />
+    <Compile Include="Areas\Company\ViewModels\NonEmployeesDefaultAddEdit.cs" />
+    <Compile Include="Areas\Company\ViewModels\NonEmployeeViewModel.cs" />
+    <Compile Include="Areas\Company\ViewModels\OrganisationUnitClassificationDefaultAddEdit.cs" />
+    <Compile Include="Areas\Company\ViewModels\PeopleAtRiskDefaultAddEdit.cs" />
+    <Compile Include="ViewModels\PermissionsGroupViewModel.cs" />
+    <Compile Include="ViewModels\PermissionViewModel.cs" />
+    <Compile Include="Areas\Company\ViewModels\SpecialistSuppliersDefaultAddEdit.cs" />
+    <Compile Include="Areas\Company\ViewModels\CompanyDefaultsViewModel.cs" />
+    <Compile Include="Controllers\Helpers\UpdateModelState.cs" />
+    <Compile Include="Areas\TaskList\Controllers\TaskListController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Users\ViewModels\AddUsersViewModel.cs" />
+    <Compile Include="Areas\TaskList\ViewModels\TaskViewModel.cs" />
+    <Compile Include="Areas\Users\ViewModels\UserSearchViewModel.cs" />
+    <Compile Include="Areas\Users\ViewModels\UsersSearchUserViewModel.cs" />
+    <Compile Include="Areas\Users\ViewModels\UserRolePermissionsViewModel.cs" />
+    <Compile Include="Areas\Users\ViewModels\UserRolesViewModel.cs" />
+    <Compile Include="Areas\Users\ViewModels\UsersWithUserRoleResultViewModel.cs" />
+    <Compile Include="WebsiteMoqs\ClientDocumentServiceFactory.cs" />
+    <Compile Include="WebsiteMoqs\FakeCacheHelper.cs" />
+    <Compile Include="WebsiteMoqs\FakeSqlReportExecutionServiceFacade.cs" />
+    <Compile Include="WebsiteMoqs\FakeStreamingClientDocumentService.cs" />
+    <Compile Include="WebsiteMoqs\SqlReportsFactory.cs" />
+    <Compile Include="WebsiteMoqs\StreamingClientDocumentServiceFactory.cs" />
+    <Compile Include="WebsiteMoqs\DocumentTypeServiceFactory.cs" />
+    <Compile Include="WebsiteMoqs\FakeClientDocumentService.cs" />
+    <Compile Include="WebsiteMoqs\FakeDocumentTypeService.cs" />
+    <Compile Include="WebsiteMoqs\FakeDocumentSubTypeService.cs" />
+    <Compile Include="WebsiteRegistry.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Contracts\IViewModelFactory.cs" />
+    <Compile Include="StructureMapControllerActivator.cs" />
+    <Compile Include="StructureMapDependencyResolver.cs" />
+    <Compile Include="Factories\SiteDetailsViewModelFactory.cs" />
+    <Compile Include="Factories\SiteGroupViewModelFactory.cs" />
+    <Compile Include="Factories\SiteTreeViewBuilder.cs" />
+    <Compile Include="Areas\TaskList\Factories\TaskListViewModelFactory.cs" />
+    <Compile Include="Factories\SiteOrganisationalUnit.cs" />
+    <Compile Include="Factories\SiteStructureViewModelFactory.cs" />
+    <Compile Include="Factories\UnlinkedSites.cs" />
+    <Compile Include="Factories\UnlinkedSitesTreeViewBuilder.cs" />
+    <Compile Include="Areas\TaskList\ViewModels\TaskListViewModel.cs" />
+    <Compile Include="Extensions\HtmlExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\themes\bso_v1.5\ie7.css" />
+    <Content Include="Content\images\glyphicons-halflings.png" />
+    <Content Include="Content\images\ajax-loader.gif" />
+    <Content Include="Scripts\BusinessSafe\added-documents.js" />
+    <Content Include="Scripts\BusinessSafe\Application\application.js" />
+    <Content Include="Scripts\BusinessSafe\attach-documents.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.hazardoussubstance.description.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.hazardoussubstance.suppliers.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.riskassessment.employees.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.riskassessment.nonemployees.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.riskassessment.reviews.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.riskassessment.summary.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.tasks.acceptancetest.helper.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.tasks.complete.viewmodel.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.tasks.edit.viewmodel.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.tasks.gridrow.viewmodel.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.tasks.tablerow.parameter.extractor.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.tasks.new.viewmodel.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.tasks.nolongerrequired.viewmodel.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.tasks.print.viewmodel.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.tasks.reassign.viewmodel.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.tasks.remove.viewmodel.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.tasks.riskassessment.options.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.tasks.summarydetails.viewmodel.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.tasks.view.viewmodel.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.visitrequest.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafesystem-documents.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.personalriskassessment.checklists.generator.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.fireriskassessment.premisesinformation.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.fireriskassessment.significantfinding.js" />
+    <Content Include="Scripts\BusinessSafe\company-defaults-accident-record-distribution-list.js" />
+    <Content Include="Scripts\BusinessSafe\company-defaults-add-risk-assessor.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.responsibilities.search.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.responsibilities.edit.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.responsibilities.wizard.select-responsibilities.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.responsibilities.wizard.assign-responsibilities.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.responsibilities.wizard.generate-tasks.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.responsibilities.task.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.accidentrecord.accidentdetails.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.responsibilities.task.nolongerrequired.js" />
+    <Content Include="Scripts\BusinessSafe\BusinessSafe.PersonalRiskAssessment.Checklists.Summary.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.accidentrerecord.injurydetails.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.accidentrecords.search.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.accidentrecord.accidentsummary.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.accidentrerecord.overview.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.accidentrecord.delete.js" />
+    <Content Include="Scripts\BusinessSafe\document-library.js" />
+    <Content Include="Content\jquery.jOrgChart.css" />
+    <Content Include="Content\jquery.treeview.css" />
+    <Content Include="Content\Default\editor.png" />
+    <Content Include="Content\Default\imagebrowser.png" />
+    <Content Include="Content\Default\loading.gif" />
+    <Content Include="Content\Default\slider-h.gif" />
+    <Content Include="Content\Default\slider-v.gif" />
+    <Content Include="Content\Default\sprite-vertical.png" />
+    <Content Include="Content\Default\sprite.png" />
+    <Content Include="Content\Default\treeview-line.png" />
+    <Content Include="Content\Default\treeview-nodes-rtl.png" />
+    <Content Include="Content\Default\treeview-nodes.png" />
+    <Content Include="Content\images\ImageFile.png" />
+    <Content Include="Content\images\tick.png" />
+    <Content Include="Content\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\smoothness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\smoothness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\smoothness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\smoothness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\smoothness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\smoothness\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\smoothness\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\smoothness\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\smoothness\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\smoothness\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\smoothness\jquery-ui-1.8.18.custom.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectmenu.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="hibernate_BusinessSafe.cfg.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="hibernate_PeninsulaDB.cfg.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Scripts\2012.1.214\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\2012.1.214\jquery.validate.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.all.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.autocomplete.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.calendar.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.chart.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.combobox.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.common.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.datepicker.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.datetimepicker.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.draganddrop.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.editor.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.grid.editing.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.grid.filtering.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.grid.grouping.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.grid.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.grid.reordering.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.grid.resizing.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.imagebrowser.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.list.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.menu.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.panelbar.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.slider.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.splitter.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.tabstrip.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.textbox.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.timepicker.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.treeview.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.upload.min.js" />
+    <Content Include="Scripts\2012.1.214\telerik.window.min.js" />
+    <Content Include="Scripts\Libraries\bootstrap-button.js" />
+    <Content Include="Scripts\Libraries\bootstrap-dropdown.js" />
+    <Content Include="Scripts\Libraries\bootstrap-popover.js" />
+    <Content Include="Scripts\Libraries\bootstrap-tab.js" />
+    <Content Include="Scripts\Libraries\bootstrap-tooltip.js" />
+    <Content Include="Scripts\BusinessSafe\company-defaults-add-non-employee-manager.js" />
+    <Content Include="Scripts\BusinessSafe\company-defaults-edit-non-employee-manager.js" />
+    <Content Include="Scripts\BusinessSafe\company-defaults.js" />
+    <Content Include="Scripts\BusinessSafe\company-details.js" />
+    <Content Include="Scripts\BusinessSafe\Application\dropdownautocomplete.js" />
+    <Content Include="Scripts\BusinessSafe\employee-tasks.js" />
+    <Content Include="Scripts\BusinessSafe\employees-maintenance-emergencycontacts.js" />
+    <Content Include="Scripts\BusinessSafe\hazardoussubstance.inventory.js" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.hazardoussubstance.inventory.js" />
+    <Content Include="Scripts\BusinessSafe\user-permissions.js" />
+    <Content Include="Scripts\BusinessSafe\employees-maintenance.js" />
+    <Content Include="Scripts\BusinessSafe\employees-search.js" />
+    <Content Include="Scripts\BusinessSafe\generalriskassessments.hazards.manager.js" />
+    <Content Include="Scripts\BusinessSafe\generalriskassessments.premisesinformation.js" />
+    <Content Include="Scripts\BusinessSafe\site-structure.js" />
+    <Content Include="Scripts\BusinessSafe\Application\cookies.js" />
+    <Content Include="Scripts\BusinessSafe\user-roles.js" />
+    <Content Include="Scripts\BusinessSafe\user-search.js" />
+    <Content Include="Scripts\BusinessSafe\Application\utils.js" />
+    <Content Include="Scripts\Libraries\jquery-1.7.1-vsdoc.js" />
+    <Content Include="Scripts\Libraries\jquery-1.7.1.js" />
+    <Content Include="Scripts\Libraries\jquery-ui-1.8.18.js" />
+    <Content Include="Scripts\Libraries\jquery.history.js" />
+    <Content Include="Scripts\Libraries\jquery.multisortable.js" />
+    <Content Include="Scripts\Libraries\jquery.tablesorter.js" />
+    <Content Include="Scripts\Libraries\jquery.treeview.js" />
+    <Content Include="Scripts\Libraries\jquery.ui.selectmenu.js" />
+    <Content Include="Scripts\Libraries\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\Libraries\jquery.validate.js" />
+    <Content Include="Scripts\Libraries\json2.js" />
+    <Content Include="Scripts\Libraries\modernizr-2.5.3.js" />
+    <Content Include="Scripts\Libraries\jquery.jOrgChart.js" />
+    <Content Include="Log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\GeneralRiskAssessments\Views\RiskAssessment\Create.cshtml" />
+    <Content Include="Areas\GeneralRiskAssessments\Views\RiskAssessment\_GRASearchResults.cshtml" />
+    <Content Include="Areas\PersonalRiskAssessments\Views\Web.config" />
+    <Content Include="Areas\PersonalRiskAssessments\Views\RiskAssessment\Index.cshtml" />
+    <Content Include="Areas\PersonalRiskAssessments\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\PersonalRiskAssessments\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\PersonalRiskAssessments\Views\RiskAssessment\Create.cshtml" />
+    <Content Include="Areas\PersonalRiskAssessments\Views\PremisesInformation\Index.cshtml" />
+    <Content Include="Areas\PersonalRiskAssessments\Views\Shared\_Tabs.cshtml" />
+    <Content Include="Areas\PersonalRiskAssessments\Views\Review\Index.cshtml" />
+    <Content Include="Areas\PersonalRiskAssessments\Views\Documents\Index.cshtml" />
+    <Content Include="Areas\PersonalRiskAssessments\Views\PremisesInformation\_DetailsAssessment.cshtml" />
+    <Content Include="Areas\GeneralRiskAssessments\Views\Summary\Index.cshtml" />
+    <Content Include="Areas\GeneralRiskAssessments\Views\Summary\_Form.cshtml" />
+    <Content Include="Areas\HazardousSubstanceRiskAssessments\Views\Summary\Index.cshtml" />
+    <Content Include="Areas\HazardousSubstanceRiskAssessments\Views\Summary\_Form.cshtml" />
+    <Content Include="Areas\Company\Views\CompanyDefaults\_AddingDefaultHazard.cshtml" />
+    <Content Include="Areas\PersonalRiskAssessments\Views\Summary\Index.cshtml" />
+    <Content Include="Areas\PersonalRiskAssessments\Views\Summary\_Form.cshtml" />
+    <Content Include="Areas\PersonalRiskAssessments\Views\Shared\_RiskAssessmentSummary.cshtml" />
+    <Content Include="Areas\PersonalRiskAssessments\Views\Shared\_TitleBar.cshtml" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.personalriskassessment.premisesinformation.js" />
+    <Content Include="Areas\PersonalRiskAssessments\Views\RiskAssessment\_PRASearchResults.cshtml" />
+    <Content Include="Areas\PersonalRiskAssessments\Views\Hazards\Index.cshtml" />
+    <Content Include="Areas\PersonalRiskAssessments\Views\Hazards\_Hazards.cshtml" />
+    <Content Include="Areas\PersonalRiskAssessments\Views\ControlMeasures\Index.cshtml" />
+    <Content Include="Areas\PersonalRiskAssessments\Views\ChecklistGenerator\Index.cshtml" />
+    <Content Include="Areas\PersonalRiskAssessments\Views\ChecklistGenerator\_Form.cshtml" />
+    <Content Include="Areas\PersonalRiskAssessments\Views\ChecklistManager\Index.cshtml" />
+    <Content Include="Areas\PersonalRiskAssessments\Views\ChecklistManager\_Grid.cshtml" />
+    <Content Include="Areas\PersonalRiskAssessments\Views\ChecklistManager\_EmployeeChecklistSummary.cshtml" />
+    <Content Include="Areas\Reports\Views\Web.config" />
+    <Content Include="Areas\Reports\Views\Reports\Index.cshtml" />
+    <Content Include="Areas\SqlReports\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\SqlReports\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\Web.config" />
+    <Content Include="Areas\FireRiskAssessments\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\RiskAssessment\_FRASearchResults.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\RiskAssessment\Index.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\RiskAssessment\Create.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\Summary\Index.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\Summary\_Form.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\Shared\_Tabs.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\PremisesInformation\Index.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\PremisesInformation\_DetailsAssessment.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\Shared\_RiskAssessmentSummary.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\Shared\_TitleBar.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\Review\Index.cshtml" />
+    <Content Include="Areas\TaskList\Views\TaskList\_TaskCompleteCommand.cshtml" />
+    <Content Include="Areas\TaskList\Views\TaskList\_TaskPrintCommand.cshtml" />
+    <Content Include="Areas\TaskList\Views\TaskList\_TaskReassignCommand.cshtml" />
+    <Content Include="Areas\TaskList\Views\TaskList\_TaskDeleteCommand.cshtml" />
+    <Content Include="Areas\TaskList\Views\TaskList\_TaskBulkReassignCheckbox.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\Documents\Index.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\Hazards\Index.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\Hazards\_Hazards.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\Hazards\_PeopleAtRiskMultiSelect.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\Hazards\_FireSafetyControlMeasuresMultiSelect.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\Hazards\_SourcesOfFuelMultiSelect.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\Hazards\_SourcesOfIgnitionMultiSelect.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\Checklist\_Form.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\Checklist\Index.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\Checklist\_Section.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\Checklist\_Question.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\SignificantFindings\Index.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\SignificantFindings\_SignificantFinding.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\FurtherControlMeasureTask\_AddFireRiskAssessmentFurtherControlMeasureTask.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\Checklist\_SectionTabs.cshtml" />
+    <Content Include="Scripts\BusinessSafe\businesssafe.tasklist.summary.js" />
+    <EmbeddedResource Include="Documents\General Risk Assessment Process.pdf" />
+    <EmbeddedResource Include="Documents\Getting Started.pdf" />
+    <EmbeddedResource Include="Documents\Hazardous Substances.pdf" />
+    <EmbeddedResource Include="Documents\My Task List.pdf" />
+    <EmbeddedResource Include="Documents\Setting up your company and employees.pdf" />
+    <EmbeddedResource Include="Documents\HAZARDOUS SUBSTANCES CONTROL SYSTEM - Containment.docx" />
+    <EmbeddedResource Include="Documents\HAZARDOUS SUBSTANCES CONTROL SYSTEM - Engineering Control.docx" />
+    <EmbeddedResource Include="Documents\HAZARDOUS SUBSTANCES CONTROL SYSTEM - General Ventilation.docx" />
+    <EmbeddedResource Include="Documents\HAZARDOUS SUBSTANCES CONTROL SYSTEM - Special Measures.docx" />
+    <Content Include="Areas\TaskList\Views\TaskList\_TaskViewCommand.cshtml" />
+    <Content Include="Areas\GeneralRiskAssessments\Views\RiskAssessment\_SearchResultsGridTiteBar.cshtml" />
+    <Content Include="Areas\TaskList\Views\TaskList\_SearchForm.cshtml" />
+    <Content Include="Areas\TaskList\Views\TaskList\_SearchResultsGridTiteBar.cshtml" />
+    <Content Include="Areas\PersonalRiskAssessments\Views\RiskAssessment\_SearchResultsGridTiteBar.cshtml" />
+    <Content Include="Areas\FireRiskAssessments\Views\RiskAssessment\_SearchResultsGridTiteBar.cshtml" />
+    <Content Include="Areas\HazardousSubstanceRiskAssessments\Views\RiskAssessment\_SearchResultsGridTiteBar.cshtml" />
+    <Content Include="Areas\Company\Views\RiskAssessor\_AddForm.cshtml" />
+    <Content Include="Areas\Company\Views\RiskAssessor\_Grid.cshtml" />
+    <Content Include="Areas\Company\Views\RiskAssessor\_EditForm.cshtml" />
+    <Content Include="Areas\Company\Views\RiskAssessor\_RiskAssessorDetails.cshtml" />
+    <Content Include="Areas\Company\Views\RiskAssessor\_NotificationCheckboxes.cshtml" />
+    <Content Include="Areas\Company\Views\RiskAssessor\_CommandButtons.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Web.config" />
+    <Content Include="Areas\Responsibilities\Views\Responsibility\Index.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Responsibility\Create.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Responsibility\_SearchForm.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Responsibility\_Responsibilities.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Responsibility\_SearchResultsGridTiteBar.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Responsibility\_ResponsibilityTask.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Wizard\SelectResponsibilities.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Wizard\_EmployeeDropdown.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Wizard\_FrequencyDropdown.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Wizard\_ResponsibilitySelectTable.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Wizard\GenerateResponsibilities.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Wizard\GenerateTasks.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Wizard\_ResponsibilitySelectTableHeader.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Wizard\_ResponsibilitySelectTableFooter.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Wizard\_ResponsibilitySelectTable_DescriptionInColumn.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Wizard\_GenerateTasksTableHeader.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Wizard\_GenerateTasksTableFooter.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Wizard\_TasksEmployeeDropdown.cshtml" />
+    <EmbeddedResource Include="Documents\Overdue Tasks.xlsx" />
+    <EmbeddedResource Include="Documents\Task Status.xlsx" />
+    <Content Include="Areas\Responsibilities\Views\Responsibility\_ResponsibilityTasks.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Responsibility\_ResponsibilityDetail.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Responsibility\Edit.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Responsibility\_CompleteResponsibilityTask.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Responsibility\_ResponsibilitySummary.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Responsibility\_CompleteResponsibilityTaskDetails.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Responsibility\_ResponsibilityTaskDetail.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Responsibility\_ReadOnlyResponsibilityTaskDetail.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Responsibility\ViewResponsibilityTask.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Responsibility\_ReassignResponsibilityTask.cshtml" />
+    <Content Include="Areas\AccidentReports\Views\Web.config" />
+    <Content Include="Areas\AccidentReports\Views\Search\Index.cshtml" />
+    <Content Include="Areas\AccidentReports\Views\Create\Index.cshtml" />
+    <Content Include="Areas\AccidentReports\Views\Create\_Form.cshtml" />
+    <Content Include="Areas\AccidentReports\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\AccidentReports\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\AccidentReports\Views\InjuredPerson\Index.cshtml" />
+    <Content Include="Areas\AccidentReports\Views\Create\Edit.cshtml" />
+    <Content Include="Areas\AccidentReports\Views\Summary\Index.cshtml" />
+    <Content Include="Areas\AccidentReports\Views\Shared\_AccidentRecordSummary.cshtml" />
+    <Content Include="Areas\AccidentReports\Views\Shared\_Tabs.cshtml" />
+    <Content Include="Areas\AccidentReports\Views\Summary\_Form.cshtml" />
+    <Content Include="Areas\AccidentReports\Views\InjuredPerson\_Form.cshtml" />
+    <Content Include="Areas\AccidentReports\Views\AccidentDetails\Index.cshtml" />
+    <Content Include="Areas\AccidentReports\Views\NextSteps\Index.cshtml" />
+    <Content Include="Areas\AccidentReports\Views\Shared\_TitleBar.cshtml" />
+    <Content Include="Areas\AccidentReports\Views\AccidentDetails\_Form.cshtml" />
+    <Content Include="Areas\AccidentReports\Views\Overview\_Documents.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Wizard\_ResponsibilityRow.cshtml" />
+    <Content Include="Areas\Responsibilities\Views\Wizard\_Nav.cshtml" />
+    <Content Include="Areas\PersonalRiskAssessments\Views\ChecklistGenerator\_EmployeeMultiSelect.cshtml" />
+    <Content Include="Areas\PersonalRiskAssessments\Views\ChecklistGenerator\_EmployeeSelected.cshtml" />
+    <Content Include="Areas\AccidentReports\Views\InjuryDetails\Index.cshtml" />
+    <Content Include="Areas\AccidentReports\Views\InjuryDetails\_Form.cshtml" />
+    <Content Include="Areas\AccidentReports\Views\Overview\Index.cshtml" />
+    <Content Include="Areas\AccidentReports\Views\Overview\_Form.cshtml" />
+    <Content Include="Areas\AccidentReports\Views\Search\_SearchForm.cshtml" />
+    <Content Include="Areas\AccidentReports\Views\Search\_SearchResults.cshtml" />
+    <Content Include="Areas\SafeCheck\Web.config" />
+    <Content Include="Areas\SafeCheck\Views\SafeCheck\Index.cshtml" />
+    <Content Include="Areas\SafeCheck\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\SafeCheck\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\ActionPlans\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\ActionPlans\Views\ActionPlan\Index.cshtml" />
+    <Content Include="Areas\ActionPlans\Views\Web.config" />
+    <Content Include="Areas\ActionPlans\Views\ActionPlan\_SearchForm.cshtml" />
+    <Content Include="Areas\ActionPlans\Views\ActionPlan\_ActionPlan.cshtml" />
+    <Content Include="Areas\ActionPlans\Views\ActionPlan\_SearchResultsGridTiteBar.cshtml" />
+    <Content Include="Areas\ActionPlans\Views\ImmediateRiskNotificationsActions\Index.cshtml" />
+    <Content Include="Areas\ActionPlans\Views\ImmediateRiskNotificationsActions\_SearchForm.cshtml" />
+    <Content Include="Areas\ActionPlans\Views\ImmediateRiskNotificationsActions\_Actions.cshtml" />
+    <Content Include="Areas\ActionPlans\Views\ImmediateRiskNotificationsActions\_AssignedToDropdown.cshtml" />
+    <Content Include="Areas\ActionPlans\Views\ImmediateRiskNotificationsActions\_Header.cshtml" />
+    <Content Include="Areas\ActionPlans\Views\ImmediateRiskNotificationsActions\_ImmediateRiskNotification.cshtml" />
+    <Content Include="Areas\ActionPlans\Views\ImmediateRiskNotificationsActions\_CompleteActionTask.cshtml" />
+    <Content Include="Areas\ActionPlans\Views\Shared\_ReassignActionTask.cshtml" />
+    <Content Include="Areas\ActionPlans\Views\Shared\_ViewEditActionTask.cshtml" />
+    <Content Include="Areas\TermsAndConditions\Views\Web.config" />
+    <Content Include="Areas\TermsAndConditions\Views\TermsOfService\Index.cshtml" />
+    <Content Include="Areas\TermsAndConditions\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\TermsAndConditions\Views\DataProtectionPolicy\Index.cshtml" />
+    <Content Include="Areas\Company\Views\AccidentRecordDistribution\_DistributionList.cshtml" />
+    <Content Include="Areas\Company\Views\AccidentRecordDistribution\_EmployeeMultiSelect.cshtml" />
+    <Content Include="Areas\Company\Views\AccidentRecordDistribution\_EmployeeSelected.cshtml" />
+    <Content Include="Areas\Company\Views\AccidentRecordDistribution\_AddNonEmployee.cshtml" />
+    <Content Include="Areas\Contact\Views\Web.config" />
+    <Content Include="Areas\Contact\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Contact\Views\ContactUs\Index.cshtml" />
+    <Content Include="Areas\SqlReports\Views\SqlReports\Index.cshtml" />
+    <Content Include="Areas\SqlReports\Views\SqlReports\_SearchReports.cshtml" />
+    <Content Include="Areas\ActionPlans\Views\ImmediateRiskNotificationsActions\_ViewCompletedActionTask.cshtml" />
+    <Content Include="Areas\VisitRequest\Views\Web.config" />
+    <Content Include="Areas\VisitRequest\Views\VisitRequest\Index.cshtml" />
+    <Content Include="Areas\VisitRequest\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\VisitRequest\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\VisitRequest\Views\VisitRequest\_RequestAVisit.cshtml" />
+    <None Include="Service References\ClientDocumentService\ClientDocumentService.wsdl" />
+    <None Include="Service References\ClientDocumentService\ClientDocumentService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientDocumentService\ClientDocumentService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientDocumentService\ClientDocumentService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientDocumentService\ClientDocumentService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientDocumentService\ClientDocumentService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientDocumentService\ClientDocumentService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientDocumentService\ClientDocumentService6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentSubTypeService\DocumentSubTypeService1.wsdl" />
+    <None Include="Service References\DocumentSubTypeService\DocumentSubTypeService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentSubTypeService\DocumentSubTypeService51.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentSubTypeService\DocumentSubTypeService52.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentSubTypeService\DocumentSubTypeService53.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentSubTypeService\DocumentSubTypeService54.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentTypeService\DocumentTypeService1.wsdl" />
+    <None Include="Service References\DocumentTypeService\DocumentTypeService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentTypeService\DocumentTypeService31.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentTypeService\DocumentTypeService32.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentTypeService\DocumentTypeService33.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentTypeService\DocumentTypeService34.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SqlReportExecutionService\BusinessSafe.WebSite.SqlReportExecutionService.DocumentMapNode.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SqlReportExecutionService\BusinessSafe.WebSite.SqlReportExecutionService.ExecutionHeader.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SqlReportExecutionService\BusinessSafe.WebSite.SqlReportExecutionService.ExecutionInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SqlReportExecutionService\BusinessSafe.WebSite.SqlReportExecutionService.ExecutionInfo2.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SqlReportExecutionService\BusinessSafe.WebSite.SqlReportExecutionService.Extension.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SqlReportExecutionService\BusinessSafe.WebSite.SqlReportExecutionService.ServerInfoHeader.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SqlReportExecutionService\BusinessSafe.WebSite.SqlReportExecutionService.Warning.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\SqlReportExecutionService\configuration91.svcinfo" />
+    <None Include="Service References\SqlReportExecutionService\configuration.svcinfo" />
+    <None Include="Service References\SqlReportExecutionService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Areas\GeneralRiskAssessments\Views\AuditHistory\Details.cshtml" />
+    <Content Include="Areas\GeneralRiskAssessments\Views\AuditHistory\_Hazard.cshtml" />
+    <Content Include="Areas\GeneralRiskAssessments\Views\AuditHistory\_ListPeople.cshtml" />
+    <Content Include="Areas\GeneralRiskAssessments\Views\AuditHistory\_FurtherActionTask.cshtml" />
+    <None Include="Service References\DocumentSubTypeService\DocumentSubTypeService1.disco" />
+    <None Include="Service References\DocumentTypeService\DocumentTypeService1.disco" />
+    <None Include="Service References\StreamingClientDocumentService\StreamingClientDocumentService.disco" />
+    <None Include="Service References\ClientDocumentService\ClientDocumentService.disco" />
+    <Content Include="Views\Shared\_RiskAssessmentDocuments.cshtml" />
+    <Content Include="Views\Shared\_RiskAssessmentDocumentsCommandButtons.cshtml" />
+    <Content Include="Views\FurtherControlMeasureTaskDetailsSummary\_TaskDetailsSummary.cshtml" />
+    <Content Include="Views\Shared\_AddEditRiskAssessmentReview.cshtml" />
+    <Content Include="Views\Shared\_TempData.cshtml" />
+    <Content Include="Views\Shared\_BulkReassignTasks.cshtml" />
+    <Content Include="Views\Shared\_RiskAssessmentReviews.cshtml" />
+    <Content Include="Views\Shared\_CompleteRiskAssessmentReview.cshtml" />
+    <Content Include="Views\Shared\_DocumentDisplayMessages.cshtml" />
+    <Content Include="Areas\GeneralRiskAssessments\Views\RiskAssessment\_TemplateGeneralRiskAssessment.cshtml" />
+    <Content Include="Areas\HazardousSubstanceInventory\Views\Web.config" />
+    <Content Include="Areas\HazardousSubstanceRiskAssessments\Views\Description\Index.cshtml" />
+    <Content Include="Areas\HazardousSubstanceRiskAssessments\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\HazardousSubstanceRiskAssessments\Views\Shared\_RiskAssessmentSummary.cshtml" />
+    <Content Include="Areas\HazardousSubstanceInventory\Views\Inventory\_SearchCriteria.cshtml" />
+    <Content Include="Areas\HazardousSubstanceInventory\Views\Inventory\_SearchResults.cshtml" />
+    <Content Include="Areas\HazardousSubstanceRiskAssessments\Views\Description\_Form.cshtml" />
+    <Content Include="Areas\HazardousSubstanceRiskAssessments\Views\RiskAssessment\Index.cshtml" />
+    <Content Include="Areas\HazardousSubstanceRiskAssessments\Views\RiskAssessment\_HSASearchResults.cshtml" />
+    <Content Include="Areas\HazardousSubstanceRiskAssessments\Views\RiskAssessment\Create.cshtml" />
+    <Content Include="Areas\HazardousSubstanceInventory\Views\Inventory\Add.cshtml" />
+    <Content Include="Areas\HazardousSubstanceInventory\Views\Inventory\_HazardSymbols.cshtml" />
+    <Content Include="Areas\HazardousSubstanceInventory\Views\Inventory\_RiskAndSafetyPhrases.cshtml" />
+    <Content Include="Areas\HazardousSubstanceInventory\Views\Inventory\CheckForDuplicatedSubstance.cshtml" />
+    <Content Include="Areas\HazardousSubstanceInventory\Views\Inventory\Edit.cshtml" />
+    <Content Include="Areas\HazardousSubstanceInventory\Views\Inventory\_EditableHazardousSubstanceDetails.cshtml" />
+    <Content Include="Areas\HazardousSubstanceInventory\Views\Inventory\_EditableHazardousSubstanceCommandButtons.cshtml" />
+    <Content Include="Areas\HazardousSubstanceRiskAssessments\Views\Web.config" />
+    <Content Include="Areas\HazardousSubstanceRiskAssessments\Views\RiskAssessment\_CreateGeneralRiskAssessmentSummary.cshtml" />
+    <Content Include="Areas\HazardousSubstanceInventory\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\HazardousSubstanceRiskAssessments\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Users\Views\Web.config" />
+    <Content Include="Areas\Users\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Employees\Views\Web.config" />
+    <Content Include="Areas\Employees\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\HazardousSubstanceRiskAssessments\Views\Assessment\_DetailsAssessment.cshtml" />
+    <Content Include="Areas\HazardousSubstanceRiskAssessments\Views\Shared\_Tabs.cshtml" />
+    <Content Include="Areas\Company\Views\Web.config" />
+    <Content Include="Areas\Company\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Documents\Views\Web.config" />
+    <Content Include="Areas\Documents\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\TaskList\Views\Web.config" />
+    <Content Include="Areas\TaskList\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\TaskList\Views\TaskList\_BulkReassign.cshtml" />
+    <Content Include="Areas\TaskList\Views\TaskList\Index.cshtml" />
+    <Content Include="Areas\Sites\Views\Web.config" />
+    <Content Include="Areas\Sites\Views\Shared\_SiteDetails.cshtml" />
+    <Content Include="Areas\Sites\Views\Shared\_SiteGroup.cshtml" />
+    <Content Include="Areas\Sites\Views\Shared\_SiteStructureTreeView.cshtml" />
+    <Content Include="Areas\Sites\Views\Shared\Index.cshtml" />
+    <Content Include="Areas\Sites\Views\Shared\IndexSiteOrganisationalChart.cshtml" />
+    <Content Include="Areas\Sites\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\HazardousSubstanceRiskAssessments\Views\Assessment\Index.cshtml" />
+    <Content Include="Areas\HazardousSubstanceInventory\Views\Inventory\SubstanceDetailsForRiskAssessment.cshtml" />
+    <Content Include="Areas\HazardousSubstanceRiskAssessments\Views\ControlMeasures\Index.cshtml" />
+    <Content Include="Areas\HazardousSubstanceRiskAssessments\Views\ControlMeasures\_ControlMeasures.cshtml" />
+    <Content Include="Areas\HazardousSubstanceRiskAssessments\Views\ControlMeasures\_FurtherControlMeasures.cshtml" />
+    <Content Include="Areas\GeneralRiskAssessments\Views\AuditHistory\_ControlMeasure.cshtml" />
+    <Content Include="Areas\GeneralRiskAssessments\Views\AuditHistory\Index.cshtml" />
+    <Content Include="Areas\Users\Views\ViewUsers\ViewUser.cshtml" />
+    <Content Include="Areas\Employees\Views\Shared\_ViewEmergencyContactDetails.cshtml" />
+    <Content Include="Areas\HazardousSubstanceRiskAssessments\Views\Review\Index.cshtml" />
+    <Content Include="Areas\HazardousSubstanceRiskAssessments\Views\Shared\_TempData.cshtml" />
+    <Content Include="Areas\HazardousSubstanceInventory\Views\Inventory\_SafetyPhraseAdditionalInformation.cshtml" />
+    <Content Include="Areas\GeneralRiskAssessments\Views\Shared\_TitleBar.cshtml" />
+    <Content Include="Areas\HazardousSubstanceRiskAssessments\Views\Shared\_TitleBar.cshtml" />
+    <Content Include="Areas\HazardousSubstanceRiskAssessments\Views\Documents\Index.cshtml" />
+    <Content Include="Areas\HazardousSubstanceRiskAssessments\Views\Shared\_Footer.cshtml" />
+    <Content Include="Areas\HazardousSubstanceRiskAssessments\Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_EditRiskAssessmentFurtherControlMeasureTask.cshtml" />
+    <Content Include="Views\Shared\_RiskAssessmentHazardSummary.cshtml" />
+    <Content Include="Areas\HazardousSubstanceRiskAssessments\Views\FurtherControlMeasureTask\_AddHazardousSubstanceRiskAssessmentFurtherControlMeasureTask.cshtml" />
+    <Content Include="Views\Shared\_AddRiskAssessmentFurtherControlMeasureTask.cshtml" />
+    <Content Include="Views\Shared\_ViewRiskAssessmentFurtherControlMeasureTask.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Shared\_CompleteRiskAssessmentFurtherControlMeasureTask.cshtml" />
+    <Content Include="Views\Shared\_ReassignRiskAssessmentFurtherControlMeasureTask.cshtml" />
+    <Content Include="Areas\SqlReports\Views\Web.config" />
+    <Content Include="Views\Shared\_PrintRiskAssessmentFurtherControlMeasureTask.cshtml" />
+    <None Include="Content\HazardousSubstanceControlSystems\Hazardous_Substances_Control_System_Containment.docx" />
+    <None Include="Content\HazardousSubstanceControlSystems\Hazardous_Substances_Control_System_Engineering_Control.docx" />
+    <None Include="Content\HazardousSubstanceControlSystems\Hazardous_Substances_Control_System_General_Ventilation.docx" />
+    <None Include="Content\HazardousSubstanceControlSystems\Hazardous_Substances_Control_System_Special_Measures.docx" />
+    <None Include="Properties\DataSources\BusinessSafe.Application.EmployeeService.AddEmployeeResponse.datasource" />
+    <None Include="Properties\DataSources\BusinessSafe.Application.EmployeeService.EmployeeDto.datasource" />
+    <None Include="Properties\DataSources\BusinessSafe.Application.EmployeeService.EmployeeEmergencyContactResponse.datasource" />
+    <None Include="Properties\DataSources\BusinessSafe.Application.EmployeeService.LookupDto.datasource" />
+    <None Include="Service References\ClientDocumentService\BusinessSafe.WebSite.ClientDocumentService.ClientDocumentDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DocumentLibraryService\BusinessSafe.WebSite.DocumentLibraryService.ArchiveDocumentDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DocumentLibraryService\BusinessSafe.WebSite.DocumentLibraryService.CreateDocumentFromBytesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DocumentLibraryService\BusinessSafe.WebSite.DocumentLibraryService.CreateDocumentFromPathResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DocumentLibraryService\BusinessSafe.WebSite.DocumentLibraryService.CreateFolderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DocumentLibraryService\BusinessSafe.WebSite.DocumentLibraryService.DocumentDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DocumentLibraryService\BusinessSafe.WebSite.DocumentLibraryService.FolderDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService.wsdl" />
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService1.wsdl" />
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentSubTypeService\BusinessSafe.WebSite.DocumentSubTypeService.DocumentSubTypeDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DocumentTypeService\BusinessSafe.WebSite.DocumentTypeService.DocumentTypeDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\PeninsulaOnline\NewRegistrationRequestSerivce.wsdl" />
+    <None Include="Service References\PeninsulaOnline\NewRegistrationRequestService.disco" />
+    <None Include="Service References\PeninsulaOnline\configuration91.svcinfo" />
+    <None Include="Service References\PeninsulaOnline\configuration.svcinfo" />
+    <None Include="Service References\PeninsulaOnline\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService.disco" />
+    <None Include="Service References\DocumentLibraryService\configuration91.svcinfo" />
+    <None Include="Service References\DocumentLibraryService\configuration.svcinfo" />
+    <None Include="Service References\DocumentLibraryService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\SqlReportExecutionService\ReportExecution2005.wsdl" />
+    <None Include="Service References\StreamingClientDocumentService\BusinessSafe.WebSite.StreamingClientDocumentService.ClientDocumentDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\StreamingClientDocumentService\StreamingClientDocumentService.wsdl" />
+    <None Include="Service References\StreamingClientDocumentService\StreamingClientDocumentService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\StreamingClientDocumentService\StreamingClientDocumentService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\StreamingClientDocumentService\StreamingClientDocumentService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\StreamingClientDocumentService\StreamingClientDocumentService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\StreamingClientDocumentService\StreamingClientDocumentService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\StreamingClientDocumentService\StreamingClientDocumentService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\StreamingDocumentLibraryService\BusinessSafe.WebSite.StreamingDocumentLibraryService.DocumentDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\StreamingDocumentLibraryService\StreamingDocumentLibraryService.disco" />
+    <None Include="Service References\StreamingDocumentLibraryService\configuration91.svcinfo" />
+    <None Include="Service References\StreamingDocumentLibraryService\configuration.svcinfo" />
+    <None Include="Service References\StreamingDocumentLibraryService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ClientDocumentService\configuration91.svcinfo" />
+    <None Include="Service References\ClientDocumentService\configuration.svcinfo" />
+    <None Include="Service References\ClientDocumentService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\DocumentTypeService\configuration91.svcinfo" />
+    <None Include="Service References\DocumentTypeService\configuration.svcinfo" />
+    <None Include="Service References\DocumentTypeService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\StreamingClientDocumentService\configuration91.svcinfo" />
+    <None Include="Service References\StreamingClientDocumentService\configuration.svcinfo" />
+    <None Include="Service References\StreamingClientDocumentService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\DocumentSubTypeService\configuration91.svcinfo" />
+    <None Include="Service References\DocumentSubTypeService\configuration.svcinfo" />
+    <None Include="Service References\DocumentSubTypeService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Scripts\Libraries\selectivizr.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Scripts\Libraries\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\Libraries\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\Libraries\MicrosoftAjax.js" />
+    <Content Include="Scripts\Libraries\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\Libraries\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\Libraries\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\Libraries\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\Libraries\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\Employees\Views\EmployeeSearch\_EmployeeSearchCriteria.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\Employees\Views\EmployeeSearch\_EmployeeSearchResults.cshtml" />
+    <Content Include="Areas\Users\Views\ViewUsers\Index.cshtml" />
+    <Content Include="Areas\Users\Views\UserRoles\Index.cshtml" />
+    <Content Include="Areas\Users\Views\UserRoles\_UserRolesSelection.cshtml" />
+    <Content Include="Areas\Users\Views\UserRoles\_UserRolePermissions.cshtml" />
+    <Content Include="Areas\Users\Views\ViewUsers\_UserSearchCriteria.cshtml" />
+    <Content Include="Areas\Users\Views\ViewUsers\_UserSearchResults.cshtml" />
+    <Content Include="Areas\Users\Views\AddUsers\Index.cshtml" />
+    <Content Include="Areas\Users\Views\AddUsers\_UserPermissionsSelection.cshtml" />
+    <Content Include="Areas\Users\Views\UserRoles\_ViewAddEditDeleteSelections.cshtml" />
+    <Content Include="Areas\Users\Views\UserRoles\_PermissionGroup.cshtml" />
+    <Content Include="Areas\Users\Views\UserRoles\_NewRoleHeader.cshtml" />
+    <Content Include="Areas\Users\Views\UserRoles\_EditRoleHeader.cshtml" />
+    <Content Include="StructureMap.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Service References\PeninsulaOnline\NewRegistrationRequestService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PeninsulaOnline\NewRegistrationRequestService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PeninsulaOnline\NewRegistrationRequestService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Areas\TaskList\Views\TaskList\_EmployeeTasks.cshtml" />
+    <Content Include="Views\Shared\_GlobalAjaxUrls.cshtml" />
+    <Content Include="Areas\Documents\Views\Document\_DocumentGridRow.cshtml" />
+    <Content Include="Views\Shared\_AttachDocuments.cshtml" />
+    <Content Include="Areas\Documents\Views\Document\DocumentUploadButton.cshtml" />
+    <None Include="Service References\StreamingDocumentLibraryService\StreamingDocumentLibraryService.wsdl" />
+    <None Include="Service References\StreamingDocumentLibraryService\StreamingDocumentLibraryService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\StreamingDocumentLibraryService\StreamingDocumentLibraryService1.wsdl" />
+    <None Include="Service References\StreamingDocumentLibraryService\StreamingDocumentLibraryService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\StreamingDocumentLibraryService\StreamingDocumentLibraryService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\StreamingDocumentLibraryService\StreamingDocumentLibraryService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\StreamingDocumentLibraryService\StreamingDocumentLibraryService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Areas\Documents\Views\ReferenceDocumentsLibrary\Index.cshtml" />
+    <Content Include="Areas\Documents\Views\ReferenceDocumentsLibrary\_DocumentLibrarySearchCriteria.cshtml" />
+    <Content Include="Areas\Documents\Views\ReferenceDocumentsLibrary\_DocumentLibrarySearchResults.cshtml" />
+    <Content Include="Web.CI.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.UAT.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\Documents\Views\CreateAddedDocument\Index.cshtml" />
+    <Content Include="Areas\Documents\Views\AddedDocumentsLibrary\Index.cshtml" />
+    <Content Include="Areas\Documents\Views\AddedDocumentsLibrary\_AddedDocumentsLibrarySearchResults.cshtml" />
+    <Content Include="Areas\Documents\Views\AddedDocumentsLibrary\_AddedDocumentsLibrarySearchCriteria.cshtml" />
+    <Content Include="Areas\Documents\Views\Document\_AddedDocumentGridRow.cshtml" />
+    <Content Include="Views\Shared\_DistinctValidationSummary.cshtml" />
+    <Content Include="Areas\Documents\Views\BusinessSafeSystemDocumentsLibrary\_BusinessSafeSystemDocumentsLibrarySearchCriteria.cshtml" />
+    <Content Include="Areas\Documents\Views\BusinessSafeSystemDocumentsLibrary\_BusinessSafeSystemDocumentsLibrarySearchResults.cshtml" />
+    <Content Include="Areas\Documents\Views\BusinessSafeSystemDocumentsLibrary\Index.cshtml" />
+    <Content Include="Areas\HazardousSubstanceInventory\Views\Inventory\Index.cshtml" />
+    <Content Include="Views\Shared\_AssessmentStatus.cshtml" />
+    <Content Include="Web.LIVE.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\GeneralRiskAssessments\Views\RiskAssessment\_CreateGeneralRiskAssessmentSummary.cshtml" />
+    <None Include="Transformer.proj">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Shared\_AddSupplier.cshtml" />
+    <Content Include="Views\Shared\_EditFurtherControlMeasureTask.cshtml" />
+    <Content Include="Views\Shared\_FurtherControlMeasureDetails.cshtml" />
+    <Content Include="Views\Shared\_ReassignFurtherControlMeasureTask.cshtml" />
+    <Content Include="Views\Shared\_ReadOnlyTaskDetails.cshtml" />
+    <Content Include="Views\Shared\_ViewFurtherControlMeasureTask.cshtml" />
+    <Content Include="Views\Shared\_CompleteFurtherControlMeasureTask.cshtml" />
+    <Content Include="Views\Shared\_PrintFurtherControlMeasureTask.cshtml" />
+    <Content Include="Views\AutoLogInFromPeninsula\Test.cshtml" />
+    <Content Include="Views\Shared\_EmployeeNotAUserWarning.cshtml" />
+    <Content Include="Views\HealthStatus\Index.cshtml" />
+    <Content Include="Views\Shared\_ImpersonatingUserIndicator.cshtml" />
+    <Content Include="Views\Shared\_AdviceLine.cshtml" />
+    <Content Include="Views\Shared\_SearchRiskAssessmentFormFieldset.cshtml" />
+    <Content Include="Views\Shared\_SitesMultiSelect.cshtml" />
+    <Content Include="Views\Shared\_AccidentRecordStatus.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\App_Data\" />
+    <Folder Include="Areas\Company\Views\Shared\" />
+    <Folder Include="Areas\Contact\Views\Shared\" />
+    <Folder Include="Areas\Documents\Views\Shared\" />
+    <Folder Include="Areas\HazardousSubstanceInventory\Models\" />
+    <Folder Include="Areas\HazardousSubstanceInventory\Views\Shared\" />
+    <Folder Include="Areas\HazardousSubstanceRiskAssessments\Models\" />
+    <Folder Include="Areas\Reports\Controllers\" />
+    <Folder Include="Areas\Reports\ViewModels\" />
+    <Folder Include="Areas\Reports\Views\Shared\" />
+    <Folder Include="Areas\Responsibilities\Models\" />
+    <Folder Include="Areas\TermsAndConditions\Models\" />
+    <Folder Include="Areas\TermsAndConditions\Views\Shared\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessSafe.Application\BusinessSafe.Application.csproj">
+      <Project>{5DBF972D-D624-4FE6-8483-F9828C37CF52}</Project>
+      <Name>BusinessSafe.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Data\BusinessSafe.Data.csproj">
+      <Project>{0E42764A-6356-461F-9473-D452EFC22AC7}</Project>
+      <Name>BusinessSafe.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Domain\BusinessSafe.Domain.csproj">
+      <Project>{EA0B55F3-6232-400F-8BE0-FEC49883253F}</Project>
+      <Name>BusinessSafe.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Infrastructure\BusinessSafe.Infrastructure.csproj">
+      <Project>{9DD3289E-AA83-483D-88E1-F2FCE53B941C}</Project>
+      <Name>BusinessSafe.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Messages.Emails\BusinessSafe.Messages.Emails.csproj">
+      <Project>{CFC682DE-01ED-45D9-925A-8F764368514A}</Project>
+      <Name>BusinessSafe.Messages.Emails</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Messages\BusinessSafe.Messages.csproj">
+      <Project>{EE24F1BE-1BB4-413F-895D-7DC49325F36A}</Project>
+      <Name>BusinessSafe.Messages</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\Currency.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\GridForeignKey.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\Integer.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\Number.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Company\Views\Company\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Company\Views\CompanyDefaults\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Company\Views\CompanyDefaults\_DefaultAddEdit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Menu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\GeneralRiskAssessments\Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\GeneralRiskAssessments\Views\PremisesInformation\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\GeneralRiskAssessments\Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\GeneralRiskAssessments\Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\GeneralRiskAssessments\Views\Documents\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\GeneralRiskAssessments\Views\Review\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\GeneralRiskAssessments\Views\Hazards\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\GeneralRiskAssessments\Views\Shared\_Tabs.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\GeneralRiskAssessments\Views\Hazards\_Hazards.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\GeneralRiskAssessments\Views\RiskAssessment\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_NonEmployees.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\GeneralRiskAssessments\Views\PremisesInformation\_DetailsAssessment.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_BusinessSafeCookie.cshtml" />
+    <Content Include="Areas\Company\Views\CompanyDefaults\_CompanyLogo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Company\Views\CompanyDefaults\_AddingDefaultStandard.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Company\Views\CompanyDefaults\_AddingDefaultNonEmployee.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_AddNonEmployee.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+    <Content Include="Views\Shared\_MatchingDefaults.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Employees.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\GeneralRiskAssessments\Views\ControlMeasures\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_HazardDetails.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\GeneralRiskAssessments\Views\ControlMeasures\_ControlMeasures.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\GeneralRiskAssessments\Views\ControlMeasures\_ActionRequired.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\GeneralRiskAssessments\Views\Shared\_RiskAssessmentSummary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Employees\Views\Employee\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Employees\Views\EmployeeSearch\Index.cshtml" />
+    <Content Include="Areas\Employees\Views\Shared\_EmergencyContactDetails.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ClientDocumentService\" />
+    <WCFMetadataStorage Include="Service References\DocumentLibraryService\" />
+    <WCFMetadataStorage Include="Service References\DocumentSubTypeService\" />
+    <WCFMetadataStorage Include="Service References\DocumentTypeService\" />
+    <WCFMetadataStorage Include="Service References\PeninsulaOnline\" />
+    <WCFMetadataStorage Include="Service References\SqlReportExecutionService\" />
+    <WCFMetadataStorage Include="Service References\StreamingClientDocumentService\" />
+    <WCFMetadataStorage Include="Service References\StreamingDocumentLibraryService\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>63317</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost/BusinessSafe.WebSite</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://businesssafe.dev-peninsula-online.com/</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

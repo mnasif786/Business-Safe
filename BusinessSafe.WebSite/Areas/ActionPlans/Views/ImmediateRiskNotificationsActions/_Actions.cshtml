@@ -1,0 +1,84 @@
+﻿@using BusinessSafe.WebSite.Areas.ActionPlans.ViewModels
+@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Extensions
+@using NHibernate.Mapping
+@using Telerik.Web.Mvc.UI
+@model BusinessSafe.WebSite.Areas.ActionPlans.ViewModels.ImmediateRiskNotificationActionsIndexViewModel
+
+<h2>
+    <a id="show-deleted" class="btn @(Model.IsShowDeleted ? "disabled" : string.Empty)" href="#">Show Deleted</a>
+    <span class="tick"></span>Actions
+</h2>
+<div id="action-validation-message" class="alert alert-error hide"></div>
+<table>
+    <thead>
+        <tr>
+            @*<th><input class="responsibilitySelector" type="checkbox" /></th>*@
+            <th>Non Compliance</th>
+            <th>Action Required</th>
+            <th>Guidance Notes</th>
+            <th>Target Timescale</th>  
+            <th>Assigned To</th>
+            <th class="action-grid-fixed-date-column">Due Date</th>
+            <th>Status</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var action in Model.Actions)
+        {
+            var assignButton = "button_assign_" + @action.Id;
+            <tr class="actionTaskRow" data-has-task="@action.HasTask" >
+               
+                <td>@action.AreaOfNonCompliance</td>
+                <td>@action.ActionRequired</td>
+                <td>@action.GuidanceNote</td>
+                <td>@action.TargetTimescale</td>
+            
+                <td>@Html.Partial("_AssignedToDropdown", new AssignedToViewModel { Id = action.Id, SelectedAssignedToId = action.AssignedTo })</td>
+
+                 @if (@Model.CanEdit(User))
+                 {
+                     <td class="action-grid-fixed-date-column">@Html.TextBox("DueDate", @action.DueDateFormatted, new { @class = "span calendar action-grid", id = "dueDate" + action.Id })</td>
+                 }
+                 else
+                  {
+                      <td class="text-align:center"> @action.DueDateFormatted</td> 
+                  }
+
+
+                <td>@action.Status</td>
+                <td nowrap="nowrap">
+                  @if (@Model.CanEdit(User))
+                  {
+                        <input class="assign-btn btn btn-success" type="button" value="Assign" id="@assignButton" 
+                                    data-id="@action.Id" 
+                                    data-validationmessage="#action-validation-message" />                
+                  }
+                  
+                  @if (@action.HasTask == false && @Model.CanEdit(User) == false)
+                  {
+                      <p class="centredContent">Not Assigned</p>
+                  }
+                  else
+                  {
+                       if (@action.HasTask == true)
+                       {
+                           <div class="task-created hide">
+                               <a class="reassign-action-task-link" data-id="@action.Id" data-actionplan-id="@Model.ActionPlanId" data-mode="View" data-title="View Action Task" href="" title="View">
+                                   <i class="icon-search"></i></a>
+                  
+                               @if (@Model.CanEdit(User) && @Model.StatusId != 0)
+                               {
+                                   <a class="reassign-action-task-link" data-id="@action.Id" data-actionplan-id="@Model.ActionPlanId"  data-mode="Edit" data-title="Edit Action Task" href="" title="Edit Task">
+                                       <i class="icon-edit"></i></a>
+                               } 
+                           </div>
+                       }
+                  }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

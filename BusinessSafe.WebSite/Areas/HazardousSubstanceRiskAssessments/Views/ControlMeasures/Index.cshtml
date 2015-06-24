@@ -1,0 +1,66 @@
+﻿@using BusinessSafe.WebSite.Areas.HazardousSubstanceRiskAssessments.ViewModels
+@using Cassette.Views
+@model ControlMeasuresViewModel
+@{
+    ViewBag.Title = "Control Measures";
+}
+@Html.Partial("_RiskAssessmentSummary", ViewBag.RiskAssessmentSummary as HazardousSubstanceSummaryViewModel)
+@Html.HiddenFor(x => x.RiskAssessmentId)
+@Html.HiddenFor(x => x.CompanyId)
+<div class="container tabs ipad-container">
+    @{
+        var hazardousSubstanceRiskAssessmentTabViewModel = ViewBag.TabViewModel as HazardousSubstanceRiskAssessmentTabViewModel;
+    }
+    @Html.Partial("_Tabs", hazardousSubstanceRiskAssessmentTabViewModel)
+    <div class="fixed-content">
+        @Html.Partial("_TitleBar", ViewBag.RiskAssessmentSummary as HazardousSubstanceSummaryViewModel)
+        <div class="content">
+            @Html.Partial("_ControlMeasures", Model)
+            @Html.Partial("_FurtherControlMeasures", Model)
+        </div>
+        @if (Model.FurtherControlMeasures.Any())
+        {
+            <div class="content">
+                @Html.Partial("_BulkReassignTasks")
+            </div>
+        }
+        <div class="validation-summary-errors alert alert-error hide">
+        </div>
+    </div>
+</div>
+<div id="dialogFurtherControlMeasureTask" title="Further Control Measure Task">
+</div>
+<div id="dialogReassignFurtherControlMeasureTask" title="Reassign Further Control Measure Task">
+</div>
+<div class="hide">
+    <div id="dialogDeleteFurtherControlMeasureTask" title="Delete Further Control Measure">
+        <p>
+            Are you sure you want to delete this further control measure task?</p>
+    </div>
+    <div id="dialogDeleteReoccurringFurtherControlMeasureTask" title="Delete Further Control Measure">
+        <p>
+            Deleting this task will also delete all related future scheduled tasks. Do you want
+            to proceed?</p>
+    </div>
+    <div id="dialogNoLongerRequired" title="Mark Reoccurring Task As No Longer Required">
+        <p>
+            Marking this task as no longer required will prevent any future tasks from being
+            scheduled for this task. Do you want to proceed?</p>
+    </div>
+    <div id="dialogDeleteFurtherControlMeasureTaskResponse" title="Existing Completed Tasks">
+    </div>
+</div>
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("tasks");
+        
+    }
+    <script type="text/javascript">
+        var hazardControls = {};
+        $(document).ready(function () {
+            BusinessSafe.RiskAssessment.ControlMeasures.ViewModel(BusinessSafe.HazardousSubstanceRiskAssessment.ControlMeasures);
+            BusinessSafe.RiskAssessment.Tasks.Grid.ViewModel(BusinessSafe.Tasks.HazardousSubstanceRiskAssessment.Options);
+        });
+    </script>
+}

@@ -1,0 +1,58 @@
+﻿@using Cassette.Views
+@model BusinessSafe.WebSite.Areas.Sites.ViewModels.SiteStructureViewModel
+@{
+    ViewBag.Title = "Site Organisational Chart";
+}
+@{
+    Layout = null;
+}
+@{
+    Bundles.Reference("siteorganisationchartcss");
+    @Bundles.RenderStylesheets()
+}
+<div id="container">
+    <h2>
+        Site Structure</h2>
+    <ul id="org" style="display: none">
+        @Model.SiteChartsHtml
+    </ul>
+    <a id="closewindowbtn" href="#" class="btn" onclick="window.close();">Close Window</a>
+</div>
+@{
+    Bundles.Reference("jquery");
+    @Bundles.RenderScripts()  
+}
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#org").jOrgChart({
+            chartElement: "#container"
+        });
+
+        $(".node").click(function (e) {
+            var siteid = $('div', this).attr("data-id");
+        });
+
+        $("div.node").css("cursor", "pointer");
+
+        $("td.node-cell").hover(function () {
+            $('div', this).css("text-decoration", "underline").css("font-weight", "bold");
+        },
+
+            function () {
+                $('div', this).css("text-decoration", "").css("font-weight", "normal");
+            });
+
+        $("div[data-type='sitegroup']").parent().css("border", ".5px solid  #B94A48");
+
+        var containerWidth = screen.width;
+        $("#container").css("width", containerWidth + "px").css("overflow", "auto");
+
+    });
+
+    window.moveTo(0, 0);
+    window.resizeTo(screen.width, screen.height);
+    window.title = "Site Organisational Chart";
+        
+</script>

@@ -1,0 +1,13 @@
+﻿@model BusinessSafe.WebSite.Areas.Responsibilities.ViewModels.Wizard.FrequencyViewModel
+           
+@using BusinessSafe.Application.Helpers
+@{
+    var frequency = "Frequency" + Model.Id;
+    var frequencyId = "Frequency" + Model.Id + "Id";
+}
+
+<div class="frequency responsibilities-auto-select-container">
+    <input id="@frequency" class="frequency" type="text" value="@EnumHelper.GetEnumDescription(Model.Frequencies.SelectedValue as Enum)" data-initial-value="@EnumHelper.GetEnumDescription(Model.Frequencies.SelectedValue as Enum)" />
+    <input id="@frequencyId" class="frequency" type="hidden" value="@(((int)Model.Frequencies.SelectedValue).ToString())" data-initial-value="@(((int)Model.Frequencies.SelectedValue).ToString())" />
+</div>
+ 

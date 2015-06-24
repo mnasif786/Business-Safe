@@ -1,0 +1,551 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0E42764A-6356-461F-9473-D452EFC22AC7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BusinessSafe.Data</RootNamespace>
+    <AssemblyName>BusinessSafe.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CI|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\CI\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'UAT|AnyCPU'">
+    <OutputPath>bin\UAT\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LIVE|AnyCPU'">
+    <OutputPath>bin\LIVE\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NServiceBus.3.2.6\lib\net40\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.3.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NHibernate.3.3.0.4000\lib\Net35\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.ByteCode.Castle">
+      <HintPath>..\packages\NHibernate.Castle.3.1.0.4000\lib\Net35\NHibernate.ByteCode.Castle.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Linq">
+      <HintPath>..\packages\NHibernate.Linq.1.0\lib\NHibernate.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\packages\structuremap.2.6.3\lib\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\Audit.cs" />
+    <Compile Include="Common\AuditUpdateListener.cs" />
+    <Compile Include="Common\DataRegistry.cs" />
+    <Compile Include="Common\Repository.cs" />
+    <Compile Include="CustomExceptions\AuditUpdateLastModifiedByNotSetExceptions.cs" />
+    <Compile Include="CustomExceptions\AuditUpdateNotOldStatePresentExceptions.cs" />
+    <Compile Include="CustomExceptions\DocumentNotFoundException.cs" />
+    <Compile Include="CustomExceptions\EmployeeChecklistNotFoundException.cs" />
+    <Compile Include="CustomExceptions\EmployeeForAuditingNotFoundException.cs" />
+    <Compile Include="CustomExceptions\FireAnswerNotFoundException.cs" />
+    <Compile Include="CustomExceptions\FurtherControlMeasureNotFoundException.cs" />
+    <Compile Include="CustomExceptions\HazardousSubstanceNotFoundException.cs" />
+    <Compile Include="CustomExceptions\HazardousSubstanceRiskAssessmentNotFoundException.cs" />
+    <Compile Include="CustomExceptions\RiskAssessmentHazardNotFoundException.cs" />
+    <Compile Include="CustomExceptions\DelinkSiteFailedException.cs" />
+    <Compile Include="CustomExceptions\EmployeeNotFoundException.cs" />
+    <Compile Include="CustomExceptions\EmployeeTasksNotFoundException.cs" />
+    <Compile Include="CustomExceptions\HazardNotFoundException.cs" />
+    <Compile Include="CustomExceptions\PersonAtRiskNotFoundException.cs" />
+    <Compile Include="CustomExceptions\RiskAssessmentNotFoundException.cs" />
+    <Compile Include="CustomExceptions\RiskAssessmentReviewNotFoundException.cs" />
+    <Compile Include="CustomExceptions\RoleNotFoundException.cs" />
+    <Compile Include="CustomExceptions\SiteGroupNotFoundException.cs" />
+    <Compile Include="CustomExceptions\SiteNotFoundException.cs" />
+    <Compile Include="CustomExceptions\SupplierNotFoundException.cs" />
+    <Compile Include="CustomExceptions\TaskNotFoundException.cs" />
+    <Compile Include="CustomExceptions\UserNotFoundException.cs" />
+    <Compile Include="NHibernate\BusinessSafe\BusinessSafeSessionFactory.cs" />
+    <Compile Include="NHibernate\BusinessSafe\BusinessSafeSessionManager.cs" />
+    <Compile Include="Common\Log4NetHelper.cs" />
+    <Compile Include="NHibernate\BusinessSafe\BusinessSafeSessionManagerFactory.cs" />
+    <Compile Include="NHibernate\BusinessSafe\CurrentContextSessionManager.cs" />
+    <Compile Include="NHibernate\Database.cs" />
+    <Compile Include="NHibernate\Helpers\NHibernateConfigPathGenerator.cs" />
+    <Compile Include="NHibernate\IServicesSessionFactory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\CompletedTaskQuery\GetCompletedHazardousSubstanceRiskAssessmentFurtherControlMeasureTasksForEmployeeQuery.cs" />
+    <Compile Include="Queries\CompletedTaskQuery\GetCompletedMultiHazardRiskAssessmentTasksForEmployeeQuery.cs" />
+    <Compile Include="Queries\CompletedTaskQuery\GetCompletedRiskAssessmentReviewTasksForEmployeeQuery.cs" />
+    <Compile Include="Queries\CompletedTaskQuery\IGetCompletedHazardousSubstanceRiskAssessmentFurtherControlMeasureTasksForEmployeeQuery.cs" />
+    <Compile Include="Queries\CompletedTaskQuery\GetCompletedFireRiskAssessmentFurtherControlMeasureTasksForEmployeeQuery.cs" />
+    <Compile Include="Queries\CompletedTaskQuery\IGetCompletedMultiHazardRiskAssessmentTasksForEmployeeQuery.cs" />
+    <Compile Include="Queries\CompletedTaskQuery\IGetCompletedRiskAssessmentReviewTasksForEmployeeQuery.cs" />
+    <Compile Include="Queries\DueTaskQuery\GetDueActionTasksForEmployeeQuery.cs" />
+    <Compile Include="Queries\DueTaskQuery\GetDueFireRiskAssessmentFurtherControlMeasureTasksForEmployeeQuery.cs" />
+    <Compile Include="Queries\DueTaskQuery\GetDueResponsibilityTasksForEmployeeQuery.cs" />
+    <Compile Include="Queries\DueTaskQuery\GetDueHazardousSubstanceRiskAssessmentFurtherControlMeasureTask.cs" />
+    <Compile Include="Queries\DueTaskQuery\GetDueMultiHazardRiskAssessmentTasksForEmployeeQuery.cs" />
+    <Compile Include="Queries\DueTaskQuery\GetDueRiskAssessmentReviewTasksForEmployeeQuery.cs" />
+    <Compile Include="Queries\DueTaskQuery\IGetDueRiskAssessmentReviewTasksForEmployeeQuery.cs" />
+    <Compile Include="Queries\GetEmployeeNamesQuery.cs" />
+    <Compile Include="Queries\OverdueTaskQuery\GetOverdueActionTasksForEmployeeQuery.cs" />
+    <Compile Include="Queries\OverdueTaskQuery\GetOverdueFireRiskAssessmentFurtherControlMeasureTask.cs" />
+    <Compile Include="Queries\OverdueTaskQuery\GetOverdueHazardousSubstanceRiskAssessmentFurtherControlMeasureTask.cs" />
+    <Compile Include="Queries\OverdueTaskQuery\GetOverdueMultiHazardRiskAssessmentTasksForEmployeeQuery.cs" />
+    <Compile Include="Queries\OverdueTaskQuery\GetOverdueResponsibilitiesTasks.cs" />
+    <Compile Include="Queries\OverdueTaskQuery\GetOverdueRiskAssessmentReviewTasks.cs" />
+    <Compile Include="Queries\GetTaskEmployeesQuery\GetRiskAssessmentReviewTaskRiskAssessorsQuery.cs" />
+    <Compile Include="Queries\GetTaskEmployeesQuery\GetFireRiskAssessmentFurtherControlMeasureTaskRiskAssessorsQuery.cs" />
+    <Compile Include="Queries\GetTaskEmployeesQuery\GetHazardousSubstancesRiskAssessmentFurtherControlMeasuresRiskAssessorsQuery.cs" />
+    <Compile Include="Queries\GetTaskEmployeesQuery\GetTaskAssigneesQuery.cs" />
+    <Compile Include="Queries\GetTaskEmployeesQuery\GetMultiHazardRiskAssessmentFurtherControlMeasureTaskRiskAssessorsQuery.cs" />
+    <Compile Include="Queries\OverdueTaskQuery\IGetOverdueActionTasksForEmployeeQuery.cs" />
+    <Compile Include="Queries\OverdueTaskQuery\IGetOverdueMultiHazardRiskAssessmentTasksForEmployeeQuery.cs" />
+    <Compile Include="Queries\OverdueTaskQuery\IGetOverduePersonalRiskAssessmentTasksForEmployeeQuery.cs" />
+    <Compile Include="Queries\GetTaskEmployeesQuery\IGetTaskEmployeesQuery.cs" />
+    <Compile Include="Queries\QueriesHelper.cs" />
+    <Compile Include="Queries\SafeCheck\GetCompletedChecklistsQuery.cs" />
+    <Compile Include="Queries\SafeCheck\GetChecklistsQuery.cs" />
+    <Compile Include="Queries\SafeCheck\IGetChecklistsQuery.cs" />
+    <Compile Include="Repository\ActionRepository.cs" />
+    <Compile Include="Repository\ActionTaskRepository.cs" />
+    <Compile Include="Repository\AddedDocumentRepository.cs" />
+    <Compile Include="Repository\ApplicationTokenRepository.cs" />
+    <Compile Include="Repository\BusinessSafeCompanyDetailRepository.cs" />
+    <Compile Include="Repository\CauseOfAccidentRepository.cs" />
+    <Compile Include="Repository\AccidentTypeRepository.cs" />
+    <Compile Include="Repository\BodyPartRepository.cs" />
+    <Compile Include="Repository\AccidentRecordRepository.cs" />
+    <Compile Include="Repository\InjuryRepository.cs" />
+    <Compile Include="Repository\JurisdictionRepository.cs" />
+    <Compile Include="Repository\OthersInvolvedAccidentDetailsRepository.cs" />
+    <Compile Include="Repository\RiskAssessmentQueryExtensions.cs" />
+    <Compile Include="Repository\SafeCheck\CategoryRepository.cs" />
+    <Compile Include="Repository\SafeCheck\ChecklistRepository.cs" />
+    <Compile Include="Repository\SafeCheck\ChecklistQuestionRepository.cs" />
+    <Compile Include="Repository\ActionPlanRepository.cs" />
+    <Compile Include="Repository\SafeCheck\ChecklistTemplateQuestionRepository.cs" />
+    <Compile Include="Repository\SafeCheck\FavouriteChecklistRepository.cs" />
+    <Compile Include="Repository\SafeCheck\ConsultantRepository.cs" />
+    <Compile Include="Repository\SafeCheck\MaintenanceUserRepository.cs" />
+    <Compile Include="Repository\SafeCheck\LastQaAdvisorAssignedRepository.cs" />
+    <Compile Include="Repository\SafeCheck\QaAdvisorRepository.cs" />
+    <Compile Include="Repository\SafeCheck\ReportLetterStatementCategoryRepository.cs" />
+    <Compile Include="Repository\SafeCheck\TimescaleRepository.cs" />
+    <Compile Include="Repository\SafeCheck\ImpressionTypeRepository.cs" />
+    <Compile Include="Repository\SafeCheck\ChecklistTemplateRepository.cs" />
+    <Compile Include="Repository\SafeCheck\QuestionRepository.cs" />
+    <Compile Include="Repository\SafeCheck\QuestionResponseRepository.cs" />
+    <Compile Include="Repository\StatutoryResponsibilityTaskTemplateRepository.cs" />
+    <Compile Include="Repository\StatutoryResponsibilityTemplateRepository.cs" />
+    <Compile Include="Repository\EmployeeForAuditingRepository.cs" />
+    <Compile Include="Repository\ResponsibilityCategoryRepository.cs" />
+    <Compile Include="Repository\ResponsibilityReasonRepository.cs" />
+    <Compile Include="Repository\ResponsibilityRepository.cs" />
+    <Compile Include="Repository\ResponsibilityTaskRepository.cs" />
+    <Compile Include="Repository\RiskAssessorRepository.cs" />
+    <Compile Include="Repository\TaskListRepository.cs" />
+    <Compile Include="Repository\UserForAuditingRepository.cs" />
+    <Compile Include="Repository\AuthenticationTokenRepository.cs" />
+    <Compile Include="Repository\ChecklistRepository.cs" />
+    <Compile Include="Repository\FireAnswerRepository.cs" />
+    <Compile Include="Repository\FireRiskAssessmentChecklistRepository.cs" />
+    <Compile Include="Repository\EmployeeChecklistEmailRepository.cs" />
+    <Compile Include="Repository\FireRiskAssessmentRepository.cs" />
+    <Compile Include="Repository\FireSafetyControlMeasureRepository.cs" />
+    <Compile Include="Repository\QuestionRepository.cs" />
+    <Compile Include="Repository\EmployeeChecklistRepository.cs" />
+    <Compile Include="Repository\CompanyDefaultsRepositoryCriteriaHelper.cs" />
+    <Compile Include="CustomExceptions\NonEmployeeNotFoundException.cs" />
+    <Compile Include="Repository\CompanyVehicleTypeRepository.cs" />
+    <Compile Include="Repository\ControlSystemRepository.cs" />
+    <Compile Include="Repository\FurtherControlMeasureTasksRepository.cs" />
+    <Compile Include="Repository\HazardousSubstanceRiskAssessmentFurtherControlMeasureTaskRepository.cs" />
+    <Compile Include="Repository\MultiHazardRiskAssessmentRepository.cs" />
+    <Compile Include="Repository\PersonalRiskAssessmentRepository.cs" />
+    <Compile Include="Repository\HazardTypeRepository.cs" />
+    <Compile Include="Repository\RiskAssessmentDocumentRepository.cs" />
+    <Compile Include="Repository\RiskAssessmentRepository.cs" />
+    <Compile Include="Repository\PictogramRepository.cs" />
+    <Compile Include="Repository\SafetyPhraseRepository.cs" />
+    <Compile Include="Repository\DocHandlerDocumentTypeRepository.cs" />
+    <Compile Include="Repository\DocumentRepository.cs" />
+    <Compile Include="Repository\HazardousSubstanceRiskAssessmentRepository.cs" />
+    <Compile Include="Repository\HazardousSubstancesRepository.cs" />
+    <Compile Include="Repository\MultiHazardRiskAssessmentHazardRepository.cs" />
+    <Compile Include="Repository\RiskAssessmentReviewRepository.cs" />
+    <Compile Include="Repository\DocumentTypeRepository.cs" />
+    <Compile Include="Repository\CountriesRepository.cs" />
+    <Compile Include="Repository\EmployeeEmergencyContactDetailsRepository.cs" />
+    <Compile Include="Repository\EmployeeRepository.cs" />
+    <Compile Include="Repository\RiskPhraseRepository.cs" />
+    <Compile Include="Repository\SignificantFindingRepository.cs" />
+    <Compile Include="Repository\SourceOfFuelRepository.cs" />
+    <Compile Include="Repository\SourceOfIgnitionRepository.cs" />
+    <Compile Include="Repository\SupplierRepository.cs" />
+    <Compile Include="Repository\TaskDocumentRepository.cs" />
+    <Compile Include="Repository\TasksRepository.cs" />
+    <Compile Include="Repository\EmploymentStatusRepository.cs" />
+    <Compile Include="Repository\MultiHazardRiskAssessmentFurtherControlMeasureTaskRepository.cs" />
+    <Compile Include="Repository\NationalityRepository.cs" />
+    <Compile Include="Repository\PermissionRepository.cs" />
+    <Compile Include="Repository\MultiHazardRiskAssessmentControlMeasureRepository.cs" />
+    <Compile Include="Repository\RoleRepository.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
+    <Compile Include="Repository\HazardRepository.cs" />
+    <Compile Include="Repository\NonEmployeeRepository.cs" />
+    <Compile Include="Repository\PeopleAtRiskRepository.cs" />
+    <Compile Include="Repository\GeneralRiskAssessmentRepository.cs" />
+    <Compile Include="Repository\SiteGroupRepository.cs" />
+    <Compile Include="Repository\SiteStructureElementRepository.cs" />
+    <Compile Include="Repository\EmailTemplateRepository.cs" />
+    <Compile Include="Repository\TaskCategoryRepository.cs" />
+    <Compile Include="Repository\SiteRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="nhibernate-configuration.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="nhibernate-mapping.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessSafe.Domain\BusinessSafe.Domain.csproj">
+      <Project>{EA0B55F3-6232-400F-8BE0-FEC49883253F}</Project>
+      <Name>BusinessSafe.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Infrastructure\BusinessSafe.Infrastructure.csproj">
+      <Project>{9DD3289E-AA83-483D-88E1-F2FCE53B941C}</Project>
+      <Name>BusinessSafe.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ConfigFiles\hibernate_PeninsulaDB.cfg.xml" />
+    <Content Include="ConfigFiles\hibernate_BusinessSafeDB.cfg.xml" />
+    <EmbeddedResource Include="Mappers\OthersInvolvedAccidentDetails.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\EmployeeTaskNotification.hbm.xml" />
+    <EmbeddedResource Include="Mappers\AccidentRecordNotificationMember.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\SafeCheck\FavouriteChecklists.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\SafeCheck\ChecklistOtherEmail.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\SafeCheck\MaintenanceUser.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\SafeCheck\ChecklistPersonSeen.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\SafeCheck\ChecklistUpdatesRequired.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\SafeCheck\LastQaAdvisorAssigned.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\SafeCheck\Consultant.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\SafeCheck\QaAdvisor.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\SafeCheck\ReportLetterStatementCategory.hbm.xml" />
+    <EmbeddedResource Include="Mappers\SafeCheck\ImmediateRiskNotification.hbm.xml" />
+    <EmbeddedResource Include="Mappers\Action.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\ActionPlan.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\SafeCheck\ImpressionType.hbm.xml" />
+    <EmbeddedResource Include="Mappers\SafeCheck\Timescale.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\SafeCheck\ClientQuestion.hbm.xml" />
+    <EmbeddedResource Include="Mappers\SafeCheck\Industry.hbm.xml" />
+    <EmbeddedResource Include="Mappers\SafeCheck\IndustryQuestion.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\SafeCheck\Category.hbm.xml" />
+    <EmbeddedResource Include="Mappers\SafeCheck\Checklist.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\SafeCheck\ChecklistAnswer.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\SafeCheck\ChecklistQuestion.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\SafeCheck\Question.hbm.xml" />
+    <EmbeddedResource Include="Mappers\SafeCheck\QuestionResponse.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\AccidentRecordNextStepSection.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\AccidentRecord.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\AccidentRecordBodyPart.hbm.xml" />
+    <EmbeddedResource Include="Mappers\AccidentRecordInjury.hbm.xml" />
+    <EmbeddedResource Include="Mappers\BodyPart.hbm.xml" />
+    <EmbeddedResource Include="Mappers\AccidentType.hbm.xml" />
+    <EmbeddedResource Include="Mappers\CauseOfAccident.hbm.xml" />
+    <EmbeddedResource Include="Mappers\Jurisdiction.hbm.xml" />
+    <EmbeddedResource Include="Mappers\Injury.hbm.xml" />
+    <EmbeddedResource Include="Mappers\StatutoryResponsibilityTaskTemplate.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\StatutoryResponsibilityTemplate.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\RolePermission.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\FireRiskAssessmentControlMeasure.hbm.xml" />
+    <EmbeddedResource Include="Mappers\FireRiskAssessmentSourceOfIgnition.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\FireRiskAssessmentSourceOfFuel.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\HazardSubstanceRiskPhrase.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\HazardousSubstancePictogram.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\PersonalRiskAssessmentChecklist.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\ChecklistGeneratorEmployee.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\RiskAssessmentPeopleAtRisk.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\Responsibility.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\ResponsibilityCategory.hbm.xml" />
+    <EmbeddedResource Include="Mappers\ResponsibilityReason.hbm.xml" />
+    <EmbeddedResource Include="Mappers\RiskAssessmentNonEmployee.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\RiskAssessmentEmployee.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\EmployeeForAuditing.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\BusinessSafeCompanyDetail.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\RiskAssessor.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\UserForAuditing.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\AuthenticationToken.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\ApplicationToken.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\SignificantFinding.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\FireRiskAssessmentChecklist.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\SourceOfFuel.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\SourceOfIgnition.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\FireSafetyControlMeasure.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\EmployeeChecklistEmail.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\Checklist.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\EmployeeChecklist.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\Answer.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\Question.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\Audit.hbm.xml" />
+    <EmbeddedResource Include="Mappers\HazardType.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\HazardSubstanceSafetyPhrase.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\PermissionTarget.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\RiskAssessment.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\ControlSystem.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\HazardousSubstanceGroup.hbm.xml" />
+    <EmbeddedResource Include="Mappers\HazardousSubstanceRiskAssessmentControlMeasure.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\Pictogram.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\Section.hbm.xml" />
+    <EmbeddedResource Include="Mappers\Supplier.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\RiskPhrase.hbm.xml" />
+    <EmbeddedResource Include="Mappers\SafetyPhrase.hbm.xml" />
+    <EmbeddedResource Include="Mappers\HazardousSubstance.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\DocHandlerDocumentType.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\Keyword.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\DocumentKeyword.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\Document.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\RiskAssessmentReview.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\DocumentType.hbm.xml" />
+    <EmbeddedResource Include="Mappers\Task.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\MultiHazardRiskAssessmentControlMeasure.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\MultiHazardRiskAssessmentHazard.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\EmploymentStatus.hbm.xml" />
+    <EmbeddedResource Include="Mappers\EmployeeEmergencyContactDetail.hbm.xml" />
+    <EmbeddedResource Include="Mappers\Nationality.hbm.xml" />
+    <EmbeddedResource Include="Mappers\Employee.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\Country.hbm.xml" />
+    <EmbeddedResource Include="Mappers\CompanyVehicleType.hbm.xml" />
+    <EmbeddedResource Include="Mappers\EmployeeContactDetail.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\Permission.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\Role.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\User.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\PeopleAtRisk.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\Hazard.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\NonEmployee.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\SiteStructureElement.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappers\EmailTemplate.hbm.xml" />
+    <EmbeddedResource Include="Mappers\TaskCategory.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

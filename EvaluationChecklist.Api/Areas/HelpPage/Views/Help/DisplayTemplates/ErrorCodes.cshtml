@@ -1,0 +1,27 @@
+﻿@using BusinessSafe.API.Areas.HelpPage.Models
+@model System.Collections.ObjectModel.Collection<BusinessSafe.API.Areas.HelpPage.Models.HelpPageErrorCode>
+
+<table>
+    <thead>
+        <tr>
+            <th>StatusCode</th>
+            <th>Message</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (HelpPageErrorCode errorCode in Model)
+        {
+
+
+            <tr>
+                <td>@((int) errorCode.HttpStatusCode)</td>
+                <td>@errorCode.Message</td>
+                <td>@errorCode.Description</td>
+            </tr>
+         
+        }
+    </tbody>
+</table>
+
+

@@ -1,0 +1,1361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E152C4B8-30E2-4520-848E-3A5256D3DFD3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BusinessSafe.AcceptanceTests</RootNamespace>
+    <AssemblyName>BusinessSafe.AcceptanceTests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CI|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\CI\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'UAT|AnyCPU'">
+    <OutputPath>bin\UAT\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LIVE|AnyCPU'">
+    <OutputPath>bin\LIVE\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HibernatingRhinos.Profiler.Appender.v4.0, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0774796e73ebf640, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\HibernatingRhinos.Profiler.Appender.v4.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NServiceBus.3.2.6\lib\net40\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc">
+      <HintPath>..\packages\Mvc2Futures.2.0.50217.0\lib\Microsoft.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcContrib">
+      <HintPath>..\packages\MvcContrib.2.0.95.0\lib\MvcContrib.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcContrib.WatiN">
+      <HintPath>..\packages\MvcContrib.WatiN.2.0.96.0\lib\MvcContrib.WatiN.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NHibernate.3.3.0.4000\lib\Net35\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap, Version=2.6.3.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
+      <HintPath>..\packages\structuremap.2.6.3\lib\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TechTalk.SpecFlow, Version=1.9.0.77, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\SpecFlow.1.9.0\lib\net35\TechTalk.SpecFlow.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DetailedTests\ResponsibilityPlanner\StringHelperTests\GetDateFromStringTests.cs" />
+    <Compile Include="Features\AccidentRecords\AccidentDetails.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccidentDetails.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\AccidentRecords\Index.feature.cs">
+      <DependentUpon>Index.feature</DependentUpon>
+      <SubType>Code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Features\AccidentRecords\InjuredPerson.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InjuredPerson.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\AccidentRecords\InjuryDetails.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InjuryDetails.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\AccidentRecords\NextSteps.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NextSteps.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\AccidentRecords\SearchAccidentRecords.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchAccidentRecords.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\CompanyDefaults\AddRiskAssessor.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddRiskAssessor.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\CompanyDefaults\EditRiskAssessor.feature.cs">
+      <DependentUpon>EditRiskAssessor.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Features\CompanyDefaults\ReinstateRiskAssessor.feature.cs">
+      <DependentUpon>ReinstateRiskAssessor.feature</DependentUpon>
+      <SubType>Code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Features\CoreFunctionality\FireRiskAssessmentCoreFunctionality.feature.cs">
+      <DependentUpon>FireRiskAssessmentCoreFunctionality.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Features\CoreFunctionality\EmployeeCoreFunctionality.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeeCoreFunctionality.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\CoreFunctionality\GeneralRiskAssessmentCoreFunctionality.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GeneralRiskAssessmentCoreFunctionality.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\CoreFunctionality\PersonalRiskAssessmentCoreFunctionality.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PersonalRiskAssessmentCoreFunctionality.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\CoreFunctionality\ResponsibilityCoreFunctionality.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResponsibilityCoreFunctionality.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\CoreFunctionality\SitesCoreFunctionality.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SitesCoreFunctionality.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\CoreFunctionality\UserCoreFunctionality.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserCoreFunctionality.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Documents\Added Documents\AddAddedDocument.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddAddedDocument.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Documents\Added Documents\DeleteAddedDocuments.feature.cs" />
+    <Compile Include="Features\Authentication\Authentication.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Authentication.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\BUGS\1671_ShouldNotBeAbleToEditOrDeleteSystemDefaults.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>1671_ShouldNotBeAbleToEditOrDeleteSystemDefaults.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\BUGS\1836_RemoveButtonToRemoveEmployeeNotDisplayingInIE.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>1836_RemoveButtonToRemoveEmployeeNotDisplayingInIE.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\BUGS\OnCreatingNewEmployeeTitleIsDisplayedAfterSave.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OnCreatingNewEmployeeTitleIsDisplayedAfterSave.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\CompanyDefaults\CompanyDefaults.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CompanyDefaults.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\CompanyDetails\NotifyPeninsulaClientTask.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NotifyPeninsulaClientTask.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Employees\DeleteEmployee.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeleteEmployee.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Documents\DocumentLibrary\SearchDocumentsinBusinessSafeSystem.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchDocumentsinBusinessSafeSystem.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Documents\DocumentLibrary\ViewingDocumentLibraryForBusinessSafeSystem.feature.cs">
+      <DependentUpon>ViewingDocumentLibraryForBusinessSafeSystem.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Features\Documents\DocumentLibrary\ViewingDocumentLibrary.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewingDocumentLibrary.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Documents\DocumentLibrary\SearchDocuments.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchDocuments.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Documents\Added Documents\DeleteAddedDocuments1.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeleteAddedDocuments.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Employees\ViewEmployee.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewEmployee.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Fire Risk Assessment\Checklist\SaveOnTabChange.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SaveOnTabChange.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Fire Risk Assessment\Hazards\AddingAndRemovingHazards.feature.cs">
+      <DependentUpon>AddingAndRemovingHazards.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Features\Fire Risk Assessment\Summary\BUG FRA07.feature.cs">
+      <DependentUpon>BUG FRA07.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Features\Fire Risk Assessment\Premises Information\SleepingAccommodation.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SleepingAccommodation.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\General Risk Assessment\CopyForMultipleSites.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CopyForMultipleSites.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\General Risk Assessment\Further Control Measures\AddDocumentToFurtherControlMeasure.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddDocumentToFurtherControlMeasure.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\General Risk Assessment\Documents\AddDocumentToRiskAssessment.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddDocumentToRiskAssessment.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Documents\Added Documents\SearchAddedDocuments.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchAddedDocuments.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Documents\SearchReferenceLibraryDocuments.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchReferenceLibraryDocuments.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Employees\AddEmployee.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddEmployee.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Employees\UpdateEmployee.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UpdateEmployee.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\FurtherControlMeasureTask\CompleteFurtherControlMeasureTask.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CompleteFurtherControlMeasureTask.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\General Risk Assessment\Add Non Employees.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Add Non Employees.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\General Risk Assessment\AddHazardsToGeneralRiskAssessment.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddHazardsToGeneralRiskAssessment.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\General Risk Assessment\AddPeopleAtRiskToGeneralRiskAssessment.feature.cs">
+      <DependentUpon>AddPeopleAtRiskToGeneralRiskAssessment.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Features\General Risk Assessment\Archive\ViewIndex.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewIndex.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\General Risk Assessment\AttachGeneralGRADocuments.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AttachGeneralGRADocuments.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\General Risk Assessment\BulkReassignFurtherControlMeasuresFromGRA1.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BulkReassignFurtherControlMeasuresFromGRA.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\General Risk Assessment\CreateRiskAssessment.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreateRiskAssessment.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\General Risk Assessment\DeleteRiskAssessment.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeleteRiskAssessment.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\General Risk Assessment\EditControlMeasures.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditControlMeasures.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\General Risk Assessment\EditHazardsAndPeople.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditHazardsAndPeople.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\General Risk Assessment\AddHazardsFurtherActionTasks.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddHazardsFurtherActionTasks.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\General Risk Assessment\MarkAsDraft.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MarkAsDraft.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\General Risk Assessment\ReassignFurtherControlMeasureTask.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReassignFurtherControlMeasureTask.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\General Risk Assessment\RemoveFurtherActionTask.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RemoveFurtherActionTask.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\General Risk Assessment\SearchGeneralRiskAssessments.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchGeneralRiskAssessments.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\General Risk Assessment\Summary\GeneralRiskAssessmentSummary.feature.cs">
+      <DependentUpon>GeneralRiskAssessmentSummary.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Features\Hazardous Substance Risk Assessment\AddAndCompleteReview.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddAndCompleteReview.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Hazardous Substance Risk Assessment\DeleteAndUndelete.feature.cs">
+      <DependentUpon>DeleteAndUndelete.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Features\Hazardous Substance Risk Assessment\Documents\AddDocumentToRiskAssessment.feature.cs">
+      <DependentUpon>AddDocumentToRiskAssessment.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Features\Hazardous Substance Risk Assessment\Further Control Measure Tasks\BulkReassignFurtherControlMeasuresFromHSRA.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BulkReassignFurtherControlMeasuresFromHSRA.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Hazardous Substance Risk Assessment\Further Control Measure Tasks\MarkFurtherControlMeasureAsNoLongerRequired.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MarkFurtherControlMeasureAsNoLongerRequired.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Hazardous Substance Risk Assessment\Further Control Measure Tasks\RemoveFurtherControlMeasureTask.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RemoveFurtherControlMeasureTask.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Hazardous Substance Risk Assessment\Further Control Measure Tasks\ViewCompletedFCMTasks.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewCompletedFCMTasks.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Hazardous Substance Risk Assessment\Summary\HazardousSubstanceRiskAssessmentSummary.feature.cs">
+      <DependentUpon>HazardousSubstanceRiskAssessmentSummary.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Features\Personal Risk Assessments\ChecklistGenerator\AddChecklistGenerator.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddChecklistGenerator.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Personal Risk Assessments\ChecklistGenerator\GenerateChecklists.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GenerateChecklists.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Personal Risk Assessments\ChecklistGenerator\GenerateMultipleEmployeeChecklists.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GenerateMultipleEmployeeChecklists.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Personal Risk Assessments\ChecklistGenerator\SendToSingleEmployee.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SendToSingleEmployee.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Personal Risk Assessments\ChecklistManager\ViewEmployeeChecklistEmail.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewEmployeeChecklistEmail.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Personal Risk Assessments\CannotCopyPRAs.feature.cs">
+      <DependentUpon>CannotCopyPRAs.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Features\Personal Risk Assessments\Create.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Create.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Personal Risk Assessments\DeleteAndUndelete.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeleteAndUndelete.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Personal Risk Assessments\FurtherControlMeasureTasks\AddFurtherControlMeasureTasks1.feature.cs">
+      <DependentUpon>AddFurtherControlMeasureTasks.feature</DependentUpon>
+      <SubType>Code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Features\Personal Risk Assessments\FurtherControlMeasureTasks\EditFurtherControlMeasureTasks1.feature.cs">
+      <DependentUpon>EditFurtherControlMeasureTasks.feature</DependentUpon>
+      <SubType>Code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Features\Personal Risk Assessments\FurtherControlMeasureTasks\RemoveFurtherControlMeasureTasks1.feature.cs">
+      <DependentUpon>RemoveFurtherControlMeasureTasks.feature</DependentUpon>
+      <SubType>Code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Features\Personal Risk Assessments\Hazards\AddCustomHazard.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddCustomHazard.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Personal Risk Assessments\Hazards\EditHazards.feature.cs">
+      <DependentUpon>EditHazards.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Features\Personal Risk Assessments\PremisesInformation.feature.cs">
+      <DependentUpon>PremisesInformation.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Features\Personal Risk Assessments\SearchPersonalRiskAssessments.feature.cs">
+      <DependentUpon>SearchPersonalRiskAssessments.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Features\Personal Risk Assessments\SensitiveFlag.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SensitiveFlag.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Personal Risk Assessments\ViewMode.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewMode.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Responsibilities\Index\DeleteReinstate.feature.cs">
+      <DependentUpon>DeleteReinstate.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Features\Responsibilities\Tasks\AddTask.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddTask.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Responsibilities\Tasks\CompleteTask.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CompleteTask.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Responsibilities\Tasks\UploadDocument.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UploadDocument.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Search Users\DisableAndReinstateUsers.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DisableAndReinstateUsers.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Sites\RestrictRiskAssessmentsBySites.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RestrictRiskAssessmentsBySites.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\General Risk Assessment\Review\AddGeneralRiskAssessmentReview.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddGeneralRiskAssessmentReview.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\General Risk Assessment\Review\ArchiveGeneralRiskAssessment.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ArchiveGeneralRiskAssessment.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\General Risk Assessment\Review\CompleteReviewTask.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CompleteReviewTask.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Hazardous Substance Risk Assessment\Hazardous Substance Assessment Calculator.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Hazardous Substance Assessment Calculator.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Hazardous Substance Risk Assessment\Further Control Measure Tasks\AddDocumentToFurtherControlMeasure.feature.cs">
+      <DependentUpon>AddDocumentToFurtherControlMeasure.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Features\Hazardous Substance Risk Assessment\Further Control Measure Tasks\AddFurtherControlMeasureTasks.feature.cs">
+      <DependentUpon>AddFurtherControlMeasureTasks.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Features\Hazardous Substance Risk Assessment\SearchHazardousSubstanceRiskAssessments.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchHazardousSubstanceRiskAssessments.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Hazardous Substance Risk Assessment\CreateHazardousSubstanceRiskAssessment.feature.cs">
+      <DependentUpon>CreateHazardousSubstanceRiskAssessment.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Features\Hazardous Substances Inventory\DeleteHazardousSubstance.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeleteHazardousSubstance.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Hazardous Substances Inventory\AddToInventory.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddToInventory.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Hazardous Substances Inventory\CheckForDuplicates.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CheckForDuplicates.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Hazardous Substances Inventory\InventoryItemLinkBackToAssociatedRiskAssessment.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InventoryItemLinkBackToAssociatedRiskAssessment.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Hazardous Substances Inventory\ViewInventory.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewInventory.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Hazardous Substance Risk Assessment\MarkAsDraft.feature.cs">
+      <DependentUpon>MarkAsDraft.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Features\PerformanceTestContextSetup\PerformanceTestContextSetup.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PerformanceTestContextSetup.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\ReassignFurtherActionTasks\BulkReassignFurtherControlMeasureFromTaskList.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BulkReassignFurtherControlMeasureFromTaskList.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\ReassignFurtherActionTasks\ReassignFurtherActionTasks.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReassignFurtherActionTasks.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\ReinstateDeletedEmploye\ReinstateDeletedEmployee.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReinstateDeletedEmployee.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Employees\Search Employees\SearchEmployees.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchEmployees.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Search Users\SearchUsers.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchUsers.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Sites\ManageSites.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ManageSites.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\TaskList\RecurringTasks.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecurringTasks.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\TaskList\SearchingTasks.feature.cs">
+      <DependentUpon>SearchingTasks.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Features\TaskList\DeletingTaskFromTaskList.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeletingTaskFromTaskList.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\TaskList\ViewCompletedTasks.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewCompletedTasks.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\User Roles\CreatingUserRoles.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreatingUserRoles.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\User Roles\ManagingUserRoles.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ManagingUserRoles.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\UserPermissions\AddUser.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddUser.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\UserPermissions\UserPermissions.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserPermissions.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Users\DisplayLogin.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DisplayLogin.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Users\ViewUser.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewUser.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StepDefinitions\AcceptanceTestBootstrap.cs" />
+    <Compile Include="StepDefinitions\AccidentRecords\AccidentDetailsSteps.cs" />
+    <Compile Include="StepDefinitions\AccidentRecords\AccidentRecordSearchSteps.cs" />
+    <Compile Include="StepDefinitions\AccidentRecords\InjuredPersonSteps.cs" />
+    <Compile Include="StepDefinitions\AccidentRecords\NextStepsSteps.cs" />
+    <Compile Include="StepDefinitions\CompanyDefaults\AddRiskAssessorSteps.cs" />
+    <Compile Include="StepDefinitions\CompanyDefaults\EditRiskAssessorSteps.cs" />
+    <Compile Include="StepDefinitions\CompanyDefaults\RiskAssessorsSteps.cs" />
+    <Compile Include="StepDefinitions\Documents\AddedDocuments\AddDocumentToAddedDocumentsSteps.cs" />
+    <Compile Include="StepDefinitions\Documents\AddedDocuments\AddedDocumentsSteps.cs" />
+    <Compile Include="StepDefinitions\BUGS\1671BugSteps.cs" />
+    <Compile Include="StepDefinitions\BUGS\1836BugSteps.cs" />
+    <Compile Include="StepDefinitions\BUGS\WhenCreatingNewEmployeeSelectedTitleNotDisplayedBugSteps.cs" />
+    <Compile Include="StepDefinitions\CommandButtonSteps.cs" />
+    <Compile Include="StepDefinitions\CompanyDefaults\CompanyDefaultsSteps.cs" />
+    <Compile Include="StepDefinitions\BaseSteps.cs" />
+    <Compile Include="StepDefinitions\Documents\DocumentLibrary\DocumentLibrarySteps.cs" />
+    <Compile Include="StepDefinitions\Documents\SearchAddedDocumentsSteps.cs" />
+    <Compile Include="StepDefinitions\Fire Risk Assessment\Checklist\SaveOnTabChangeDefinition.cs" />
+    <Compile Include="StepDefinitions\Fire Risk Assessment\Checklist\ValidateCompleteChecklistSteps.cs" />
+    <Compile Include="StepDefinitions\Fire Risk Assessment\Premises Information\SleepingAccommodationSteps.cs" />
+    <Compile Include="StepDefinitions\FRACoreFunctionalitySteps.cs" />
+    <Compile Include="StepDefinitions\General Risk Assessment\CopyForMultipleSitesSteps.cs" />
+    <Compile Include="StepDefinitions\General Risk Assessment\DeleteRiskAssessmentSteps.cs" />
+    <Compile Include="StepDefinitions\General Risk Assessment\Archive\GeneralRiskAssessmentArchiveViewSteps.cs" />
+    <Compile Include="StepDefinitions\General Risk Assessment\EditRiskAssessmentSteps.cs" />
+    <Compile Include="StepDefinitions\General Risk Assessment\SearchGeneralRiskAssessmentSteps.cs" />
+    <Compile Include="StepDefinitions\General Risk Assessment\Summary\GeneralRiskAssessmentSummarySteps.cs" />
+    <Compile Include="StepDefinitions\GRACoreFunctionalitySteps.cs" />
+    <Compile Include="StepDefinitions\Hazardous Substance Risk Assessment\AddAndCompleteAReviewSteps.cs" />
+    <Compile Include="StepDefinitions\Hazardous Substance Risk Assessment\HazardousSubstanceRiskAssessmentSummarySteps.cs" />
+    <Compile Include="StepDefinitions\Hazardous Substance Risk Assessment\MarkFurtherControlMeasureAsNoLongerRequiredSteps.cs" />
+    <Compile Include="StepDefinitions\Hazardous Substance Risk Assessment\RemoveFurtherControlMeasureTask.cs" />
+    <Compile Include="StepDefinitions\InjuryDetailsSteps.cs" />
+    <Compile Include="StepDefinitions\PersonalRiskAssessment\ChecklistGenerator\AddChecklistGenerator.cs" />
+    <Compile Include="StepDefinitions\PersonalRiskAssessment\ChecklistGenerator\GenerateMultipleEmployeeChecklistsSteps.cs" />
+    <Compile Include="StepDefinitions\PersonalRiskAssessment\ChecklistGenerator\SendToSingleEmployeeSteps.cs" />
+    <Compile Include="StepDefinitions\PersonalRiskAssessment\ChecklistManager\ViewEmployeeChecklistEmail.cs" />
+    <Compile Include="StepDefinitions\PersonalRiskAssessment\CreateSteps.cs" />
+    <Compile Include="StepDefinitions\PersonalRiskAssessment\FurtherControlMeasureTaskSteps.cs" />
+    <Compile Include="StepDefinitions\PRACoreFunctionalitySteps.cs" />
+    <Compile Include="StepDefinitions\Responsibilities\AddResponsibilityTasks.cs" />
+    <Compile Include="StepDefinitions\Responsibilities\CompleteTestSteps.cs" />
+    <Compile Include="StepDefinitions\Responsibilities\ViewEditDeleteResponsibilityTasks.cs" />
+    <Compile Include="StepDefinitions\Responsibilities\ResponsibilityIndex.cs" />
+    <Compile Include="StepDefinitions\Sites\RestrictGeneralRiskAssessmentsBySitesSteps.cs" />
+    <Compile Include="StepDefinitions\General Risk Assessment\Review\CompleteReviewTaskSteps.cs" />
+    <Compile Include="StepDefinitions\ElementHelperSteps.cs" />
+    <Compile Include="StepDefinitions\DeleteEmployees\DeleteEmployeeSteps.cs" />
+    <Compile Include="StepDefinitions\Documents\DocumentsSteps.cs" />
+    <Compile Include="StepDefinitions\Employees\AddEmployeesSteps.cs" />
+    <Compile Include="StepDefinitions\Employees\UpdateEmployeeSteps.cs" />
+    <Compile Include="StepDefinitions\FileSystemSteps.cs" />
+    <Compile Include="StepDefinitions\FormSteps.cs" />
+    <Compile Include="StepDefinitions\FurtherControlMeasureTask\FurtherControlMeasureTaskSteps.cs" />
+    <Compile Include="StepDefinitions\General Risk Assessment\BulkReassignFurtherActionTasksFromGRASteps.cs" />
+    <Compile Include="StepDefinitions\General Risk Assessment\ControlMeasuresSteps.cs" />
+    <Compile Include="StepDefinitions\General Risk Assessment\CreateNewRiskAssessmentSteps.cs" />
+    <Compile Include="StepDefinitions\General Risk Assessment\FurtherActionTasksSteps.cs" />
+    <Compile Include="StepDefinitions\General Risk Assessment\HazardsAndPeopleAtRiskSteps.cs" />
+    <Compile Include="StepDefinitions\General Risk Assessment\MarkAsDraftSteps.cs" />
+    <Compile Include="StepDefinitions\General Risk Assessment\NonEmployeeSteps.cs" />
+    <Compile Include="StepDefinitions\General Risk Assessment\PremisesInformationSteps.cs" />
+    <Compile Include="StepDefinitions\General Risk Assessment\ReassignFurtherControlMeasureSteps.cs" />
+    <Compile Include="StepDefinitions\General Risk Assessment\RemoveFurtherActionTaskSteps.cs" />
+    <Compile Include="StepDefinitions\General Risk Assessment\Review\AddGRAReviewSteps.cs" />
+    <Compile Include="StepDefinitions\Hazardous Substance Inventory\InventoryItemHasLinkBackToAssociatedRiskAssessmentSteps.cs" />
+    <Compile Include="StepDefinitions\Hazardous Substance Risk Assessment\AddFurtherControlMeasureTask.cs" />
+    <Compile Include="StepDefinitions\Hazardous Substance Risk Assessment\HazardousSubstanceAssessmentCalculatorSteps.cs" />
+    <Compile Include="StepDefinitions\Hazardous Substance Risk Assessment\SearchHazardousSubstanceRiskAssessmentsSteps.cs" />
+    <Compile Include="StepDefinitions\Hazardous Substance Risk Assessment\CreateHazardousSubstanceNewRiskAssessmentSteps.cs" />
+    <Compile Include="StepDefinitions\Hazardous Substance Inventory\DeleteHazardousSubstanceSteps.cs" />
+    <Compile Include="StepDefinitions\Hazardous Substance Inventory\AddToInventorySteps.cs" />
+    <Compile Include="StepDefinitions\Hazardous Substance Inventory\ViewInventorySteps.cs" />
+    <Compile Include="StepDefinitions\NavigationSteps.cs" />
+    <Compile Include="StepDefinitions\PerformanceTest\PerformanceTestContextSteps.cs" />
+    <Compile Include="StepDefinitions\ReassignFurtherActionTasks\BulkReassignFurtherActionTaskFromTaskListSteps.cs" />
+    <Compile Include="StepDefinitions\ReassignFurtherActionTasks\ReassignFurtherActionTasksSteps.cs" />
+    <Compile Include="StepDefinitions\ReinstateDeletedEmployees\ReinstateDeletedEmployeeSteps.cs" />
+    <Compile Include="StepDefinitions\ResponsibilityPlanner\NotifyPeninsulaClientSteps.cs" />
+    <Compile Include="StepDefinitions\SearchEmployees\SearchEmployeeSteps.cs" />
+    <Compile Include="StepDefinitions\AuthenticationSteps.cs" />
+    <Compile Include="StepDefinitions\DialogConfirmationSteps.cs" />
+    <Compile Include="StepDefinitions\SearchUsers\DisableUsers.cs" />
+    <Compile Include="StepDefinitions\SearchUsers\SearchUsersSteps.cs" />
+    <Compile Include="StepDefinitions\Sites\SitesSteps.cs" />
+    <Compile Include="StepDefinitions\TaskList\TaskListSteps.cs" />
+    <Compile Include="StepDefinitions\User Roles\UserRolesSteps.cs" />
+    <Compile Include="StepDefinitions\UserPermissions\AddUserSteps.cs" />
+    <Compile Include="StepDefinitions\UserPermissions\UserPermissionsSteps.cs" />
+    <Compile Include="StepDefinitions\Users\DeleteUserSteps.cs" />
+    <Compile Include="StepDefinitions\Users\ViewUserSteps.cs" />
+    <Compile Include="StepDefinitions\ValidationMessageSteps.cs" />
+    <Compile Include="StepDefinitions\Documents\DocumentLibrary\ViewingDocumentLibrarySteps.cs" />
+    <Compile Include="StepHelpers\ElementCssHelper.cs" />
+    <Compile Include="StepHelpers\StringHelper.cs" />
+    <Compile Include="StepHelpers\TaskListStepArgumentTransformation.cs" />
+    <Compile Include="StepDefinitions\ResponsibilityPlanner\AddResponsibilityTaskSteps.cs" />
+    <Compile Include="StepHelpers\TelerikWatinHelper.cs" />
+    <Compile Include="StepDefinitions\ResponsibilityPlanner\CompleteResponsibilityTaskSteps.cs" />
+    <Compile Include="StepDefinitions\ResponsibilityPlanner\DeleteResponsibilityTask.cs" />
+    <Compile Include="StepDefinitions\ScenarioContextHelpers.cs" />
+    <Compile Include="SutRegistry.cs" />
+    <Compile Include="StepDefinitions\ResponsibilityPlanner\TaskListSteps.cs" />
+    <Compile Include="StepHelpers\WebBrowser.cs" />
+    <Compile Include="WatiNHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Features\AccidentRecords\AccidentDetails.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AccidentDetails.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\AccidentRecords\Index.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Index.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\AccidentRecords\InjuredPerson.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>InjuredPerson.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\AccidentRecords\InjuryDetails.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>InjuryDetails.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\AccidentRecords\NextSteps.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>NextSteps.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\AccidentRecords\SearchAccidentRecords.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SearchAccidentRecords.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\CompanyDefaults\AddRiskAssessor.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AddRiskAssessor.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\CompanyDefaults\EditRiskAssessor.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>EditRiskAssessor.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\CompanyDefaults\ReinstateRiskAssessor.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ReinstateRiskAssessor.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\CoreFunctionality\FireRiskAssessmentCoreFunctionality.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>FireRiskAssessmentCoreFunctionality.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\CoreFunctionality\EmployeeCoreFunctionality.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>EmployeeCoreFunctionality.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\CoreFunctionality\GeneralRiskAssessmentCoreFunctionality.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>GeneralRiskAssessmentCoreFunctionality.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\CoreFunctionality\PersonalRiskAssessmentCoreFunctionality.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>PersonalRiskAssessmentCoreFunctionality.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\CoreFunctionality\ResponsibilityCoreFunctionality.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ResponsibilityCoreFunctionality.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\CoreFunctionality\SitesCoreFunctionality.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SitesCoreFunctionality.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\CoreFunctionality\UserCoreFunctionality.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>UserCoreFunctionality.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Documents\Added Documents\AddAddedDocument.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AddAddedDocument.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Documents\Added Documents\DeleteAddedDocuments.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DeleteAddedDocuments1.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Authentication\Authentication.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Authentication.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\BUGS\1671_ShouldNotBeAbleToEditOrDeleteSystemDefaults.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>1671_ShouldNotBeAbleToEditOrDeleteSystemDefaults.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\BUGS\1836_RemoveButtonToRemoveEmployeeNotDisplayingInIE.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>1836_RemoveButtonToRemoveEmployeeNotDisplayingInIE.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\BUGS\OnCreatingNewEmployeeTitleIsDisplayedAfterSave.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>OnCreatingNewEmployeeTitleIsDisplayedAfterSave.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\CompanyDefaults\CompanyDefaults.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CompanyDefaults.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\CompanyDetails\NotifyPeninsulaClientTask.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>NotifyPeninsulaClientTask.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Employees\DeleteEmployee.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DeleteEmployee.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Documents\DocumentLibrary\SearchDocumentsinBusinessSafeSystem.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SearchDocumentsinBusinessSafeSystem.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Documents\DocumentLibrary\ViewingDocumentLibraryForBusinessSafeSystem.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ViewingDocumentLibraryForBusinessSafeSystem.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Documents\DocumentLibrary\ViewingDocumentLibrary.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ViewingDocumentLibrary.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Documents\DocumentLibrary\SearchDocuments.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SearchDocuments.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Employees\ViewEmployee.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ViewEmployee.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Fire Risk Assessment\Checklist\SaveOnTabChange.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SaveOnTabChange.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Fire Risk Assessment\Hazards\AddingAndRemovingHazards.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AddingAndRemovingHazards.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Fire Risk Assessment\Summary\BUG FRA07.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>BUG FRA07.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Fire Risk Assessment\Premises Information\SleepingAccommodation.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SleepingAccommodation.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\General Risk Assessment\CopyForMultipleSites.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CopyForMultipleSites.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\General Risk Assessment\Further Control Measures\AddDocumentToFurtherControlMeasure.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AddDocumentToFurtherControlMeasure.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\General Risk Assessment\Documents\AddDocumentToRiskAssessment.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AddDocumentToRiskAssessment.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Documents\Added Documents\SearchAddedDocuments.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SearchAddedDocuments.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Documents\SearchReferenceLibraryDocuments.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SearchReferenceLibraryDocuments.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Employees\AddEmployee.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AddEmployee.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Employees\UpdateEmployee.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>UpdateEmployee.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\FurtherControlMeasureTask\CompleteFurtherControlMeasureTask.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CompleteFurtherControlMeasureTask.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\General Risk Assessment\Add Non Employees.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Add Non Employees.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\General Risk Assessment\AddHazardsToGeneralRiskAssessment.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AddHazardsToGeneralRiskAssessment.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\General Risk Assessment\AddPeopleAtRiskToGeneralRiskAssessment.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AddPeopleAtRiskToGeneralRiskAssessment.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\General Risk Assessment\Archive\ViewIndex.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ViewIndex.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\General Risk Assessment\AttachGeneralGRADocuments.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AttachGeneralGRADocuments.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\General Risk Assessment\BulkReassignFurtherControlMeasuresFromGRA.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>BulkReassignFurtherControlMeasuresFromGRA1.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\General Risk Assessment\CreateRiskAssessment.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CreateRiskAssessment.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\General Risk Assessment\DeleteRiskAssessment.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DeleteRiskAssessment.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\General Risk Assessment\EditControlMeasures.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>EditControlMeasures.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\General Risk Assessment\EditHazardsAndPeople.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>EditHazardsAndPeople.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\General Risk Assessment\AddHazardsFurtherActionTasks.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AddHazardsFurtherActionTasks.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\General Risk Assessment\MarkAsDraft.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>MarkAsDraft.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\General Risk Assessment\ReassignFurtherControlMeasureTask.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ReassignFurtherControlMeasureTask.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\General Risk Assessment\RemoveFurtherActionTask.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>RemoveFurtherActionTask.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\General Risk Assessment\SearchGeneralRiskAssessments.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SearchGeneralRiskAssessments.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\General Risk Assessment\Summary\GeneralRiskAssessmentSummary.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>GeneralRiskAssessmentSummary.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Hazardous Substance Risk Assessment\AddAndCompleteReview.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AddAndCompleteReview.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Hazardous Substance Risk Assessment\DeleteAndUndelete.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DeleteAndUndelete.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Hazardous Substance Risk Assessment\Documents\AddDocumentToRiskAssessment.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AddDocumentToRiskAssessment.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Hazardous Substance Risk Assessment\Further Control Measure Tasks\BulkReassignFurtherControlMeasuresFromHSRA.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>BulkReassignFurtherControlMeasuresFromHSRA.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Hazardous Substance Risk Assessment\Further Control Measure Tasks\MarkFurtherControlMeasureAsNoLongerRequired.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>MarkFurtherControlMeasureAsNoLongerRequired.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Hazardous Substance Risk Assessment\Further Control Measure Tasks\RemoveFurtherControlMeasureTask.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>RemoveFurtherControlMeasureTask.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Hazardous Substance Risk Assessment\Further Control Measure Tasks\ViewCompletedFCMTasks.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ViewCompletedFCMTasks.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Hazardous Substance Risk Assessment\Summary\HazardousSubstanceRiskAssessmentSummary.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>HazardousSubstanceRiskAssessmentSummary.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Personal Risk Assessments\ChecklistGenerator\AddChecklistGenerator.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AddChecklistGenerator.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Personal Risk Assessments\ChecklistGenerator\GenerateChecklists.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>GenerateChecklists.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Personal Risk Assessments\ChecklistGenerator\GenerateMultipleEmployeeChecklists.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>GenerateMultipleEmployeeChecklists.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Personal Risk Assessments\ChecklistGenerator\SendToSingleEmployee.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SendToSingleEmployee.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Personal Risk Assessments\ChecklistManager\ViewEmployeeChecklistEmail.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ViewEmployeeChecklistEmail.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Personal Risk Assessments\CannotCopyPRAs.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CannotCopyPRAs.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Personal Risk Assessments\Create.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Create.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Personal Risk Assessments\DeleteAndUndelete.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DeleteAndUndelete.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Personal Risk Assessments\FurtherControlMeasureTasks\AddFurtherControlMeasureTasks.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AddFurtherControlMeasureTasks1.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Personal Risk Assessments\FurtherControlMeasureTasks\EditFurtherControlMeasureTasks.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>EditFurtherControlMeasureTasks1.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Personal Risk Assessments\FurtherControlMeasureTasks\RemoveFurtherControlMeasureTasks.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>RemoveFurtherControlMeasureTasks1.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Personal Risk Assessments\Hazards\AddCustomHazard.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AddCustomHazard.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Personal Risk Assessments\Hazards\EditHazards.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>EditHazards.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Personal Risk Assessments\PremisesInformation.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>PremisesInformation.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Personal Risk Assessments\SearchPersonalRiskAssessments.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SearchPersonalRiskAssessments.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Personal Risk Assessments\SensitiveFlag.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SensitiveFlag.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Personal Risk Assessments\ViewMode.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ViewMode.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Responsibilities\Index\DeleteReinstate.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DeleteReinstate.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Responsibilities\Tasks\AddTask.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AddTask.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Responsibilities\Tasks\CompleteTask.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CompleteTask.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Responsibilities\Tasks\UploadDocument.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>UploadDocument.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Search Users\DisableAndReinstateUsers.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DisableAndReinstateUsers.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Sites\RestrictRiskAssessmentsBySites.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>RestrictRiskAssessmentsBySites.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\General Risk Assessment\Review\AddGeneralRiskAssessmentReview.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AddGeneralRiskAssessmentReview.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\General Risk Assessment\Review\ArchiveGeneralRiskAssessment.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ArchiveGeneralRiskAssessment.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\General Risk Assessment\Review\CompleteReviewTask.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CompleteReviewTask.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Hazardous Substance Risk Assessment\Hazardous Substance Assessment Calculator.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Hazardous Substance Assessment Calculator.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Hazardous Substance Risk Assessment\Further Control Measure Tasks\AddDocumentToFurtherControlMeasure.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AddDocumentToFurtherControlMeasure.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Hazardous Substance Risk Assessment\Further Control Measure Tasks\AddFurtherControlMeasureTasks.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AddFurtherControlMeasureTasks.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Hazardous Substance Risk Assessment\SearchHazardousSubstanceRiskAssessments.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SearchHazardousSubstanceRiskAssessments.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Hazardous Substance Risk Assessment\CreateHazardousSubstanceRiskAssessment.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CreateHazardousSubstanceRiskAssessment.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Hazardous Substances Inventory\DeleteHazardousSubstance.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DeleteHazardousSubstance.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Hazardous Substances Inventory\AddToInventory.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AddToInventory.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Hazardous Substances Inventory\CheckForDuplicates.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CheckForDuplicates.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Hazardous Substances Inventory\InventoryItemLinkBackToAssociatedRiskAssessment.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>InventoryItemLinkBackToAssociatedRiskAssessment.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Hazardous Substances Inventory\ViewInventory.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ViewInventory.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Hazardous Substance Risk Assessment\MarkAsDraft.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>MarkAsDraft.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\PerformanceTestContextSetup\PerformanceTestContextSetup.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>PerformanceTestContextSetup.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\ReassignFurtherActionTasks\BulkReassignFurtherControlMeasureFromTaskList.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>BulkReassignFurtherControlMeasureFromTaskList.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\ReassignFurtherActionTasks\ReassignFurtherActionTasks.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ReassignFurtherActionTasks.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\ReinstateDeletedEmploye\ReinstateDeletedEmployee.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ReinstateDeletedEmployee.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Employees\Search Employees\SearchEmployees.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SearchEmployees.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Search Users\SearchUsers.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SearchUsers.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Sites\ManageSites.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ManageSites.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\TaskList\RecurringTasks.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>RecurringTasks.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\TaskList\SearchingTasks.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SearchingTasks.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\TaskList\DeletingTaskFromTaskList.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DeletingTaskFromTaskList.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\TaskList\ViewCompletedTasks.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ViewCompletedTasks.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\User Roles\CreatingUserRoles.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CreatingUserRoles.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\User Roles\ManagingUserRoles.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ManagingUserRoles.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\UserPermissions\AddUser.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AddUser.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\UserPermissions\UserPermissions.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>UserPermissions.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Users\DisplayLogin.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DisplayLogin.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\Users\ViewUser.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ViewUser.feature.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessSafe.Application\BusinessSafe.Application.csproj">
+      <Project>{5DBF972D-D624-4FE6-8483-F9828C37CF52}</Project>
+      <Name>BusinessSafe.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Data\BusinessSafe.Data.csproj">
+      <Project>{0E42764A-6356-461F-9473-D452EFC22AC7}</Project>
+      <Name>BusinessSafe.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Domain\BusinessSafe.Domain.csproj">
+      <Project>{EA0B55F3-6232-400F-8BE0-FEC49883253F}</Project>
+      <Name>BusinessSafe.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Infrastructure\BusinessSafe.Infrastructure.csproj">
+      <Project>{9DD3289E-AA83-483D-88E1-F2FCE53B941C}</Project>
+      <Name>BusinessSafe.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.WebSite\BusinessSafe.WebSite.csproj">
+      <Project>{3CF88FC7-ED75-48C1-A2CE-A16754F3FA0F}</Project>
+      <Name>BusinessSafe.WebSite</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="hibernate_BusinessSafe.cfg.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="hibernate_PeninsulaDB.cfg.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

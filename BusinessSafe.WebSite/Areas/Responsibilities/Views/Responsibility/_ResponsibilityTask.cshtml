@@ -1,0 +1,24 @@
+﻿@using BusinessSafe.WebSite.Extensions
+@model BusinessSafe.WebSite.Areas.Responsibilities.ViewModels.CreateUpdateResponsibilityTaskViewModel
+
+@using (Html.BeginForm("CreateResponsibilityTask", "Responsibility", FormMethod.Post, new { @class = "form-inline", id = "CreateResponsibilityTaskForm" }))
+{   
+    @Html.Partial("_ResponsibilityTaskDetail", Model)
+
+    @Html.Partial("_AttachDocuments", Model.ExistingDocuments)
+
+    <div class="row">
+        <label class="span3"></label>
+        <button type="submit" id="saveResponsibilityTaskButton" class="btn btn-primary">Save</button>
+        <a id="CancelAddResponsibilityTask" class="btn btn-link">Cancel</a>
+    @if (Model.IsRecurring && Model.NotMarkedAsNoLongerRequired())
+    {
+        <button class="btn btn-large btn-danger" id="ResponsibilityTaskNoLongerRequiredButton">
+            No Longer Required</button>    
+    }
+    </div>
+}
+
+       
+
+

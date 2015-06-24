@@ -1,0 +1,132 @@
+﻿@using BusinessSafe.WebSite.Areas.Company.ViewModels
+@using BusinessSafe.WebSite.AuthenticationService
+@model RiskAssessorsDefaultAddEdit
+<h3>@Model.SectionHeading</h3>
+<div id="riskAssessors" class="well form-inline">
+    <div id="controls" class="clearfix">
+    @if (User.IsInRole(Permissions.AddCompanyDefaults.ToString()) && !Model.ShowingDeleted)
+    {
+        <div class="pull-left">
+            <button type="button" id="add-new-riskassessor-button" class="btn addRiskAssessor btn-success">Add New Assessor</button></div>
+    }
+        <div class="pull-right">
+            @if (!Model.ShowingDeleted)
+            {
+                <button type="button" class="btn showDeletedRiskAssessors">Show Deleted</button>
+            }
+            else
+            {
+                <button type="button" class="btn showActiveRiskAssessors">Show Active</button>
+            }
+        </div>
+    </div>
+    <table class="table table-bordered table-striped tablesorter" id="riskAssessorsTable">
+        <colgroup>
+            <col class="span3" />
+            <col class="span3" />
+            <col class="span3" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>
+                    Forename
+                </th>
+                <th>
+                    Surname
+                </th>
+                <th>
+                    Site
+                </th>
+                <th colspan="3" class="nosort centredContent">
+                    Does Not Want A Notification
+                </th>
+                <th class="nosort">
+                </th>
+            </tr>
+            <tr>
+                <td colspan="3">
+                </td>
+                <td class="centredContent nosort">
+                    <strong>Overdue</strong>
+                </td>
+                <td class="centredContent nosort">
+                    <strong>Completed</strong>
+                </td>
+                <td class="centredContent nosort">
+                    <strong>Due</strong>
+                </td>
+                <td>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var riskAssessor in Model.RiskAssessors)
+            {
+                <tr class="company-default-command-row">
+                    <td>
+                        @riskAssessor.Forename.Trim()
+                    </td>
+                    <td>
+                        @riskAssessor.Surname.Trim()
+                    </td>
+                    <td>
+                        @riskAssessor.Site.Trim()
+                    </td>
+                    <td class="centredContent">
+                        @Html.CheckBox("DoNotSendOverDueNotifications", riskAssessor.DoNotSendOverDueNotifications, new { disabled = "disabled" })
+                    </td>
+                    <td class="centredContent">
+                        @Html.CheckBox("DoNotSendCompletedNotifications", riskAssessor.DoNotSendCompletedNotifications, new { disabled = "disabled" })
+                    </td>
+                    <td class="centredContent">
+                        @Html.CheckBox("DoNotSendDueNotifications", riskAssessor.DoNotSendDueNotifications, new { disabled = "disabled" })
+                    </td>
+                   <td>
+                        @if (User.IsInRole(Permissions.EditCompanyDefaults.ToString()) && !Model.ShowingDeleted)
+                        {
+                            <a class="icon-edit edit-risk-assessor" href="#" title="edit" data-id="@riskAssessor.Id"rel="tooltip" />
+                        }
+                        @if (User.IsInRole(Permissions.DeleteCompanyDefaults.ToString()) && !Model.ShowingDeleted)
+                        {
+                            <a class="icon-remove delete confirmLink" href="#" title="delete" data-id="@riskAssessor.Id" data-employee-id="@riskAssessor.EmployeeId" rel="tooltip" />        
+                        }
+                        @if (User.IsInRole(Permissions.DeleteCompanyDefaults.ToString()) && Model.ShowingDeleted)
+                        {
+                            <a class="icon-share reinstate-risk-assessor" href="#" title="reinstate" data-id="@riskAssessor.Id" rel="tooltip" />
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    
+    <script type="text/template" id="newRiskAssessorRowTemplate">
+        <tr class="company-default-command-row hide">
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td class="centredContent">
+                    @Html.CheckBox("DoNotSendOverDueNotifications", false, new { disabled = "disabled" })
+                </td>
+                <td class="centredContent">
+                    @Html.CheckBox("DoNotSendCompletedNotifications", false, new { disabled = "disabled" })
+                </td>
+                <td class="centredContent">
+                    @Html.CheckBox("DoNotSendDueNotifications", false, new { disabled = "disabled" })
+                </td>
+                <td>
+                    @if (User.IsInRole(Permissions.EditCompanyDefaults.ToString()))
+                    {
+                        <a class="icon-edit edit-risk-assessor" href="#" title="edit" data-id=""  rel="tooltip"></a>     
+                    }
+                    @if (User.IsInRole(Permissions.DeleteCompanyDefaults.ToString()))
+                    {
+                        <a class="icon-remove delete confirmLink" href="#" title="delete" data-id="" data-employee-id="" rel="tooltip" />        
+                    }
+                </td>
+            </tr>
+    </script>
+</div>

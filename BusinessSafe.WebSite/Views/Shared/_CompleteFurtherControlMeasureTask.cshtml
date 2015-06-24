@@ -1,0 +1,35 @@
+﻿@model BusinessSafe.WebSite.ViewModels.CompleteFurtherControlMeasureTaskViewModel
+<form id="ActionTask" class="form-inline" method="POST" action="@Url.Action("CompleteTask", "TaskListAction", new { area = "" })">
+@Html.Hidden("FFurtherControlMeasureTaskId", Model.FurtherControlMeasureTaskId)
+@Html.HiddenFor(x => x.FurtherControlMeasureTaskId)
+@Html.HiddenFor(x => x.CompanyId)
+@Html.Partial("_ReadOnlyTaskDetails", Model.ViewFurtherControlMeasureTaskViewModel)
+<fieldset>
+    <legend id="FurtherControlMeasureCompletedTaskLegend">
+        <h3>
+            Complete Task</h3> 
+    </legend>
+    <div class="row">
+        <label for="TaskCompleted" class="span2">Completed</label>
+        <input type="checkbox" id="TaskComplete" name="TaskStatusId" value="1" @(Model.ViewFurtherControlMeasureTaskViewModel.TaskStatusId == 1 ? "checked='checked'" : string.Empty) />
+    </div>
+    <div class="row">
+        <label for="Description" class="span2">Completed Comments</label>
+        @Html.TextAreaFor(m => m.CompletedComments, new { maxlength = 250, @class = "span8" })
+    </div>
+</fieldset>
+@Html.Partial("_AttachDocuments", Model.ViewFurtherControlMeasureTaskViewModel.ExistingDocuments)
+<div data-valmsg-summary="true" class="validation-summary-errors hide">
+    <ul>
+    </ul>
+</div>
+<div class="row">
+    <label class="span2">
+    </label>
+    @if (Model.ViewFurtherControlMeasureTaskViewModel.TaskStatusId == 0)
+    {
+        <button type="submit" class="btn btn-primary disabled" id="TaskSaveButton">Complete Task</button>
+    }
+    <button class="btn btn-link" id="TaskCancelButton">Cancel</button>
+</div>
+</form>

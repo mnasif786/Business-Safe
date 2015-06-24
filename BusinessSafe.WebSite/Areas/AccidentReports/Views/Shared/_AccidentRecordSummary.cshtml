@@ -1,0 +1,30 @@
+﻿@using BusinessSafe.Domain.Entities
+@model BusinessSafe.WebSite.Areas.AccidentReports.ViewModels.AccidentSummaryViewModel
+<div class="well">
+    <div class="container ipad-container">
+        <div class="row">
+            <div class="span6">
+                <div class="row">
+                    <label class="span2">Title</label>
+                    <strong>@Model.Title</strong>
+                </div>
+                <div class="row">
+                    <label class="span2">Created On</label>
+                    <strong>@Model.CreatedOn.ToShortDateString()</strong>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="row">
+                    <label class="span2">Reference</label>
+                    <strong>@Model.Reference</strong>
+                </div>
+            </div>
+             <div class="span6">
+                <div class="row">
+                    <label class="span2">Closed</label>
+                    @Html.CheckBox("IsClosed", Model.Status == AccidentRecordStatusEnum.Open, new { @id = "IsClosed" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

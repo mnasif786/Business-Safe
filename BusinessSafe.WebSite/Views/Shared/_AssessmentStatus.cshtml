@@ -1,0 +1,5 @@
+﻿@model string
+@{ var hideClass = " hide";}
+<span class="label label-warning draft-label@(Model != "Draft" ? hideClass : string.Empty)">Draft</span>
+<span class="label label-success live-label@(Model != "Live" ? hideClass : string.Empty)">Live</span>
+<span class="label label-info archived-label@(Model != "Archived" ? hideClass : string.Empty)">Archived</span>

@@ -1,0 +1,42 @@
+﻿@using BusinessSafe.WebSite.Areas.FireRiskAssessments.ViewModels
+@model FireRiskAssessmentChecklistViewModel
+@{
+    ViewBag.Title = "Checklist";
+}
+@Html.Partial("_RiskAssessmentSummary", ViewBag.RiskAssessmentSummary as FireRiskAssessmentSummaryViewModel)
+<div class="container ipad-container">
+    
+    @{
+        var fireRiskAssessmentTabViewModel = ViewBag.TabViewModel as FireRiskAssessmentTabViewModel;
+    }
+
+    @Html.Partial("_Tabs", fireRiskAssessmentTabViewModel)
+    @Html.Hidden("SelectedTabIndex", 3)
+    <div id="fire-checklists" class="fixed-content">
+        @Html.Partial("_TitleBar", ViewBag.RiskAssessmentSummary as FireRiskAssessmentSummaryViewModel)
+        @Html.Partial("_Form")
+    </div>
+</div>
+
+<div class="hide">
+    <div id="dialogAnswerYesWhenQuestionHasFurtherControlMeasureTasks" title="Changed Answer">
+        <p>There are Further Control Measure Tasks outstanding with this question. Changing the answer will delete these. Do you want to proceed?</p>
+    </div>
+    <div id="dialogAnswerCanNotBeChanged" title="Can Not Change Answer">
+        <p>You are unable to change the answer as Significant Finding has Completed Further Control Measure Tasks. </p>
+    </div>
+    
+</div>
+
+@section StyleSheetSection
+{
+    <link rel="stylesheet" href="@Url.Content("~/Content/themes/bso_v1.5/checklists.css")" />
+}
+@section JavaScriptSection
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            BusinessSafe.FireRiskAssessment.Checklists.initialise();
+        });
+    </script>
+}

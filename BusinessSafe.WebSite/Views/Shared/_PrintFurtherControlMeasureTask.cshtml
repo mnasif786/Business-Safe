@@ -1,0 +1,27 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+@model BusinessSafe.WebSite.ViewModels.ViewFurtherControlMeasureTaskViewModel
+@Html.Partial("_ReadOnlyTaskDetails", Model)
+<fieldset class="well readonly">
+    <div class="row">
+        <label for="TaskCompletedDate" class="span2">Completed Date</label>
+        @Html.TextBoxFor(x => x.TaskCompletedDate, new { @class= "span2"})
+    </div>
+    <div class="row">
+        <label for="TaskCompletedComments" class="span2">Completed Comments</label>
+        @Html.TextAreaFor(x => x.TaskCompletedComments, new { @class = "span7" })
+    </div>
+</fieldset>
+<div class="form-actions">
+    <div class="row">
+        <div class="span9" style="text-align: center;">
+            @if (User.IsInRole(Permissions.ViewRiskAssessmentTasks.ToString()))
+            {
+            <button type="submit" class="btn btn-primary btn-large" id="FurtherActionTaskPrintButton"
+                    style="width: 125px;">
+                Print</button>
+            }
+            <button class="btn btn-large" id="FurtherActionTaskCancelButton" style="width: 125px;">
+                Cancel</button>
+        </div>
+    </div>
+</div>

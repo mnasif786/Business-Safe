@@ -1,0 +1,22 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Helpers
+@using Telerik.Web.Mvc.UI
+@model BusinessSafe.WebSite.Areas.Documents.ViewModels.BusinessSafeSystemDocumentsLibraryViewModel
+<h2><span id="tick"></span>Reference Library</h2>
+    @Html.Telerik().Grid(Model.Documents).Name("DocumentsGrid").DataKeys(keys => keys.Add(d => d.Id)).DataBinding(dataBinding => dataBinding.Server()).Columns(columns =>
+{
+    columns.Bound(o => o.Id).HeaderTemplate("Id").Visible(false);
+    columns.Bound(o => o.DocumentType).Title("Document Type").Width(200);
+    columns.Bound(o => o.DocumentSubType).Title("Document SubType").Width(200);
+    columns.Bound(o => o.Title).Title("Title").Width(400);
+    columns.Bound(o => o.Description).Title("Description").Width(400);
+    columns.Bound(o => o.DateUploaded).Format("{0:dd/MM/yyyy}").Title("Date Uploaded").Width(120);
+    columns.Template(
+        @<text>
+             @if (User.IsInRole(Permissions.ViewAddedDocuments.ToString()))
+             {
+                 <a class="ViewDocumentIconLink icon-search" href="@Url.Action("DownloadClientDocument", "Document", new { enc = EncryptionHelper.Encrypt("clientDocumentId=" + item.Id) })" target="_blank" title="View Document"></a>
+                 <a class="PrintDocumentIconLink icon-print" href="@Url.Action("DownloadClientDocument", "Document", new { enc = EncryptionHelper.Encrypt("clientDocumentId=" + item.Id) })" target="_blank" title="Print Document"></a>
+             }
+         </text>).Width(165);
+}).Pageable(page => page.PageSize(10)).Sortable()

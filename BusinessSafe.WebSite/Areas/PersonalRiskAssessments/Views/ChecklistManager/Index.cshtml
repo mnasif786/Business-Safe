@@ -1,0 +1,34 @@
+﻿@using BusinessSafe.WebSite.Areas.PersonalRiskAssessments.ViewModels
+@using BusinessSafe.WebSite.HtmlHelpers
+@model ChecklistManagerViewModel
+@{
+    ViewBag.Title = "Checklist Manager";
+    var tabViewModel = ViewBag.TabViewModel as PersonalRiskAssessmentTabViewModel;
+}
+@Html.Partial("_RiskAssessmentSummary", ViewBag.RiskAssessmentSummary as PersonalRiskAssessmentSummaryViewModel)
+
+<div id="checklist-manager" class="container">
+    @Html.Partial("_Tabs", tabViewModel as PersonalRiskAssessmentTabViewModel)
+    <div id="review-wrapper" class="fixed-content">
+        @Html.Partial("_TitleBar", ViewBag.RiskAssessmentSummary as PersonalRiskAssessmentSummaryViewModel)
+        @Html.HiddenFor(x => x.RiskAssessmentId)
+        @Html.HiddenFor(x => x.CompanyId)
+         @Html.Partial("_Grid", Model)
+    </div>
+</div>
+<div id="employee-checklist-email-dialog" title="Sent Checklist Email Summary"></div>
+<div class="hide">
+    <div id="dialog-resend-checklists-confirmation" title="Send Checklist Emails">
+        
+    </div>
+    
+</div>
+
+@section JavaScriptSection
+{   
+    <script type="text/javascript">
+        $(document).ready(function () {
+            BusinessSafe.PersonalRiskAssessment.Checklists.Manager.initialize();
+        });
+    </script>
+}

@@ -1,0 +1,30 @@
+﻿@using Cassette.Views
+@model BusinessSafe.WebSite.Areas.ActionPlans.ViewModels.ActionPlanIndexViewModel
+@{
+    ViewBag.Title = "Action Plan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section>
+    <span class="legend">Action Plans</span>
+    <div class="content">
+        @Html.Partial("_SearchForm", Model)
+         @Html.Partial("_ActionPlan", Model)
+    </div>
+</section>
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("actionplanindex");
+        @Bundles.RenderScripts()  
+    }
+    <script type="text/javascript">
+        $(function () {
+
+            var sites = @Html.Raw(Json.Encode(Model.Sites));
+            var siteGroups = @Html.Raw(Json.Encode(Model.SiteGroups));
+
+            actionPlanSearch.initialise(sites, siteGroups);
+        });
+    </script>
+}

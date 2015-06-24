@@ -1,0 +1,36 @@
+﻿@using Cassette.Views
+@model BusinessSafe.WebSite.Areas.Responsibilities.ViewModels.Wizard.SelectResponsibilitiesViewModel
+@{
+    ViewBag.Title = "Select Responsibilities";     
+}
+
+<div id="responsibilities-wizard">
+    @Html.Partial("_Nav")
+    <div class="content">
+        <h2><span class="tick"></span>Select Responsibilities</h2>
+        <p>Please select the Responsibilities you would like to create.</p>
+        @if (TempData["alertMessage"] != null)
+        {
+            <div class="alert alert-error"><ul><li>@TempData["alertMessage"]</li></ul></div>
+        }
+        <form method="POST" action="">
+            @Html.Partial("_ResponsibilitySelectTable")
+            <fieldset>
+                @Html.ActionLink("Cancel", "Index", "Responsibility", null, new { @class = "btn btn-link  pull-right" })
+                <input type="submit" value="Select" class="btn btn-success pull-right" />
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("responsibilitiesWizard");
+    }
+    <script type="text/javascript">
+        $(function () {
+            BusinessSafe.Responsibilities.Wizard.SelectResponsibilities.initialise();
+        });
+    </script>
+}

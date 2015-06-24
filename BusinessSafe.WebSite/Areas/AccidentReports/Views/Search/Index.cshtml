@@ -1,0 +1,44 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Extensions
+@using BusinessSafe.WebSite.HtmlHelpers
+@model BusinessSafe.WebSite.Areas.AccidentReports.ViewModels.AccidentRecordsIndexViewModel
+@using Cassette.Views
+@{
+    ViewBag.Title = "Accident Records";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section>
+    <span class="legend">Accident Records</span>
+    <div class="major-index-actions">
+        @if (User.IsInRole(Permissions.AddAccidentRecords.ToString()))
+        {
+            <a id="AddNewAccidentRecordLink" class="btn btn-success btn-large" href="@Url.Action("Index", "Create", new { companyId = Html.GetUsersCompanyId(User) })" title="Add New Accident Record">
+                Add New Accident Record</a> 
+        }            
+    </div>
+    <div class="content">
+        @Html.Partial("_SearchForm", Model)
+        <div style="min-height: 26px; margin-bottom: 10px; margin-right: 11px; margin-top: -10px;">
+            <input type="button" id="printSearchResults" value="Print" style="float: right;" class="btn">
+        </div>
+        @Html.Partial("_SearchResults", Model)
+    </div>
+</section>
+<div class="hide">
+     <div id="delete-accident-record-dialog" title="Delete Accident Record">
+        <p>Are you sure you want to delete this Accident Record?</p>
+    </div>
+</div>
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("accidentReportsIndex");
+        @Bundles.RenderScripts()  
+    }
+     <script type="text/javascript">
+        $(function () {
+            var sites = @Html.Raw(Json.Encode(Model.Sites));
+            accidentRecordsSearch.initialise(sites);
+        });
+    </script>
+}

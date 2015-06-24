@@ -1,0 +1,25 @@
+
+SET XACT_ABORT ON
+
+BEGIN TRANSACTION
+
+UPDATE dbo.SafeCheckCheckList
+SET Deleted = 1
+WHERE ClientId IN (33748,33749,33750,33751,68151)
+AND Deleted = 0
+
+
+COMMIT TRANSACTION
+
+
+/*
+
+SELECT Status, * FROM SafeCheckCheckList
+WHERE ClientId IN (33748,33749,33750,33751,68151)
+AND Deleted = 0
+
+SELECT * FROM Peninsula.dbo.tblcustomers 
+WHERE customerid IN (33748,33749,33750,33751,68151)
+
+*/
+

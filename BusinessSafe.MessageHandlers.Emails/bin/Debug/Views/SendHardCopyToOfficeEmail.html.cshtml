@@ -1,0 +1,54 @@
+﻿@model BusinessSafe.MessageHandlers.Emails.ViewModels.SendHardCopyToOfficeEmailViewModel
+<head>
+    <style>
+        body
+        {
+            background-color: white;
+            font-size: .85em;
+            font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
+            margin: 0;
+            padding: 0;
+            color: #393939;
+        }
+        
+        h1
+        {
+            font-size: 2em;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>
+        SafeCheck - Hard copy report request
+    </h1>
+    <p>
+        Following report requires printing and posting to the client
+    </p>
+    <p>
+        CAN: <b>@Model.CAN</b>
+    </p>
+    <p>
+        Visit Date: <b>@Model.VisitDate</b>
+    </p>
+    <p>
+        Visit By: <b>@Model.VisitBy</b>
+    </p>
+    <p>
+        Submitted By: <b>@Model.SubmittedBy</b>
+    </p>
+    <p>
+        Submitted Date: <b>@Model.SubmittedDate</b>
+    </p>
+    <p>
+       Please forward a hard copy by post to:  <b>@Model.SiteAddress</b>
+    </p>
+   <p>
+   <b>To access the report, please click on following link which will take you to the report:</b>
+   </p>
+   <p>
+   http://safecheck.peninsula-online.com/#/evaluationchecklists/@Model.ChecklistId
+   </p>
+</body>

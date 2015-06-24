@@ -1,0 +1,479 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2FAE47AD-2C27-4A38-BA85-5AB2167B583E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BusinessSafe.MessageHandlers.Emails</RootNamespace>
+    <AssemblyName>BusinessSafe.MessageHandlers.Emails</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ActionMailer.Net">
+      <HintPath>..\packages\ActionMailer.Standalone.0.7.4\lib\Net40\ActionMailer.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="ActionMailer.Net.Standalone">
+      <HintPath>..\packages\ActionMailer.Standalone.0.7.4\lib\Net40\ActionMailer.Net.Standalone.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\packages\NHibernate.3.3.0.4000\lib\Net35\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus">
+      <HintPath>..\packages\NServiceBus.3.2.6\lib\net40\NServiceBus.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus.Core">
+      <HintPath>..\packages\NServiceBus.3.2.6\lib\net40\NServiceBus.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus.Host">
+      <HintPath>..\packages\NServiceBus.3.2.6\lib\net40\NServiceBus.Host.exe</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus.NHibernate">
+      <HintPath>..\packages\NServiceBus.NHibernate.3.2.6\lib\net40\NServiceBus.NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus.ObjectBuilder.StructureMap">
+      <HintPath>..\packages\NServiceBus.3.2.6\containers\structuremap\NServiceBus.ObjectBuilder.StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine, Version=3.2.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RazorEngine.3.1.0\lib\net40\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\packages\structuremap.2.6.3\lib\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20715.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Activation\BusinessSafeEmailLinkBaseUrlConfiguration.cs" />
+    <Compile Include="Activation\SafeCheckEmailLinkBaseUrlConfiguration.cs" />
+    <Compile Include="Activation\ISafeCheckEmailLinkBaseUrlConfiguration.cs" />
+    <Compile Include="Activation\IBusinessSafeEmailLinkBaseUrlConfiguration.cs" />
+    <Compile Include="Core\MessageModule.cs" />
+    <Compile Include="EmailSender\EmailSender.cs" />
+    <Compile Include="EmailSender\IEmailSender.cs" />
+    <Compile Include="EventHandlers\EmployeeChecklistCompletedHandler.cs" />
+    <Compile Include="EventHandlers\EmployeeChecklistEmailGeneratedHandler.cs" />
+    <Compile Include="EventHandlers\ReviewAssignedHandler.cs" />
+    <Compile Include="MessageHandlers\SendAccidentRecordEmailHandler.cs" />
+    <Compile Include="MessageHandlers\SendEmployeeDigestEmailHandler.cs" />
+    <Compile Include="MessageHandlers\SendTaskDueTomorrowEmailHandler.cs" />
+    <Compile Include="MessageHandlers\SendTechnicalSupportEmailHandler.cs" />
+    <Compile Include="MessageHandlers\SendHardCopyToOfficeEmailHandler.cs" />
+    <Compile Include="MessageHandlers\SendIRNNotificationEmailHandler.cs" />
+    <Compile Include="MessageHandlers\SendSafeCheckChecklistCompletedEmailHandler.cs" />
+    <Compile Include="MessageHandlers\SendActionTaskCompletedEmailHandler.cs" />
+    <Compile Include="MessageHandlers\SendChecklistAssignedEmailHandler.cs" />
+    <Compile Include="MessageHandlers\SendSubmitChecklistEmailHandler.cs" />
+    <Compile Include="MessageHandlers\SendUpdateRequiredEmailHandler.cs" />
+    <Compile Include="MessageHandlers\SendVisitRequestedEmailHandler.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ClientDocumentService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\DocumentLibraryService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\EmailPusherService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AccidentRecordEmailViewModel.cs" />
+    <Compile Include="ViewModels\ActionTaskCompletedViewModel.cs" />
+    <Compile Include="ViewModels\OffWorkReminderViewModel.cs" />
+    <Compile Include="MessageHandlers\SendOffWorkReminderEmailHandler.cs" />
+    <Compile Include="MessageHandlers\SendResponsibilityTaskCompletedEmailHandler.cs" />
+    <Compile Include="MessageHandlers\SendNextReoccurringLiveTaskEmailHandler.cs" />
+    <Compile Include="MessageHandlers\SendReviewAssignedEmailHelper.cs" />
+    <Compile Include="MessageHandlers\SendReviewCompletedEmailHandler.cs" />
+    <Compile Include="MessageHandlers\SendReviewOverdueRiskAssessorEmailHandler.cs" />
+    <Compile Include="MessageHandlers\SendTaskAssignedEmailHelper.cs" />
+    <Compile Include="EventHandlers\TaskAssignedHandler.cs" />
+    <Compile Include="MessageHandlers\SendTaskCompletedEmailHandler.cs" />
+    <Compile Include="MessageHandlers\SendTaskOverdueRiskAssessorEmailHandler.cs" />
+    <Compile Include="MessageHandlers\SendTaskOverdueUserEmailHandler.cs" />
+    <Compile Include="ViewModels\ResponsibilityTaskCompletedViewModel.cs" />
+    <Compile Include="ViewModels\ReviewAssignedEmailViewModel.cs" />
+    <Compile Include="ViewModels\ReviewCompletedEmailViewModel.cs" />
+    <Compile Include="ViewModels\ReviewOverdueViewModel.cs" />
+    <Compile Include="ViewModels\SafeCheckChecklistCompletedViewModel.cs" />
+    <Compile Include="ViewModels\SendEmployeeDigestEmailViewModel.cs" />
+    <Compile Include="ViewModels\TaskDueTomorrowViewModel.cs" />
+    <Compile Include="ViewModels\SendTechnicalSupportEmailViewModel.cs" />
+    <Compile Include="ViewModels\SendHardCopyToOfficeEmailViewModel.cs" />
+    <Compile Include="ViewModels\SendIRNNotificationEmailViewModel.cs" />
+    <Compile Include="ViewModels\SendChecklistAssignedEmailViewModel.cs" />
+    <Compile Include="ViewModels\SendEmployeeChecklistCompletedEmailViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeChecklistEmailGeneratedViewModel.cs" />
+    <Compile Include="ViewModels\SendSiteDetailsUpdatedEmailViewModel.cs" />
+    <Compile Include="Activation\Log4NetHelper.cs" />
+    <Compile Include="Controllers\MailerController.cs" />
+    <Compile Include="Activation\MessageEndpoint.cs" />
+    <Compile Include="Activation\MessageHandlersRegistry.cs" />
+    <Compile Include="MessageHandlers\SendSiteDetailsUpdatedEmailHandler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MessageHandlers\SendCompanyDetailsUpdatedEmailHandler.cs" />
+    <Compile Include="ViewModels\SendCompanyDetailsUpdatedEmailViewModel.cs" />
+    <Compile Include="ViewModels\SendSubmitChecklistEmailViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\SendUpdateRequiredEmailViewModel.cs" />
+    <Compile Include="ViewModels\TaskCompletedViewModel.cs" />
+    <Compile Include="ViewModels\TaskAssignedEmailViewModel.cs" />
+    <Compile Include="ViewModels\TaskOverdueViewModel.cs" />
+    <Compile Include="ViewModels\VisitRequestedViewModel.cs" />
+    <Compile Include="Web References\ActiveDirectory\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientDocumentService\BusinessSafe.MessageHandlers.Emails.ClientDocumentService.ClientDocumentDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ClientDocumentService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ClientDocumentService\configuration.svcinfo" />
+    <None Include="Service References\ClientDocumentService\configuration91.svcinfo" />
+    <None Include="Service References\ClientDocumentService\ClientDocumentService.disco" />
+    <None Include="Service References\ClientDocumentService\ClientDocumentService.wsdl" />
+    <None Include="Service References\ClientDocumentService\ClientDocumentService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientDocumentService\ClientDocumentService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientDocumentService\ClientDocumentService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientDocumentService\ClientDocumentService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientDocumentService\ClientDocumentService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientDocumentService\ClientDocumentService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientDocumentService\ClientDocumentService6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EmailPusherService\BusinessSafe.MessageHandlers.Emails.EmailPusherService.AddMessageResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EmailPusherService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\EmailPusherService\configuration.svcinfo" />
+    <None Include="Service References\EmailPusherService\configuration91.svcinfo" />
+    <None Include="Service References\EmailPusherService\EmailPusherService.disco" />
+    <None Include="Service References\DocumentLibraryService\BusinessSafe.MessageHandlers.Emails.DocumentLibraryService.ArchiveDocumentDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DocumentLibraryService\BusinessSafe.MessageHandlers.Emails.DocumentLibraryService.CreateDocumentFromBytesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DocumentLibraryService\BusinessSafe.MessageHandlers.Emails.DocumentLibraryService.CreateDocumentFromPathResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DocumentLibraryService\BusinessSafe.MessageHandlers.Emails.DocumentLibraryService.CreateFolderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DocumentLibraryService\BusinessSafe.MessageHandlers.Emails.DocumentLibraryService.DocumentDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DocumentLibraryService\BusinessSafe.MessageHandlers.Emails.DocumentLibraryService.FolderDto.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DocumentLibraryService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\DocumentLibraryService\configuration.svcinfo" />
+    <None Include="Service References\DocumentLibraryService\configuration91.svcinfo" />
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService.disco" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService.wsdl" />
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService1.wsdl" />
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EmailPusherService\EmailPusherService.wsdl" />
+    <None Include="Service References\EmailPusherService\EmailPusherService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EmailPusherService\EmailPusherService1.wsdl" />
+    <None Include="Service References\EmailPusherService\EmailPusherService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EmailPusherService\EmailPusherService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\EmailPusherService\EmailPusherService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Views\AccidentRecordEmail.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\SendEmployeeDigestEmail.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\SendEmployeeDigestEmail1.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\SendTechnicalSupportEmail.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\SendHardCopyToOfficeEmail.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\SendIRNNotificationEmail.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\SendSubmitChecklistEmail.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\SendSafeCheckChecklistCompletedEmail.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\SendVisitRequestedEmail.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Web References\ActiveDirectory\ActiveDirectoryGroup.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ActiveDirectory\ActiveDirectoryUser.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ActiveDirectory\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ActiveDirectory\WS_ActiveDirectory.disco" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App.CI.config">
+      <DependentUpon>App.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+    </None>
+    <None Include="App.LIVE.config">
+      <DependentUpon>App.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App.UAT.config">
+      <DependentUpon>App.config</DependentUpon>
+      <IsTransformFile>True</IsTransformFile>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Log4Net.config">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
+    <None Include="Transformer.proj" />
+    <None Include="Views\ActionTaskAssignedEmail.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\ActionTaskOverdueUserEmail.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\ActionTaskCompletedEmail.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\SendUpdateRequiredEmail.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\SendChecklistAssignedEmail.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\OffWorkReminderEmail.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\ResponsibilityTaskCompletedEmail.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\ReviewCompletedEmail.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\ReviewAssignedEmail.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\ReviewOverdueRiskAssessorEmail.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\TaskOverdueRiskAssessorEmail.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\TaskOverdueUserEmail.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\TaskCompletedEmail.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\EmployeeChecklistEmailGenerated.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\SendEmployeeChecklistCompletedEmail.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\SendSiteDetailsUpdatedEmail.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\TaskAssignedEmail.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\SendTaskDueTomorrowEmail.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Views\web.config" />
+    <None Include="Web References\ActiveDirectory\WS_ActiveDirectory.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessSafe.Application\BusinessSafe.Application.csproj">
+      <Project>{5DBF972D-D624-4FE6-8483-F9828C37CF52}</Project>
+      <Name>BusinessSafe.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Data\BusinessSafe.Data.csproj">
+      <Project>{0E42764A-6356-461F-9473-D452EFC22AC7}</Project>
+      <Name>BusinessSafe.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Domain\BusinessSafe.Domain.csproj">
+      <Project>{EA0B55F3-6232-400F-8BE0-FEC49883253F}</Project>
+      <Name>BusinessSafe.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Messages.Emails\BusinessSafe.Messages.Emails.csproj">
+      <Project>{CFC682DE-01ED-45D9-925A-8F764368514A}</Project>
+      <Name>BusinessSafe.Messages.Emails</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Messages\BusinessSafe.Messages.csproj">
+      <Project>{EE24F1BE-1BB4-413F-895D-7DC49325F36A}</Project>
+      <Name>BusinessSafe.Messages</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\SendCompanyDetailsUpdatedEmail.html.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ClientDocumentService\" />
+    <WCFMetadataStorage Include="Service References\DocumentLibraryService\" />
+    <WCFMetadataStorage Include="Service References\EmailPusherService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="hibernate_BusinessSafe.cfg.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="hibernate_PeninsulaDB.cfg.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://pbsnet:8028/WS_ActiveDirectory.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ActiveDirectory\</RelPath>
+      <UpdateFromURL>http://pbsnet:8028/WS_ActiveDirectory.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>BusinessSafe_MessageHandlers_Emails_ActiveDirectory_WS_ActiveDirectory</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

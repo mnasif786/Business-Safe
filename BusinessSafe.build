@@ -1,0 +1,884 @@
+<project name="BusinessSafe"
+         default="DeveloperBuild" >
+
+  <setenv>
+          <variable name="TmsCommandLineBuild" value="true" />
+  </setenv>
+
+        
+    <include buildfile="C:\NantBuildFiles\NantCommonTasks.include" />
+    
+    <property name="MSTest.exe" value="C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\MSTest.exe" />
+    <property name="nunit.exe" value="ThirdParty\nunit\nunit-console.exe" />
+    <property name="NCover.Console.exe" value="C:\Program Files\NCover\ncover.console.exe" />
+    <property name="NCover.Reporting.exe" value="C:\Program Files\NCover\ncover.reporting.exe" />
+    <property name="nant.settings.currentframework" value="net-4.0" />
+    <property name="AppCmdPath" value="C:\Windows\System32\inetsrv\appcmd.exe" />
+	
+    <property name="build.configuration" value="debug" />
+    
+    <property name="NCover.TrendFile" value="BusinessSafeCoverage.trend" />
+    <property name="NCover.CoverageFile" value="BusinessSafeCoverage.nccov" />
+    
+    <property name="BuildOK.Indicator.Filename" value=".BuiltOK" />
+
+    <property name="TmsEnvironmentHasBeenPrepared.Indicator.Filename" value=".TmsEnvironmentHasBeenPrepared" />
+    
+    
+    <!-- ~~~~~~~~~~~~~~~ Public targets ~~~~~~~~~~~~~~~  -->
+    <!-- Test -->
+    <!--<target name="DeveloperBuildWithSmokeTests">
+        <call target="DeveloperBuild" />
+        <call target="RunSmokeTests" />        
+        <call target="SetBuildOKFlag" />
+    </target>-->    
+	
+    <!--<target name="DeveloperBuildWithAcceptanceTests">
+        <call target="DeveloperBuild" />
+        <call target="RunAcceptanceTests" />        
+        <call target="SetBuildOKFlag" />
+    </target>-->    
+	
+    <target name="DeveloperBuild">
+        <call target="DeveloperConfig" />
+        <!--<call target="UnsetBuildOKFlag" />
+        <call target="Compile" />
+        <call target="InstallConfigFiles" />
+        <call target="RunUnitTests"  />-->
+        <call target="DropAndRecreateAllDatabases" />
+        <!--<call target="RunIntegrationTests" />
+        <call target="SetUpBusinessSafeWebApp" />-->  
+
+
+    </target>    
+    
+    <target name="CIServerBuild">
+        <call target="CIServerConfig" />
+        <call target="UnsetBuildOKFlag" />
+        <call target="Compile" />
+        <call target="InstallConfigFiles" />
+        <call target="DropAndRecreateAllDatabases" />
+         <!--<call target="PopulateDatabaseWithDataForTests"  />-->
+        <call target="RunAllTestsUnderNCover" />
+        <call target="CreateNCoverReports" />		
+        <call target="SetUpBusinessSafeWebApp" />
+
+      <!-- ////   SMOKE TESTS TEMPORARILY DISABLED 
+        <call target="RunSmokeTests" /> 
+		     ///// -->
+ <!-- ////   SMOKE TESTS TEMPORARILY DISABLED 
+        <call target="RunAcceptanceTests" />
+ ///// -->
+        <call target="SetBuildOKFlag" />
+    </target>
+    
+    <target name="DeployToDevServer">
+        <call target="DeveloperConfig" />
+        <call target="InstallConfigFiles" />
+        <call target="DropAndRecreateAllDatabases" />
+        <!-- <call target="PopulateDatabaseWithDataForTests" /> -->
+        <call target="SetUpBusinessSafeWebAppDev" />
+    </target>
+    
+    <target name="DeployToUATServer">
+        <call target="UATServerConfig" />
+		<call target="DoPreDeploymentChecks" />	
+        <call target="InstallConfigFiles" />
+         <call target="DropAndRecreateAllDatabases" />
+        <!--<call target="UpgradeDatabaseTMS" />--> 
+        <call target="SetUpBusinessSafeWebApp" />              
+    </target>
+    
+    <target name="DeployToLiveServer">		
+        <call target="LiveServerConfig" />
+		<call target="DoPreDeploymentChecks" />
+        <call target="InstallConfigFiles" />
+        <call target="UpgradeDatabaseTMS" />
+		
+		<call target="LiveIISConfig1" />
+        <call target="SetUpBusinessSafeWebApp" />
+		
+		<call target="LiveIISConfig2" />
+        <call target="SetUpBusinessSafeWebApp" />
+		
+		<call target="LiveIISConfig3" />
+        <call target="SetUpBusinessSafeWebApp" /> 
+    </target>
+
+    <target name="CheckIfOKToDeploy">
+        <call target="CIServerConfig" />
+        <call target="CheckBuildOKFlagIsSet" />
+    </target>
+    
+    
+    <!-- ~~~~~~~~~~~~~~~ Configurations ~~~~~~~~~~~~~~~  -->
+    
+    <target name="DeveloperConfig">
+        <property name="BuildPath" value="." />
+		
+        <call target="DeveloperApplicationConfig" />
+		
+        <property name="Target.BusinessSafe.SQLServer" value="localhost\sql2008R2" />
+        <property name="Target.Peninsula.SQLServer" value="localhost\sql2008R2" />
+        
+        <property name="Target.BusinessSafe.SQLServer.Filename" value="localhost_SQL2008R2" />
+        <property name="Target.Peninsula.SQLServer.Filename" value="localhost_SQL2008R2" />
+      
+        <property name="MSSQLFolder" value="d:\BusinessSafe_SQL" />
+
+        <property name="IsIISRemote" value="false" />        
+        <property name="Target.WebServer" value="localhost" />
+        <property name="LocalWebsitePath" value="d:\inetpub\BusinessSafe\BusinessSafe.WebSite"/>
+        <property name="RemoteWebsitePath" value="d:\inetpub\BusinessSafe\BusinessSafe.WebSite" />
+        <property name="RemoteWebsiteBackupPath" value="d:\inetpub" />		
+    </target>
+	
+    <target name="DeveloperApplicationConfig">
+        <property name="Target.BusinessSafe.ConnectionString" value="Data Source=localhost;Initial Catalog=BusinessSafe;Min Pool Size=2;Max Pool Size=60;Connect Timeout=60;User Id=intranetadmin;Password=intadpas;" />
+        <property name="Target.Peninsula.ConnectionString" value="Data Source=localhost;Initial Catalog=Peninsula_test;Min Pool Size=2;Max Pool Size=60;Connect Timeout=60;User Id=intranetadmin;Password=intadpas;" />
+		
+        <property name="Diagnostic.Level" value="DEBUG" />
+
+        <property name="CustomErrors.Redirect" value="Off" />		
+    </target>
+    
+    <target name="CIServerConfig">
+      <echo message="CIServerConfig"/>
+        <property name="BuildPath" value="c:\BusinessSafe\BuildDirectory" />
+		
+        <call target="CIApplicationConfig" />
+		
+        <property name="Target.BusinessSafe.SQLServer" value="PBSUATSQL3" />
+        <property name="Target.Peninsula.SQLServer" value="PBSUATSQL3" />
+
+        <property name="Target.BusinessSafe.SQLServer.Filename" value="PBSUATSQL3" />
+        <property name="Target.Peninsula.SQLServer.Filename" value="PBSUATSQL3" />
+        
+        <property name="IsIISRemote" value="false" />
+        <property name="Target.WebServer" value="pbscihro1" />
+        <property name="LocalWebsitePath" value="c:\BusinessSafe\Deploy\BusinessSafe"/>
+        <property name="RemoteWebsitePath" value="\\pbscihro1\c$\BusinessSafe\Deploy\BusinessSafe" />
+        <property name="RemoteWebsiteBackupPath" value="\\pbscihro1\c$\inetpub" />
+    </target>
+	
+    <target name="CIApplicationConfig">
+        <property name="Target.BusinessSafe.ConnectionString" value="Data Source=pbsuatsql3;Initial Catalog=BusinessSafe;Min Pool Size=2;Max Pool Size=60;Connect Timeout=60;User Id=intranetadmin;Password=intadpas;" />
+        <property name="Target.Peninsula.ConnectionString" value="Data Source=pbsuatsql3;Initial Catalog=Peninsula_Test;Min Pool Size=2;Max Pool Size=60;Connect Timeout=60;User Id=intranetadmin;Password=intadpas;" />
+       	
+        <property name="Diagnostic.Level" value="DEBUG" />	
+
+        <property name="CustomErrors.Redirect" value="Off" />		
+    </target>
+    
+    <target name="UATServerConfig">
+        <property name="BuildPath" value="c:\BusinessSafe\BuildDirectory" />
+		
+        <call target="UATApplicationConfig" />
+		
+        <property name="Target.BusinessSafe.SQLServer" value="PBSUATSQL1" />
+        <property name="Target.Peninsula.SQLServer" value="PBSUATSQL1" />
+
+        <property name="Target.BusinessSafe.SQLServer.Filename" value="PBSUATSQL1" />
+        <property name="Target.Peninsula.SQLServer.Filename" value="PBSUATSQL1" />
+        
+        
+        <property name="IsIISRemote" value="true" />        
+        <property name="Target.WebServer" value="pbswebtest1" />
+        <property name="LocalWebsitePath" value="c:\BusinessSafe\Deploy\BusinessSafe.WebSite"/>
+        <property name="RemoteWebsitePath" value="\\pbswebtest1\c$\BusinessSafe\Deploy\BusinessSafe.WebSite" />
+        <property name="RemoteWebsiteBackupPath" value="\\pbswebtest1\c$\inetpub" />
+    </target>
+	
+    <target name="UATApplicationConfig">
+        <property name="Target.BusinessSafe.ConnectionString" value="Data Source=pbsuatsql1;Initial Catalog=BusinessSafe;Min Pool Size=2;Max Pool Size=60;Connect Timeout=60;User Id=intranetadmin;Password=intadpas;" />
+        <property name="Target.Peninsula.ConnectionString" value="Data Source=pbsuatsql1;Initial Catalog=Peninsula;Min Pool Size=2;Max Pool Size=60;Connect Timeout=60;User Id=intranetadmin;Password=intadpas;" />        
+
+        <property name="Diagnostic.Level" value="ERROR" />	
+
+        <property name="CustomErrors.Redirect" value="On" />		
+    </target>
+
+    <target name="LiveServerConfig">
+        <property name="BuildPath" value="c:\TaxWise\BuildDirectory" />
+		
+        <call target="LiveApplicationConfig" />
+		
+        <property name="Target.TMS.SQLServer" value="PBSW23SQL1" />
+        <property name="Target.Peninsula.SQLServer" value="PBSW23SQL2" />
+        <property name="Target.LegacyTaxWise.SQLServer" value="PBSW23SQL1" />
+    </target>
+	
+    <target name="LiveApplicationConfig">
+        <property name="Target.BusinessSafe.ConnectionString" value="Data Source=pbsw23sql1;Initial Catalog=BusinessSafe;Min Pool Size=2;Max Pool Size=60;Connect Timeout=60;User Id=intranetadmin;Password=intadpas;" />
+        <property name="Target.Peninsula.ConnectionString" value="Data Source=pbsw23sql2;Initial Catalog=Peninsula;Min Pool Size=2;Max Pool Size=60;Connect Timeout=60;User Id=intranetadmin;Password=intadpas;" />
+        <property name="Target.TaxWiseOnline.ConnectionString" value="Data Source=pbsw23sql1;Initial Catalog=TaxWise;Min Pool Size=2;Max Pool Size=60;Connect Timeout=60;User Id=intranetadmin;Password=intadpas;" />
+		
+        <property name="TaxWiseInternalPracticeId" value="16244" />
+
+        <property name="Diagnostic.Level" value="ERROR" />	
+
+        <property name="CustomErrors.Redirect" value="On" />		
+    </target>
+	
+	
+    <target name="LiveIISConfig1">
+        <property name="IsIISRemote" value="true" />        
+        <property name="Target.WebServer" value="pbsweb01" />
+        <property name="LocalWebsitePath" value="c:\inetpub\BusinessSafe"/>
+        <property name="RemoteWebsitePath" value="\\pbsweb01\c$\inetpub\TaxWiseManagementSystem" />
+        <property name="RemoteWebsiteBackupPath" value="\\pbsweb01\c$\inetpub" />
+    </target>
+	
+    <target name="LiveIISConfig2">
+        <property name="IsIISRemote" value="true" />        
+        <property name="Target.WebServer" value="pbsweb02" />
+        <property name="LocalWebsitePath" value="c:\inetpub\BusinessSafe"/>
+        <property name="RemoteWebsitePath" value="\\pbsweb02\c$\inetpub\TaxWiseManagementSystem" />
+        <property name="RemoteWebsiteBackupPath" value="\\pbsweb02\c$\inetpub" />
+    </target>
+	
+    <target name="LiveIISConfig3">
+        <property name="IsIISRemote" value="true" />        
+        <property name="Target.WebServer" value="pbsweb03" />
+        <property name="LocalWebsitePath" value="c:\inetpub\BusinessSafe"/>
+        <property name="RemoteWebsitePath" value="\\pbsweb03\c$\inetpub\TaxWiseManagementSystem" />
+        <property name="RemoteWebsiteBackupPath" value="\\pbsweb03\c$\inetpub" />
+    </target>
+    
+    
+    <!-- ~~~~~~~~~~~~~~~ Build Control ~~~~~~~~~~~~~~~  -->
+    
+    <target name="UnsetBuildOKFlag">
+        <delete file="${BuildPath}\${BuildOK.Indicator.Filename}" failonerror="false" />
+    </target>
+    
+    <target name="SetBuildOKFlag">
+        <touch file="${BuildPath}\${BuildOK.Indicator.Filename}" />
+    </target>
+    
+    <target name="CheckBuildOKFlagIsSet">
+        <property name="BuildOK.Indicator.Filename.Path" value="${BuildPath}\${BuildOK.Indicator.Filename}" />
+        
+        <if test="${not file::exists(BuildOK.Indicator.Filename.Path)}">
+            <fail message="
+            *** CANNOT DEPLOY: SUCCESSFUL BUILD NOT FOUND ***
+            
+            '${BuildOK.Indicator.Filename.Path}' does not exist" />
+        </if>
+    </target>
+	
+    <target name="DoPreDeploymentChecks">
+        <call target="CheckBuildOKFlagIsSet" />
+        <call target="ReportReasonForDeployment" />
+        <call target="ReportUserTriggeringDeployment" />
+        <call target="CheckDeploymentPassword" />
+    </target>
+    
+    <target name="ReportReasonForDeployment">
+		<if test="${not property::exists('deploy.reason')}">
+			<fail message="
+			*** NO REASON HAS BEEN SUPPLIED FOR THIS DEPLOYMENT ***
+			" />
+		</if>
+		
+        <echo message="
+=== Reason for deployment: ${deploy.reason} ===
+" />
+    </target>
+    
+    <target name="ReportUserTriggeringDeployment">
+		<if test="${not property::exists('deploy.username')}">
+			<fail message="
+			*** NO USERNAME HAS BEEN SUPPLIED FOR THIS DEPLOYMENT ***
+			" />
+		</if>
+		
+        <echo message="
+=== User triggering deployment: ${deploy.username} ===
+" />
+    </target>
+    
+    <target name="CheckDeploymentPassword">
+		<if test="${not property::exists('deploy.password')}">
+			<fail message="
+			*** NO PASSWORD HAS BEEN SUPPLIED FOR THIS DEPLOYMENT ***
+			" />
+		</if>
+		
+        <if test="${deploy.password!='apple'}">
+			<fail message="
+			*** AN INVALID PASSWORD HAS BEEN SUPPLIED FOR THIS DEPLOYMENT ***
+			" />
+        </if>
+    </target>
+	
+    
+    <!-- ~~~~~~~~~~~~~~~ Install / Update Application Config ~~~~~~~~~~~~~~~  -->
+    
+    <target name="InstallConfigFiles">
+        <property name="ConfigFileSource" value="${BuildPath}\BusinessSafe.Data\ConfigFiles" />
+        
+        <property name="ConfigFileDest" value="${BuildPath}\BusinessSafe.WebSite.Test\bin\Debug" />
+        <call target="InstallNHibernateConfigFiles" />
+        
+        <property name="ConfigFileDest" value="${BuildPath}\TaxWise\AcceptanceTests\bin\Debug" />
+        <call target="InstallNHibernateConfigFiles" />
+        
+        <property name="ConfigFileDest" value="${BuildPath}\BusinessSafe.WebSite" />
+        <call target="InstallNHibernateConfigFiles" />
+		
+		<call target="ConfigureWebDotConfig" />
+    </target>
+    
+    <target name="InstallNHibernateConfigFiles">    
+        <property name="Database.Identifier" value="BusinessSafeDB" />
+        <property name="Database.ConnectionString" value="${Target.BusinessSafe.ConnectionString}" />
+        <call target="InstallNHibernateConfigFile" />
+		
+        <property name="Database.Identifier" value="PeninsulaDB" />
+        <property name="Database.ConnectionString" value="${Target.Peninsula.ConnectionString}" />
+        <call target="InstallNHibernateConfigFile" />
+    </target>
+    
+    <target name="InstallNHibernateConfigFile">
+        <property name="NHibernateFileName" value="hibernate_${Database.Identifier}.cfg.xml" />
+        <property name="copy.file.source" value="${ConfigFileSource}\${NHibernateFileName}" />
+        <property name="copy.file.target" value="${ConfigFileDest}\${NHibernateFileName}" />
+        
+        <copy file="${copy.file.source}" tofile="${copy.file.target}" overwrite="true" />
+              
+        <attrib file="${copy.file.target}" readonly="false" />
+              
+       <!-- <xmlpoke file="${copy.file.target}"
+                 xpath="/configuration/nhc:hibernate-configuration/nhc:session-factory/nhc:property[@name = 'connection.connection_string']"
+                 value="${Database.ConnectionString}">
+		    <namespaces>
+                <namespace prefix="nhc" uri="urn:nhibernate-configuration-2.2" />
+            </namespaces>
+        </xmlpoke>-->
+    </target>
+	
+    <target name="ConfigureWebDotConfig">
+        <property name="web.config.path" value="${BuildPath}\BusinessSafe.WebSite\web.config" />
+		      
+        <!--<xmlpoke file="${web.config.path}"
+                 xpath="/configuration/appSettings/add[@key = 'TaxWiseInternalPracticeId']/@value"
+                 value="${TaxWiseInternalPracticeId}">
+        </xmlpoke>-->
+		
+        <xmlpoke file="${web.config.path}"
+                 xpath="/configuration/log4net/root/level/@value"
+                 value="${Diagnostic.Level}">
+        </xmlpoke>
+		
+        <xmlpoke file="${web.config.path}"
+                 xpath="/configuration/system.web/customErrors/@mode"
+                 value="${CustomErrors.Redirect}">
+        </xmlpoke>
+    </target>
+    
+    <!-- ~~~~~~~~~~~~~~~ Build ~~~~~~~~~~~~~~~  -->
+        
+    <target name="Compile">
+        <call target="EnsureBinFoldersAreNotReadOnlySoBuildCanSucceed" />
+        
+        <property name="solution.file" value="${BuildPath}\BusinessSafe.sln" />
+        
+        <exec program="${framework::get-framework-directory(framework::get-target-framework())}\msbuild.exe"
+                commandline="${solution.file} /t:Rebuild /p:Configuration=${build.configuration} /v:q" workingdir="." />
+    </target>
+    
+    <target name="EnsureBinFoldersAreNotReadOnlySoBuildCanSucceed" >
+          <attrib readonly="false">
+              <fileset basedir="${BuildPath}\">
+                  <include name="**/bin/**/*.*" />
+              </fileset>
+          </attrib>
+    </target>
+    
+    
+    <!-- ~~~~~~~~~~~~~~~ Top-level Database Targets ~~~~~~~~~~~~~~~  -->
+       
+    <target name="DropAndRecreateAllDatabases">
+        <call target="DropAndCreateDatabaseBusinessSafe" />
+        <!--<call target="DropAndCreateDatabasePeninsula_test" />
+        <call target="DropAndCreateDatabaseTaxWise_test" />
+        <call target="CreateDatabaseCreationSentinel" />-->
+    </target> 
+        
+    <target name="DropAndCreateDatabaseBusinessSafe">
+        <property name="SQL.Server" value="${Target.BusinessSafe.SQLServer}"/>  
+        <property name="SQL.Filename" value="${Target.BusinessSafe.SQLServer.Filename}"/>  
+        <property name="SQL.Database" value="BusinessSafe"/> 
+        <call target="CreateDatabaseBusinessSafe" />     
+        <call target="EnsureLoginExistsInDatabase" />
+        <call target="DBDeployBusinessSafe" />
+    </target>  
+    
+    <target name="DropAndCreateDatabasePeninsula_test">
+        <property name="SQL.Server" value="${Target.Peninsula.SQLServer}"/>  
+        <property name="SQL.Database" value="Peninsula_test"/>
+        <call target="CreateDatabasePeninsula_test" />     
+        <call target="EnsureLoginExistsInDatabase" />
+        <call target="DBDeployPeninsula_test" />
+    </target>     
+    
+    <target name="DropAndCreateDatabaseTaxWise_test">
+        <property name="SQL.Server" value="${Target.LegacyTaxWise.SQLServer}"/>    
+        <property name="SQL.Database" value="TaxWise_test"/>  
+        <call target="CreateDatabaseTaxWise_test" />     
+        <call target="EnsureLoginExistsInDatabase" />
+        <call target="DBDeployTaxWise_test" />
+    </target>  
+
+    <target name="CreateDatabaseCreationSentinel">
+       <touch file="${BuildPath}\${TmsEnvironmentHasBeenPrepared.Indicator.Filename}" />	
+	</target>
+    
+    <target name="UpgradeDatabaseBusinessSafe">
+        <property name="SQL.Server" value="${Target.BusinessSafe.SQLServer}"/>
+        <property name="SQL.Database" value="BusinessSafe"/> 
+		<call target="BackupDatabaseBusinessSafe" />
+        <call target="DBDeployTMS" />
+    </target> 
+    
+
+    <!-- ~~~~~~~~~~~~~~~ Detailed Database Targets ~~~~~~~~~~~~~~~  -->
+
+    <target name="EnsureLoginExistsInDatabase">
+        <property name="SQL.SqlScript" value="${BuildPath}\SQLScripts\CREATE Security Login - intranetadmin.sql"/>
+        <call target="SQL.RunScript" />
+    </target>
+
+    <target name="CreateDatabaseBusinessSafe">
+        <call target="EnsureMSSQLFolderExists" />
+        
+        <property name="SQL.Server" value="${Target.BusinessSafe.SQLServer}"/>
+        <property name="SQL.Filename" value="${Target.BusinessSafe.SQLServer.Filename}"/>
+        <property name="SQL.Database" value="master"/> 
+        
+        <echo message="${SQL.Server}" />
+        <property name="SQL.SqlScript" value="${BuildPath}\SQLScripts\CREATE BusinessSafe database.${SQL.Filename}.sql"/>
+        <call target="SQL.RunScript" />
+        
+        <property name="SQL.SqlScript" value="${BuildPath}\SQLScripts\CREATE ChangeLog table - BusinessSafe.sql"/>
+        <call target="SQL.RunScript" />
+
+    </target>
+    
+    <target name="CreateDatabasePeninsula_test">
+        <call target="EnsureMSSQLFolderExists" />
+        
+        <property name="SQL.Server" value="${Target.Peninsula.SQLServer}"/> 
+        <property name="SQL.Database" value="master"/>     
+        
+        <property name="SQL.SqlScript" value="${BuildPath}\SQLScripts\CREATE Peninsula_test database.${SQL.Server}.sql"/>
+        <call target="SQL.RunScript" />
+        
+        <property name="SQL.SqlScript" value="${BuildPath}\SQLScripts\CREATE ChangeLog table - Peninsula_test.sql"/>
+        <call target="SQL.RunScript" />
+
+    </target>
+    
+    <target name="CreateDatabaseTaxWise_test">
+        <call target="EnsureMSSQLFolderExists" />
+        
+        <property name="SQL.Server" value="${Target.LegacyTaxWise.SQLServer}"/>    
+        <property name="SQL.Database" value="master"/>       
+        
+        <property name="SQL.SqlScript" value="${BuildPath}\SQLScripts\CREATE TaxWise_test database.${SQL.Server}.sql"/>
+        <call target="SQL.RunScript" />
+        
+        <property name="SQL.SqlScript" value="${BuildPath}\SQLScripts\CREATE ChangeLog table - TaxWise_test.sql"/>
+        <call target="SQL.RunScript" />
+
+    </target>
+	
+    <target name="BackupDatabaseBusinessSafe">
+        <property name="SQL.Server" value="${Target.BusinessSafe.SQLServer}"/>    
+        <property name="SQL.Database" value="master"/>       
+        
+        <property name="SQL.SqlScript" value="${BuildPath}\SQLScripts\BACKUP BusinessSafe.${SQL.Server}.sql"/>
+        <call target="SQL.RunScript" />
+    </target>
+    
+    
+    <!-- ~~~~~~~~~~~~~~~ DBDeploy Update & Output Script ~~~~~~~~~~~~~~~  -->
+    <target name="DBDeployBusinessSafe" description="generate a sql upgrade script">
+        <tstamp property="dbdeploy.timestamp" pattern="yyyyMMdd_HHmm" />
+
+        <property name="dbdeploy.filename" value="DBDeploy_BusinessSafe_${Target.BusinessSafe.SQLServer.Filename}_${dbdeploy.timestamp}.sql"/>
+        <property name="dbdeploy.undo.filename" value="DBDeploy_UNDO_BusinessSafe_${Target.BusinessSafe.SQLServer.Filename}_${dbdeploy.timestamp}.sql"/>
+		
+        <loadtasks assembly="${BuildPath}/ThirdParty/DBDeploy/Net.Sf.Dbdeploy.dll" />
+            <dbdeploy dbType="mssql" 
+                      dbConnection="Data Source=${Target.BusinessSafe.SQLServer};Initial Catalog=BusinessSafe;Trusted_Connection=True"
+                      dir="${BuildPath}/SQLScripts/BusinessSafe" 
+                      outputFile="${BuildPath}/SQLScripts/BusinessSafe/${dbdeploy.filename}" 
+                      undoOutputFile="${BuildPath}/SQLScripts/BusinessSafe/${dbdeploy.undo.filename}" />
+
+        <property name="SQL.Server" value="${Target.BusinessSafe.SQLServer}"/>
+        <property name="SQL.Database" value="BusinessSafe"/>
+
+        <property name="SQL.SqlScript" value="${BuildPath}/SQLScripts/BusinessSafe/${dbdeploy.filename}"/>
+        <call target="SQL.RunScript" />
+
+     </target>
+
+    <target name="DBDeployPeninsula_test" description="generate a sql upgrade script">
+        <tstamp property="dbdeploy.timestamp" pattern="yyyyMMdd_HHmm" />
+
+        <property name="dbdeploy.filename" value="DBDeploy_Peninsula_test_${Target.Peninsula.SQLServer}_${dbdeploy.timestamp}.sql"/>
+        <property name="dbdeploy.undo.filename" value="DBDeploy_UNDO_Peninsula_test_${Target.Peninsula.SQLServer}_${dbdeploy.timestamp}.sql"/>
+		
+        <loadtasks assembly="${BuildPath}/ThirdParty/DBDeploy/Net.Sf.Dbdeploy.dll" />
+            <dbdeploy dbType="mssql" 
+                      dbConnection="Data Source=${Target.Peninsula.SQLServer};Initial Catalog=Peninsula_test;Trusted_Connection=True"
+                      dir="${BuildPath}/SQLScripts/Peninsula_test" 
+                      outputFile="${BuildPath}/SQLScripts/Peninsula_test/${dbdeploy.filename}" 
+                      undoOutputFile="${BuildPath}/SQLScripts/Peninsula_test/${dbdeploy.undo.filename}" />
+
+        <property name="SQL.Server" value="${Target.Peninsula.SQLServer}"/>
+        <property name="SQL.Database" value="Peninsula_test"/>
+        
+        <property name="SQL.SqlScript" value="${BuildPath}/SQLScripts/Peninsula_test/${dbdeploy.filename}"/>
+        <call target="SQL.RunScript" />
+
+     </target>
+
+    <target name="DBDeployTaxWise_test" description="generate a sql upgrade script">
+        <tstamp property="dbdeploy.timestamp" pattern="yyyyMMdd_HHmm" />
+
+        <property name="dbdeploy.filename" value="DBDeploy_TaxWise_test_${Target.LegacyTaxWise.SQLServer}_${dbdeploy.timestamp}.sql"/>
+        <property name="dbdeploy.undo.filename" value="DBDeploy_UNDO_TaxWise_test_${Target.LegacyTaxWise.SQLServer}_${dbdeploy.timestamp}.sql"/>
+		
+        <loadtasks assembly="${BuildPath}/ThirdParty/DBDeploy/Net.Sf.Dbdeploy.dll" />
+            <dbdeploy dbType="mssql" 
+                      dbConnection="Data Source=${Target.LegacyTaxWise.SQLServer};Initial Catalog=TaxWise_test;Trusted_Connection=True"
+                      dir="${BuildPath}/SQLScripts/TaxWise_test" 
+                      outputFile="${BuildPath}/SQLScripts/TaxWise_test/${dbdeploy.filename}" 
+                      undoOutputFile="${BuildPath}/SQLScripts/TaxWise_test/${dbdeploy.undo.filename}" />
+
+        <property name="SQL.Server" value="${Target.LegacyTaxWise.SQLServer}"/>
+        <property name="SQL.Database" value="TaxWise_test"/>
+        
+        <property name="SQL.SqlScript" value="${BuildPath}/SQLScripts/TaxWise_test/${dbdeploy.filename}"/>
+        <call target="SQL.RunScript" />
+
+     </target>
+
+    <target name="EnsureMSSQLFolderExists">
+        <if test="${property::exists('MSSQLFolder')}">
+            <mkdir dir="${MSSQLFolder}" />
+        </if>
+    </target>
+    
+    <!-- ~~~~~~~~~~~~~~~ Tests ~~~~~~~~~~~~~~~  -->
+        
+    <target name="RunUnitTests">
+        <property name="TestCategories" value="Unit" />
+        <call target="RunNUnitTest" />
+    </target>
+    
+    <target name="RunIntegrationTests">    
+        <call target="PopulateDatabaseWithDataForTests" />
+        
+        <property name="TestCategories" value="Integration" />
+        <call target="RunMSTest" />
+    </target>
+    
+    <target name="PopulateDatabaseWithDataForTests">
+        <property name="SQL.Server" value="${Target.BusinessSafe.SQLServer}"/>  
+        <property name="SQL.Database" value="BusinessSafe"/>   
+        <property name="SQL.SqlScript" value="${BuildPath}\TaxWise\TaxWise.Data.Tests\TestData\PopulateDatabase.TMS.sql"/>
+        <call target="SQL.RunScript" />
+        
+        <property name="SQL.Server" value="${Target.Peninsula.SQLServer}"/>   
+        <property name="SQL.Database" value="Peninsula_test"/>       
+        <property name="SQL.SqlScript" value="${BuildPath}\TaxWise\TaxWise.Data.Tests\TestData\PopulateDatabase.Peninsula_test.sql"/>
+        <call target="SQL.RunScript" />
+    </target>
+    
+    <target name="RunNUnitTest">
+        <call target="BuildNUnitCommandLine" />
+        
+        <call target="PrepareTestResultsFolder" />
+        
+   <!--      The tests run may need to interact with the desktop - e.g. to run a browser
+             Running mstest.exe directly here will fail if we are running as a service on a CI server.
+             So one workaround is to go via "cmd.exe /interactive":
+                 http://stackoverflow.com/questions/640273/watin-tests-fail-on-cc-net/1241329#1241329
+            
+             The whole command needs enclosing in quotes to work around cmd.exe's wacky quote handling:
+                 http://stackoverflow.com/questions/355988/how-do-i-deal-with-quote-characters-when-using-cmd-exe
+                 
+             The browser launched must also be configured to allow access to the web app's URL. -->
+          <echo message="${NUnitCommandLine}"/>
+        <exec program="cmd.exe" failonerror="true">
+            <arg value="/interactive" />
+            <arg value="/c" />
+            <arg value="&quot;  &quot;${nunit.exe}&quot; ${NUnitCommandLine} &quot;" />
+   </exec>
+
+    </target>
+    
+    <target name="BuildNUnitCommandLine">             
+        <call target="BuildListOfTestContainers"/>
+         <property name="NUnit.ResultsFile" value="${BuildPath}\TestResults\UnitTests.xml" />
+
+       <property name="NUnitCommandLine"
+                  value=" ${TestContainers} /xml:${NUnit.ResultsFile} /include:${TestCategories}" /> 
+                               
+        
+       <!-- <foreach item="File" property="TestAssembly">
+            <in>
+                <items>
+                    <include name="**\bin\${build.configuration}\*Tests.dll" />
+                </items>
+            </in>
+            <do>
+                   <exec program="${nunit.exe}"  commandline="/xml:shit2.xml">
+                        <arg file="${TestAssembly}"/>
+                        
+                    </exec>  
+                    
+       
+            </do>
+        </foreach>     -->          
+
+    </target>
+    
+    <target name="BuildListOfTestContainers">
+        <property name="TestContainers" value="" />
+        <foreach item="File" property="TestAssembly">
+            <in>
+                <items>
+                    <include name="**\bin\${build.configuration}\*Tests.dll" />
+                </items>
+            </in>
+            <do>
+                <property name="TestContainers" value="${TestContainers} ${TestAssembly}" />
+            </do>
+        </foreach>
+    </target>
+    
+    <target name="PrepareTestResultsFolder">
+        <delete file="${NUnit.ResultsFile}" />
+        <mkdir dir="${BuildPath}\TestResults" />
+    </target>
+    
+    
+    <!-- ~~~~~~~~~~~~~~~ NCover ~~~~~~~~~~~~~~~  -->
+    
+    <target name="RunAllTestsUnderNCover">
+        <property name="workingDirectory" value="${BuildPath}\TestResults" />
+        <property name="appendTrendTo" value="${BuildPath}\TestResults\${NCover.TrendFile}" />
+        <property name="coverageFile" value="${BuildPath}\TestResults\${NCover.CoverageFile}" />
+        <property name="excludeAssemblies" value="Iesi.Collections.dll;NHibernate.dll;NHibernate.ByteCode.Castle;.*Tests.dll;" />
+        <property name="onlyAssembliesWithSource" value="True" />
+        <property name="projectName" value="BusinessSafe_NCover" />
+        
+        <property name="TestCategories" value="Unit" />    
+        
+        <call target="BuildNUnitCommandLine" />
+        
+        <call target="PrepareTestResultsFolder" />
+        
+        <exec program="${NCover.Console.exe} " 
+              commandline="&quot;${nunit.exe}&quot; ${NUnitCommandLine} //w &quot;${workingDirectory}&quot; //at &quot;${appendTrendTo}&quot; //x &quot;${coverageFile}&quot; //eas &quot;${excludeAssemblies}&quot; //onlywithsource //p &quot;${projectName}&quot; //ea BusinessSafe.Infrastructure.Attributes.CoverageExcludeAttribute //coverall"  />
+    </target>
+    
+    <target name="CreateNCoverReports">
+        <exec workingdir="${BuildPath}\TestResults" 
+              program="${NCover.Reporting.exe} "
+              commandline="${NCover.CoverageFile}  //lt ${NCover.TrendFile} //or FullCoverageReport:Html:CoverageReports" />
+      
+        <exec workingdir="${BuildPath}\TestResults" 
+              program="${NCover.Reporting.exe} "
+              commandline="${NCover.CoverageFile}  //lt ${NCover.TrendFile} //or SymbolModule:Xml:${BuildPath}\TestResults\symbolmodule.xml " />
+    </target>
+    
+    
+    <!-- ~~~~~~~~~~~~~~~ IIS & Web App Deployment ~~~~~~~~~~~~~~~  -->
+        
+    <target name="Deploy">
+        <call target="InstallConfigFiles" />
+        <call target="DropAndRecreateAllDatabases" />
+        <call target="SetUpBusinessSafeWebApp" />
+    </target>
+    
+    <target name="SetUpBusinessSafeWebApp" >      
+        <call target="DetermineHowToDriveIISConfig" />		
+        <call target="TestIfWebAppExistsInIIS" />
+        <call target="StopIISWebApp" />
+	
+        <call target="BackupWebApp" />
+		
+        <call target="CreateWebAppInIIS" />
+        <call target="SetIISWebSiteSecurity" />
+        <call target="CreateAppPoolInIIS" />
+		
+        <delete dir="${RemoteWebsitePath}" failonerror="false"/>
+        <mkdir dir="${RemoteWebsitePath}" />
+        <call target="CopyWebAppFiles" /> 
+    </target>
+
+    <target name="SetUpBusinessSafeWebAppDev" >      
+        <call target="DetermineHowToDriveIISConfig" />      
+        <call target="TestIfWebAppExistsInIIS" />
+        <call target="StopIISWebApp" />
+    
+        <call target="BackupWebApp" />
+        
+        <call target="CreateWebAppInIIS" />
+        <call target="SetIISWebSiteSecurity" />
+        <call target="CreateAppPoolInIIS" />
+                
+    </target>
+	
+    
+    <target name="DetermineHowToDriveIISConfig">
+        <property name="PsExecPath" value="${BuildPath}\ThirdParty\SysInternals\PsExec.exe" />
+        
+        <if test="${IsIISRemote}">
+            <property name="IISExecCmd" value="${PsExecPath}" />
+            <property name="IISExecCmdArgPrefix" value="\\${Target.WebServer} ${AppCmdPath}" />
+        </if>
+
+        <if test="${IsIISRemote=='false'}">
+            <property name="IISExecCmd" value="${AppCmdPath}" />
+            <property name="IISExecCmdArgPrefix" value="" />
+        </if>
+    </target>
+    
+    <target name="TestIfWebAppExistsInIIS">
+        <property name="ResultOfListSiteAttempt" value="" />
+        
+		<!-- failonerror to tolerate the site not existing -->
+        <exec program="${IISExecCmd}" resultproperty="ResultOfListSiteAttempt" failonerror="false">
+            <arg value=" ${IISExecCmdArgPrefix} list site &quot;BusinessSafe&quot; "/>
+        </exec>
+
+	    <property name="WebAppExists" value="false" />
+        <if test="${ResultOfListSiteAttempt=='0'}">
+			<property name="WebAppExists" value="true" />
+        </if>
+    </target>
+
+    <target name="StopIISWebApp">
+        <if test="${WebAppExists=='true'}">
+            <exec program="${IISExecCmd}" >
+                <arg value=" ${IISExecCmdArgPrefix} stop site &quot;BusinessSafe&quot; "/>
+            </exec>
+        </if>
+    </target>
+	
+    <target name="CreateWebAppInIIS">
+        <if test="${WebAppExists=='true'}">
+            <exec program="${IISExecCmd}" >
+                <arg value=" ${IISExecCmdArgPrefix} delete site &quot;BusinessSafe&quot; "/>
+            </exec>
+        </if>
+
+        <exec program="${IISExecCmd}" >
+            <arg value=" ${IISExecCmdArgPrefix} add site /name:BusinessSafe /bindings:http://*:8070,http/*:80:BusinessSafe /physicalPath:&quot;${LocalWebsitePath}&quot; "/>
+        </exec>
+    </target>
+    
+    <target name="SetIISWebSiteSecurity">
+        <exec program="${IISExecCmd}" >
+            <arg value=" ${IISExecCmdArgPrefix} set config &quot;BusinessSafe&quot; -section:system.webServer/security/authentication/windowsAuthentication /enabled:&quot;True&quot;  /commit:apphost "/>
+        </exec>
+        
+        <exec program="${IISExecCmd}" >
+            <arg value=" ${IISExecCmdArgPrefix} set config &quot;BusinessSafe&quot; -section:system.webServer/security/authentication/anonymousAuthentication /enabled:&quot;True&quot;  /commit:apphost "/>
+        </exec>
+    </target>
+
+    <target name="CreateAppPoolInIIS">
+        <property name="DoesAppPoolExistFlag" value="" />
+        
+        <exec program="${IISExecCmd}" resultproperty="DoesAppPoolExistFlag" failonerror="false">
+            <arg value=" ${IISExecCmdArgPrefix} list apppool &quot;BusinessSafe&quot; "/>
+        </exec>
+
+        <if test="${DoesAppPoolExistFlag=='1'}">
+            <exec program="${IISExecCmd}" failonerror="false">
+                <arg value=" ${IISExecCmdArgPrefix} add apppool /name:&quot;BusinessSafe&quot; /managedRuntimeVersion:v4.0 /managedPipelineMode:Integrated "/>
+            </exec>
+        </if>
+        
+        <exec program="${IISExecCmd}" >
+            <arg value=" ${IISExecCmdArgPrefix} set AppPool &quot;BusinessSafe&quot; -processModel.identityType:NetworkService "/>
+        </exec>
+
+        <exec program="${IISExecCmd}" >
+            <arg value=" ${IISExecCmdArgPrefix} set site /site.name:&quot;BusinessSafe&quot; /[path='/'].applicationPool:&quot;BusinessSafe&quot; "/>
+        </exec>
+    </target>
+    
+    
+    <target name="BackupWebApp" >   
+        <tstamp property="zip.timestamp" pattern="yyyyMMdd_HHmm" />
+        <property name="BackupFile" value="${RemoteWebsiteBackupPath}\BusinessSafe_AutomatedBackup_${zip.timestamp}.zip" />
+		<zip zipfile="${BackupFile}" failonerror="false" >
+		<fileset basedir="${RemoteWebsitePath}">
+			<include name="**/*" />
+		</fileset>
+		</zip>        
+    </target>
+    
+    <target name="CopyWebAppFiles">
+        <copy todir="${RemoteWebsitePath}" overwrite="true">
+            <fileset basedir="${BuildPath}\BusinessSafe.WebSite">
+                <include name="**/*" />
+                
+                <exclude name="**/*.cs" />
+                <exclude name="**/*.csproj" />
+                <exclude name="**/*.csproj.user" />
+                <exclude name="**/*.sln" />
+                <exclude name="**/*.scc" />
+                <exclude name="**/*.log*" />
+                <exclude name="**/*.vspscc" />
+                <exclude name="**/obj/" />
+            </fileset>
+        </copy>
+    </target>
+    
+    
+    <!-- ~~~~~~~~~~~~~~~ Acceptance Tests ~~~~~~~~~~~~~~~  -->
+
+    <target name="RunSmokeTests">
+        <call target="SetAcceptanceTestConfig" />
+        <property name="TestCategories" value="Smoke" />
+        <call target="RunMSTest" />    
+    </target>
+	
+    <target name="RunAcceptanceTests">
+
+        <call target="SetAcceptanceTestConfig" />
+        <property name="TestCategories" value="Acceptance" />
+        <call target="RunNUnitTest" />    
+    </target>
+
+    <target name="SetAcceptanceTestConfig">
+    
+    <property name="Target.WebServer" value="D:\inetpub\BusinessSafe\" />
+        <property name="AcceptanceTest.Config.Path" value="${BuildPath}\AcceptanceTests\bin\Debug\AcceptanceTests.dll.config" />
+        
+        <if test="${not file::exists(AcceptanceTest.Config.Path)}">
+            <fail message="
+            *** ACCEPTANCE TESTS CANNOT BE RECONFIGURED ***
+            
+            '${AcceptanceTest.Config.Path}' does not exist" />
+        </if>
+        
+        <xmlpoke file="${AcceptanceTest.Config.Path}"
+                 xpath="/configuration/appSettings/add[@key = 'RootURL']/@value"
+                 value="http://${Target.WebServer}:8070">
+        </xmlpoke>
+    </target>
+    
+	
+</project>
+

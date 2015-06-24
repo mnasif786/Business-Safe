@@ -1,0 +1,40 @@
+﻿@using BusinessSafe.WebSite.Extensions
+@model BusinessSafe.WebSite.ViewModels.SearchRiskAssessmentsViewModel
+<fieldset>
+    <legend>Search @ViewBag.Title</legend>
+    <ul>
+        <li>
+            <label class="thin" for="Site">Site</label>
+            @Html.TextBox("Site", "", new { })
+            @Html.Hidden("SiteId", Model.SiteId)
+        </li>
+        <li>
+            <label for="Title" class="medium">Title</label>
+            @Html.TextBoxFor(model => model.Title, new { id="search-title", @class = "two-date-pickers-and-a-button-wide" })
+        </li>
+    </ul>
+    <ul>
+        <li>
+            <label for="SiteGroup" class="thin">Site Group</label>
+            @Html.TextBox("SiteGroup")
+            @Html.Hidden("SiteGroupId", Model.SiteGroupId)
+        </li>
+        <li>
+            <label class="medium" for="CreatedFrom">Created From</label>
+            @Html.TextBoxFor(model => model.CreatedFrom, new { @class = "calendar" })
+        </li>
+        <li>
+            <label for="CreatedTo">To</label>
+            @Html.TextBoxFor(model => model.CreatedTo, new { @class = "calendar" })
+        </li>
+    </ul>
+    <ul>
+        <li class="buttons thin">
+            <input id="Search" type="submit" value="Search" class="btn btn-primary" />
+            @Html.ActionLink("Reset", "Index", "RiskAssessment", new { companyId = Html.GetUsersCompanyId(User), @class = "btn btn-link" })
+        </li>
+    </ul>
+    <input id="ShowDeleted" name="ShowDeleted" type="hidden" value="false" />
+    <input id="ShowArchived" name="ShowArchived" type="hidden" value="false" />
+    @Html.Hidden("CompanyId", @Model.CompanyId)
+</fieldset>

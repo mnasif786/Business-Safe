@@ -1,0 +1,123 @@
+﻿@using iTextSharp.text
+@using iTextSharp.text.html.simpleparser
+@using iTextSharp.text.pdf
+@model EvaluationChecklist.Models.DocumentTemplateViewModel
+
+@functions {
+    public MemoryStream createPDF(string html)
+    {
+        MemoryStream msOutput = new MemoryStream();
+        TextReader reader = new StringReader(html);
+
+        // step 1: creation of a document-object
+        Document document = new Document(PageSize.A4, 30, 30, 30, 30);
+
+        // step 2:
+        // we create a writer that listens to the document
+        // and directs a XML-stream to a file
+        PdfWriter writer = PdfWriter.GetInstance(document, msOutput);
+
+        // step 3: we create a worker parse the document
+        HTMLWorker worker = new HTMLWorker(document);
+
+        // step 4: we open document and start the worker on the document
+        document.Open();
+        worker.StartDocument();
+
+        var parsedHTML = HTMLWorker.ParseToList(new StringReader(Model.CoverLetter.Paragraphs[0]), null);
+
+        foreach (var element in parsedHTML)
+        {
+            document.Add(element as IElement);
+        }
+        
+        // step 5: parse the html into the document
+        worker.Parse(reader);
+
+        // step 6: close the document and the worker
+        worker.EndDocument();
+        worker.Close();
+        document.Close();
+
+        
+        return msOutput;
+    }
+
+}
+
+<itext creationdate="@DateTime.Now.ToString()" producer="RazorPDF">
+    
+    @{
+        var parsedHTML = HTMLWorker.ParseToList(new StringReader(Model.CoverLetter.Paragraphs[0]), null);
+
+        foreach (var element in parsedHTML)
+        {
+            
+        }
+
+        createPDF(Model.CoverLetter.Paragraphs[0]);
+        
+    }
+
+    <paragraph style="font-family: Helvetica; font-size: 18; font-style: italic;">
+        <chunk red="255" green="0" blue="0">@Model.CoverLetter.Paragraphs[0]</chunk>
+    </paragraph>
+    <newline/>
+     <paragraph style="font-family: Helvetica; font-size: 18; font-style: italic;">
+        <chunk red="255" green="0" blue="0">@Model.CoverLetter.Paragraphs[0]</chunk>
+    </paragraph>
+    
+    <table columns="3" width="80.0%" align="Center" cellpadding="5.0" cellspacing="5.0" widths="33.333332;33.333332;33.333332" borderwidth="1.0" left="true" right="true" top="true" bottom="true" red="0" green="0" blue="255">
+        <row>
+            <cell borderwidth="0.5" left="true" right="true" top="true" bottom="true" horizontalalign="Default" verticalalign="Default" colspan="3" header="true" leading="18.0">
+                <paragraph leading="18.0" font="unknown" align="Default">header</paragraph>
+            </cell>
+        </row>
+        <row>
+            <cell borderwidth="0.5" left="true" right="true" top="true" bottom="true" red="255" green="0" blue="0" horizontalalign="Default" verticalalign="Default" rowspan="2" leading="18.0">
+                <paragraph leading="18.0" font="unknown" align="Default">example cell with colspan 1 and rowspan 2</paragraph>
+            </cell>
+            <cell borderwidth="0.5" left="true" right="true" top="true" bottom="true" horizontalalign="Default" verticalalign="Default" leading="18.0">
+                <phrase leading="18.0" font="unknown">1.1</phrase>
+            </cell>
+            <cell borderwidth="0.5" left="true" right="true" top="true" bottom="true" horizontalalign="Default" verticalalign="Default" leading="18.0">
+                <phrase leading="18.0" font="unknown">2.1</phrase>
+            </cell>
+        </row>
+        <row>
+            <cell borderwidth="0.5" left="true" right="true" top="true" bottom="true" horizontalalign="Default" verticalalign="Default" leading="18.0">
+                <phrase leading="18.0" font="unknown">1.2</phrase>
+            </cell>
+            <cell borderwidth="0.5" left="true" right="true" top="true" bottom="true" horizontalalign="Default" verticalalign="Default" leading="18.0">
+                <phrase leading="18.0" font="unknown">2.2</phrase>
+            </cell>
+        </row>
+        <row>
+            <cell borderwidth="0.5" left="true" right="true" top="true" bottom="true" horizontalalign="Default" verticalalign="Default" leading="18.0">
+                <phrase leading="18.0" font="unknown">cell test1</phrase>
+            </cell>
+            <cell borderwidth="0.5" left="true" right="true" top="true" bottom="true" horizontalalign="Default" verticalalign="Default" colspan="2" rowspan="2" leading="18.0">
+                <paragraph leading="18.0" font="unknown" align="Default">big cell</paragraph>
+            </cell>
+        </row>
+        <row>
+            <cell borderwidth="0.5" left="true" right="true" top="true" bottom="true" horizontalalign="Default" verticalalign="Default" leading="18.0">
+                <phrase leading="18.0" font="unknown">cell test2</phrase>
+            </cell>
+        </row>
+    </table>
+
+    <table width="100%" cellpadding="1.0" cellspacing="1.0"  style="font-size: 10px;">
+        <row>
+            <cell borderwidth="0.5" left="false" right="false" top="false" bottom="true" backgroud-color="Red">User Name</cell>
+            <cell borderwidth="0.5" left="false" right="false" top="false" bottom="true" horizontalalign="right">Lucky Number</cell>
+       
+        </row>
+        <row>
+             <cell borderwidth="0.5" horizontalalign="Default" verticalalign="Default">
+<chunk leading="18.0" font="unknown" align="Default" style="font-family: Helvetica; font-size: 10; font-style: italic;">header</chunk>
+</cell>
+        </row>
+</table>
+    
+</itext>

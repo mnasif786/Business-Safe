@@ -1,0 +1,17 @@
+USE [BusinessSafe]
+GO 
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG = 'BusinessSafe' AND TABLE_NAME = 'SafeCheckChecklistOtherEmails' AND COLUMN_NAME = 'Name')
+BEGIN
+	ALTER TABLE SafeCheckChecklistOtherEmails
+	ADD Name varchar(100) NULL 
+END
+GO
+
+--//@UNDO
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG = 'BusinessSafe' AND TABLE_NAME = 'SafeCheckChecklistOtherEmails' AND COLUMN_NAME = 'Name')
+BEGIN
+	ALTER TABLE SafeCheckChecklistOtherEmails
+	DROP COLUMN Name  
+END 

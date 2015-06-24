@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="Jurisdiction" table="`Jurisdiction`">
+    <id name="Id" column="Id" type="long">
+      <generator class="identity"/>
+    </id>
+    <property name="Name" column="`Name`"/>
+    <property name="Order" column="`Order`"/>
+    <property name="Deleted" type="bool" />
+    <property name="CreatedOn" type="DateTime" />
+    <many-to-one name="CreatedBy" class="UserForAuditing" column="CreatedBy" cascade="none" />
+    <property name="LastModifiedOn" type="DateTime" />
+    <many-to-one name="LastModifiedBy" class="UserForAuditing" column="LastModifiedBy" cascade="none" />
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,32 @@
+﻿@using BusinessSafe.WebSite.Areas.HazardousSubstanceRiskAssessments.ViewModels
+@model BusinessSafe.WebSite.ViewModels.DocumentsViewModel
+@{
+    ViewBag.Title = "Hazards";
+}
+@Html.Partial("_RiskAssessmentSummary", ViewBag.RiskAssessmentSummary as HazardousSubstanceSummaryViewModel)
+<div class="container tabs ipad-container">
+    @Html.Partial("_Tabs", ViewBag.TabViewModel as HazardousSubstanceRiskAssessmentTabViewModel)
+    @Html.Hidden("SelectedTabIndex", 2)
+    @Html.HiddenFor(x => x.CompanyId)
+    @Html.HiddenFor(x => x.RiskAssessmentId)
+    <div id="hazardsPeopleWrapper" class="fixed-content">
+        
+        @{
+            var hazardousSubstanceRiskAssessmentTabViewModel = ViewBag.TabViewModel as HazardousSubstanceRiskAssessmentTabViewModel;
+        }
+
+        @Html.Partial("_TitleBar", ViewBag.RiskAssessmentSummary as HazardousSubstanceSummaryViewModel)
+        @Html.Partial("_RiskAssessmentDocuments", Model)
+    </div>
+</div>
+@Html.Partial("_Footer")
+@section JavaScriptSection
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var url = window.globalajaxurls.saveAndNextHazardousSubstanceRiskAssessmentDocuments;
+
+            riskAssessmentDocumentsManager.initialise(url);
+        });
+    </script>
+}

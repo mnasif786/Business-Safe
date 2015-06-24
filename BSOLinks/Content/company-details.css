@@ -1,0 +1,57 @@
+﻿fieldset input[type=text]
+{
+    width: 250px;
+    padding: .405em .5em .405em .5em;
+    outline: none;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+#notifyAdminButton, #cancelButton {
+    width: 90px;
+    height: 30px;
+    margin: 15px 10px 15px 0px;
+}
+
+.sectionContainer fieldset {
+    width: 50%;
+    margin: 0 auto;
+}
+
+span.centerbuttons
+{
+    display: block;
+    width: 300px;
+    height: 60px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#modifyCompanyDetails {
+    width: 200px;
+    height: 40px;
+    margin: 15px 10px;
+}
+
+.invisible {
+    display: none;
+}
+
+.visible {
+    display: inline;
+}
+
+fieldset#summaryFieldset label {    
+    height: 30px;
+    margin: 15px 10px 15px 0px;
+}
+
+.editor-label 
+{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.editor-field {
+    width: 70%;
+}

@@ -1,0 +1,36 @@
+﻿@using BusinessSafe.WebSite.Areas.PersonalRiskAssessments.ViewModels
+@model EmployeeChecklistGeneratorViewModel
+@{
+    ViewBag.Title = "Checklist Generator";
+    var tabViewModel = ViewBag.TabViewModel as PersonalRiskAssessmentTabViewModel;
+}
+@Html.Partial("_RiskAssessmentSummary", ViewBag.RiskAssessmentSummary as PersonalRiskAssessmentSummaryViewModel)
+
+<div class="container ipad-container">
+    @Html.Partial("_Tabs", tabViewModel as PersonalRiskAssessmentTabViewModel)
+    <div id="review-wrapper" class="fixed-content">
+        @Html.Partial("_TitleBar", ViewBag.RiskAssessmentSummary as PersonalRiskAssessmentSummaryViewModel)
+        @Html.Partial("_Form", Model)
+    </div>
+</div>
+<div class="hide">
+    <div id="dialogSendChecklistsConfirmation" title="Send Checklist Emails">
+        <p>
+            Checklists emails will be sent to selected employees. Do you want
+            to proceed?</p>
+    </div>
+    
+</div>
+
+@section JavaScriptSection
+{
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+           var employees = @Html.Raw(Json.Encode(Model.Employees));
+            
+            var sites = @Html.Raw(Json.Encode(Model.Sites));
+            BusinessSafe.PersonalRiskAssessment.Checklists.Generator.initialize(employees, sites);
+        });
+    </script>
+}

@@ -1,0 +1,52 @@
+﻿@using BusinessSafe.Domain.Entities
+@using BusinessSafe.WebSite.AuthenticationService
+@using Telerik.Web.Mvc.UI
+@model BusinessSafe.WebSite.Areas.PersonalRiskAssessments.ViewModels.ChecklistManagerViewModel
+<fieldset>
+    <legend class="span12"><h3>Checklists</h3>
+    </legend>
+    <div class="span">
+        @if (Model.PersonalRiskAssessementEmployeeChecklistStatus == PersonalRiskAssessementEmployeeChecklistStatusEnum.Generating)
+        {
+            <p>Generating checklists... this may take a few minutes. <a href="@Url.Action("Index", "ChecklistManager", new {area = "PersonalRiskAssessments", riskAssessmentId = Model.RiskAssessmentId, companyId = Model.CompanyId})">Refresh</a></p>
+        }
+        @if (Model.PersonalRiskAssessementEmployeeChecklistStatus == PersonalRiskAssessementEmployeeChecklistStatusEnum.Generated)
+        {
+             using (Html.BeginForm("FilterGrid", "ChecklistManager", FormMethod.Get, new { @class = "search-form clearfix" }))
+             {
+                 @Html.Hidden("riskAssessmentId", @Model.RiskAssessmentId)
+                 <ul>
+                     <li><label for="emailContains">Email:</label> @Html.TextBox("emailContains")</li>
+                     <li><label for="nameContains">Name:</label> @Html.TextBox("nameContains")</li>
+                 </ul>
+
+                 <input type="submit" id="FilterChecklists" value="Search" class="btn btn-primary" />
+                 <a class="btn btn-link" href="@Url.Action("Index", "ChecklistManager", new { area = "PersonalRiskAssessments", riskAssessmentId = Model.RiskAssessmentId, companyId = Model.CompanyId })">Reset</a>
+             }
+            @Html.Telerik().Grid(Model.EmployeeChecklists).Name("EmployeeChecklists").DataKeys(keys => keys.Add(c => c.Id)).DataBinding(dataBinding => dataBinding.Server()).Columns(columns =>
+                    {
+                        columns.Bound(o => o.Id).HeaderTemplate("Id").Visible(false);
+                        columns.Bound(o => o.FriendlyReference).HeaderTemplate("Reference");
+                        columns.Bound(o => o.EmployeeName).HeaderTemplate("Employee Name");
+                        columns.Bound(o => o.EmployeeEmail).HeaderTemplate("Current Email");
+                        columns.Bound(o => o.Site).HeaderTemplate("Site");
+                        columns.Bound(o => o.CompletedDate).HeaderTemplate("Completed Date");
+                        columns.Template(@<text>
+                                              <div title="@item.ChecklistName">
+                                                  @item.ChecklistNameForDisplay
+                                              </div>
+                                          </text>).HeaderTemplate("CheckList");
+           				columns.Bound(o => o.IsFurtherActionRequired).Title("Further Action");
+                        columns.Template(@<text>
+                                                @if (User.IsInRole(Permissions.EditPersonalRiskAssessments.ToString()))
+                                                {
+                                                    <a data-id="@item.Id" class="icon-search" href="#" title="View Checklist">
+                                                    </a>
+                                                    <a data-id="@item.Id" data-employee-id="@item.EmployeeId" class="icon-share resend-checklist-link" href="#" title="Resend Checklist">
+                                                    </a>
+                                                }
+                                            </text>);
+                    }).Pageable(page => page.PageSize(10)).Sortable()
+        }
+    </div>
+</fieldset>

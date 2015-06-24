@@ -1,0 +1,25 @@
+﻿@model BusinessSafe.WebSite.Areas.Company.ViewModels.AddEditRiskAssessorViewModel
+<form id="riskAssessorForm" action="@Url.Action("Edit", "RiskAssessor", new { area = "Company" })">
+<div id="risk-assessor-validation-summary" class="hide validation-summary-errors">
+    <ul>
+    </ul>
+</div>
+<fieldset>
+    <legend>
+        <h3>Risk Assessor Details</h3>
+    </legend>
+    <div class="row">
+        <label class="span1" for="EmployeeId">
+            Employee:
+        </label>
+        <div class="span4 auto-complete-dropdown">
+            @Html.DisplayFor(m => m.Employee)
+            @Html.HiddenFor(x => x.EmployeeId)
+        </div>
+    </div>
+    @Html.Partial("_RiskAssessorDetails")
+</fieldset>
+@Html.Partial("_NotificationCheckboxes")
+@Html.Partial("_CommandButtons")
+@Html.HiddenFor(x => x.RiskAssessorId)
+</form>

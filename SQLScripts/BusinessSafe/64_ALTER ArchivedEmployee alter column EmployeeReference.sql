@@ -1,0 +1,17 @@
+USE [BusinessSafe]
+GO
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'ArchivedEmployee' AND COLUMN_NAME = 'EmployeeReference' AND IS_NULLABLE = 'NO')
+BEGIN
+	ALTER TABLE [ArchivedEmployee]
+	ALTER COLUMN [EmployeeReference] nvarchar(100) NULL
+END
+GO	
+
+--//@UNDO 
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'ArchivedEmployee' AND COLUMN_NAME = 'EmployeeReference' AND IS_NULLABLE = 'YES')
+BEGIN
+	ALTER TABLE [ArchivedEmployee]
+	ALTER COLUMN [EmployeeReference] nvarchar(100) NOT NULL
+END
+GO

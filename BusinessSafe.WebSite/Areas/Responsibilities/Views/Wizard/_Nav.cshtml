@@ -1,0 +1,33 @@
+﻿@using BusinessSafe.WebSite.Areas.Responsibilities.ViewModels.Wizard
+<ul class="nav nav-pills">
+    <li @if(ViewBag.TabViewModel.SelectedTab == ResponsibilityWizardTabs.SelectResponsibilities) {<text> class="active"</text>}>
+        @Html.ActionLink("Select Responsibilities", "SelectResponsibilities",
+            new { selectedResponsibilityTemplateIds = ViewBag.TabViewModel.SelectedResponsiblityTemplateIds })
+    </li>
+        @{
+            var selectedResponsiblityTemplateIds = ViewBag.TabViewModel.SelectedResponsiblityTemplateIds;
+        }
+    <li class="@if(ViewBag.TabViewModel.SelectedTab == ResponsibilityWizardTabs.GenerateResponsibilities)
+               {
+                   <text> active </text>
+               }
+               @if(string.IsNullOrEmpty(selectedResponsiblityTemplateIds)) {
+                   <text> hide </text>
+               }
+    ">
+        @Html.ActionLink("Generate Responsibilities", "GenerateResponsibilities",
+            new { selectedResponsibilityTemplateIds = ViewBag.TabViewModel.SelectedResponsiblityTemplateIds },
+            new { id="nav-generate-responsibilities"})
+    </li>
+    <li id="nav-generate-tasks" class="@if(ViewBag.TabViewModel.SelectedTab == ResponsibilityWizardTabs.GenerateTasks)
+               {
+                   <text> active </text>
+               }
+               @if(!ViewBag.TabViewModel.HasUncreatedTasks) {
+                   <text> hide </text>
+               }
+    ">
+        @Html.ActionLink("Generate Tasks", "GenerateTasks",
+            new { selectedResponsibilityTemplateIds = ViewBag.TabViewModel.SelectedResponsiblityTemplateIds })
+    </li>
+</ul>

@@ -1,0 +1,84 @@
+﻿@using BusinessSafe.WebSite.Areas.AccidentReports.ViewModels
+@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Extensions
+@model CreateAccidentRecordSummaryViewModel
+<div class="fixed-content">
+    @*@Html.Partial("_TitleBar", ViewBag.RiskAssessmentSummary as GeneralRiskAssessmentSummaryViewModel)*@
+    <h2><i class="tick"></i>New Accident Record</h2>
+    <form class="row form-inline" method="post" action="@Url.Action("Save", "Create")" >
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div>
+                @*@Html.Partial("_DistinctValidationSummary")*@
+            </div>
+        }
+        @if (TempData["Notice"] != null)
+        {
+            <div class="alert alert-success">
+                <a id="successmessageanchor" href="#successmessage"></a>
+                @TempData["Notice"].ToString()
+            </div>
+        }
+        <fieldset>
+            <legend class="span12">Accident Record Summary</legend>
+            <div class="span12">
+                <label class="span2" for="Title">Title</label>
+                @Html.TextBoxFor(m => m.Title, new {@class = "span4"})
+            </div>
+            <div class="span12">
+                <label class="span2" for="Reference">Reference</label>
+                @Html.TextBoxFor(model => model.Reference, new {@class = "span4"})
+            </div>
+            
+            <div class="span12">
+                <label class="span2">Jurisdiction</label>
+                <ul id="jurisdiction-type" class="row-of-radios clearfix">
+                    <li class="span">
+                        <label>GB</label>
+                        <input type="radio" name="JurisdictionId" value="1" />
+                    </li>
+                    <li class="span">
+                        <label>NI</label>
+                        <input type="radio" name="JurisdictionId" value="3" />
+                    </li>
+                    <li class="span">
+                        <label>ROI</label>
+                        <input type="radio" name="JurisdictionId" value="2" />
+                    </li>
+                    <li class="span">
+                        <label>IoM</label>
+                        <input type="radio" name="JurisdictionId" value="9" />
+                    </li>
+                    <li class="span">
+                        <label>Guernsey</label>
+                        <input type="radio" name="JurisdictionId" value="8" />
+                    </li>
+                    <li class="span">
+                        <label>Jersey</label>
+                        <input type="radio" name="JurisdictionId" value="5" />
+                    </li>
+                </ul>
+            </div>
+
+        </fieldset>
+   
+        <div class="span12">
+            <label class="span2">
+            </label>
+            @if (User.IsInRole(Permissions.AddAccidentRecords.ToString()) || User.IsInRole(Permissions.EditAccidentRecords.ToString()))
+            {
+                <input type="submit" id="saveButton" value="Start Accident Record" class="btn btn-success" />
+            }
+            <a class="btn btn-link" href="@Url.Action("Index", "Search", new {})">
+                Cancel</a>
+        </div>
+        
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div>
+                @Html.Partial("_DistinctValidationSummary")
+            </div>
+        }
+        @Html.HiddenFor(model => model.CompanyId, new { id = "CompanyId", name = "CompanyId" })
+    </form>
+</div>

@@ -1,0 +1,41 @@
+﻿@using BusinessSafe.WebSite.Extensions
+@model BusinessSafe.WebSite.Areas.Users.ViewModels.UserSearchViewModel
+<div class="well">
+    <form method="get" action="@Url.Action("Index", "ViewUsers")" class="search-form">
+        <fieldset>
+            <legend>Search Users</legend>
+            <ul>
+                <li>
+                    <label for="Forename" class="thin">Forename</label>
+                    @Html.TextBoxFor(model => model.Forename)
+                </li>
+                <li class="after-dropdown" id="view-users-surname">
+                    <label for="Surname" class="thin">Surname</label>
+                    @Html.TextBoxFor(model => model.Surname)
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <label for="GroupSite" class="thin">Site</label>
+                    @Html.TextBox("Site")
+                    @Html.Hidden("SiteId", Model.SiteId)
+                </li>
+                @*<li>
+                    <label for="GroupSite" class="thin">Site Group</label>
+                    @Html.TextBox("GroupSite")
+                    @Html.Hidden("GroupSiteId", Model.GroupSiteId)
+                </li>*@
+            </ul>
+            <ul>
+                <li class="buttons thin">
+                    <input id="Search" type="submit" value="Search" class="btn btn-primary" />
+                    <a class="btn-link" href="@Url.Action("Index", "ViewUsers", new { companyId = Html.GetUsersCompanyId(User) })">Reset</a>
+                </li>
+            </ul>
+        </fieldset>
+        <div class="hide">
+            <input type="checkbox" id="ShowDeleted" name="ShowDeleted" value="true" />
+        </div>
+        @Html.Hidden("CompanyId", @Model.CompanyId)
+    </form>
+</div>

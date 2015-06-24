@@ -1,0 +1,21 @@
+﻿@using System.Globalization
+@using BusinessSafe.Checklists.ViewModels
+@using BusinessSafe.Domain.Entities
+@model QuestionViewModel
+<label class="span6">@Html.Raw(Model.Text)</label>
+@{
+    var questionAnswer = Model.Answer ?? new AnswerViewModel();
+}
+
+<div class="question span6" data-question-id="@Model.Id">
+@if (Model.QuestionType == QuestionType.YesNo || Model.QuestionType == QuestionType.YesNoWithAdditionalInfo)
+{
+    <input type="radio" @(questionAnswer.BooleanResponse.GetValueOrDefault() ? "checked" : "")   name="@("YesNo_" + Model.Id.ToString(CultureInfo.InvariantCulture))" id="@("YesNo_" + Model.Id.ToString(CultureInfo.InvariantCulture) + "yes")" value="Yes" /><label for="@("YesNo_" + Model.Id.ToString(CultureInfo.InvariantCulture) + "yes")">Yes</label>
+    <input type="radio" @(questionAnswer.BooleanResponse.HasValue && questionAnswer.BooleanResponse.Value == false ? "checked" : "") name="@("YesNo_" + Model.Id.ToString(CultureInfo.InvariantCulture))" id="@("YesNo_" + Model.Id.ToString(CultureInfo.InvariantCulture) + "no")" value="No" /><label for="@("YesNo_" + Model.Id.ToString(CultureInfo.InvariantCulture) + "no")">No</label>
+}
+@if (Model.QuestionType == QuestionType.AdditionalInfo || Model.QuestionType == QuestionType.YesNoWithAdditionalInfo)
+{
+    @Html.TextArea("AdditionalInfo_" + Model.Id.ToString(CultureInfo.InvariantCulture), questionAnswer.AdditionalInfo, new { cols = "40", rows = "1", @class = "span" })
+}
+
+</div>

@@ -1,0 +1,44 @@
+﻿@using BusinessSafe.WebSite.Extensions
+@using Cassette.Views
+@model BusinessSafe.WebSite.Areas.Users.ViewModels.AddUsersViewModel
+@{
+    ViewBag.Title = "Add Users";
+}
+<div id="addUserContainer" class="container-fluid">
+    <section>
+        <span class="legend">User Permissions</span>
+        <div class="content">
+            <div class="major-index-actions">
+                <a id="close-user-record" class="btn" href="@Url.Action("Index", "ViewUsers", new { companyId = Model.CompanyId })" title="Close User Record">
+                    <i class="icon-remove"></i></a>
+            </div>
+            @Html.HiddenFor(x => x.CompanyId)
+            <div id="SaveSuccessNotification" class="alert alert-success" style="display:@(Model.SaveSuccessNotificationVisible ? "block" : "none")">
+                User has been successfully updated. <a href="@Url.Action("Index", "ViewUsers", new { area = "Users", companyId = @Html.GetUsersCompanyId(User) })">
+                    Click here</a> to be returned to the user index.
+            </div>
+            @Html.Partial("_UserPermissionsSelection", Model)
+            <div id="RolesDetails">
+            </div>
+        </div>
+    </section>
+</div>
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("users");
+        @Bundles.RenderScripts()  
+    }
+    <script type="text/javascript">
+    
+        var employees = @Html.Raw(Json.Encode(Model.Employees));
+        var roles = @Html.Raw(Json.Encode(Model.Roles));
+        var siteGroups = @Html.Raw(Json.Encode(Model.SiteGroups));
+        var sites = @Html.Raw(Json.Encode(Model.Sites));
+        
+        $(function () {
+            userPermissionsManager.initialize(employees, roles, siteGroups, sites);
+        });
+
+    </script>
+}

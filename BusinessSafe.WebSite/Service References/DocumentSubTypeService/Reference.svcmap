@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="f8dafe3e-164e-4816-a0d0-acb84b60f578" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://pbswebtest2:8064/DocumentSubTypeService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="DocumentSubTypeService5.xsd" MetadataType="Schema" ID="96ed9b4e-229e-4657-b21a-932a1074d14b" SourceId="1" SourceUrl="http://pbswebtest2:8064/DocumentSubTypeService.svc?xsd=xsd4" />
+    <MetadataFile FileName="DocumentSubTypeService51.xsd" MetadataType="Schema" ID="dd736711-ab40-4d0e-956d-8f5dccb1ccb1" SourceId="1" SourceUrl="http://pbswebtest2:8064/DocumentSubTypeService.svc?xsd=xsd2" />
+    <MetadataFile FileName="DocumentSubTypeService52.xsd" MetadataType="Schema" ID="b62fd9b6-87e7-4553-bfab-eda248d86d2f" SourceId="1" SourceUrl="http://pbswebtest2:8064/DocumentSubTypeService.svc?xsd=xsd1" />
+    <MetadataFile FileName="DocumentSubTypeService53.xsd" MetadataType="Schema" ID="ba7b2f1f-f798-412f-857d-52b86c90c1b5" SourceId="1" SourceUrl="http://pbswebtest2:8064/DocumentSubTypeService.svc?xsd=xsd3" />
+    <MetadataFile FileName="DocumentSubTypeService1.wsdl" MetadataType="Wsdl" ID="627818f9-7d5f-4ccc-b347-c255741dc686" SourceId="1" SourceUrl="http://pbswebtest2:8064/DocumentSubTypeService.svc?wsdl" />
+    <MetadataFile FileName="DocumentSubTypeService1.disco" MetadataType="Disco" ID="d881e02c-5a4a-4ff0-acca-2e1b7673b727" SourceId="1" SourceUrl="http://pbswebtest2:8064/DocumentSubTypeService.svc?disco" />
+    <MetadataFile FileName="DocumentSubTypeService54.xsd" MetadataType="Schema" ID="8720ea70-b60d-41af-8855-26e99d934e19" SourceId="1" SourceUrl="http://pbswebtest2:8064/DocumentSubTypeService.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

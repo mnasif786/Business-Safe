@@ -1,0 +1,49 @@
+﻿@model BusinessSafe.WebSite.Areas.HazardousSubstanceInventory.ViewModels.HazardousSubstanceSummaryViewModel
+<div class="span12">
+    <label class="span2">Substance Name</label>
+    <span id="HazardousSubstance">@Model.Name</span>
+</div>
+<div class="span12">
+    <label class="span2">Hazards of Substance</label>
+    <div id="substance-hazard-symbols">
+        <ul class="hazardousSubstanceSymbols">
+            @foreach (var hazard in Model.Hazards)
+            {
+                <li class="@Model.HazardSymbolStandard @hazard.ToLower().Replace(" ", "-")" title="@hazard">
+                    <label>@hazard</label></li>
+            }
+        </ul>
+    </div>
+</div>
+<div class="span12">
+    <label class="span2">Risk No &amp; Phrases</label>
+    <div class="span4 ipad-70-width">
+        <ul id="riskPhrases">
+            @foreach (var phrase in Model.RiskPhrases)
+            {
+                <li>@phrase</li>
+            }
+        </ul>
+    </div>
+    <label class="span2">Safety No &amp; Phrases</label>
+    <div class="span3">
+        <ul id="safetyPhrases">
+            @foreach (var phrase in Model.SafetyPhrases)
+            {
+                <li>@phrase</li>
+            }
+        </ul>
+    </div>
+</div>
+<div class="span12">
+    <label class="span2">Additional Information</label>
+    <div>
+        <ul id="additionalInformationRecords">
+            @foreach (var record in Model.AdditionalInformationRecords)
+            {
+                <li>@record</li>
+            }
+        </ul>
+    </div>
+</div>
+<input type="hidden" name="HazardousSubstanceId" value="@Model.Id"/>

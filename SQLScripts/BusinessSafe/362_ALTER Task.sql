@@ -1,0 +1,19 @@
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Task' AND COLUMN_NAME = 'ResponsibilityId')
+BEGIN
+	ALTER TABLE Task
+	ADD ResponsibilityId [bigint] NULL
+
+	ALTER TABLE [dbo].Task ADD  CONSTRAINT [DF_Task_ResponsibilityId]  DEFAULT ((0)) FOR [ResponsibilityId]
+END
+
+--//@UNDO 
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Task' AND COLUMN_NAME = 'ResponsibilityId')
+BEGIN
+	ALTER TABLE [dbo].Task 
+	DROP CONSTRAINT [DF_Task_ResponsibilityId]
+	
+	ALTER TABLE Task
+	DROP COLUMN [ResponsibilityId] 
+	
+END

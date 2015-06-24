@@ -1,0 +1,12 @@
+﻿@model BusinessSafe.WebSite.Areas.ActionPlans.ViewModels.ActionPlanIndexViewModel
+
+<h2>
+    <a id="ShowArchivedLink" class="btn @(Model.IsShowArchived ? "disabled" : string.Empty)" href="#" title="Show Archived Action Plans">Show Archived</a>
+  
+    @if(Model.IsShowArchived)
+    {
+        @Html.ActionLink("Show Open", "Index", "ActionPlan", null, new { @class = "btn" })
+    }
+   
+    <span class="tick"></span>Action Plans
+</h2>

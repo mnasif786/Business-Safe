@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities.SafeCheck"
+                   assembly="BusinessSafe.Domain">
+
+  <class name="Consultant" table="`SafeCheckConsultant`">
+    <id name="Id" column="Id" type="Guid">
+      <generator class="assigned"/>
+    </id>
+    <property name="Username" />
+    <property name="Forename" />
+    <property name="Surname" />
+    <property name="Email" />
+    <property name="Deleted" />
+    <property name="PercentageOfChecklistsToSendToQualityControl"  />
+    <property name="QaAdvisorAssigned" />
+  </class>
+</hibernate-mapping>

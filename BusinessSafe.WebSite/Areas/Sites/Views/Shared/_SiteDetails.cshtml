@@ -1,0 +1,138 @@
+﻿@model BusinessSafe.WebSite.Areas.Sites.ViewModels.SiteDetailsViewModel
+@using System.Web.Mvc.Html
+@using BusinessSafe.WebSite.Areas.Sites.Controllers
+@using BusinessSafe.WebSite.Extensions
+@using BusinessSafe.WebSite.HtmlHelpers
+@using (Html.BeginForm((Model.SiteId == 0 ? "CreateSite" : "UpdateSite"), "Sites", FormMethod.Post, new { id = "SiteDetails", @class = "form-inline" }))
+{
+    <div class="alert alert-success successful-updated-message hide">
+        Site Details have been successfully been amended.
+    </div>
+    @Html.HiddenFor(m => m.SiteStructureId)
+    @Html.HiddenFor(m => m.SiteId)
+    @Html.HiddenFor(m => m.ClientId)
+    @Html.HiddenFor(m => m.IsMainSite)
+    @Html.HiddenFor(m => m.OriginalLinkId)
+    <div class="row">
+        <div id="sitedetailsinputfields">
+            <fieldset>
+                <div class="page-header">
+                    <h1>
+                        Site Details</h1>
+                </div>
+                <div class="span6">
+                    <label for="SiteName" class="span2">
+                        Site Name</label>
+                    @Html.TextBoxFor(m => m.Name, @HtmlExtensions.CreateDisabledHtmlAttribute(Model.FormEnabled))
+                </div>
+                <div class="span6">
+                    <label for="SiteReference" class="span2">
+                        Site Reference</label>
+                    @Html.TextBoxFor(m => m.Reference, @HtmlExtensions.CreateDisabledHtmlAttribute(Model.FormEnabled))
+                </div>
+                <div class="span6">
+                    <label for="Address1" class="span2">
+                        Site Address</label>
+                    @Html.TextBoxFor(m => m.AddressLine1, @HtmlExtensions.CreateDisabledHtmlAttribute(Model.FormEnabled))
+                </div>
+                <div class="span6">
+                    <label class="span2">
+                    </label>
+                    @Html.TextBoxFor(m => m.AddressLine2, @HtmlExtensions.CreateDisabledHtmlAttribute(Model.FormEnabled))
+                </div>
+                <div class="span6">
+                    <label class="span2">
+                    </label>
+                    @Html.TextBoxFor(m => m.AddressLine3, @HtmlExtensions.CreateDisabledHtmlAttribute(Model.FormEnabled))
+                </div>
+                <div class="span6">
+                    <label class="span2">
+                    </label>
+                    @Html.TextBoxFor(m => m.AddressLine4, @HtmlExtensions.CreateDisabledHtmlAttribute(Model.FormEnabled))
+                </div>
+                <div class="span6">
+                    <label for="Town" class="span2">
+                        Town</label>
+                    @Html.TextBoxFor(m => m.AddressLine5, @HtmlExtensions.CreateDisabledHtmlAttribute(Model.FormEnabled))
+                </div>
+                <div class="span6">
+                    <label for="County" class="span2">
+                        County</label>
+                    @Html.TextBoxFor(m => m.County, @HtmlExtensions.CreateDisabledHtmlAttribute(Model.FormEnabled))
+                </div>
+                <div class="span6">
+                    <label for="Postcode" class="span2">
+                        Postcode</label>
+                    @Html.TextBoxFor(m => m.Postcode, @HtmlExtensions.CreateDisabledHtmlAttribute(Model.FormEnabled))
+                </div>
+                <div class="span6">
+                    <label for="Telephone" class="span2">
+                        Telephone</label>
+                    @Html.TextBoxFor(m => m.Telephone, @HtmlExtensions.CreateDisabledHtmlAttribute(Model.FormEnabled))
+                </div>
+                <div class="span6">
+                    <label for="SiteContact" class="span2">
+                        Site Contact</label>
+                    @Html.TextBoxFor(m => m.SiteContact, @HtmlExtensions.CreateDisabledHtmlAttribute(Model.FormEnabled))
+                </div>
+                <div class="span6">
+                    <label for="LinkedToExistingSite" class="span2">
+                        Linked To Existing Site</label>
+                    @Html.TextBox("LinkToSite", "", @HtmlExtensions.CreateDisabledHtmlAttribute(Model.FormEnabled))
+                    @Html.Hidden("LinkToSiteId", Model.LinkToSiteId)
+                </div>
+                <div class="span6">
+                    <label for="LinkedToExistingGroup" class="span2">
+                        Linked To Existing Groups</label>
+                    @Html.TextBox("LinkToGroup", "", @HtmlExtensions.CreateDisabledHtmlAttribute(Model.FormEnabled))
+                    @Html.Hidden("LinkToGroupId", Model.LinkToGroupId)
+                </div>
+                @if (FeatureSwitchChecker.Enabled(FeatureSwitches.FeatureSwitch_ClosedSites, User.GetCustomPrinciple()))
+                {
+                    <div class="span6">
+                        <label for="SiteClosed" class="span2">
+                            Close Site
+                        </label>
+                        @Html.CheckBoxFor(m => m.SiteClosed, @HtmlExtensions.CreateDisabledHtmlAttribute(Model.FormEnabled))
+                    </div>
+                }
+
+                @Html.HiddenFor(m=>m.SiteStatusCurrent)
+            </fieldset>
+        </div>
+
+        @if (TempData[SitesController.MessageKey] != null)
+        {
+            <div class="alert alert-success">
+                <a id="successmessageanchor" href="#successmessage"></a>
+                @TempData["Message"].ToString()
+            </div>    
+        }
+        <div class="span6">
+            @if (!ViewData.ModelState.IsValid)
+            {
+                @Html.Partial("_DistinctValidationSummary")
+            }
+            <label div class="span2">
+            </label>
+            @if (Model.IsSaveButtonEnabled(User))
+            {
+                <button id="SaveSiteDetailsButton" type="submit" value="Save" class="btn btn-success save" @HtmlExtensions.IsEnabled(Model.FormEnabled)>
+                    Save</button>
+
+                @(Model.FormEnabled ? @Html.ActionLink("Cancel", "Index", new { controller="SitesStructure", area = "Sites"} , new { @class = "btn-cancel btn-link" }) : new MvcHtmlString("<a class='btn-link cancel' disabled='disabled' href='#'>Cancel</a>"))
+            }
+        </div>
+    </div>
+}
+<div id="dialogDelinkSite" class="hide" title="Delink Site">
+    <p>
+        Are you sure you want to delink this site?</p>
+</div>
+<script type="text/javascript">
+    window.siteDetails = { 
+        sites : @Html.Raw(Json.Encode(Model.ExistingSites)),
+        siteGroups : @Html.Raw(Json.Encode(Model.ExistingGroups))    
+    };
+</script>
+

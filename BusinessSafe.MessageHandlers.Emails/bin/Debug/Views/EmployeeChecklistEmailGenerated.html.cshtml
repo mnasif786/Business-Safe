@@ -1,0 +1,45 @@
+﻿@model BusinessSafe.MessageHandlers.Emails.ViewModels.EmployeeChecklistEmailGeneratedViewModel
+<head>
+    <style>
+        body
+        {
+            background-color: white;
+            font-size: .85em;
+            font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
+            margin: 0;
+            padding: 0;
+            color: #393939;
+        }
+        
+        h1
+        {
+            font-size: 2em;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        BusinessSafe Online - Checklists
+    </h1>
+
+<p>
+    @Model.CompletionDueDateForChecklists
+</p>
+
+@foreach (var paragraph in Model.Message)
+{
+    <p>
+        @paragraph
+    </p>
+}
+
+@foreach(var checklistUrl in Model.ChecklistUrls)
+{
+    <p>
+    @checklistUrl
+    </p>
+}
+</body>
+

@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<project name="ClientData" default="">
+  	<!-- OSQL properties -->
+  	<property name="SQL.Client" value="sqlcmd"/>
+  	<property name="SQL.Server" value="localhost"/>
+  	<property name="SQL.Database" value="master"/>
+  	<property name="SQL.SqlScript" value=""/>
+	<property name="SQL.ClientAvailable" value=""/>
+	<property name="SQL.ClientWorkingDirectory" value="C:\Program Files\Microsoft SQL Server\90\Tools\binn"/>
+  	
+	<!-- Executes SQL Script -->
+	<target name="SQL.RunScript" >
+		<if test="${not directory::exists(SQL.ClientWorkingDirectory)}">
+			<property name="SQL.ClientWorkingDirectory" value="C:\Program Files (x86)\Microsoft SQL Server\90\Tools\Binn"/>
+		</if>
+		
+		<if test="${not directory::exists(SQL.ClientWorkingDirectory)}">
+			<property name="SQL.ClientWorkingDirectory" value="C:\Program Files\Microsoft SQL Server\100\Tools\Binn"/>
+		</if>
+		
+		<exec program="${SQL.Client}" basedir="${SQL.ClientWorkingDirectory}">
+		<arg line="/S ${SQL.Server}"/>
+		<!--<arg line="/U ${SQL.user}"/>
+		<arg line="/P ${SQL.pwd}"/> -->
+		<arg line="/E "/>
+		<arg line="/d ${SQL.Database}"/>
+		<arg line="-b"/>
+		<arg line="-i &quot;${SQL.SqlScript}&quot;"/>
+		</exec>
+	</target>
+  
+	<property name="vss.GetPath" value="" />
+	<property name="vss.ProjectPath" value="" />
+
+	<!-- Get files form SourceSafe -->
+	<target name="vss.Get" description="Get all files from VSS" >
+		<mkdir dir="${vss.GetPath}" /> 
+		<exec program="ss.exe" basedir="\\pbsw23drvm\vss\win32" workingdir="${vss.GetPath}" failonerror="false" >
+			<arg value="get"/>
+			<arg value="${vss.ProjectPath}"/>
+			<arg line="-R -W -I-"/>
+		</exec>
+		
+		<!-- The vss option that sets the files to read only raises erorrs if the files exists. 
+			Therefore we need to set all files to readonly after we have retrieved the files-->
+		<attrib readonly="true">
+			<fileset basedir="${vss.GetPath}">
+				<include name="**/*.*" />
+				<exclude name="**/bin/**" />
+				<exclude name="**/bin/debug/**" />
+				<exclude name="**/obj/**" />
+				<exclude name="**/obj/debug/**" />
+			</fileset>
+		</attrib> 
+	
+	</target>
+	
+	<!-- Pre Compile a ASP.NET application -->
+	<property name="ASP.PathOfWebsiteToCompile" value="" />
+	<property name="ASP.VirtualPath" value="" />
+
+	<target name="CompileWebSite">
+		<exec program="Aspnet_compiler" basedir="C:\Windows\Microsoft.NET\Framework\v2.0.50727">
+			<arg line="-p ${ASP.PathOfWebsiteToCompile}"/>
+			<arg line="-v /${ASP.VirtualPath}"/>
+			<arg line="-c -errorstack"/>
+		</exec>
+	</target>
+	
+	
+	<!-- Configures IIS -->
+	<property name="IIS.IISConfigCmdDirectory" value="C:\IISConfigCmd" />
+	<property name="IIS.Server" value="" />
+	<property name="IIS.WebsiteId" value="" />
+	<property name="IIS.WebsiteName" value="" />
+	<property name="IIS.Port" value="" />
+	<property name="IIS.Path" value="" />
+	<property name="IIS.AspVersion" value="" />
+	<property name="IIS.DeleteIfExists" value="false" />
+	<property name="IIS.HostName" value="" />
+	<property name="IIS.AppPoolName" value="" />
+	<property name="IIS.AnonymousAuthentication" value="false" />
+	
+	<target name="IIS.GetIISConfigCmdexe">
+		<property name="IIS.IISConfigCmdFilePath" value="${IIS.IISConfigCmdDirectory}\IISConfigCmd.exe" />
+		<if test="${not file::exists(IIS.IISConfigCmdFilePath)}">
+			<mkdir dir="${IIS.IISConfigCmdDirectory}" />
+			<echo message="Copying IISConfigCmd" />
+			<copy file="\\pbsw23it\IT\Development Resources\IISConfigCmd.exe" tofile="${IIS.IISConfigCmdFilePath}" />
+		</if>
+	</target>
+	
+	<target name="IIS.CreateWebsite" depends="IIS.GetIISConfigCmdexe">
+		<exec program="IISConfigCmd.exe " basedir="${IIS.IISConfigCmdDirectory}" workingdir="${IIS.IISConfigCmdDirectory}" >
+			<arg value="command::CreateWebsite" />
+			<arg value="server::${IIS.Server}" />
+			<arg value="id::${IIS.WebsiteId}" />
+			<arg value="name::${IIS.WebsiteName}" />
+			<arg value="port::${IIS.Port}" />
+			<arg value="path::${IIS.Path}" />
+			<arg value="aspversion::${IIS.AspVersion}" />
+			<arg value="deleteifexists::${IIS.DeleteIfExists}" />
+			<arg value="hostname::${IIS.HostName}" />
+			<arg value="apppoolname::${IIS.AppPoolName}" />
+		</exec>
+	</target>
+	
+	<target name="IIS.CreateApplicationPool" depends="IIS.GetIISConfigCmdexe">
+		<exec program="IISConfigCmd.exe " basedir="C:\IISConfigCmd" workingdir="C:\IISConfigCmd" >
+			<arg value="command::CreateAppPool" />
+			<arg value="server::${IIS.Server}" />
+			<arg value="apppoolname::${IIS.AppPoolName}" />
+		</exec>
+	</target>
+	
+	<target name="IIS.SetAnonymousAuthentication" depends="IIS.GetIISConfigCmdexe">
+		<echo message="command::ChangeAuthenticationSettings server::${IIS.Server} Anonymous::${IIS.AnonymousAuthentication}" />
+		<exec program="IISConfigCmd.exe " basedir="C:\IISConfigCmd" workingdir="C:\IISConfigCmd" >
+			<arg value="command::ChangeAuthenticationSettings" />
+			<arg value="server::${IIS.Server}" />
+			<arg value="id::${IIS.WebsiteId}" />
+			<arg value="Anonymous::${IIS.AnonymousAuthentication}" />
+		</exec>
+	</target>
+
+</project>

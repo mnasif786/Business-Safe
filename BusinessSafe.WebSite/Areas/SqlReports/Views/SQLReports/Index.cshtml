@@ -1,0 +1,32 @@
+﻿@using BusinessSafe.WebSite.Areas.SqlReports.Helpers
+@using BusinessSafe.WebSite.HtmlHelpers
+@using Cassette.Views
+@model BusinessSafe.WebSite.Areas.SqlReports.ViewModels.SqlReportViewModel
+@{
+    ViewBag.Title = "My Reports";
+} 
+<section>
+    <span class="legend">My Reports</span>
+    <div class="content">      
+        @Html.Partial("_SearchReports", Model)         
+    </div>
+</section>
+@section JavaScriptSection
+{
+    @{      
+        Bundles.Reference("sqlReports");  
+        @Bundles.RenderScripts() 
+    }
+    
+     <script type="text/javascript">
+        $(function () 
+        {           
+            var reports     = @Html.Raw(Json.Encode( Model.ReportTypes )) ;
+            var sites       = @Html.Raw(Json.Encode( Model.Sites ));
+            var siteGroups  = @Html.Raw(Json.Encode( Model.SiteGroups ));          
+            sqlReportsManager.initialize( reports, sites, siteGroups );
+        });
+    </script>
+
+    
+}

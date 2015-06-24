@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="Action" table="`Action`">
+    
+    <id name="Id" column="Id" type="long">
+      <generator class="identity"/>
+    </id>    
+    
+    <property name="Title" column="`Title`" />
+    
+    <many-to-one name="ActionPlan" class="ActionPlan" column="ActionPlanId"/>       
+    
+    <property name="Reference" column="`Reference`" />
+
+    <property name="NoLongerRequired" column="`NoLongerRequired`" />
+     
+    <property name="AreaOfNonCompliance" column="`AreaOfNonCompliance`" />
+    <property name="ActionRequired" column="`ActionRequired`" />
+    <property name="GuidanceNotes" column="`GuidanceNotes`" />
+    <property name="TargetTimescale" column="`TargetTimescale`" />    
+
+    <many-to-one name="AssignedTo" class="Employee" column="AssignedTo" lazy="false" />
+    
+    <property name="DueDate" column="`DueDate`" />
+    <property name="QuestionStatus" column="`QuestionStatus`" />
+    
+    <property name="Category" column="`Category`" />
+
+    <property name="CreatedOn" />
+    <many-to-one name="CreatedBy" class="UserForAuditing" column="CreatedBy" lazy="false" />
+    <property name="LastModifiedOn" />
+    <many-to-one name="LastModifiedBy" class="UserForAuditing" column="LastModifiedBy"/>
+    <property name="Deleted" type="bool" />
+
+    <bag name="ActionTasks" table="Task" lazy="true" cascade="save-update" where="deleted = 0">
+      <key column="ActionId"></key>
+      <one-to-many class="ActionTask"  />
+    </bag>
+
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="@Url.Content("/Content/bootstrap.css")" />
+    <link rel="stylesheet" href="@Url.Content("/Content/themes/bso_v1.5/core.css")" />
+    <link rel="stylesheet" href="@Url.Content("/Content/themes/bso_v1.5/checklists.css")" />
+    <!--[if (lte IE 8)]>
+    <script type="text/javascript" src="@Url.Content("/Scripts/Libraries/modernizr-2.5.3.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/Libraries/selectivizr.js")"></script>
+    <![endif]-->
+    @RenderSection("StyleSheetSection", false)
+    <!--[if (IE 8)]>
+    <link rel="stylesheet" href="@Url.Content("/Content/themes/bso_v1.5/ie8.css")" />
+    <![endif]-->
+    <!--[if (IE 7)]>
+    <link rel="stylesheet" href="@Url.Content("/Content/themes/bso_v1.5/ie7.css")" />
+    <![endif]-->
+</head>
+<body>
+    <div class="container-fluid" id="siteContainer">
+        <header class="container-fluid" >
+            <img src="@Url.Content("/Content/themes/bso_v1.5/images/logo.png")" alt="BusinessSafe Logo" id="logo" />
+        </header>
+    </div>
+    <div class="container-fluid checklists" id="main">
+        <section>
+            <div class="container">
+                    @RenderBody()
+            </div>
+        </section>
+    </div>
+	<footer>
+		<p>Copyright &copy; 2013 &ndash; Peninsula Business Services</p>
+		<ul>
+			<li><a href="#">Terms of Service</a></li>
+			<li><a href="#">Business Safe Online Data Protection Policy</a></li>
+		</ul>
+	</footer>
+    <script type="text/javascript" src="@Url.Content("/Scripts/Libraries/jquery-1.7.1.js")"></script>
+    @RenderSection("JavaScriptSection", false)
+</body>
+</html>

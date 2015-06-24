@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="RiskAssessor" table="`RiskAssessor`" >
+    <id name="Id" column="Id" type="long">
+      <generator class="identity" />
+    </id>
+    <many-to-one name="Employee" class="Employee" column="EmployeeId" />
+    <property name="HasAccessToAllSites"  />
+    <many-to-one name="Site" column="SiteId" cascade="none" />
+    <property name="DoNotSendTaskOverdueNotifications"/>
+    <property name="DoNotSendTaskCompletedNotifications"/>
+    <property name="DoNotSendReviewDueNotification"/>
+    <many-to-one name="CreatedBy" class="UserForAuditing" column="CreatedBy" update="false" cascade="none"/>
+    <property name="CreatedOn" update="false" />
+    <many-to-one name="LastModifiedBy" class="UserForAuditing" column="LastModifiedBy" cascade="none" />
+    <property name="LastModifiedOn" />
+    <property name="Deleted"/>
+  </class>
+</hibernate-mapping>

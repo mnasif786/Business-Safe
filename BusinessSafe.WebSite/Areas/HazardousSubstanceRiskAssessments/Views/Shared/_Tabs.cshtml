@@ -1,0 +1,65 @@
+﻿@using BusinessSafe.WebSite.Areas.HazardousSubstanceRiskAssessments.ViewModels
+@model HazardousSubstanceRiskAssessmentTabViewModel
+@Html.Hidden("CurrentStatus", (int)Model.CurrentTab)
+<ul class="nav nav-pills" id="myTab">
+    <li class="@Model.IsTabActive(HazardousSubstancesTabs.Summary.ToString())">
+        @if (Model.Id > 0)
+        {
+            @Html.ActionLink("Summary", Model.IsReadOnly ? "View" : "Index", "Summary", new { area = "HazardousSubstanceRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId }, new { id = "summary", @class = "riskassessment-tab-links", @tabIndex = "1" })
+        }
+        else
+        {
+            <a href="#">Summary</a>
+        }
+    </li>
+    <li class="@Model.IsTabActive(HazardousSubstancesTabs.Description.ToString())">
+        @if (Model.Id > 0)
+        {
+            @Html.ActionLink("Description", Model.IsReadOnly ? "View" : "Index", "Description", new { area = "HazardousSubstanceRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId }, new { id = "description", @class = "riskassessment-tab-links", @tabIndex = "1" })
+        }
+        else
+        {
+            <a href="#">Description</a>
+        }
+    </li>
+    <li class="@Model.IsTabActive(HazardousSubstancesTabs.Assessment.ToString())">
+        @if (Model.Id > 0)
+        {
+            @Html.ActionLink("Assessment", Model.IsReadOnly ? "View" : "Index", "Assessment", new { area = "HazardousSubstanceRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId }, new { id = "assessment", @class = "riskassessment-tab-links", @tabIndex = "2" })
+        }
+        else
+        {
+            <a href="#">Assessment</a>
+        }
+    </li>
+    <li class="@Model.IsTabActive(HazardousSubstancesTabs.ControlMeasures.ToString())">
+        @if (Model.Id > 0)
+        {
+            @Html.ActionLink("Control Measures", Model.IsReadOnly ? "View" : "Index", "ControlMeasures", new { area = "HazardousSubstanceRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId }, new { id = "controlmeasures", @class = "riskassessment-tab-links", @tabIndex = "3" })
+        }
+        else
+        {
+            <a href="#" id="controlmeasures">Control Measures</a>
+        }
+    </li>
+    <li class="@Model.IsTabActive(HazardousSubstancesTabs.Documents.ToString())">
+        @if (Model.Id > 0)
+        {
+            @Html.ActionLink("Attach Documents", Model.IsReadOnly ? "View" : "Index", "Documents", new { area = "HazardousSubstanceRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId }, new { id = "attachdocuments", @class = "riskassessment-tab-links", @mainUrl = "AttachDocument", @tabIndex = "4" })
+        }
+        else
+        {
+            <a href="#" class="riskassessment-tab-links">Attach Documents</a>
+        }
+    </li>
+    <li class="@Model.IsTabActive(HazardousSubstancesTabs.Review.ToString())">
+        @if (Model.Id > 0)
+        {
+            @Html.ActionLink("Review", Model.IsReadOnly ? "View" : "Index", "Review", new { area = "HazardousSubstanceRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId }, new { id = "review", @class = "riskassessment-tab-links", @mainUrl = "Review", @tabIndex = "5" })
+        }
+        else
+        {
+            <a href="#">Review</a>
+        }
+    </li>
+</ul>

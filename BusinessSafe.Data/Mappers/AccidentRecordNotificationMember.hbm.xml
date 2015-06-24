@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="AccidentRecordNotificationMember" table="`AccidentRecordNotificationMember`">
+    <id name="Id">
+      <generator class="identity"/>
+    </id>
+
+    <discriminator column="Discriminator" type="string" />
+    
+    <many-to-one name="Site" class="SiteStructureElement" column="SiteId" lazy="proxy" cascade="none" />
+    
+    <property name="Deleted" />
+    <property name="CreatedOn" update="false"/>
+    <many-to-one name="CreatedBy" update="false" class="UserForAuditing"/>
+    <property name="LastModifiedOn" />
+    <many-to-one name="LastModifiedBy" class="UserForAuditing"/>
+
+    <subclass name="AccidentRecordNotificationEmployeeMember">
+      <many-to-one name="Employee" class="Employee" column="EmployeeId" cascade="none"/>      
+    </subclass>
+                                                                                      
+    <subclass name="AccidentRecordNotificationNonEmployeeMember">      
+      <property name="NonEmployeeEmail"/>
+      <property name="NonEmployeeName"/>
+    </subclass>
+
+
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,37 @@
+﻿@using BusinessSafe.Domain.Entities
+@model BusinessSafe.WebSite.Areas.HazardousSubstanceInventory.ViewModels.AddEditHazardousSubstanceViewModel
+
+
+<fieldset>
+    <legend><h3>Hazard Identification</h3></legend>
+    <div class="row">
+        <div class="span12">
+            <p>Please select the shape of the symbol that displays the hazards assocated with the substance</p>
+            <div id="hazardousSubstanceStandards">
+                <ul class="hazardousSubstanceSymbols">
+                    <li class="@HazardousSubstanceStandard.Global.ToString() acute-toxicity" data-title="@HazardousSubstanceStandard.Global.ToString()" title="Global Hazard Symbol Standard">
+                        <label>Global Hazard Symbol Standard</label>
+                        @Html.RadioButton("HazardousSubstanceStandard", HazardousSubstanceStandard.Global.ToString(), Model.HazardousSubstanceStandard == HazardousSubstanceStandard.Global)
+                        <span>@HazardousSubstanceStandard.Global.ToString()</span>
+                    </li>
+                    <li class="@HazardousSubstanceStandard.European.ToString() toxic" data-title="@HazardousSubstanceStandard.European.ToString()" title="European Hazard Symbol Standard">
+                        <label>European Hazard Symbol Standard</label>
+                        @Html.RadioButton("HazardousSubstanceStandard", HazardousSubstanceStandard.European.ToString(), Model.HazardousSubstanceStandard == HazardousSubstanceStandard.European)
+                        <span>@HazardousSubstanceStandard.European.ToString()</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row hide" id="substance-hazard-symbols">
+        <ul class="hazardousSubstanceSymbols">
+            @foreach (var symbol in Model.Pictograms)
+            {
+                <li class="@symbol.HazardousSubstanceStandard.ToString() @symbol.CssClassName" title="@symbol.Title">
+                    <label>@symbol.Title</label>
+                    <input type="checkbox" name="PictogramIds" id="PictogramIds" @if(Model.SelectedHazardousSubstanceSymbols.Contains(symbol.Id)) { <text>checked="checked"</text>} value="@symbol.Id" />
+                </li>
+            }
+        </ul>
+    </div>
+</fieldset>

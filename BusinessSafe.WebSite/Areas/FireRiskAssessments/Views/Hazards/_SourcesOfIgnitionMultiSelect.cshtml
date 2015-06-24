@@ -1,0 +1,40 @@
+﻿@model BusinessSafe.WebSite.ViewModels.HazardsViewModel
+<fieldset class="">
+    <legend class="span12">
+        <h3>
+            Sources of Ignition</h3>
+    </legend>
+    <div class="row">
+        <div class="span2">
+            <label style="margin-left: 30px;">
+                Source of Ignition</label>
+        </div>
+        <div id="source-of-ignition-multi-select" class="search-and-multi-select">
+            <div class="row">
+                <input type="text" id="AddSourceOfIgnition" name="AddSourceOfIgnition" class="input-xlarge"
+                    placeholder="Add New Source Of Ignition" />
+                <button id="AddNewSourceOfIgnition" type="submit" class="btn">
+                    +</button>
+            </div>
+            <div class="row">
+                <ul id="SourceOfIgnitionOptions" class="available-options options span4 offset2">
+                    @foreach (var option in Model.SourceOfIgnitions)
+                    {
+                        <li data-value="@option.Id">@option.Name</li>
+                    }
+                </ul>
+                <div class="span1 span1fix">
+                    <input type="button" class="add-to-selected btn" value="&gt;" />
+                    <input type="button" class="remove-from-selected btn" value="&lt;" />
+                </div>
+                <select id="SourceOfIgnitionIds" name="SourceOfIgnitionIds" class="selected-options options span4"
+                    multiple="multiple">
+                    @foreach (var option in Model.SelectedSourceOfIgnitions)
+                    {
+                        <option data-value="@option.Id" value="@option.Id">@option.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+</fieldset>

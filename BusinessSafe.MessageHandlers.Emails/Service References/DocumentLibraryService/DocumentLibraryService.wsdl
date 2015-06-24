@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:i0="http://schemas.microsoft.com/ws/2005/02/mex/bindings" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="DocumentLibraryService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="DocumentLibraryService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:import namespace="http://schemas.microsoft.com/ws/2005/02/mex/bindings" location="http://uatmaintws1:8056/DocumentLibraryService.svc?wsdl=wsdl0" />
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://uatmaintws1:8056/DocumentLibraryService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://uatmaintws1:8056/DocumentLibraryService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://uatmaintws1:8056/DocumentLibraryService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" />
+      <xsd:import schemaLocation="http://uatmaintws1:8056/DocumentLibraryService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.DataTransferObjects" />
+      <xsd:import schemaLocation="http://uatmaintws1:8056/DocumentLibraryService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary" />
+      <xsd:import schemaLocation="http://uatmaintws1:8056/DocumentLibraryService.svc?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://uatmaintws1:8056/DocumentLibraryService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Responses" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IDocumentLibraryService_GetFolderById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFolderById" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_GetFolderById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFolderByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_GetFoldersByIds_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFoldersByIds" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_GetFoldersByIds_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFoldersByIdsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_SearchFolders_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchFolders" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_SearchFolders_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchFoldersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_CreateFolder_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateFolder" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_CreateFolder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateFolderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_DeleteFolder_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFolder" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_DeleteFolder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFolderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_RestoreFolder_InputMessage">
+    <wsdl:part name="parameters" element="tns:RestoreFolder" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_RestoreFolder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RestoreFolderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_RenameFolder_InputMessage">
+    <wsdl:part name="parameters" element="tns:RenameFolder" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_RenameFolder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RenameFolderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_MoveFolder_InputMessage">
+    <wsdl:part name="parameters" element="tns:MoveFolder" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_MoveFolder_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MoveFolderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_GetDocumentByIdWithContent_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentByIdWithContent" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_GetDocumentByIdWithContent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentByIdWithContentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_GetDocumentByIdWithArchiveDocuments_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentByIdWithArchiveDocuments" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_GetDocumentByIdWithArchiveDocuments_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentByIdWithArchiveDocumentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_GetDocumentsByIds_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentsByIds" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_GetDocumentsByIds_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentsByIdsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_GetFolderStructureFromRoot_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFolderStructureFromRoot" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_GetFolderStructureFromRoot_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFolderStructureFromRootResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_SearchDocuments_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchDocuments" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_SearchDocuments_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchDocumentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_CreateDocumentFromBytes_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateDocumentFromBytes" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_CreateDocumentFromBytes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateDocumentFromBytesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_CreateDocumentFromPath_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateDocumentFromPath" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_CreateDocumentFromPath_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateDocumentFromPathResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_DeleteDocument_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteDocument" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_DeleteDocument_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_RestoreDocument_InputMessage">
+    <wsdl:part name="parameters" element="tns:RestoreDocument" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_RestoreDocument_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RestoreDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_RenameDocument_InputMessage">
+    <wsdl:part name="parameters" element="tns:RenameDocument" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_RenameDocument_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RenameDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_MoveDocument_InputMessage">
+    <wsdl:part name="parameters" element="tns:MoveDocument" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_MoveDocument_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MoveDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_UpdateDocumentContentFromBytes_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDocumentContentFromBytes" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_UpdateDocumentContentFromBytes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDocumentContentFromBytesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_UpdateDocumentContentFromPath_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDocumentContentFromPath" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_UpdateDocumentContentFromPath_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateDocumentContentFromPathResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_GetPreviousVersionWithContent_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPreviousVersionWithContent" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_GetPreviousVersionWithContent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPreviousVersionWithContentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_RestoreDocumentContentToPreviousVersion_InputMessage">
+    <wsdl:part name="parameters" element="tns:RestoreDocumentContentToPreviousVersion" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_RestoreDocumentContentToPreviousVersion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RestoreDocumentContentToPreviousVersionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_AddTagsToDocument_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddTagsToDocument" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_AddTagsToDocument_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddTagsToDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_RemoveTag_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveTag" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentLibraryService_RemoveTag_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveTagResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IDocumentLibraryService">
+    <wsdl:operation name="GetFolderById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentLibraryService/GetFolderById" message="tns:IDocumentLibraryService_GetFolderById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentLibraryService/GetFolderByIdResponse" message="tns:IDocumentLibraryService_GetFolderById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFoldersByIds">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentLibraryService/GetFoldersByIds" message="tns:IDocumentLibraryService_GetFoldersByIds_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentLibraryService/GetFoldersByIdsResponse" message="tns:IDocumentLibraryService_GetFoldersByIds_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchFolders">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentLibraryService/SearchFolders" message="tns:IDocumentLibraryService_SearchFolders_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentLibraryService/SearchFoldersResponse" message="tns:IDocumentLibraryService_SearchFolders_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateFolder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentLibraryService/CreateFolder" message="tns:IDocumentLibraryService_CreateFolder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentLibraryService/CreateFolderResponse" message="tns:IDocumentLibraryService_CreateFolder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFolder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentLibraryService/DeleteFolder" message="tns:IDocumentLibraryService_DeleteFolder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentLibraryService/DeleteFolderResponse" message="tns:IDocumentLibraryService_DeleteFolder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RestoreFolder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentLibraryService/RestoreFolder" message="tns:IDocumentLibraryService_RestoreFolder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentLibraryService/RestoreFolderResponse" message="tns:IDocumentLibraryService_RestoreFolder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RenameFolder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentLibraryService/RenameFolder" message="tns:IDocumentLibraryService_RenameFolder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentLibraryService/RenameFolderResponse" message="tns:IDocumentLibraryService_RenameFolder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MoveFolder">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentLibraryService/MoveFolder" message="tns:IDocumentLibraryService_MoveFolder_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentLibraryService/MoveFolderResponse" message="tns:IDocumentLibraryService_MoveFolder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentByIdWithContent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentLibraryService/GetDocumentByIdWithContent" message="tns:IDocumentLibraryService_GetDocumentByIdWithContent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentLibraryService/GetDocumentByIdWithContentResponse" message="tns:IDocumentLibraryService_GetDocumentByIdWithContent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentByIdWithArchiveDocuments">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentLibraryService/GetDocumentByIdWithArchiveDocuments" message="tns:IDocumentLibraryService_GetDocumentByIdWithArchiveDocuments_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentLibraryService/GetDocumentByIdWithArchiveDocumentsResponse" message="tns:IDocumentLibraryService_GetDocumentByIdWithArchiveDocuments_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentsByIds">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentLibraryService/GetDocumentsByIds" message="tns:IDocumentLibraryService_GetDocumentsByIds_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentLibraryService/GetDocumentsByIdsResponse" message="tns:IDocumentLibraryService_GetDocumentsByIds_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFolderStructureFromRoot">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentLibraryService/GetFolderStructureFromRoot" message="tns:IDocumentLibraryService_GetFolderStructureFromRoot_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentLibraryService/GetFolderStructureFromRootResponse" message="tns:IDocumentLibraryService_GetFolderStructureFromRoot_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchDocuments">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentLibraryService/SearchDocuments" message="tns:IDocumentLibraryService_SearchDocuments_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentLibraryService/SearchDocumentsResponse" message="tns:IDocumentLibraryService_SearchDocuments_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateDocumentFromBytes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentLibraryService/CreateDocumentFromBytes" message="tns:IDocumentLibraryService_CreateDocumentFromBytes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentLibraryService/CreateDocumentFromBytesResponse" message="tns:IDocumentLibraryService_CreateDocumentFromBytes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateDocumentFromPath">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentLibraryService/CreateDocumentFromPath" message="tns:IDocumentLibraryService_CreateDocumentFromPath_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentLibraryService/CreateDocumentFromPathResponse" message="tns:IDocumentLibraryService_CreateDocumentFromPath_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteDocument">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentLibraryService/DeleteDocument" message="tns:IDocumentLibraryService_DeleteDocument_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentLibraryService/DeleteDocumentResponse" message="tns:IDocumentLibraryService_DeleteDocument_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RestoreDocument">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentLibraryService/RestoreDocument" message="tns:IDocumentLibraryService_RestoreDocument_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentLibraryService/RestoreDocumentResponse" message="tns:IDocumentLibraryService_RestoreDocument_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RenameDocument">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentLibraryService/RenameDocument" message="tns:IDocumentLibraryService_RenameDocument_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentLibraryService/RenameDocumentResponse" message="tns:IDocumentLibraryService_RenameDocument_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MoveDocument">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentLibraryService/MoveDocument" message="tns:IDocumentLibraryService_MoveDocument_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentLibraryService/MoveDocumentResponse" message="tns:IDocumentLibraryService_MoveDocument_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDocumentContentFromBytes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentLibraryService/UpdateDocumentContentFromBytes" message="tns:IDocumentLibraryService_UpdateDocumentContentFromBytes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentLibraryService/UpdateDocumentContentFromBytesResponse" message="tns:IDocumentLibraryService_UpdateDocumentContentFromBytes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDocumentContentFromPath">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentLibraryService/UpdateDocumentContentFromPath" message="tns:IDocumentLibraryService_UpdateDocumentContentFromPath_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentLibraryService/UpdateDocumentContentFromPathResponse" message="tns:IDocumentLibraryService_UpdateDocumentContentFromPath_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPreviousVersionWithContent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentLibraryService/GetPreviousVersionWithContent" message="tns:IDocumentLibraryService_GetPreviousVersionWithContent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentLibraryService/GetPreviousVersionWithContentResponse" message="tns:IDocumentLibraryService_GetPreviousVersionWithContent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RestoreDocumentContentToPreviousVersion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentLibraryService/RestoreDocumentContentToPreviousVersion" message="tns:IDocumentLibraryService_RestoreDocumentContentToPreviousVersion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentLibraryService/RestoreDocumentContentToPreviousVersionResponse" message="tns:IDocumentLibraryService_RestoreDocumentContentToPreviousVersion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddTagsToDocument">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentLibraryService/AddTagsToDocument" message="tns:IDocumentLibraryService_AddTagsToDocument_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentLibraryService/AddTagsToDocumentResponse" message="tns:IDocumentLibraryService_AddTagsToDocument_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveTag">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentLibraryService/RemoveTag" message="tns:IDocumentLibraryService_RemoveTag_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentLibraryService/RemoveTagResponse" message="tns:IDocumentLibraryService_RemoveTag_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DocumentLibraryService" type="tns:IDocumentLibraryService">
+    <wsp:PolicyReference URI="#DocumentLibraryService_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetFolderById">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentLibraryService/GetFolderById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFoldersByIds">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentLibraryService/GetFoldersByIds" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchFolders">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentLibraryService/SearchFolders" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateFolder">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentLibraryService/CreateFolder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFolder">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentLibraryService/DeleteFolder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RestoreFolder">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentLibraryService/RestoreFolder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RenameFolder">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentLibraryService/RenameFolder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MoveFolder">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentLibraryService/MoveFolder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentByIdWithContent">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentLibraryService/GetDocumentByIdWithContent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentByIdWithArchiveDocuments">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentLibraryService/GetDocumentByIdWithArchiveDocuments" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentsByIds">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentLibraryService/GetDocumentsByIds" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFolderStructureFromRoot">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentLibraryService/GetFolderStructureFromRoot" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchDocuments">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentLibraryService/SearchDocuments" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateDocumentFromBytes">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentLibraryService/CreateDocumentFromBytes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateDocumentFromPath">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentLibraryService/CreateDocumentFromPath" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteDocument">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentLibraryService/DeleteDocument" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RestoreDocument">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentLibraryService/RestoreDocument" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RenameDocument">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentLibraryService/RenameDocument" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MoveDocument">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentLibraryService/MoveDocument" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDocumentContentFromBytes">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentLibraryService/UpdateDocumentContentFromBytes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDocumentContentFromPath">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentLibraryService/UpdateDocumentContentFromPath" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPreviousVersionWithContent">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentLibraryService/GetPreviousVersionWithContent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RestoreDocumentContentToPreviousVersion">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentLibraryService/RestoreDocumentContentToPreviousVersion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddTagsToDocument">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentLibraryService/AddTagsToDocument" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveTag">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentLibraryService/RemoveTag" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DocumentLibraryService">
+    <wsdl:port name="mex" binding="i0:mex">
+      <soap12:address location="http://uatmaintws1:8056/DocumentLibraryService.svc/mex" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://uatmaintws1:8056/DocumentLibraryService.svc/mex</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="DocumentLibraryService" binding="tns:DocumentLibraryService">
+      <soap12:address location="http://uatmaintws1:8056/DocumentLibraryService.svc" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://uatmaintws1:8056/DocumentLibraryService.svc</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Dns>localhost</Dns>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

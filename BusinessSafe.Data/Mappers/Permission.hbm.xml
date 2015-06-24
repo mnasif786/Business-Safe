@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="Permission" table="`Permission`" mutable="false" where="deleted = 0">
+    <id name="Id" column="Id" type="int">
+      <generator class="identity"/>
+    </id>
+    <many-to-one name="PermissionTarget" class="PermissionTarget" column="PermissionTargetId" cascade="none" />
+    <property name="PermissionActivity" column="PermissionActivityId" />
+    <property name="Deleted" type="bool" />
+    <property name="CreatedOn" type="DateTime" />
+    <many-to-one name="CreatedBy" class="UserForAuditing"/>
+    <property name="LastModifiedOn" type="DateTime" />
+    <many-to-one name="LastModifiedBy" class="UserForAuditing"/>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,691 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5DBF972D-D624-4FE6-8483-F9828C37CF52}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BusinessSafe.Application</RootNamespace>
+    <AssemblyName>BusinessSafe.Application</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CI|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\CI\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'UAT|AnyCPU'">
+    <OutputPath>bin\UAT\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LIVE|AnyCPU'">
+    <OutputPath>bin\LIVE\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr4.StringTemplate">
+      <HintPath>..\packages\Antlr4.StringTemplate.4.0.6.9004\lib\net35\Antlr4.StringTemplate.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.2.1.265\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation, Version=3.3.1.0, Culture=neutral, PublicKeyToken=a82054b837897c66, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.3.3.1.0\lib\Net40\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NServiceBus.3.2.6\lib\net40\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.3.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL" />
+    <Reference Include="NServiceBus">
+      <HintPath>..\packages\NServiceBus.3.2.6\lib\net40\NServiceBus.dll</HintPath>
+    </Reference>
+    <Reference Include="Peninsula.Online.Messages">
+      <HintPath>..\Lib\Peninsula.Online.Messages\Peninsula.Online.Messages.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\packages\RestSharp.104.1\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\packages\structuremap.2.6.3\lib\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\ApplicationLayerException.cs" />
+    <Compile Include="Common\ApplicationFault.cs" />
+    <Compile Include="Common\BusinessSafeCompanyDetailsNotFoundException.cs" />
+    <Compile Include="Common\ErrorHandingBehaviorAttribute.cs" />
+    <Compile Include="Common\ErrorHandler.cs" />
+    <Compile Include="Common\Log4NetHelper.cs" />
+    <Compile Include="Common\RequestLoggingBehaviourAttribute.cs" />
+    <Compile Include="Common\RequestLoggingDispatchMessageInspector.cs" />
+    <Compile Include="Common\SessionClosingBehaviourAttribute.cs" />
+    <Compile Include="Common\SessionClosingDispatchMessageInspector.cs" />
+    <Compile Include="Common\TemplateEngine.cs" />
+    <Compile Include="Common\ValidationFault.cs" />
+    <Compile Include="Common\ValidationFaultException.cs" />
+    <Compile Include="Common\ValidationFaultMessage.cs" />
+    <Compile Include="Contracts\AccidentRecord\ICauseOfAccidentService.cs" />
+    <Compile Include="Contracts\AccidentRecord\IInjuryDetailsService.cs" />
+    <Compile Include="Contracts\AccidentRecord\IInjuryService.cs" />
+    <Compile Include="Contracts\ActionPlan\IActionService.cs" />
+    <Compile Include="Contracts\ActionPlan\IActionPlanService.cs" />
+    <Compile Include="Contracts\ActionPlan\IActionTaskService.cs" />
+    <Compile Include="Contracts\Employee\IEmployeeNotificationsService.cs" />
+    <Compile Include="Contracts\IUserRegistrationService.cs" />
+    <Compile Include="Contracts\VisitRequest\IVisitRequestService.cs" />
+    <Compile Include="Custom Exceptions\ActionTaskNotFoundException.cs" />
+    <Compile Include="Custom Exceptions\EmailRegisteredToOtherUserException.cs" />
+    <Compile Include="DataTransferObjects\AccidentRecordNextStepSectionDto.cs" />
+    <Compile Include="DataTransferObjects\ActionDto.cs" />
+    <Compile Include="DataTransferObjects\ActionTaskDto.cs" />
+    <Compile Include="DataTransferObjects\NotificationTypeDto.cs" />
+    <Compile Include="DataTransferObjects\OthersInvolvedAccidentDetailsDto.cs" />
+    <Compile Include="Implementations\ActionPlan\ActionService.cs" />
+    <Compile Include="DataTransferObjects\ActionPlanDto.cs" />
+    <Compile Include="Implementations\ActionPlan\ActionTaskService.cs" />
+    <Compile Include="Implementations\Employees\EmployeeNotificationsHelper.cs" />
+    <Compile Include="Implementations\Employees\EmployeeNotificationsService.cs" />
+    <Compile Include="Mappers\ActionPlanDtoMapper.cs" />
+    <Compile Include="Implementations\ActionPlan\ActionPlanService.cs" />
+    <Compile Include="Implementations\Users\RegistrationServiceStub.cs" />
+    <Compile Include="Mappers\AccidentRecordNextStepSectionDtoMapper.cs" />
+    <Compile Include="Mappers\ActionDtoMapper.cs" />
+    <Compile Include="Mappers\ActionTaskDtoMapper.cs" />
+    <Compile Include="Mappers\AutoMapper\AutoMapperConfiguration.cs" />
+    <Compile Include="Mappers\ResponsibilityTaskDtoMapper.cs" />
+    <Compile Include="Request\AssignActionTaskRequest.cs" />
+    <Compile Include="Request\CompleteActionTaskRequest.cs" />
+    <Compile Include="Request\RequestVisitRequest.cs" />
+    <Compile Include="Request\SearchActionPlanRequest.cs" />
+    <Compile Include="Request\CopyRiskAssessmentForMultipleSitesRequest.cs" />
+    <Compile Include="Request\Responsibilities\CopyResponsibilityRequest.cs" />
+    <Compile Include="Request\SaveInjuryRequest.cs" />
+    <Compile Include="Request\SearchActionRequest.cs" />
+    <Compile Include="Request\UpdateInjuryDetailsRequest.cs" />
+    <Compile Include="Custom Exceptions\AccidentRecordNotFoundException.cs" />
+    <Compile Include="DataTransferObjects\InjuredAbleToWork.cs" />
+    <Compile Include="DataTransferObjects\InjuredToHospital.cs" />
+    <Compile Include="DataTransferObjects\InjuryAccidentDetailsDto.cs" />
+    <Compile Include="DataTransferObjects\InjurySeverity.cs" />
+    <Compile Include="DataTransferObjects\UnableToWork.cs" />
+    <Compile Include="Implementations\AccidentRecords\AccidentTypeService.cs" />
+    <Compile Include="Contracts\AccidentRecord\IAccidentRecordService.cs" />
+    <Compile Include="Contracts\AccidentRecord\IAccidentTypeService.cs" />
+    <Compile Include="Contracts\Company\IBusinessSafeCompanyDetailService.cs" />
+    <Compile Include="Contracts\Company\IRiskAssessorService.cs" />
+    <Compile Include="Contracts\Responsibilities\IStatutoryResponsibilityTaskTemplateService.cs" />
+    <Compile Include="Custom Exceptions\EmployeeRequestedForStatutoryResponsibilityNotValidException.cs" />
+    <Compile Include="Custom Exceptions\SiteRequestedForStatutoryResponsibilityNotValidException.cs" />
+    <Compile Include="DataTransferObjects\AccidentRecordBodyPartDto.cs" />
+    <Compile Include="DataTransferObjects\AccidentRecordDocumentDto.cs" />
+    <Compile Include="DataTransferObjects\AccidentRecordInjuryDto.cs" />
+    <Compile Include="DataTransferObjects\AccidentTypeDto.cs" />
+    <Compile Include="DataTransferObjects\BodyPartDto.cs" />
+    <Compile Include="DataTransferObjects\CauseOfAccidentDto.cs" />
+    <Compile Include="DataTransferObjects\InjuryDto.cs" />
+    <Compile Include="DataTransferObjects\JurisdictionDto.cs" />
+    <Compile Include="DataTransferObjects\AccidentRecordDto.cs" />
+    <Compile Include="DataTransferObjects\EmployeeForAuditingDto.cs" />
+    <Compile Include="Implementations\AccidentRecords\AccidentRecordService.cs" />
+    <Compile Include="Implementations\AccidentRecords\BodyPartService.cs" />
+    <Compile Include="Implementations\AccidentRecords\CauseOfAccidentService.cs" />
+    <Compile Include="Contracts\AccidentRecord\IBodyPartService.cs" />
+    <Compile Include="Implementations\AccidentRecords\InjuryDetailsService.cs" />
+    <Compile Include="Implementations\AccidentRecords\InjuryService.cs" />
+    <Compile Include="Mappers\AccidentRecordDtoMapper.cs" />
+    <Compile Include="Mappers\AccidentRecordInjuryDtoMapper.cs" />
+    <Compile Include="Mappers\AccidentTypeDtoMapper.cs" />
+    <Compile Include="Mappers\CauseOfAccidentDtoMapper.cs" />
+    <Compile Include="Mappers\BodyPartDtoMapper.cs" />
+    <Compile Include="Mappers\AccidentRecordBodyPartDtoMapper.cs" />
+    <Compile Include="Mappers\EmployeeForAuditingDtoMapper.cs" />
+    <Compile Include="Mappers\InjuryDtoMapper.cs" />
+    <Compile Include="Mappers\JurisdictionDtoMapper.cs" />
+    <Compile Include="Request\AddDocumentToAccidentReportRequest.cs" />
+    <Compile Include="Request\AddEmployeesToChecklistGeneratorRequest.cs" />
+    <Compile Include="Request\RemoveDocumentsFromAccidentRecordRequest.cs" />
+    <Compile Include="Request\SaveAccidentRecordSummaryRequest.cs" />
+    <Compile Include="Request\Responsibilities\CreateManyResponsibilityTaskFromWizardRequest.cs" />
+    <Compile Include="Request\Responsibilities\CreateResponsibilityFromWizardRequest.cs" />
+    <Compile Include="Contracts\Responsibilities\IResponsibilitiesService.cs" />
+    <Compile Include="Contracts\Responsibilities\IResponsibilityTaskService.cs" />
+    <Compile Include="Contracts\TaskList\ITaskListService.cs" />
+    <Compile Include="Custom Exceptions\ResponsibilityTaskNotFoundException.cs" />
+    <Compile Include="Custom Exceptions\ResponsibilityNotFoundException.cs" />
+    <Compile Include="DataTransferObjects\FireRiskAssessmentControlMeasureDto.cs" />
+    <Compile Include="DataTransferObjects\FireRiskAssessmentSourceOfFuelDto.cs" />
+    <Compile Include="DataTransferObjects\FireRiskAssessmentSourceOfIgnitionDto.cs" />
+    <Compile Include="DataTransferObjects\ResponsibilityTaskDto.cs" />
+    <Compile Include="DataTransferObjects\RiskAssessmentNonEmployeeDto.cs" />
+    <Compile Include="DataTransferObjects\RiskAssessmentEmployeeDto.cs" />
+    <Compile Include="DataTransferObjects\StatutoryResponsibilityTaskTemplateDto.cs" />
+    <Compile Include="DataTransferObjects\StatutoryResponsibilityTemplateDto.cs" />
+    <Compile Include="Contracts\Responsibilities\IStatutoryResponsibilityTemplateService.cs" />
+    <Compile Include="Implementations\Responsibilities\StatutoryResponsibilityTaskTemplateService.cs" />
+    <Compile Include="Implementations\Responsibilities\StatutoryResponsibilityTemplateService.cs" />
+    <Compile Include="Implementations\Responsibilities\ResponsibilityTaskService.cs" />
+    <Compile Include="Implementations\TaskList\TaskListService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Mappers\BusinessSafeCompanyDetailDtoMapper.cs" />
+    <Compile Include="Mappers\StatutoryResponsibilityTaskTemplateDtoMapper.cs" />
+    <Compile Include="Mappers\StatutoryResponsibilityTemplateDtoMapper.cs" />
+    <Compile Include="Mappers\FireRiskAssessmentControlMeasureDtoMapper.cs" />
+    <Compile Include="Mappers\FireRiskAssessmentSourceOfIgnitionDtoMapper.cs" />
+    <Compile Include="Mappers\FireRiskAssessmentSourceOfFuelDtoMapper.cs" />
+    <Compile Include="Mappers\ResponsibilityReasonDtoMapper.cs" />
+    <Compile Include="Mappers\ResponsibilityCategoryDtoMapper.cs" />
+    <Compile Include="Mappers\RiskAssessmentNonEmployeeDtoMapper.cs" />
+    <Compile Include="Mappers\RiskAssessmentEmployeeDtoMapper.cs" />
+    <Compile Include="Mappers\ResponsibilityDtoMapper.cs" />
+    <Compile Include="Mappers\RolePermissionDtoMapper.cs" />
+    <Compile Include="Request\AddDocumentsToTaskRequest.cs" />
+    <Compile Include="Request\Responsibilities\CompleteResponsibilityTaskRequest.cs" />
+    <Compile Include="Request\Responsibilities\CreateResponsibilityTasksFromWizardRequest.cs" />
+    <Compile Include="Request\Responsibilities\SaveResponsibilityTaskRequest.cs" />
+    <Compile Include="Request\Responsibilities\SaveResponsibilityRequest.cs" />
+    <Compile Include="Request\Responsibilities\SearchResponsibilitiesRequest.cs" />
+    <Compile Include="DataTransferObjects\ResponsibilityDto.cs" />
+    <Compile Include="Custom Exceptions\TryingToDeleteRiskAssessorWithOutstandingRiskAssessmentsException.cs" />
+    <Compile Include="DataTransferObjects\BusinessSafeCompanyDetailDto.cs" />
+    <Compile Include="DataTransferObjects\CompanyDto.cs" />
+    <Compile Include="DataTransferObjects\CompanyHazardDto.cs" />
+    <Compile Include="DataTransferObjects\ResponsibilityReasonDto.cs" />
+    <Compile Include="DataTransferObjects\ResponsibilityCategoryDto.cs" />
+    <Compile Include="DataTransferObjects\EmployeeContactDetailDto.cs" />
+    <Compile Include="DataTransferObjects\NationalityDto.cs" />
+    <Compile Include="DataTransferObjects\RiskAssessorDto.cs" />
+    <Compile Include="Helpers\EnumHelper.cs" />
+    <Compile Include="Implementations\Company\BusinessSafeCompanyDetailService.cs" />
+    <Compile Include="Implementations\Company\RiskAssessorService.cs" />
+    <Compile Include="Implementations\Responsibilities\ResponsibilitiesService.cs" />
+    <Compile Include="Mappers\ApplicationTokenMapper.cs" />
+    <Compile Include="Implementations\ApplicationTokenService.cs" />
+    <Compile Include="DataTransferObjects\ApplicationTokenDto.cs" />
+    <Compile Include="Contracts\Checklists\IChecklistService.cs" />
+    <Compile Include="Contracts\Checklists\IEmployeeChecklistEmailService.cs" />
+    <Compile Include="Contracts\Checklists\IEmployeeChecklistService.cs" />
+    <Compile Include="Contracts\IApplicationTokenService.cs" />
+    <Compile Include="Implementations\Users\AuthenticationTokenService.cs" />
+    <Compile Include="Contracts\Users\IAuthenticationTokenService.cs" />
+    <Compile Include="Custom Exceptions\TryingToDeleteSignificantFidningFromFireAnswer.cs" />
+    <Compile Include="DataTransferObjects\AuthenticationTokenDto.cs" />
+    <Compile Include="DataTransferObjects\FireRiskAssessmentFurtherControlMeasureTaskDto.cs" />
+    <Compile Include="Implementations\RiskAssessments\CreateRiskAssessmentValidator.cs" />
+    <Compile Include="Implementations\FireRiskAssessments\FireRiskAssessmentFurtherControlMeasureTaskService.cs" />
+    <Compile Include="Contracts\FireRiskAssessments\IFireRiskAssessmentChecklistService.cs" />
+    <Compile Include="Contracts\FireRiskAssessments\IFireRiskAssessmentAttachmentService.cs" />
+    <Compile Include="Contracts\FireRiskAssessments\IFireRiskAssessmentFurtherControlMeasureTaskService.cs" />
+    <Compile Include="Contracts\FireRiskAssessments\ISignificantFindingService.cs" />
+    <Compile Include="DataTransferObjects\AnswerDto.cs" />
+    <Compile Include="DataTransferObjects\FireAnswerDto.cs" />
+    <Compile Include="DataTransferObjects\FireRiskAssessmentChecklistDto.cs" />
+    <Compile Include="DataTransferObjects\FireRiskAssessmentDto.cs" />
+    <Compile Include="DataTransferObjects\FireSafetyControlMeasureDto.cs" />
+    <Compile Include="DataTransferObjects\SignificantFindingDto.cs" />
+    <Compile Include="DataTransferObjects\SourceOfFuelDto.cs" />
+    <Compile Include="DataTransferObjects\SourceOfIgnitionDto.cs" />
+    <Compile Include="Extensions\SiteAddressDtoExtensions.cs" />
+    <Compile Include="Implementations\FireRiskAssessments\FireRiskAssessmentChecklistService.cs" />
+    <Compile Include="Implementations\FireRiskAssessments\FireRiskAssessmentService.cs" />
+    <Compile Include="Contracts\MultiHazardRiskAssessment\IMultiHazardRiskAssessmentAttachmentService.cs" />
+    <Compile Include="Contracts\MultiHazardRiskAssessment\IMultiHazardRiskAssessmentService.cs" />
+    <Compile Include="Contracts\FireRiskAssessments\IFireRiskAssessmentService.cs" />
+    <Compile Include="Contracts\RiskAssessments\IRiskAssessmentAttachmentService.cs" />
+    <Compile Include="Contracts\HazardousSubstanceInventory\IPictogramService.cs" />
+    <Compile Include="Contracts\HazardousSubstanceInventory\ISafetyPhraseService.cs" />
+    <Compile Include="Contracts\HazardousSubstanceRiskAssessments\IControlSystemService.cs" />
+    <Compile Include="Contracts\PersonalRiskAssessments\IPersonalRiskAssessmentService.cs" />
+    <Compile Include="Contracts\RiskAssessments\IFurtherControlMeasureTaskService.cs" />
+    <Compile Include="Contracts\HazardousSubstanceRiskAssessments\IHazardousSubstanceRiskAssessmentFurtherControlMeasureTaskService.cs" />
+    <Compile Include="Contracts\HazardousSubstanceRiskAssessments\IHazardousSubstanceRiskAssessmentService.cs" />
+    <Compile Include="Contracts\HazardousSubstanceInventory\IRiskPhraseService.cs" />
+    <Compile Include="Contracts\IEmailTemplateService.cs" />
+    <Compile Include="Contracts\RiskAssessments\IRiskAssessmentService.cs" />
+    <Compile Include="Custom Exceptions\SearchTasksSpecifiedSiteIdNotInAllowableSitesForUserException.cs" />
+    <Compile Include="Custom Exceptions\TryingToDeleteHazardousSubstanceThatUsedByRiskAssessmentsException.cs" />
+    <Compile Include="Custom Exceptions\TryingToDeleteSupplierThatUsedByHazardousSubstanceException.cs" />
+    <Compile Include="DataTransferObjects\PersonalAnswerDto.cs" />
+    <Compile Include="DataTransferObjects\AuditedUserDto.cs" />
+    <Compile Include="DataTransferObjects\ChecklistDto.cs" />
+    <Compile Include="DataTransferObjects\ControlSystemDto.cs" />
+    <Compile Include="DataTransferObjects\EmployeeChecklistDto.cs" />
+    <Compile Include="DataTransferObjects\EmployeeChecklistEmailDto.cs" />
+    <Compile Include="DataTransferObjects\MultiHazardRiskAssessmentDto.cs" />
+    <Compile Include="DataTransferObjects\PersonalRiskAssessmentDto.cs" />
+    <Compile Include="DataTransferObjects\CountryDto.cs" />
+    <Compile Include="DataTransferObjects\EmailTemplateDto.cs" />
+    <Compile Include="DataTransferObjects\FurtherControlMeasureTaskDto.cs" />
+    <Compile Include="DataTransferObjects\HazardousSubstanceGroupDto.cs" />
+    <Compile Include="DataTransferObjects\HazardousSubstanceLinkedRiskAssessmentDto.cs" />
+    <Compile Include="DataTransferObjects\HazardousSubstanceRiskAssessmentControlMeasureDto.cs" />
+    <Compile Include="DataTransferObjects\HazardousSubstanceRiskAssessmentFurtherControlMeasureTaskDto.cs" />
+    <Compile Include="DataTransferObjects\HazardousSubstanceSafetyPhraseDto.cs" />
+    <Compile Include="DataTransferObjects\PermissionTargetDto.cs" />
+    <Compile Include="DataTransferObjects\PersonalRiskAssessmentFurtherControlMeasureTaskDto.cs" />
+    <Compile Include="DataTransferObjects\PictogramDto.cs" />
+    <Compile Include="DataTransferObjects\QuestionDto.cs" />
+    <Compile Include="DataTransferObjects\RiskAssessmentDto.cs" />
+    <Compile Include="DataTransferObjects\SafetyPhraseDto.cs" />
+    <Compile Include="DataTransferObjects\RiskPhraseDto.cs" />
+    <Compile Include="DataTransferObjects\HazardousSubstanceDto.cs" />
+    <Compile Include="Contracts\Documents\IDocHandlerDocumentTypeService.cs" />
+    <Compile Include="Contracts\Documents\IDocumentTypeService.cs" />
+    <Compile Include="Contracts\Documents\IAddedDocumentsService.cs" />
+    <Compile Include="Contracts\Documents\IDocumentService.cs" />
+    <Compile Include="Contracts\HazardousSubstanceInventory\IHazardousSubstancesService.cs" />
+    <Compile Include="Contracts\RiskAssessments\IRiskAssessmentReviewService.cs" />
+    <Compile Include="Contracts\Employee\IEmployeeEmergencyContactDetailService.cs" />
+    <Compile Include="Contracts\Employee\IEmployeeService.cs" />
+    <Compile Include="Contracts\ILookupService.cs" />
+    <Compile Include="Contracts\GeneralRiskAssessments\IGeneralRiskAssessmentAttachmentService.cs" />
+    <Compile Include="Contracts\RiskAssessments\IRiskAssessmentHazardService.cs" />
+    <Compile Include="Contracts\GeneralRiskAssessments\IRiskAssessmentLookupService.cs" />
+    <Compile Include="Contracts\Users\IRolesService.cs" />
+    <Compile Include="Contracts\HazardousSubstanceInventory\ISuppliersService.cs" />
+    <Compile Include="Contracts\Users\IUserService.cs" />
+    <Compile Include="Contracts\Company\ICompanyDefaultService.cs" />
+    <Compile Include="Contracts\Company\ICompanyDetailsService.cs" />
+    <Compile Include="Contracts\INonEmployeeService.cs" />
+    <Compile Include="Contracts\GeneralRiskAssessments\IGeneralRiskAssessmentService.cs" />
+    <Compile Include="Contracts\Sites\ISiteGroupService.cs" />
+    <Compile Include="Contracts\Sites\ISiteService.cs" />
+    <Compile Include="Contracts\TaskList\ITaskService.cs" />
+    <Compile Include="Common\ApplicationRegistry.cs" />
+    <Compile Include="Contracts\ITemplateEngine.cs" />
+    <Compile Include="Custom Exceptions\InvalidDocumentForCompanyException.cs" />
+    <Compile Include="DataTransferObjects\AddedDocumentDto.cs" />
+    <Compile Include="DataTransferObjects\CompanyDefaultDto.cs" />
+    <Compile Include="DataTransferObjects\ControlMeasureDto.cs" />
+    <Compile Include="DataTransferObjects\DocHandlerDocumentTypeDto.cs" />
+    <Compile Include="DataTransferObjects\DocumentTypeDto.cs" />
+    <Compile Include="DataTransferObjects\DocumentDto.cs" />
+    <Compile Include="DataTransferObjects\EmployeeEmergencyContactDetailDto.cs" />
+    <Compile Include="DataTransferObjects\EmployeeDto.cs" />
+    <Compile Include="DataTransferObjects\MultiHazardRiskAssessmentFurtherControlMeasureTaskDto.cs" />
+    <Compile Include="DataTransferObjects\HazardousSubstanceRiskAssessmentDto.cs" />
+    <Compile Include="DataTransferObjects\SectionDto.cs" />
+    <Compile Include="DataTransferObjects\SupplierDto.cs" />
+    <Compile Include="DataTransferObjects\SymbolDto.cs" />
+    <Compile Include="DataTransferObjects\RiskAssessmentHazardDto.cs" />
+    <Compile Include="DataTransferObjects\RiskAssessmentReviewDto.cs" />
+    <Compile Include="DataTransferObjects\RiskAssessmentReviewTaskDto.cs" />
+    <Compile Include="DataTransferObjects\TaskDetailsSummaryDto.cs" />
+    <Compile Include="DataTransferObjects\TaskDto.cs" />
+    <Compile Include="DataTransferObjects\TaskDocumentDto.cs" />
+    <Compile Include="DataTransferObjects\HazardDto.cs" />
+    <Compile Include="DataTransferObjects\LookupDto.cs" />
+    <Compile Include="DataTransferObjects\PeopleAtRiskDto.cs" />
+    <Compile Include="DataTransferObjects\PermissionDto.cs" />
+    <Compile Include="DataTransferObjects\RoleDto.cs" />
+    <Compile Include="DataTransferObjects\SiteStructureElementDto.cs" />
+    <Compile Include="DataTransferObjects\UserEmployeeDto.cs" />
+    <Compile Include="DataTransferObjects\SiteDto.cs" />
+    <Compile Include="DataTransferObjects\SiteGroupDto.cs" />
+    <Compile Include="DataTransferObjects\RolePermissionsDto.cs" />
+    <Compile Include="Helpers\DocumentParameterHelper.cs" />
+    <Compile Include="Helpers\TaskReoccurringTypeHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Implementations\Checklists\ChecklistService.cs" />
+    <Compile Include="Implementations\Checklists\EmployeeChecklistEmailService.cs" />
+    <Compile Include="Implementations\Checklists\EmployeeChecklistService.cs" />
+    <Compile Include="Implementations\Documents\AddedDocumentsService.cs" />
+    <Compile Include="Implementations\EmailTemplateService.cs" />
+    <Compile Include="Implementations\FireRiskAssessments\FireRiskAssessmentAttachmentService.cs" />
+    <Compile Include="Implementations\RiskAssessments\UpdateRiskAssessmentValidator.cs" />
+    <Compile Include="Implementations\MultiHazardRiskAssessment\MultiHazardRiskAssessmentAttachmentService.cs" />
+    <Compile Include="Implementations\MultiHazardRiskAssessment\MultiHazardRiskAssessmentService.cs" />
+    <Compile Include="Implementations\HazardousSubstanceInventory\PictogramService.cs" />
+    <Compile Include="Implementations\HazardousSubstanceInventory\SafetyPhraseService.cs" />
+    <Compile Include="Implementations\Documents\DocHandlerDocumentTypeService.cs" />
+    <Compile Include="Implementations\Documents\DocumentTypeService.cs" />
+    <Compile Include="Implementations\Employees\EmployeeEmergencyContactDetailService.cs" />
+    <Compile Include="Implementations\Employees\EmployeeService.cs" />
+    <Compile Include="Custom Exceptions\TryingToDeleteEmployeeWithOutstandingTasksException.cs" />
+    <Compile Include="Implementations\HazardousSubstanceInventory\SuppliersService.cs" />
+    <Compile Include="Implementations\HazardousSubstanceRiskAssessments\ControlSystemService.cs" />
+    <Compile Include="Implementations\PersonalRiskAssessments\PersonalRiskAssessmentService.cs" />
+    <Compile Include="Implementations\RiskAssessments\FurtherControlMeasureTaskService.cs" />
+    <Compile Include="Implementations\HazardousSubstanceRiskAssessments\HazardousSubstanceRiskAssessmentFurtherControlMeasureTaskService.cs" />
+    <Compile Include="Implementations\HazardousSubstanceRiskAssessments\HazardousSubstanceRiskAssessmentService.cs" />
+    <Compile Include="Implementations\HazardousSubstanceInventory\HazardousSubstancesService.cs" />
+    <Compile Include="Implementations\RiskAssessments\RiskAssessmentAttachmentService.cs" />
+    <Compile Include="Implementations\LookupService.cs" />
+    <Compile Include="Implementations\Documents\DocumentService.cs" />
+    <Compile Include="Implementations\GeneralRiskAssessments\PeopleAtRiskWarningDisplayMessages.cs" />
+    <Compile Include="Implementations\RiskAssessments\RiskAssessmentReviewService.cs" />
+    <Compile Include="Implementations\GeneralRiskAssessments\GeneralRiskAssessmentAttachmentService.cs" />
+    <Compile Include="Implementations\RiskAssessments\RiskAssessmentHazardService.cs" />
+    <Compile Include="Implementations\RiskAssessments\RiskAssessmentLookupService.cs" />
+    <Compile Include="Implementations\HazardousSubstanceInventory\RiskPhraseService.cs" />
+    <Compile Include="Implementations\RiskAssessments\RiskAssessmentService.cs" />
+    <Compile Include="Implementations\FireRiskAssessments\SignificantFindingService.cs" />
+    <Compile Include="Implementations\Specification\ISpecification.cs" />
+    <Compile Include="Implementations\Specification\UniqueRiskAssessmentReferenceSpecification.cs" />
+    <Compile Include="Implementations\Specification\UniqueRiskAssessmentTitleSpecification.cs" />
+    <Compile Include="Implementations\Users\RolesService.cs" />
+    <Compile Include="Mappers\AnswerDtoMapper.cs" />
+    <Compile Include="Mappers\AuditedUserDtoMapper.cs" />
+    <Compile Include="Mappers\ChecklistDtoMapper.cs" />
+    <Compile Include="Mappers\ControlMeasureDtoMapper.cs" />
+    <Compile Include="Mappers\ControlSystemDtoMapper.cs" />
+    <Compile Include="Mappers\AuthenticationTokenDtoMapper.cs" />
+    <Compile Include="Mappers\FireRiskAssessmentFurtherControlMeasureTaskDtoMapper.cs" />
+    <Compile Include="Mappers\HazardousSubstanceRiskAssessmentFurtherControlMeasureTaskDtoMapper.cs" />
+    <Compile Include="Mappers\MultiHazardRiskAssessmentFurtherControlMeasureTaskDtoMapper.cs" />
+    <Compile Include="Mappers\NationalityDtoMapper.cs" />
+    <Compile Include="Mappers\EmployeeContactDetailDtoMapper.cs" />
+    <Compile Include="Mappers\FireAnswerDtoMapper.cs" />
+    <Compile Include="Mappers\CountryDtoMapper.cs" />
+    <Compile Include="Mappers\EmailTemplateDtoMapper.cs" />
+    <Compile Include="Mappers\EmployeeChecklistDtoMapper.cs" />
+    <Compile Include="Mappers\EmployeeChecklistEmailDtoMapper.cs" />
+    <Compile Include="Mappers\EmployeeEmergencyContactDetailDtoMapper.cs" />
+    <Compile Include="Mappers\FireRiskAssessmentChecklistDtoMapper.cs" />
+    <Compile Include="Mappers\FireRiskAssessmentDtoMapper.cs" />
+    <Compile Include="Mappers\FireSafetyControlMeasureDtoMapper.cs" />
+    <Compile Include="Mappers\HazardDtoMapper.cs" />
+    <Compile Include="Mappers\HazardousSubstanceGroupDtoMapper.cs" />
+    <Compile Include="Mappers\HazardousSubstanceRiskAssessmentControlMeasureDtoMapper.cs" />
+    <Compile Include="Mappers\HazardousSubstanceRiskAssessmentDtoMapper.cs" />
+    <Compile Include="Mappers\HazardousSubstanceSafetyPhraseDtoMapper.cs" />
+    <Compile Include="Mappers\NonEmployeeDtoMapper.cs" />
+    <Compile Include="Mappers\PeopleAtRiskDtoMapper.cs" />
+    <Compile Include="Mappers\PermissionDtoMapper.cs" />
+    <Compile Include="Mappers\PermissionTargetDtoMapper.cs" />
+    <Compile Include="Mappers\PersonalAnswerDtoMapper.cs" />
+    <Compile Include="Mappers\PersonalRiskAssessmentDtoMapper.cs" />
+    <Compile Include="Mappers\PictogramDtoMapper.cs" />
+    <Compile Include="Mappers\HazardousSubstanceLinkedRiskAssessmentDtoMapper.cs" />
+    <Compile Include="Mappers\QuestionDtoMapper.cs" />
+    <Compile Include="Mappers\RiskAssessmentDtoMapper.cs" />
+    <Compile Include="Mappers\RiskAssessmentReviewTaskDtoMapper.cs" />
+    <Compile Include="Mappers\RiskAssessorDtoMapper.cs" />
+    <Compile Include="Mappers\RiskPhraseDtoMapper.cs" />
+    <Compile Include="Mappers\DocHandlerDocumentTypeDtoMapper.cs" />
+    <Compile Include="Mappers\DocumentTypeDtoMapper.cs" />
+    <Compile Include="Mappers\DocumentDtoMapper.cs" />
+    <Compile Include="Mappers\EmergencyContactDetailsParametersMapper.cs" />
+    <Compile Include="Mappers\EmployeeContactDetailsParametersMapper.cs" />
+    <Compile Include="Mappers\EmployeeParametersMapper.cs" />
+    <Compile Include="Mappers\EmployeeDtoMapper.cs" />
+    <Compile Include="Mappers\HazardousSubstanceDtoMapper.cs" />
+    <Compile Include="Mappers\SafetyPhraseDtoMapper.cs" />
+    <Compile Include="Mappers\SectionDtoMapper.cs" />
+    <Compile Include="Mappers\SignificantFindingsDtoMapper.cs" />
+    <Compile Include="Mappers\SignificantFindingDtoMapper.cs" />
+    <Compile Include="Mappers\SiteDtoMapper.cs" />
+    <Compile Include="Mappers\SiteStructureElementDtoMapper.cs" />
+    <Compile Include="Mappers\SourceOfFuelDtoMapper.cs" />
+    <Compile Include="Mappers\SourceOfIgnitionDtoMapper.cs" />
+    <Compile Include="Mappers\SupplierDtoMapper.cs" />
+    <Compile Include="Mappers\TaskCategoryDtoMapper.cs" />
+    <Compile Include="Mappers\TaskDocumentDtoMapper.cs" />
+    <Compile Include="Mappers\IRegisterEmployeeAsUserParametersMapper.cs" />
+    <Compile Include="Mappers\RegisterEmployeeAsUserParametersMapper.cs" />
+    <Compile Include="Mappers\RiskAssessmentHazardDtoMapper.cs" />
+    <Compile Include="Mappers\RiskAssessmentReviewDtoMapper.cs" />
+    <Compile Include="Mappers\SiteGroupDtoMapper.cs" />
+    <Compile Include="Implementations\Company\CompanyDefaultService.cs" />
+    <Compile Include="Implementations\Users\UserService.cs" />
+    <Compile Include="Implementations\Company\DoesCompanyDefaultAlreadyExistGuard.cs" />
+    <Compile Include="Implementations\Company\DoesNonEmployeeNameExistGuard.cs" />
+    <Compile Include="Mappers\TaskDtoMapper.cs" />
+    <Compile Include="Request\AddRiskAssessmentReviewRequest.cs" />
+    <Compile Include="Request\AttachDocumentsToRiskAssessmentRequest.cs" />
+    <Compile Include="Request\AttachFireSafetyControlMeasuresToRiskAssessmentRequest.cs" />
+    <Compile Include="Request\AttachSourceOfFuelToRiskAssessmentRequest.cs" />
+    <Compile Include="Request\AttachSourceOfIgnitionToRiskAssessmentRequest.cs" />
+    <Compile Include="Request\Attributes\DateNotInPastValidationAttribute.cs" />
+    <Compile Include="Request\Attributes\EnumValueMustBeSet.cs" />
+    <Compile Include="Request\BulkReassignTasksToEmployeeRequest.cs" />
+    <Compile Include="Request\Checklists\AuthenticateUserRequest.cs" />
+    <Compile Include="Request\Checklists\CompleteEmployeeChecklistRequest.cs" />
+    <Compile Include="Request\Checklists\ResendEmployeeChecklistEmailRequest.cs" />
+    <Compile Include="Request\CompanyDetailsInformation.cs" />
+    <Compile Include="Request\CreateRiskAssessorRequest.cs" />
+    <Compile Include="Request\EmployeeWithNewEmailRequest.cs" />
+    <Compile Include="Request\CompleteTaskRequest.cs" />
+    <Compile Include="Request\CompleteRiskAssessmentReviewRequest.cs" />
+    <Compile Include="Request\Checklists\GenerateEmployeeChecklistEmailRequest.cs" />
+    <Compile Include="Request\FireRiskAssessments\CompleteFireRiskAssessmentChecklistRequest.cs" />
+    <Compile Include="Request\FireRiskAssessments\DoesAnswerHaveFurtherControlMeasureTasksRequest.cs" />
+    <Compile Include="Request\FireRiskAssessments\GetFurtherControlMeasureTaskCountsForAnswerResponse.cs" />
+    <Compile Include="Request\FireRiskAssessments\MarkChecklistWithCompleteFailureAttemptRequest.cs" />
+    <Compile Include="Request\FireRiskAssessments\SaveFurtherControlMeasureTaskRequest.cs" />
+    <Compile Include="Request\FireRiskAssessments\SubmitFireAnswerRequest.cs" />
+    <Compile Include="Request\FireRiskAssessments\SaveFireRiskAssessmentChecklistRequest.cs" />
+    <Compile Include="Request\FireRiskAssessments\ValidateCompleteFireRiskAssessmentChecklistRequest.cs" />
+    <Compile Include="Request\HazardousSubstanceInventory\CheckForDuplicatedSubstanceRequest.cs" />
+    <Compile Include="Request\HazardousSubstanceInventory\AddHazardousSubstanceRequest.cs" />
+    <Compile Include="Request\HazardousSubstanceInventory\ReinstateHazardousSubstanceRequest.cs" />
+    <Compile Include="Request\HazardousSubstanceInventory\MarkHazardousSubstanceAsDeleteRequest.cs" />
+    <Compile Include="Request\HazardousSubstanceInventory\SafetyPhraseAdditionalInformationRequest.cs" />
+    <Compile Include="Request\HazardousSubstanceRiskAssessments\SaveFurtherControlMeasureTaskRequest.cs" />
+    <Compile Include="Request\HazardousSubstanceRiskAssessments\SaveLastRecommendedControlSystemRequest.cs" />
+    <Compile Include="Request\HazardousSubstanceRiskAssessments\UpdateHazardousSubstanceRiskAssessmentAssessmentDetailsRequest.cs" />
+    <Compile Include="Request\MarkRiskAssessorAsDeletedAndUndeletedRequest.cs" />
+    <Compile Include="Request\MarkSignificantFindingAsDeletedRequest.cs" />
+    <Compile Include="Request\PeopleNotInvolvedInRiskAssessmentSearchBaseRequest.cs" />
+    <Compile Include="Request\ResetAfterChecklistGenerateRequest.cs" />
+    <Compile Include="Request\SaveChecklistGeneratorRequest.cs" />
+    <Compile Include="Request\SaveCompanyHazardDefaultRequest.cs" />
+    <Compile Include="Request\SaveFurtherControlMeasureTaskRequest.cs" />
+    <Compile Include="Request\SearchAccidentRecordsRequest.cs" />
+    <Compile Include="Request\SearchRiskAssessorRequest.cs" />
+    <Compile Include="Request\SetDescriptionHowAccidentHappenedRequest.cs" />
+    <Compile Include="Request\SubmitAnswerRequest.cs" />
+    <Compile Include="Request\Checklists\SaveEmployeeChecklistRequest.cs" />
+    <Compile Include="Request\UpdateAccidentRecordAccidentDetailsRequest.cs" />
+    <Compile Include="Request\UpdateEmployeeEmailAddressRequest.cs" />
+    <Compile Include="Request\UpdateFireRiskAssessmentPremisesInformationRequest.cs" />
+    <Compile Include="Request\UpdateInjuredPersonRequest.cs" />
+    <Compile Include="Request\UpdateOnlineRegistrationDetailsRequest.cs" />
+    <Compile Include="Request\UpdatePersonalRiskAssessmentSummaryRequest.cs" />
+    <Compile Include="Request\SaveSupplierRequest.cs" />
+    <Compile Include="Request\HazardousSubstanceRiskAssessments\SearchHazardousSubstanceRiskAssessmentsRequest.cs" />
+    <Compile Include="Request\EditRiskAssessmentReviewRequest.cs" />
+    <Compile Include="Request\Documents\MarkDocumentAsDeletedRequest.cs" />
+    <Compile Include="Request\HazardousSubstanceRiskAssessments\SaveHazardousSubstanceRiskAssessmentRequest.cs" />
+    <Compile Include="Request\Documents\SearchDocumentRequest.cs" />
+    <Compile Include="Request\HazardousSubstanceInventory\SearchHazardousSubstancesRequest.cs" />
+    <Compile Include="Request\SearchSitesRequest.cs" />
+    <Compile Include="Request\UpdateFurtherControlMeasureTaskRequest.cs" />
+    <Compile Include="Request\Documents\CreateDocumentRequest.cs" />
+    <Compile Include="Request\DetachDocumentsFromRiskAssessmentRequest.cs" />
+    <Compile Include="Request\FurtherActionTaskBaseRequest.cs" />
+    <Compile Include="Request\MarkTaskAsDeletedRequest.cs" />
+    <Compile Include="Request\MarkTaskAsNoLongerRequiredRequest.cs" />
+    <Compile Include="Request\MarkRiskAssessmentAsDraftRequest.cs" />
+    <Compile Include="Request\MarkTaskDocumentsAsDeletedRequest.cs" />
+    <Compile Include="Request\ReassignTaskToEmployeeRequest.cs" />
+    <Compile Include="Request\SearchTasksRequest.cs" />
+    <Compile Include="Request\TaskDetailsSummaryRequest.cs" />
+    <Compile Include="Request\UpdateRiskAssessmentHazardTitleRequest.cs" />
+    <Compile Include="Request\Users\CreateAdminUserRequest.cs" />
+    <Compile Include="Request\Users\CreateUserRequest.cs" />
+    <Compile Include="Request\GuardDefaultExistsRequest.cs" />
+    <Compile Include="Response\SaveResponsibilityTaskResponse.cs" />
+    <Compile Include="Response\UpdateCompanyDetailsResponse.cs" />
+    <Compile Include="Response\GuardDefaultExistsReponse.cs" />
+    <Compile Include="Mappers\UserDtoMapper.cs" />
+    <Compile Include="Request\AddControlMeasureRequest.cs" />
+    <Compile Include="Request\AttachHazardsToRiskAssessmentRequest.cs" />
+    <Compile Include="Request\AttachPeopleAtRiskToRiskAssessmentRequest.cs" />
+    <Compile Include="Request\CreateEmergencyContactRequest.cs" />
+    <Compile Include="Request\AddEmployeeRequest.cs" />
+    <Compile Include="Request\AddUserRoleRequest.cs" />
+    <Compile Include="Request\AttachNonEmployeeToRiskAssessmentRequest.cs" />
+    <Compile Include="Request\AttachEmployeeRequest.cs" />
+    <Compile Include="Request\DetachEmployeeRequest.cs" />
+    <Compile Include="Request\DetachHazardsFromRiskAssessmentRequest.cs" />
+    <Compile Include="Request\DetachPeopleAtRiskFromRiskAssessmentRequest.cs" />
+    <Compile Include="Request\EmployeeEmergencyContactRequest.cs" />
+    <Compile Include="Request\MarkEmployeeAsDeletedRequest.cs" />
+    <Compile Include="Request\MarkEmployeeEmergencyContactAsDeletedRequest.cs" />
+    <Compile Include="Request\MarkUserRoleAsDeletedRequest.cs" />
+    <Compile Include="Request\CreateEmployeeAsUserRequest.cs" />
+    <Compile Include="Request\ReinstateEmployeeAsNotDeleteRequest.cs" />
+    <Compile Include="Request\RemoveControlMeasureRequest.cs" />
+    <Compile Include="Request\SaveEmergencyContactBaseRequest.cs" />
+    <Compile Include="Request\SaveEmployeeRequest.cs" />
+    <Compile Include="Request\UpdateControlMeasureRequest.cs" />
+    <Compile Include="Request\UpdateRiskAssessmentHazardDescriptionRequest.cs" />
+    <Compile Include="Request\SaveNonEmployeeRequest.cs" />
+    <Compile Include="Request\DetachNonEmployeeFromRiskAssessmentRequest.cs" />
+    <Compile Include="Request\MarkCompanyDefaultAsDeletedRequest.cs" />
+    <Compile Include="Request\MarkNonEmployeeAsDeletedRequest.cs" />
+    <Compile Include="Request\SaveCompanyDefaultRequest.cs" />
+    <Compile Include="Request\SearchEmployeesRequest.cs" />
+    <Compile Include="Request\SearchRiskAssessmentsRequest.cs" />
+    <Compile Include="Request\SearchUsersRequest.cs" />
+    <Compile Include="Request\SetUserRoleAndSiteRequest.cs" />
+    <Compile Include="Request\UpdateEmergencyContactRequest.cs" />
+    <Compile Include="Request\UpdateEmployeeRequest.cs" />
+    <Compile Include="Request\UpdateNonEmployeeRequest.cs" />
+    <Compile Include="Request\UpdateUserRoleRequest.cs" />
+    <Compile Include="Response\AddEmployeeResponse.cs" />
+    <Compile Include="Response\AddUserRoleResponse.cs" />
+    <Compile Include="Response\CompanyDefaultSaveResponse.cs" />
+    <Compile Include="Request\CreateRiskAssessmentRequest.cs" />
+    <Compile Include="DataTransferObjects\CompanyDetailsDto.cs" />
+    <Compile Include="DataTransferObjects\ContactDto.cs" />
+    <Compile Include="DataTransferObjects\NonEmployeeDto.cs" />
+    <Compile Include="DataTransferObjects\ResponsibilityTaskCategoryDto.cs" />
+    <Compile Include="DataTransferObjects\ResponsibilityTaskStatusesDto.cs" />
+    <Compile Include="DataTransferObjects\SiteAddressDto.cs" />
+    <Compile Include="DataTransferObjects\TaskCategoryDto.cs" />
+    <Compile Include="Implementations\Company\CompanyDetailsService.cs" />
+    <Compile Include="Implementations\NonEmployeeService.cs" />
+    <Compile Include="DataTransferObjects\GeneralRiskAssessmentDto.cs" />
+    <Compile Include="Implementations\GeneralRiskAssessments\GeneralRiskAssessmentService.cs" />
+    <Compile Include="Implementations\Sites\SiteGroupService.cs" />
+    <Compile Include="Implementations\Sites\SiteService.cs" />
+    <Compile Include="Implementations\TaskList\TaskService.cs" />
+    <Compile Include="DataTransferObjects\UserDto.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Request\Attributes\AtLeastOneDropDownSelected.cs" />
+    <Compile Include="Request\Attributes\AtLeastOneDropDownSelectedMainSite.cs" />
+    <Compile Include="Request\Attributes\GreaterThanZeroAttribute.cs" />
+    <Compile Include="Request\Attributes\OneDropDownSelected.cs" />
+    <Compile Include="Request\CompanyDetailsRequest.cs" />
+    <Compile Include="Request\DeleteSiteGroupRequest.cs" />
+    <Compile Include="Request\DelinkSiteRequest.cs" />
+    <Compile Include="Request\CreateUpdateSiteGroupRequest.cs" />
+    <Compile Include="Request\SaveResponsibilityTaskRequest.cs" />
+    <Compile Include="Request\CreateUpdateSiteRequest.cs" />
+    <Compile Include="Response\EmployeeEmergencyContactResponse.cs" />
+    <Compile Include="Response\TaskListSummaryResponse.cs" />
+    <Compile Include="Response\UpdateNonEmployeeResponse.cs" />
+    <Compile Include="Response\UpdateEmployeeResponse.cs" />
+    <Compile Include="RestAPI\ClientService.cs" />
+    <Compile Include="RestAPI\Responses\CompanyDetailsResponse.cs" />
+    <Compile Include="RestAPI\Responses\Contact.cs" />
+    <Compile Include="RestAPI\Responses\Links.cs" />
+    <Compile Include="RestAPI\Responses\SiteAddressResponse.cs" />
+    <Compile Include="RestAPI\RestClient.cs" />
+    <Compile Include="Mappers\SiteAddressDtoMapper.cs" />
+    <Compile Include="Validators\CopyRiskAssessmentRequestValidator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessSafe.Data\BusinessSafe.Data.csproj">
+      <Project>{0E42764A-6356-461F-9473-D452EFC22AC7}</Project>
+      <Name>BusinessSafe.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Domain\BusinessSafe.Domain.csproj">
+      <Project>{EA0B55F3-6232-400F-8BE0-FEC49883253F}</Project>
+      <Name>BusinessSafe.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Infrastructure\BusinessSafe.Infrastructure.csproj">
+      <Project>{9DD3289E-AA83-483D-88E1-F2FCE53B941C}</Project>
+      <Name>BusinessSafe.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Messages.Emails\BusinessSafe.Messages.Emails.csproj">
+      <Project>{CFC682DE-01ED-45D9-925A-8F764368514A}</Project>
+      <Name>BusinessSafe.Messages.Emails</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Messages\BusinessSafe.Messages.csproj">
+      <Project>{EE24F1BE-1BB4-413F-895D-7DC49325F36A}</Project>
+      <Name>BusinessSafe.Messages</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
+    <Compile Include="Implementations\VisitRequest\VisitRequestService.cs" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,37 @@
+﻿@using System.Globalization
+@using BusinessSafe.WebSite.Helpers
+@model BusinessSafe.WebSite.Areas.Documents.ViewModels.NewlyAddedDocumentGridRowViewModel
+<tr>
+    <td class="filename">
+        @Html.Hidden("DocumentGridRow_" + Model.DocumentLibraryId.ToString() + "_DocumentLibraryId", Model.DocumentLibraryId)
+        @Html.Hidden("DocumentGridRow_" + Model.DocumentLibraryId.ToString() + "_FileName", Model.Filename)
+        <a href="@Url.Action("DownloadDocument", "Document", new { enc = EncryptionHelper.Encrypt("DocumentLibraryId=" + @Model.DocumentLibraryId.ToString(CultureInfo.InvariantCulture)) })">
+            @Model.Filename
+        </a>
+    </td>
+    <td class="doc-type">
+        @if (Model.CanEditDocumentType)
+        {
+            @Html.DropDownList("DocumentGridRow_" + Model.DocumentLibraryId.ToString(CultureInfo.InvariantCulture) + "_DocumentType", Model.DocumentTypes, new { style = "width:150px;" })
+        }
+        else
+        {
+            @Html.Hidden("DocumentGridRow_" + Model.DocumentLibraryId.ToString(CultureInfo.InvariantCulture) + "_DocumentType", Model.DocumentTypes.First().Value)
+            @Html.DropDownList("DocumentGridRow_" + Model.DocumentLibraryId.ToString(CultureInfo.InvariantCulture) + "_DocumentType", Model.DocumentTypes, new { disabled = "disabled", style = "width:150px;" })
+        }
+    </td>
+    <td class="doc-site">
+        @Html.DropDownList("DocumentGridRow_" + Model.DocumentLibraryId.ToString(CultureInfo.InvariantCulture) + "_Site", Model.Sites, "All", new { style = "width:150px;" })
+    </td>
+    <td class="doc-title">
+        @Html.TextBox("DocumentGridRow_" + Model.DocumentLibraryId.ToString(CultureInfo.InvariantCulture) + "_Title", Model.Filename, new { maxlength = 100 })
+    </td>
+    <td class="doc-description">
+        @Html.TextBox("DocumentGridRow_" + Model.DocumentLibraryId.ToString(CultureInfo.InvariantCulture) + "_Description", Model.Description, new { maxlength = 250 })
+    </td>
+    <td class="delete">
+        <a href="#" class="deleteNewlyAddedDocument" id="DeleteNewlyAddedDocumentLink">
+            @Html.Hidden("DeleteArgument", EncryptionHelper.Encrypt("DocumentLibraryId=" + @Model.DocumentLibraryId.ToString(CultureInfo.InvariantCulture)))
+            <i class="icon-remove" /></a>
+    </td>
+</tr>

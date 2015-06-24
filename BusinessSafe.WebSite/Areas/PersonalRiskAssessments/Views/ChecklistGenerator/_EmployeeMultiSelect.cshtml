@@ -1,0 +1,10 @@
+﻿@using BusinessSafe.Application.DataTransferObjects
+@model List<EmployeeDto>
+    <ul>
+        @foreach (var employee in Model)
+        {
+            <li>@(employee.FullName + " (" + employee.JobTitle + ") ")<input type="checkbox" class="employeeMultiSelectCheckbox" value="@employee.Id"/></li>
+        }
+    </ul>
+<a class="btn btn-primary" href="#" id="AddMultipleEmployees">Add</a>
+<input type="button" id="SelectAllEmployees" class="btn" value="Select All" />

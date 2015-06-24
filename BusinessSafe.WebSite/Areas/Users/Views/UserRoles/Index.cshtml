@@ -1,0 +1,49 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.HtmlHelpers
+@using Cassette.Views
+@model BusinessSafe.WebSite.Areas.Users.ViewModels.UserRolesViewModel
+
+@{
+    ViewBag.Title = "User Roles";
+}
+<div id="userRolesMaintenanceContainer" class="container-fluid">
+    <section>
+        <span class="legend">User Roles</span>
+        <div class="major-index-actions">
+            @if (User.IsInRole(Permissions.AddUsers.ToString()))
+            {
+                <a id="AddUserRoleLink" class="btn btn-large btn-success" href="@Url.Action("New", "UserRoles", new { companyId = Model.CompanyId })" title="Add New User Role">
+                    Add New User Role</a>
+                
+            }
+        </div>
+        <div class="content">
+            <form method="get" action="" class="form-inline">
+                @Html.HiddenFor(x => x.CompanyId)
+                @Html.HiddenFor(x => x.IsNewUserRole)
+                @if(!Model.IsNewUserRole)
+                {
+                    @Html.Partial("_UserRolesSelection", Model)    
+                }
+                <div id="RolesDetails">
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("users");
+        @Bundles.RenderScripts()  
+    }
+    
+    <script type="text/javascript">
+        var roles = @Html.Raw(Json.Encode(Model.CompanyRoles));
+        $(function () {
+            userRolesManager.initialize(roles);
+        });
+    </script>
+}
+
+

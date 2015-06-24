@@ -1,0 +1,23 @@
+﻿@using Cassette.Views
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section>
+    <span class="legend">Hazardous Substances</span>
+    @Html.Partial("_AdviceLine")
+    @RenderBody()
+    @Html.Hidden("MarkRiskAssessmentDraftStatusUrl", Url.Action("MarkRiskAssessmentIsDraftStatus", "RiskAssessmentStatus", new { area = "" }))
+</section>
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("sharedriskassessment");
+        Bundles.Reference("hazardoussubstanceriskassessment");
+        @Bundles.RenderScripts()
+    }
+    @RenderSection("JavaScriptSection", false)
+    @if (ViewBag.IsReadOnly != null)
+    {
+        @Html.Hidden("IsReadOnly", true)
+    }
+}

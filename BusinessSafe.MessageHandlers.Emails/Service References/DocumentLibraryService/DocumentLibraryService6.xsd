@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Responses" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Responses" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="CreateFolderResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FolderId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreateFolderResponse" nillable="true" type="tns:CreateFolderResponse" />
+  <xs:complexType name="CreateDocumentFromBytesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DocumentId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreateDocumentFromBytesResponse" nillable="true" type="tns:CreateDocumentFromBytesResponse" />
+  <xs:complexType name="CreateDocumentFromPathResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DocumentId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreateDocumentFromPathResponse" nillable="true" type="tns:CreateDocumentFromPathResponse" />
+</xs:schema>

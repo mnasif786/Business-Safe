@@ -1,0 +1,64 @@
+﻿@model BusinessSafe.WebSite.Areas.Users.ViewModels.UserRolePermissionsViewModel
+<div id="RolePermissionsResult" class="row-fluid">
+    <div>
+        <div class="alert alert-success successful-saved-user-role hide">
+            User Role have been successfully saved.
+        </div>
+        <div class="page-header">
+            @if (Model.IsNewRole)
+            {
+                @Html.Partial("_NewRoleHeader")
+            }
+            else
+            {
+                @Html.Partial("_EditRoleHeader", Model)
+            }
+            @if (@Model.IsSaveEnabled(User) || @Model.IsDeleteEnabled(User))
+            {
+
+                <button class="btn btn-primary" value="Edit" type="submit" id="EditUserRoleButton">Edit</button>
+            }
+            @if (@Model.IsSaveEnabled(User))
+            {   
+                <button class="btn btn-success" value="Save" type="submit" id="SaveUserRoleButton">Save</button>
+            }
+            @if (Model.IsDeleteEnabled(User))
+            {
+                <button type="submit" id="DeleteUserRoleButton" value="Delete" class="btn btn-danger" data-id="@Model.RoleId">Delete</button>    
+            }
+            <div class="validation-summary-errors hide">
+                <ul>
+                    <li>Role Name is required</li>
+                </ul>
+            </div>
+            @Html.HiddenFor(x => x.RoleId)
+        </div>
+        @if (Model.RoleName != null)
+        {
+            <h2 id="user-role-name"><span class="tick"></span>@Model.RoleName</h2>
+        }
+        @foreach (var permissionGroup in Model.PermissionGroups.OrderBy(x => x.PermissionGroupId))
+        {
+            @Html.Partial("_PermissionGroup", permissionGroup)
+        }
+    </div>
+</div>
+<div class="hide">
+    <div id="dialogDeleteUserRole" title="Delete User Role">
+        <p>Are you sure you want to delete this user role?</p>
+    </div>
+    <div id="dialogCantDeleteUserRoleRoleInUse" title="Role In Use">
+        <div class="alert">
+            <p>The user role you are attempting to delete is currently in use. We are unable to delete this
+                user role.</p>
+            <p>To delete role please remove the role from the following users;</p>
+            <div class="UsersWithRoles"></div>
+        </div>
+    </div>
+    <div id="dialogUsersAffectedByRoleEdit" title="Users Affected By Role Edit">
+        <div class="alert">
+            <p>The following users will be affected by the permissions change to this role.</p>
+            <div class="UsersWithRoles"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+﻿@using BusinessSafe.Domain.CustomExceptions
+@using iTextSharp.text.html
+@using RestSharp.Extensions
+@model EvaluationChecklist.Models.DocumentTemplateViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <link href="~/Content/document.css" rel="stylesheet" type="text/css" />
+</head>
+    <body>
+            
+        
+        <div align="center">
+            
+            @Html.Partial("QuestionAnswerChecklist",Model)
+       
+        </div>
+        <div align="left">
+            <label> <span style="font-size:9px; font-style:italic;">Note:  @Model.Notes </span></label>
+        </div>    
+            
+
+    </body>
+</html>

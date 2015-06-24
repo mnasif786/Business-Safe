@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities.SafeCheck"
+                   assembly="BusinessSafe.Domain" auto-import="false">
+
+  <class name="Checklist" table="`SafeCheckCheckList`">
+
+    <id name="Id" column="Id" type="Guid">
+      <generator class="assigned"/>
+    </id>
+
+    <property name="CompanyName"/>
+    <property name="ClientId" />
+    <property name="SiteId" />
+    <property name="CoveringLetterContent" type="string" length="1000000"/>
+    <property name="VisitDate" />
+    <property name="VisitBy" />
+    <property name="VisitType"/>
+    <property name="Status"/>
+    <property name="MainPersonSeenName" column="PersonSeenName"/>
+    
+    <many-to-one name="MainPersonSeen" class=" BusinessSafe.Domain.Entities.Employee" column="PersonSeenId" lazy="false"/>
+   
+    <property name="AreasVisited"/>
+    <property name="AreasNotVisited"/>
+    <property name="EmailAddress"/>
+
+    <bag name="Questions" table="SafeCheckCheckListQuestion" inverse="true" cascade="save-update">      
+      <key column="ChecklistId"></key>      
+      <one-to-many class="ChecklistQuestion"   />      
+    </bag>
+    
+    <bag name="Answers" table="SafeCheckCheckListAnswer" inverse="true" cascade="save-update">
+      <key column="ChecklistId"></key>
+      <one-to-many class="ChecklistAnswer"  />
+    </bag>
+
+    <many-to-one name="ImpressionType" class="ImpressionType" column="ImpressionTypeId" />
+
+    <bag name="ImmediateRiskNotifications" table="SafeCheckImmediateRiskNotification" inverse="true" cascade="save-update" access="field.camelcase-underscore">
+      <key column="ChecklistId"></key>
+      <one-to-many class="ImmediateRiskNotification" />
+    </bag>
+    <property name="Deleted" type="bool" />
+    <property name="CreatedOn" update="false" />
+    <many-to-one name="CreatedBy" class="BusinessSafe.Domain.Entities.UserForAuditing" column="CreatedBy" lazy="false" update="false" />
+    <property name="LastModifiedOn" />
+    <many-to-one name="LastModifiedBy" class="BusinessSafe.Domain.Entities.UserForAuditing" column="LastModifiedBy"/>
+    <many-to-one name="ActionPlan" class="BusinessSafe.Domain.Entities.ActionPlan" column ="ActionPlanId" lazy ="false" cascade="save-update" unique="true"  />
+
+    <property name="ChecklistCreatedOn" />
+    <property name="ChecklistCreatedBy" />
+    <property name="ChecklistCompletedOn" />
+    <property name="ChecklistCompletedBy" />
+    <property name="ChecklistSubmittedOn" />
+    <property name="ChecklistSubmittedBy" />
+    <property name="ChecklistLastModifiedBy" />
+    <many-to-one name="QaAdvisor" class="QaAdvisor" column="QaAdvisor" lazy="false"/>
+    <property name="QAComments"/>
+    <property name="EmailReportToPerson" type="bool"/>
+    <property name="EmailReportToOthers" type="bool" />
+    <property name="PostReport" type="bool"/>
+    <property name="OtherEmailAddresses"/>
+              
+    <many-to-one name="ChecklistTemplate" class="ChecklistTemplate" column="IndustryId"/>
+    <property name="UpdatesRequired"/>
+    
+    <property name="ExecutiveSummaryUpdateRequired"/>
+    <property name="ExecutiveSummaryQACommentsResolved"/>
+    <property name="ExecutiveSummaryQACommentsSignedOffBy"/>
+    <property name="ExecutiveSummaryQACommentsSignedOffDate"/>
+
+
+    <property name="ExecutiveSummaryDocumentLibraryId"/>
+    <property name="ReportHeaderType"/>
+    <property name="QaAdvisorAssignedOn"/>
+
+    <bag name="UpdatesRequiredLog" table="SafeCheckChecklistUpdatesRequired" inverse="true" cascade="save-update">
+      <key column="ChecklistId"></key>
+      <one-to-many class="ChecklistUpdatesRequired" />
+    </bag>
+
+    <bag name="PersonsSeen" table="SafeCheckChecklistPersonSeen" inverse="true" cascade="all-delete-orphan">
+      <key column="ChecklistId"></key>
+      <one-to-many class="ChecklistPersonSeen" />
+    </bag>
+
+    <bag name="OtherEmails" table="SafeCheckChecklistOtherEmails" inverse="true" cascade="all-delete-orphan">
+      <key column="ChecklistId"></key>
+      <one-to-many class="ChecklistOtherEmail" />
+    </bag>
+    
+    <property name="IncludeActionPlan" type="bool" />
+    <property name="IncludeComplianceReview" type="bool" />
+    <property name="Jurisdiction"/>
+    <property name="DeletedOn" />
+    <property name="DeletedBy" />
+    <property name="ClientLogoFilename" />
+    <property name="ClientSiteGeneralNotes" />
+    <property name="SpecialReport" type="bool" />
+  </class>
+</hibernate-mapping>

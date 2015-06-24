@@ -1,0 +1,18 @@
+USE [BusinessSafe]
+GO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Answer' AND COLUMN_NAME = 'YesNoNotApplicableResponse')
+BEGIN
+	ALTER TABLE [Answer]
+	ADD [YesNoNotApplicableResponse] [int] NULL
+END
+GO	
+
+--//@UNDO 
+
+IF  EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Answer' AND COLUMN_NAME = 'YesNoNotApplicableResponse')
+BEGIN
+	ALTER TABLE [Answer]
+	DROP COLUMN [YesNoNotApplicableResponse]
+END
+GO	

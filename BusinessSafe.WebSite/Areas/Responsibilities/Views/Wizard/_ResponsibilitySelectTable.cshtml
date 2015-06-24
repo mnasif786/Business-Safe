@@ -1,0 +1,18 @@
+﻿@model BusinessSafe.WebSite.Areas.Responsibilities.ViewModels.Wizard.SelectResponsibilitiesViewModel
+@{
+    var currCategory = string.Empty;
+}
+        @foreach (var resp in Model.Responsibilities)
+        {
+            if(currCategory != resp.Category)
+            {
+                currCategory = resp.Category;
+                if (currCategory != string.Empty)
+                {
+@Html.Partial("_ResponsibilitySelectTableFooter")                    
+                }
+@Html.Partial("_ResponsibilitySelectTableHeader", currCategory)
+            }
+            @Html.Partial("_ResponsibilityRow", resp)
+        }
+@Html.Partial("_ResponsibilitySelectTableFooter")

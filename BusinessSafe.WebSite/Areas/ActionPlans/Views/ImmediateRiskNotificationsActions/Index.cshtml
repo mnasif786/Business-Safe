@@ -1,0 +1,68 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Extensions
+@using BusinessSafe.WebSite.HtmlHelpers
+@using Cassette.Views
+@model BusinessSafe.WebSite.Areas.ActionPlans.ViewModels.ImmediateRiskNotificationActionsIndexViewModel
+@{
+    ViewBag.Title = "Actions and IRNs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="dialog">
+    
+</div>
+
+<section>
+    <span class="legend">Actions</span>
+    <div class="content">
+        <fieldset>
+            @Html.Partial("_Header",Model)
+        </fieldset>
+        @*<fieldset>
+            @Html.Partial("_SearchForm", Model)
+        </fieldset>*@
+        @if (Model.ImmediateRiskNotification.Any())
+        {
+            <fieldset>
+                @Html.Partial("_ImmediateRiskNotification", Model)
+            </fieldset>
+        }
+        <fieldset>
+            @Html.Partial("_Actions", Model)
+        </fieldset>
+        <fieldset>
+        @if (!@Model.NoLongerRequired)
+        {
+            <input type="submit" value="Assign All" class="btn btn-success pull-right assign-all-btn" />
+        }
+        </fieldset>
+    </div>
+</section>
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("immediaterisknotificationsactionsindex");
+        @Bundles.RenderScripts()
+    }
+    <script type="text/javascript">
+        $(function() {
+            var status = @Html.Raw(Json.Encode(Model.Status));
+            var assignedTo = @Html.Raw(Json.Encode(Model.AssignedTo));
+
+            immediateRiskNotificationActionsSearch.initialise(status, assignedTo);
+            BusinessSafe.ImmediateRiskNotificationAndActions.AssignedTo.initialise(assignedTo);
+
+            var canEdit = @Html.Raw(Json.Encode(Model.CanEdit(User))) && !@Html.Raw(Json.Encode(Model.NoLongerRequired)) ;
+
+            if (canEdit == false) {
+                BusinessSafe.ImmediateRiskNotificationAndActions.AssignedTo.disableAllTasksForNonEditPermissions();
+            }
+
+//            var temp = @Html.Raw(Json.Encode(Model.NoLongerRequired)) ;
+//            
+//            if (temp == true) {
+//                BusinessSafe.ImmediateRiskNotificationAndActions.AssignedTo.disableAllTasksForNonEditPermissions();
+//            }
+//           
+        });
+    </script>
+}

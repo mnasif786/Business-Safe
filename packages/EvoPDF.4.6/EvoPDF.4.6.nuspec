@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>EvoPDF</id>
+    <version>4.6</version>
+    <title>EVO HTML to PDF Converter</title>
+    <authors>EVO PDF Software</authors>
+    <owners>EVO PDF Software</owners>
+    <projectUrl>http://www.evopdf.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>EVO HTML to PDF Converter is a .NET library that can be easily integrated in any type of .NET applications to convert web pages, HTML strings and streams to PDF or to image. The converter has support for HTML5, CSS3, SVG, Canvas, Web Fonts and JavaScript. Does not require installation or any third party tools.
+
+EVO HTML to PDF Converter for .NET Product offers full support for HTML tags, CSS styles, SVG vector graphics, Canvas, Web Fonts, JavaScript, page breaks control with CSS styles, repeating HTML table header and footer in PDF pages, live URLs and internal links in PDF, automatically generated bookmarks, HTML in the headers and footers, PDF merge, PDF split and PDF edit.</description>
+    <summary>Convert HTML to PDF in your .NET application using the EVO HTML to PDF Converter.</summary>
+    <releaseNotes />
+    <copyright />
+    <language />
+    <tags>HTML to PDF Converter</tags>
+    <references>
+      <reference file="evohtmltopdf.dll" />
+    </references>
+  </metadata>
+</package>

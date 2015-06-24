@@ -1,0 +1,26 @@
+﻿@model BusinessSafe.WebSite.Areas.HazardousSubstanceInventory.ViewModels.AddEditHazardousSubstanceViewModel
+<div class="row">
+    <div class="span2">
+        <label class="@(Model.ShowAdditionalInformation() ? "" : "hide")">
+            Additional Information:</label>
+    </div>
+</div>
+@foreach (var item in Model.SafetyPhrasesAdditionalInformation.Select((additionalInformationViewModel, index) => new { additionalInformationViewModel, index }))
+{
+                    
+    <div id="@item.additionalInformationViewModel.ReferenceNumber" class="row additional-information">
+        <div class="span1 offset2">
+            @item.additionalInformationViewModel.ReferenceNumber
+        </div>
+        <div class="span8">
+            <input class="input-xxlarge" type="text" name="@(string.Format("AdditionalInformation[{0}].AdditionalInformation", item.index))" value="@item.additionalInformationViewModel.AdditionalInformation" maxlength="200" data-val-length="Max 200 characters" data-val-length-max="200" data-val="true" />
+            <input type="hidden" name="@(string.Format("AdditionalInformation[{0}].SafetyPhaseId", item.index))" value="@item.additionalInformationViewModel.SafetyPhaseId" />
+            <input type="hidden" name="@(string.Format("AdditionalInformation[{0}].ReferenceNumber", item.index))" value="@item.additionalInformationViewModel.ReferenceNumber" />
+            <span data-valmsg-replace="true" data-valmsg-for="@(string.Format("AdditionalInformation[{0}].AdditionalInformation", item.index))" class="field-validation-valid">
+            </span>
+        </div>
+    </div>
+        
+}
+<div id="SafetyPhrasesAdditionalInformationPlaceHolder">
+</div>

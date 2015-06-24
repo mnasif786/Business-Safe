@@ -1,0 +1,23 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Extensions
+@model BusinessSafe.WebSite.Areas.AccidentReports.ViewModels.AccidentSummaryViewModel
+<h2>
+    <a class="btn" href="@Url.Action("Index", "Search", new {area = "AccidentReports", companyId = @Html.GetUsersCompanyId(User)})" title="Close Accident Record">
+        <i class="icon-remove"></i></a>
+    
+    @if (!Model.IsDeleted && User.IsInRole(Permissions.ViewAccidentRecords.ToString()))
+    {
+    <a class="btn" href="@Url.Action("Pdf", "AccidentRecord", new { area = "SqlReports", accidentRecordId = Model.AccidentRecordId })" title="Print Accident Record">
+        <i class="icon-print"></i>
+    </a>
+    } 
+            
+    @if (!Model.IsDeleted && User.IsInRole(Permissions.EditAccidentRecords.ToString()))
+    {
+        <a class="btn" href="@Url.Action("Index", @ViewBag.CurrentController, new { accidentRecordId = Model.AccidentRecordId, companyId = @Html.GetUsersCompanyId(User) })" title="Edit Accident Record">
+            <i class="icon-edit"></i>
+        </a>
+    }
+    <i class="tick"></i>Accident Record
+    @Html.Partial("_AccidentRecordStatus", Model.Status.ToString())
+</h2>

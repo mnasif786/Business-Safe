@@ -1,0 +1,37 @@
+﻿@using BusinessSafe.WebSite.Areas.HazardousSubstanceRiskAssessments.ViewModels
+@model HazardousSubstanceRiskAssessmentReviewsViewModel
+@{
+    ViewBag.Title = "Review";
+}
+<div class="content">
+@Html.Partial("_RiskAssessmentSummary", ViewBag.RiskAssessmentSummary as HazardousSubstanceSummaryViewModel)
+    @Html.Hidden("RiskAssessmentId", @Model.ReviewViewModel.RiskAssessmentId)
+    @Html.Hidden("CompanyId", @Model.ReviewViewModel.CompanyId)
+    <div class="container tabs ipad-container">
+        
+        @{
+            var hazardousSubstanceRiskAssessmentTabViewModel = ViewBag.TabViewModel as HazardousSubstanceRiskAssessmentTabViewModel;
+        }
+
+        @Html.Partial("_Tabs", hazardousSubstanceRiskAssessmentTabViewModel)
+
+        <div class="fixed-content">
+        @Html.Partial("_TitleBar", ViewBag.RiskAssessmentSummary as HazardousSubstanceSummaryViewModel)
+            @Html.Partial("_RiskAssessmentReviews", Model.ReviewViewModel)
+        </div>
+    </div>
+    <div class="hide">
+        <div id="AddRiskAssessmentReviewDialog" title="Add Risk Assessment Review">
+        </div>
+        <div id="completeTaskDialog" title="Risk Assessment Review">
+        </div>
+    </div>
+</div>
+@section JavaScriptSection
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            riskAssessmentReviewsManager.initialize();
+        });
+    </script>
+}

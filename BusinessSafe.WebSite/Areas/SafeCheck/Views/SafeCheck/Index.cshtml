@@ -1,0 +1,55 @@
+﻿@model BusinessSafe.WebSite.Areas.SafeCheck.Models.CheckListViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<STYLE type="text/css">
+    table {    border:1px solid black;}
+    tr {    border:1px solid black;}
+    td {    border:1px solid black;}      
+</STYLE>
+
+
+<fieldset>
+    <legend>Safe Check Check List</legend>
+
+    <div class="display-label"><h3>CompanyName</h3></div>
+    <div class="display-field">@Html.DisplayFor(model => model.CompanyName)</div>
+
+    
+    <div>
+    <h3>Questions</h3>
+    <table>
+   
+    @foreach (var q in Model.Questions)
+    {        
+        <tr>
+            <td><h4>@q.Text</h4></td>
+
+            <td><h4>Possible Answers</h4></td>
+            @foreach (var a in q.Answer.PossibleResponses)
+            {
+                <td>@a</td>            
+            }        
+        </tr>
+        
+        <tr><td><h4>
+        @if( q.Answer.SelectedResponse == 0)
+            {
+                <p>No Answer Selected</p>
+            }
+            else
+            {
+                @q.Answer.PossibleResponses[q.Answer.SelectedResponse]
+            }
+            </h4>
+        </td>
+        
+        <td colspan="5">@q.Answer.Comment</td></tr>     
+    }
+    
+    </table>
+    </div>
+</fieldset>
+

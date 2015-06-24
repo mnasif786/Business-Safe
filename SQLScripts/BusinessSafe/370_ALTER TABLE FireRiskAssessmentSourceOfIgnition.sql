@@ -1,0 +1,118 @@
+USE [BusinessSafe]
+GO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'FireRiskAssessmentSourceOfIgnitions' AND COLUMN_NAME = 'Id')
+BEGIN
+	ALTER TABLE [FireRiskAssessmentSourceOfIgnitions]
+	ADD [Id] BIGINT IDENTITY(1,1) NOT NULL 
+END
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'FireRiskAssessmentSourceOfIgnitions' AND COLUMN_NAME = 'CreatedOn')
+BEGIN
+	ALTER TABLE [FireRiskAssessmentSourceOfIgnitions]
+	ADD [CreatedOn] DATETIME NULL
+END
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'FireRiskAssessmentSourceOfIgnitions' AND COLUMN_NAME = 'CreatedBy')
+BEGIN
+	ALTER TABLE [FireRiskAssessmentSourceOfIgnitions]
+	ADD [CreatedBy] UNIQUEIDENTIFIER NULL
+END
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'FireRiskAssessmentSourceOfIgnitions' AND COLUMN_NAME = 'LastModifiedOn')
+BEGIN
+	ALTER TABLE [FireRiskAssessmentSourceOfIgnitions]
+	ADD [LastModifiedOn] DATETIME NULL
+END
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'FireRiskAssessmentSourceOfIgnitions' AND COLUMN_NAME = 'LastModifiedBy')
+BEGIN
+	ALTER TABLE [FireRiskAssessmentSourceOfIgnitions]
+	ADD [LastModifiedBy] UNIQUEIDENTIFIER NULL
+END
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'FireRiskAssessmentSourceOfIgnitions' AND COLUMN_NAME = 'Deleted')
+BEGIN
+	ALTER TABLE [FireRiskAssessmentSourceOfIgnitions]
+	ADD [Deleted] BIT NOT NULL DEFAULT(0)
+END
+GO
+
+DECLARE @now AS DATETIME
+SET @now = GETDATE()
+
+UPDATE [FireRiskAssessmentSourceOfIgnitions]
+SET [CreatedBy] = 'B03C83EE-39F2-4F88-B4C4-7C276B1AAD99',
+[CreatedOn] = @now
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'FireRiskAssessmentSourceOfIgnitions' AND COLUMN_NAME = 'CreatedOn' AND IS_NULLABLE = 'NO')
+BEGIN
+	ALTER TABLE [FireRiskAssessmentSourceOfIgnitions]
+	ALTER COLUMN [CreatedOn] DATETIME NOT NULL
+END
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'FireRiskAssessmentSourceOfIgnitions' AND COLUMN_NAME = 'CreatedBy' AND IS_NULLABLE = 'NO')
+BEGIN
+	ALTER TABLE [FireRiskAssessmentSourceOfIgnitions]
+	ALTER COLUMN [CreatedBy] UNIQUEIDENTIFIER NOT NULL
+END
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE CONSTRAINT_NAME = 'PK_FireRiskAssessmentSourceOfIgnitions' )
+BEGIN
+	ALTER TABLE [FireRiskAssessmentSourceOfIgnitions] 
+	DROP CONSTRAINT [PK_FireRiskAssessmentSourceOfIgnitions]
+END
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE CONSTRAINT_NAME = 'PK_FireRiskAssessmentSourceOfIgnitions2' )
+BEGIN
+	ALTER TABLE [FireRiskAssessmentSourceOfIgnitions] 
+	ADD [PK_FireRiskAssessmentSourceOfIgnitions2] UNIQUEIDENTIFIER PRIMARY KEY ([Id])
+END
+GO
+
+--//@UNDO 
+USE [BusinessSafe]
+GO
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE CONSTRAINT_NAME = 'PK_FireRiskAssessmentSourceOfIgnitions2' )
+BEGIN
+	ALTER TABLE [FireRiskAssessmentSourceOfIgnitions] 
+	DROP CONSTRAINT [PK_FireRiskAssessmentSourceOfIgnitions2] 
+END
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'FireRiskAssessmentSourceOfIgnitions' AND COLUMN_NAME = 'Id')
+BEGIN
+	ALTER TABLE [FireRiskAssessmentSourceOfIgnitions]
+	DROP COLUMN [Id]
+END
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'FireRiskAssessmentSourceOfIgnitions' AND COLUMN_NAME = 'CreatedOn')
+BEGIN
+	ALTER TABLE [FireRiskAssessmentSourceOfIgnitions]
+	DROP COLUMN [CreatedOn]
+END
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'FireRiskAssessmentSourceOfIgnitions' AND COLUMN_NAME = 'CreatedBy')
+BEGIN
+	ALTER TABLE [FireRiskAssessmentSourceOfIgnitions]
+	DROP COLUMN [CreatedBy] 
+END
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'FireRiskAssessmentSourceOfIgnitions' AND COLUMN_NAME = 'LastModifiedOn')
+BEGIN
+	ALTER TABLE [FireRiskAssessmentSourceOfIgnitions]
+	DROP COLUMN [LastModifiedOn]
+END
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'FireRiskAssessmentSourceOfIgnitions' AND COLUMN_NAME = 'LastModifiedBy')
+BEGIN
+	ALTER TABLE [FireRiskAssessmentSourceOfIgnitions]
+	DROP COLUMN [LastModifiedBy]
+END
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'FireRiskAssessmentSourceOfIgnitions' AND COLUMN_NAME = 'Deleted')
+BEGIN
+	ALTER TABLE [FireRiskAssessmentSourceOfIgnitions]
+	DROP COLUMN [Deleted]
+END
+GO

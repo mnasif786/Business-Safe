@@ -1,0 +1,61 @@
+﻿@using BusinessSafe.WebSite.Areas.PersonalRiskAssessments.ViewModels
+@model PersonalRiskAssessmentTabViewModel
+@Html.Hidden("CurrentStatus", (int)Model.CurrentTab)
+<ul class="nav nav-pills" id="myTab">
+    <li class="@Model.IsTabActive(PersonalRiskAssessmentTabs.Summary.ToString())">
+        @Html.ActionLink("Summary", Model.IsReadOnly ? "View" : "Index", "Summary", new { area = "PersonalRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId }, new { id = "summary", @class = "riskassessment-tab-links", @mainUrl = "Summary", @tabIndex = "1" })
+    </li>
+    <li class="@Model.IsTabActive(PersonalRiskAssessmentTabs.PremisesInformation.ToString())">
+        @Html.ActionLink("Premises Information", Model.IsReadOnly ? "View" : "Index", "PremisesInformation", new { area = "PersonalRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId }, new { id = "premisesinformation", @class = "riskassessment-tab-links", @mainUrl = "PremisesInformation", @tabIndex = "2" })
+    </li>
+    <li class="@Model.IsTabActive(PersonalRiskAssessmentTabs.ChecklistGenerator.ToString())">
+        @Html.ActionLink("Checklist Generator", Model.IsReadOnly ? "View" : "Index", "ChecklistGenerator", new { area = "PersonalRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId }, new { id = "checklist-generator", @class = "riskassessment-tab-links", @mainUrl = "ChecklistGenerator", @tabIndex = "3" })
+    </li>
+    @if (Model.ChecklistSent)
+    {
+        <li class="@Model.IsTabActive(PersonalRiskAssessmentTabs.ChecklistManager.ToString())">
+            @Html.ActionLink("Checklist Manager", Model.IsReadOnly ? "View" : "Index", "ChecklistManager", new {area = "PersonalRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId}, new {id = "checklist-manager", @class = "riskassessment-tab-links", @mainUrl = "ChecklistManager", @tabIndex = "4"})
+        </li>
+    }
+    <li class="@Model.IsTabActive(PersonalRiskAssessmentTabs.Hazards.ToString())">
+        @if (Model.Id > 0)
+        {
+            @Html.ActionLink("Hazards", Model.IsReadOnly ? "View" : "Index", "Hazards", new {area = "PersonalRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId}, new {id = "hazardspeople", @class = "riskassessment-tab-links hazardspeoplelink ", @mainUrl = "Hazards", @tabIndex = "5"})
+        }
+        else
+        {
+            <a href="#" class="riskassessment-tab-links">Hazards</a>
+        }
+    </li>
+
+    <li class="@Model.IsTabActive(PersonalRiskAssessmentTabs.ControlMeasures.ToString())">
+        @if (Model.Id > 0)
+        {
+            @Html.ActionLink("Control Measures", Model.IsReadOnly ? "View" : "Index", "ControlMeasures", new { area = "PersonalRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId }, new { id = "controlmeasures", @class = "riskassessment-tab-links actionslink ", @mainUrl = "RAActions", @tabIndex = "6" })
+        }
+        else
+        {
+            <a href="#" class="riskassessment-tab-links">Control Measures</a>
+        }
+    </li>
+    <li class="@Model.IsTabActive(PersonalRiskAssessmentTabs.Documents.ToString())">
+        @if (Model.Id > 0)
+        {
+            @Html.ActionLink("Attach Documents", Model.IsReadOnly ? "View" : "Index", "Documents", new { area = "PersonalRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId }, new { id = "attachdocuments", @class = "riskassessment-tab-links attachdocumentslink", @mainUrl = "AttachDocument", @tabIndex = "7" })
+        }
+        else
+        {
+            <a href="#" class="riskassessment-tab-links">Attach Documents</a>
+        }
+    </li>
+    <li class="@Model.IsTabActive(PersonalRiskAssessmentTabs.Review.ToString())">
+        @if (Model.Id > 0)
+        {
+            @Html.ActionLink("Review", Model.IsReadOnly ? "View" : "Index", "Review", new { area = "PersonalRiskAssessments", riskAssessmentId = Model.Id, Model.CompanyId }, new { id = "review", @class = "riskassessment-tab-links reviewlink", @mainUrl = "Review", @tabIndex = "8" })
+        }
+        else
+        {
+            <a href="#" class="riskassessment-tab-links">Review</a>
+        }
+    </li>
+</ul>

@@ -1,0 +1,57 @@
+﻿@model BusinessSafe.MessageHandlers.Emails.ViewModels.SendChecklistAssignedEmailViewModel
+<head>
+    <style>
+        body
+        {
+            background-color: white;
+            font-size: .85em;
+            font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
+            margin: 0;
+            padding: 0;
+            color: #393939;
+        }
+        
+        h1
+        {
+            font-size: 2em;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+        
+    </style>
+</head>
+<body>
+    
+    <h1>
+        SafeCheck - A SafeCheck Report has been assigned to you
+    </h1>
+
+    <p>
+        Following report is ready for your review:
+    </p>
+    <p>
+        CAN: <b>@Model.Can</b>
+    </p>
+    <p>
+        Visit Date: <b>@Model.VisitDate</b>
+    </p>
+    <p>
+        Visit By: <b>@Model.VisitBy</b>
+    </p>
+    <p>
+        Completed Date: <b>@Model.CompletedDate</b>
+    </p>
+    <p><u>Additional Notes</u></p>
+    @if (!String.IsNullOrEmpty(Model.EmailReportTo))
+    {
+        <p>
+            Email Report To: @Model.EmailReportTo
+        </p>
+    }
+    @if (!String.IsNullOrEmpty(Model.PostReportTo))
+    {
+        <p>
+            Mail Report To: @Model.PostReportTo
+        </p>
+    }
+</body>

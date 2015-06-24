@@ -1,0 +1,17 @@
+USE [BusinessSafe]
+GO 
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG = 'BusinessSafe' AND TABLE_NAME = 'SafeCheckCheckListAnswer' AND COLUMN_NAME = 'QaSignedOffBy')
+BEGIN
+	ALTER TABLE [SafeCheckCheckListAnswer]
+	ADD [QaSignedOffBy] VARCHAR(100)
+END
+GO
+
+--//@UNDO
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG = 'BusinessSafe' AND TABLE_NAME = 'SafeCheckCheckListAnswer' AND COLUMN_NAME = 'QaSignedOffBy')
+BEGIN
+	ALTER TABLE [SafeCheckCheckListAnswer]
+	DROP [QaSignedOffBy] 
+END
+GO

@@ -1,0 +1,25 @@
+﻿@model BusinessSafe.WebSite.ViewModels.SupplierViewModel
+<div id="dialogAddSupplier" title="Supplier" class="form-inline">
+    <fieldset>
+        <legend><h3>Add New Supplier</h3></legend>
+        <div class="row">
+        <label class="span2" for="Name">Name</label>
+        <input id="SupplierName" type="text" class="input-xlarge" id="Name" value="@Model.Name"/>
+        </div>
+        @Html.HiddenFor(x => x.SupplierId)
+        @Html.HiddenFor(x => x.CompanyId)
+        <div id="validationDisplay" class="hide validation-summary-errors">
+            <ul>
+            </ul>
+        </div>
+    </fieldset>
+        <div class="row">
+    <label class="span2"></label>
+    @Html.Partial("_MatchingDefaults")
+    @if (Model.IsSaveButtonEnabled(User))
+    {
+        <button id="SaveNewSupplierButton" type="button" class="btn btn-primary">Save Supplier</button>
+    }
+    <button id="CancelButton" class="btn btn-link">Cancel</button>
+    </div>
+</div>

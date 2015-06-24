@@ -1,0 +1,52 @@
+﻿@using BusinessSafe.WebSite.Areas.Responsibilities.ViewModels
+@using BusinessSafe.WebSite.Extensions
+@using Telerik.Web.Mvc.UI
+@model IEnumerable<BusinessSafe.WebSite.Areas.Responsibilities.ViewModels.ResponsibilityTasksViewModel>
+
+
+      
+    <div>
+
+@Html.Telerik().Grid(Model).Name("ResponsibilitiesTaskGrid").DataKeys(keys => keys.Add(c => c.Id)).DataBinding(dataBinding =>
+            dataBinding.Server().Delete("todo", "todo")).Columns(
+                columns =>
+                {
+                    columns.Bound(o => o.Id).Visible(false);
+                    columns.Template(@<text>
+                                                     @if (item.IsReoccurring)
+                                                     {
+                                                          <span class='label label-important label-reoccurring-task' title="@item.GetReoccurringFrequencyDetails()"  rel="tooltip">R</span>
+                                                     }
+                                                 </text>).Width("1%");
+                    columns.Bound(o => o.Title).Width("12%");
+                    columns.Bound(o => o.Description).Title("Description").Width("35%");
+                    columns.Bound(o => o.AssignedTo).Title("Assignee").Width("7%");
+                    columns.Bound(o => o.Site).Width("5%");
+                    columns.Bound(o => o.CreatedDateFormatted).Title("Created").Width("2%");
+                    columns.Bound(o => o.DueDateFormatted).Title("Due Date").Width("2%");
+                    columns.Template(@<text>
+                                                     
+                                                     <span>@item.Status</span>
+                                                     <div class="rsp-status" style="width:120px">
+                                                             @if (item.IsCompleted || ViewBag.IsReadOnly != null)
+                                                             {
+                                                                  <a href="#" data-id="@item.Id" class="btn responsibilityTaskViewButton">
+                                                                      <i class="icon-search" title="View"></i></a>
+                                                             }
+                                                             else
+                                                             {
+                                                                  <a href="#" data-id="@item.Id" class="btn responsibilityTaskEditButton add-edit-link">
+                                                                      <i class="icon-edit" title="Edit"></i></a>
+                                                                 <a href="#" data-ir="@item.IsReoccurring"  data-id="@item.Id"class="btn responsibilityTaskDeleteButton btn-danger add-edit-link" style="color: white;">
+                                                                     <i class="icon-remove" title="Remove"></i></a>
+                                                                 if (item.IsNoLongerRequired == false && !String.IsNullOrEmpty(item.AssignedTo))
+                                                                 {
+                                                                     <a href="#" data-id="@item.Id" class="btn responsibilityTaskAssignButton">
+                                                                         <i class="icon-share" title="Assign"></i></a>
+                                                                 }
+                                                             }                                                         
+                                                     </div>
+                                                 </text>).Title("Status").Width("18%");
+                }).Pageable(page => page.PageSize(10) ).Sortable()
+    </div>
+

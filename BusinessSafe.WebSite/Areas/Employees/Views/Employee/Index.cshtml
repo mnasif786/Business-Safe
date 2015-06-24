@@ -1,0 +1,642 @@
+﻿@model BusinessSafe.WebSite.Areas.Employees.ViewModels.EmployeeViewModel 
+@using BusinessSafe.Domain.Entities
+@using BusinessSafe.WebSite.AuthenticationService
+@using Cassette.Views
+@{
+    ViewBag.Title = "Employee";
+}
+<form method="post" action="@Url.Action(@Model.GetPostAction(), "Employee")">
+@Html.Hidden("EmployeeId", @Model.GetEmployeeId())
+@Html.HiddenFor(model => model.CompanyId)
+<section>
+    <span class="legend">Company Employees</span>
+    <div class="container tabs ipad-container">
+        <ul class="nav nav-pills">
+            <li class="active"><a id="personal-details-link" href="#personal-details">Personal Details</a></li>
+            <li><a id="organisational-details-link" href="#organisational-details">Organisational Details</a> </li>
+            <li><a id="additional-details-link" href="#additional-details">Additional Details</a></li>
+             @if (User.IsInRole(Permissions.AddUsers.ToString()) || User.IsInRole(Permissions.EditUsers.ToString()))
+            {
+                <li><a id="create-user-link" href="#create-user">Create User</a></li>
+            }
+            
+            @if (User.IsInRole(Permissions.AddCompanyDefaults.ToString()) || User.IsInRole(Permissions.EditCompanyDefaults.ToString()))
+            {
+                <li><a id="risk-assessor-details-link" href="#risk-assessor-details">Risk Assessor</a></li>
+             }
+        </ul>
+        <div class="content fixed-content">
+            <h2>
+                <a id="close-employee-record" class="btn" href="@Url.Action("Index", "EmployeeSearch", new {companyId = Model.CompanyId})" title="Close Employee Record"><i class="icon-remove"></i></a>
+                @*<a id="print-employee-record" class="btn" href="" title="Print Employee Record"><i class="icon-print"></i></a>*@
+                @if (User.IsInRole(Permissions.EditEmployeeRecords.ToString()) && ViewBag.IsReadOnly != null)
+                {               
+                    <a id="edit-employee-record" class="btn" href="@Url.Action("Index", "Employee", new { employeeId = Model.EmployeeId, companyId = Model.CompanyId })" title="Edit Employee Record">
+                        <i class="icon-edit"></i></a>
+                }
+                <span class="tick"></span>@ViewBag.Title
+            </h2>
+            <div class="tab-content row form-inline">
+                <div id="personal-details" class="tab-pane active">
+                    <fieldset>
+                        <legend class="span12">
+                            <h3>
+                                Personal Details</h3>
+                        </legend>
+                        <div class="span6">
+                            <label class="span2" for="EmployeeReference">
+                                Employee Reference
+                            </label>
+                            @Html.TextBox("EmployeeReference", Model.EmployeeReference, new { @class = "span3" })
+                        </div>
+                        <div class="span6">
+                            <label class="span2" for="NameTitle">
+                                Title
+                            </label>
+                            @Html.TextBox("NameTitle")
+                            @Html.Hidden("NameTitleId", Model.NameTitle, new { @class = "span3" })
+                        </div>
+                        <div class="span6">
+                            <label class="span2" for="Forename">
+                                Forename
+                            </label>
+                            @Html.TextBox("Forename", Model.Forename, new { @class = "span3" })
+                        </div>
+                        <div class="span6">
+                            <label class="span2" for="Surname">
+                                Surname
+                            </label>
+                            @Html.TextBox("Surname", Model.Surname, new { @class = "span3" })
+                        </div>
+                        <div class="span6">
+                            <label class="span2" for="MiddleName">
+                                Middle Name
+                            </label>
+                            @Html.TextBox("MiddleName", Model.MiddleName, new { @class = "span3" })
+                        </div>
+                        <div class="span6">
+                            <label class="span2" for="Surname">
+                                Previous Surname
+                            </label>
+                            @Html.TextBox("PreviousSurname", Model.PreviousSurname, new { @class = "span3" })
+                        </div>
+                        <div class="span6">
+                            <label class="span2" for="Sex">
+                                Gender
+                            </label>
+                            @Html.TextBox("Sex")
+                            @Html.Hidden("SexId", Model.Sex)
+                        </div>
+                        <div class="span6">
+                            <label class="span2" for="DateOfBirth">
+                                DOB:
+                            </label>
+                            @Html.TextBox("DateOfBirth", Model.GetDateOfBirth(), new { @class = "span3", placeholder = "dd/mm/yyyy" })
+                            <span><strong>(@Model.GetCalculatedAge())</strong></span>
+                        </div>
+                        <div class="span6">
+                            <label class="span2" for="Nationality">
+                                Nationality:
+                            </label>
+                            @Html.TextBox("Nationality")
+                            @Html.Hidden("NationalityId", Model.NationalityId)
+                        </div>
+                        <div class="span8">
+                            <label class="span2" for="Disability">
+                                Disability:</label>
+                            @Html.CheckBox("HasDisability", Model.HasDisability)
+                            @Html.TextBox("DisabilityDescription", Model.DisabilityDescription, new { @class = "span4 disability-text" })
+                        </div>
+                        <div class="span4">
+                            @if (!Model.EmployeeId.HasValue)
+                            {
+                                <button class="btn btn-success btn-large" value="Create Employee" type="submit" id="CreateEmployeeButton">
+                                    Create Employee</button>    
+                            }
+                        </div>
+                    </fieldset>
+                    <fieldset id="emergency-contact-details-fieldset">
+                        <legend class="span12">
+                            <h3>
+                                Emergency Contact Details</h3>
+                        </legend>
+                        <div class="content">
+                            <div class="span8" id="emergencyContactDetailsGrid">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Title
+                                            </th>
+                                            <th>
+                                                Forename
+                                            </th>
+                                            <th>
+                                                Surname
+                                            </th>
+                                            <th>
+                                                Relationship
+                                            </th>
+                                            <th>
+                                                Preferred Telephone
+                                            </th>
+                                            <th>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var actionRequired in Model.EmergencyContactDetails)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @actionRequired.Title
+                                                </td>
+                                                <td>
+                                                    @actionRequired.Forename
+                                                </td>
+                                                <td>
+                                                    @actionRequired.Surname
+                                                </td>
+                                                <td>
+                                                    @actionRequired.Relationship
+                                                </td>
+                                                <td>
+                                                    @actionRequired.GetPreferredContactNumber()
+                                                </td>
+                                                <td>
+                                                    @if (User.IsInRole(Permissions.EditEmployeeRecords.ToString()))
+                                                    {
+                                                        <a href="#" data-id="@actionRequired.EmergencyContactId" class="btn emergencyContactDetailsRemoveButton btn-danger add-edit-link" style="color: white;">
+                                                            <i class="icon-remove"></i></a>
+                                                        <a href="#" data-id="@actionRequired.EmergencyContactId" class="btn emergencyContactDetailsEditButton add-edit-link" >
+                                                            <i class="icon-edit"></i></a>
+                                                        <a href="#" data-id="@actionRequired.EmergencyContactId" class="btn emergencyContactDetailsViewButton">
+                                                            <i class="icon-search"></i></a>
+                                                    }
+                                                </td>
+                                            </tr>    
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="span3" id="add-emergency-contact">
+                            @if (User.IsInRole(Permissions.EditEmployeeRecords.ToString()))
+                            {
+                                <a href="#" class="btn btn-popup-trigger add-edit-link" id="addAnotherEmergencyContact">
+                                    Add Another Emergency Contact</a>
+                            }
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div id="organisational-details" class="tab-pane">
+                    <fieldset>
+                        <legend class="span12">
+                            <h3>
+                                Organisational Details</h3>
+                        </legend>
+                        <div class="span6">
+                            <label class="span2" for="Site">
+                                Site</label>
+                            @Html.TextBox("Site", "", new { @class = "span3" })
+                            @Html.Hidden("SiteId", Model.SiteId)
+                        </div>
+                        <div class="span6">
+                            <label class="span2" for="JobTitle">
+                                Job Title</label>
+                            @Html.TextBox("JobTitle", Model.JobTitle, new { @class = "span3" })
+                        </div>
+                        <div class="span6">
+                            <label class="span2" for="EmploymentStatus">
+                                Employment Status</label>
+                            @Html.TextBox("EmploymentStatus", "", new { @class = "span3" })
+                            @Html.Hidden("EmploymentStatusId", Model.EmploymentStatusId)
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend class="span12">
+                            <h3>
+                                Company Vehicle</h3>
+                        </legend>
+                        <div class="span6">
+                            <label class="span2" for="CompanyVehicle">
+                                Has Company Vehicle</label>
+                            @Html.CheckBox("HasCompanyVehicle", Model.HasCompanyVehicle)
+                        </div>
+                        <div class="span6">
+                            <label class="span2" for="CompanyVehicleType">
+                                Type</label>
+                            @Html.TextBox("CompanyVehicleType", "", new { @class = "span3" })
+                            @Html.Hidden("CompanyVehicleTypeId", Model.CompanyVehicleTypeId)
+                        </div>
+                        <div class="span6">
+                            <label class="span2" for="VehicleRegistration">
+                                Registration</label>
+                            @Html.TextBox("CompanyVehicleRegistration", Model.CompanyVehicleRegistration, new { @class = "span3" })
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend class="span12">
+                            <h3>
+                                BusinessSafe Online Registration Details</h3>
+                        </legend>
+                        @if (!Model.IsExistingUser)
+                        {
+                            <div class="span12">
+                                <div class="alert">
+                                    <p>
+                                        <strong>NB: If you would like to add this Employee as a BSO User, Please ensure you
+                                            add an "Email Address" and a "Telephone" or "Mobile" number.</strong></p>
+                                </div>
+
+                            </div>
+                        }
+                        @if (Model.IsPendingRegistration)
+                        {
+                            <div class="alert alert-block alert-danger">
+                                Employee has a pending user registration. Changing the email address will automatically
+                                change the registration details.</div>
+                            <div class="alert alert-block alert-success hide" id="resendUserRegistrationNotice">
+                                Email successfully sent</div>
+                        }
+                        <div class="span12">
+                            <label class="span2" for="Email">Email</label>
+                                @Html.TextBox("Email", Model.Email, new { @class = "span3" })
+                                @if (Model.IsPendingRegistration)
+                                {
+                                    <input type="button" id="resendUserRegistrationButton" value="Resend Registration Email" class="btn btn-danger override-readonly" style="margin-left: 10px;" data-id="@Model.UserId" data-employee-id="@Model.EmployeeId" />
+                                }
+                        </div>
+                        <div class="span6">
+                            <label class="span2" for="Telephone">
+                                Telephone</label>
+                            @Html.TextBox("Telephone", Model.Telephone, new { @class = "span3" })
+                        </div>
+                        <div class="span6">
+                            <label class="span2" for="Mobile">
+                                Mobile</label>
+                            @Html.TextBox("Mobile", Model.Mobile, new { @class = "span3" })
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div id="additional-details" class="tab-pane">
+                    <fieldset>
+                        <legend class="span12">
+                            <h3>
+                                Contact Details</h3>
+                        </legend>
+                        <div class="span6">
+                            <div>
+                                <label class="span2" for="Address1">
+                                    Address</label>
+                                @Html.TextBox("Address1", Model.Address1, new { @class = "span3" })
+                            </div>
+                            <div>
+                                <label class="span2">
+                                </label>
+                                @Html.TextBox("Address2", Model.Address2, new { @class = "span3" })
+                            </div>
+                            <div>
+                                <label class="span2">
+                                </label>
+                                @Html.TextBox("Address3", Model.Address3, new { @class = "span3" })
+                            </div>
+                        </div>
+                        <div class="span6">
+                            <label class="span2" for="Town">
+                                Town:</label>
+                            @Html.TextBox("Town", Model.Town, new { @class = "span3" })
+                        </div>
+                        <div class="span6">
+                            <label class="span2" for="County">
+                                County:</label>
+                            @Html.TextBox("County", Model.County, new { @class = "span3" })
+                        </div>
+                        <div class="span6">
+                            <label class="span2" for="Country">
+                                Country:</label>
+                            @Html.TextBox("Country", "", new { @class = "span3" })
+                            @Html.Hidden("CountryId", Model.CountryId)
+                        </div>
+                        <div class="span6">
+                            <label class="span2" for="Postcode">
+                                Postcode:</label>
+                            @Html.TextBox("Postcode", Model.Postcode)
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend class="span12">
+                            <h3>
+                                Additional Personal Details</h3>
+                        </legend>
+                        <div class="span6">
+                            <label class="span2" for="NINumber">
+                                NI Number</label>
+                            @Html.TextBox("NINumber", Model.NINumber, new { @class = "input-large" })
+                        </div>
+                        <div class="span6">
+                            <label class="span2" for="PassportNo">
+                                Passport No</label>
+                            @Html.TextBox("PassportNumber", Model.PassportNumber, new { @class = "input-large" })
+                        </div>
+                        <div class="span12">
+                            <label class="span2" for="PPS">
+                                PPS</label>
+                            @Html.TextBox("PPSNumber", Model.PPSNumber, new { @class = "input-large" })
+                        </div>
+                        <div class="span6">
+                            <label class="span2" for="WorkingVisaNumber">
+                                Working Visa Number:</label>
+                            @Html.TextBox("WorkVisaNumber", Model.WorkVisaNumber, new { @class = "input-large" })
+                        </div>
+                        <div class="span6">
+                            <label class="span2" for="WorkingVisaExpirationDate">
+                                Working Visa Expiration Date:</label>
+                            @Html.TextBox("WorkVisaExpirationDate", Model.GetWorkingVisaExpirationDate(), new { @class = "input-medium  calendar", placeholder = "dd/mm/yyyy" })
+                        </div>
+                        <div class="span6">
+                            <label class="span2" for="DrivingLicenseNo">
+                                Driving Licence No:</label>
+                            @Html.TextBox("DrivingLicenseNumber", Model.DrivingLicenseNumber, new { @class = "input-large" })
+                        </div>
+                        <div class="span6">
+                            <label class="span2" for="DrivingLicenseExpirationDate">
+                                Driving Licence Expiration Date:</label>
+                            @Html.TextBox("DrivingLicenseExpirationDate", Model.GetDrivingLicenseExpirationDate(), new { @class = "input-medium calendar", placeholder = "dd/mm/yyyy" })
+                        </div>
+                    </fieldset>
+                </div>
+                
+                <div id="create-user" class="tab-pane">
+                    <div class="span12">
+                        <div class="row-fluid">
+                            <div class="span6">
+                                <legend>
+                                    <h3>User Permissions</h3>
+                                </legend>
+
+                                <fieldset>                       
+                                <div class="span6">
+                                    <label for="UserRole" class="span2" >User Roles</label>
+                                    @if (Model.CanChangeRoleDdl)
+                                    {
+                                        @Html.TextBox("UserRole", "", new {@class = "span3"})
+                           
+                                    }
+                                    else
+                                     {
+                                        <strong>@Model.UserRoleDescription</strong>
+                                     }
+                                     @Html.Hidden("UserRoleId", Model.UserRoleId)
+                                </div>
+                                <div class="span6">
+                                    <label for="UserSiteGroup" class="span2">Site Groups</label>
+                                    @Html.TextBox("UserSiteGroup", "", new { @class = "span3" })
+                                    @Html.Hidden("UserSiteGroupId", Model.UserSiteGroupId)
+                                </div>
+                                <div class="span6">
+                                    <label for="UserSite" class="span2">Site</label>
+                                    @Html.TextBox("UserSite", "", new { @class = "span3" })
+                                    @Html.Hidden("UserSiteId", Model.UserSiteId)
+                                </div>
+                                <div class="span6">
+                                    <label for="Sites" class="span2">All Sites</label>
+                                    @Html.CheckBoxFor(model => model.UserPermissionsApplyToAllSites)
+                                    @Html.ValidationMessageFor(model => model.UserPermissionsApplyToAllSites, "*")
+                                </div>
+                                </fieldset>
+                        </div>
+
+                            <div class="span6">
+                                <div class="row-fluid">
+                                    <legend>
+                                        <h3>Notifications Frequency</h3>
+                                    </legend>
+                                </div>
+
+                                <div class="row-fluid">
+                                    <label>Send me notifications</label>
+                                </div>
+
+                                <div class="row-fluid">
+                                    @Html.RadioButtonFor(model => model.NotificationType, NotificationType.Daily, new { id = "daily", Checked = "checked" })
+                                    <label for="daily" class="span4">Daily</label>
+                                </div>
+
+                                <div class="row-fluid">
+                                    @Html.RadioButtonFor(model => model.NotificationType, NotificationType.Weekly, new { id = "weekly" })
+                                    <label for="weekly" class="span4">Weekly on a certain day</label>
+                                </div>
+
+
+                                <div class="row-fluid" style="margin-bottom:0;">
+                                    <div class="span2" style="margin-bottom:0;">
+                                        <p></p>
+                                    </div>
+                                    <div class="span3" style="margin-bottom:0;">
+                                        <label for="monday" class="pull-left" id="every-monday">every Monday</label>
+                                    </div>
+                                    <div class="span1 pull-right" style="margin-bottom:0;">
+                                        @Html.RadioButtonFor(model => model.NotificationFrequency, (int)DayOfWeek.Monday, new { @class = "weekday", Checked = "checked" })
+                                    </div>
+
+                                    <div class="span2" style="margin-bottom:0;">
+                                        <label for="thursday" class="pull-left">Thursday</label>
+                                    </div>
+
+                                    <div class="span1 pull-right" style="margin-bottom:0;">
+                                        @Html.RadioButtonFor(model => model.NotificationFrequency, (int)DayOfWeek.Thursday, new { @class = "weekday" })
+                                    </div>
+
+                                    <div class="span2" style="margin-bottom:0;">
+                                        <label for="sunday" class="pull-left">Sunday</label>
+                                    </div>
+
+                                    <div class="span1 pull-right" style="margin-bottom:0;">
+                                        @Html.RadioButtonFor(model => model.NotificationFrequency, (int)DayOfWeek.Sunday, new { @class = "weekday" })
+                                    </div>
+
+                                </div>
+                                <div class="row-fluid" style="margin-bottom:0;">
+                                    <div class="span3" style="margin-bottom:0;">
+                                        <p></p>
+                                    </div>
+                                    <div class="span2" style="margin-bottom:0;">
+                                        <label for="tuesday" class="pull-left">Tuesday</label>
+                                    </div>
+                                    <div class="span1 pull-right" style="margin-bottom:0;">
+                                        @Html.RadioButtonFor(model => model.NotificationFrequency, (int)DayOfWeek.Tuesday, new { @class = "weekday" })
+                                    </div>
+
+
+                                    <div class="span2" style="margin-bottom:0;">
+                                        <label for="friday" class="pull-left">Friday</label>
+                                    </div>
+
+                                    <div class="span1 pull-right" style="margin-bottom:0;">
+                                        @Html.RadioButtonFor(model => model.NotificationFrequency, (int)DayOfWeek.Friday, new { @class = "weekday" })
+                                    </div>
+
+
+                                </div>
+
+                                <div class="row-fluid" style="margin-bottom:0;">
+                                    <div class="span3" style="margin-bottom:0;">
+                                        <p></p>
+                                    </div>
+
+                                    <div class="span2" style="margin-bottom:0;">
+                                        <label for="wednesday" class="pull-left">Wednesday</label>
+                                    </div>
+                                    <div class="span1 pull-right" style="margin-bottom:0;">
+                                        @Html.RadioButtonFor(model => model.NotificationFrequency, (int)DayOfWeek.Wednesday, new { @class = "weekday" })
+                                    </div>
+
+                                    <div class="span2" style="margin-bottom:0;">
+                                        <label for="saturday" class="pull-left">Saturday</label>
+                                    </div>
+                                    <div class="span1 pull-right" style="margin-bottom:0;">
+                                        @Html.RadioButtonFor(model => model.NotificationFrequency, (int)DayOfWeek.Saturday, new { @class = "weekday" })
+                                    </div>
+                                </div>
+
+                                <div class="row-fluid">
+                                    @Html.RadioButtonFor(model => model.NotificationType, NotificationType.Monthly, new { id = "monthly" })
+                                    <label for="monthly" class="span4">Monthly on a certain day</label>
+                                </div>
+                                <div style="margin-left:12px">
+                                    @{
+                                    var monthlyDays = new List<SelectListItem>();
+                                    for (int i = 1; i <= 31; i++)
+                                    {
+                                        monthlyDays.Add(new SelectListItem() { Value = i.ToString(), Text = i.ToString() });
+                                    }
+                                    }
+                                    <label for="NotificationFrequency">Select a date of each month</label>
+                                    @Html.DropDownListFor(model => model.NotificationFrequency, monthlyDays, new { id = "monthlyDate", @style = "width:12%;" })
+                                </div>
+
+
+
+                            </div>
+
+
+                     </div>
+                     </div>                
+                </div>
+
+                <div id="risk-assessor-details" class="tab-pane" style="margin-left: 20px">
+                          <div class="row-fluid">
+                              <div class="span12">
+                                  <legend>
+                                      <h3>Risk Assessor Details</h3>
+                                  </legend>
+                                  @if (Model.IsRiskAssessorAssignedToRiskAssessments)
+                                  {
+                                      <p>
+                                          You can not remove this employee from the list of risk assessors because they have 'Open' risk assessments linked to them. Please reassign before you remove risk assessor.
+                                      </p>
+                                      <p>
+                                          @Html.CheckBox("IsRiskAssessorCheckbox", true, new { disabled = "disabled", id = "IsRiskAssessor" })
+                                          <label>Mark this employee as a risk assessor</label>
+                                          @Html.HiddenFor(model => model.IsRiskAssessor)
+                                      </p>
+                                  }
+                                  else
+                                  {
+                                      <p>
+                                          @Html.CheckBoxFor(model => model.IsRiskAssessor)
+                                          <label for="IsRiskAssessor">Mark this employee as a risk assessor</label>
+                                      </p>
+                                  }
+                                  <div id="risk-assessor-details-input-section" class="">
+                                  <legend>
+                                      <h3>Select Site</h3>
+                                  </legend>
+                                  <p>
+                                      @Html.CheckBoxFor(model => model.RiskAssessorHasAccessToAllSites)
+                                      <label for="RiskAssessorHasAccessToAllSites">All sites</label>
+                                      <div>
+                                          @Html.TextBoxFor(m => m.RiskAssessorSite)
+                                          @Html.HiddenFor(m => m.RiskAssessorSiteId)
+                                      </div>
+                                  </p>
+                                  <legend>
+                                      <h3>Send Risk Assessor Notifications for:</h3>
+                                  </legend>
+                                  <p>@Html.CheckBoxFor(model => model.DoNotSendTaskOverdueNotifications)
+                                      <label for="DoNotSendTaskOverdueNotifications">Do not send - Task overdue in risk assessement notifications</label>
+                                  </p>
+                                  <p>@Html.CheckBoxFor(model => model.DoNotSendTaskCompletedNotifications)
+                                      <label for="DoNotSendTaskCompletedNotifications">Do not send - Task completed in risk assessement notifications</label>
+                                  </p>
+                                  <p>@Html.CheckBoxFor(model => model.DoNotSendReviewDueNotification)
+                                      <label for="DoNotSendReviewDueNotification">Do not send - Risk assessement due a review notifications</label>
+                                  </p>
+                                  <p class="alert">By selecting 'Do not send' notifications for the above options, the risk assessor will not be notified for any risk assessements they are assigned to. If you want it to be specific to certain risk assessments please untick the above options as you are able to stop notifications by risk assessment, in the risk assessment record.</p>
+                                      </div>
+                              </div>
+                          </div>
+                      </div>
+
+                <div class="span12" id="employee-validation-summary">
+                    @Html.ValidationSummary("")
+                </div>
+
+                @if (User.IsInRole(Permissions.AddEmployeeRecords.ToString()) || User.IsInRole(Permissions.EditEmployeeRecords.ToString()))
+                {
+                    <div class="span12">
+                        <label class="span2">
+                        </label>
+                        <button class="btn btn-success" value="Save" type="submit" id="SaveEmployeeButton">
+                            Save</button>
+                        @Html.ActionLink("Cancel", "Index", "EmployeeSearch", new { companyId = Model.CompanyId }, new { @class = "btn-link", @id = "CancelEmployeeButton" })
+                    </div>
+                }
+            </div>
+            <div id="emergencyContactDetailsDialog" class="ui-widget" title="Emergency Contact Details">
+            </div>
+            <div id="emergencyContactDetailsDeleteConfirmationDialog" class="hide" title="Remove Emergency Contact?">
+                <p>
+                    Are you sure you want to remove emergency contact?</p>
+            </div>
+        </div>
+    </div>
+</section>
+@Html.HiddenFor(model => model.ContactDetailId)
+</form>
+@if (ViewBag.IsReadOnly != null)
+{
+    <input type="hidden" id="IsReadOnly" />
+}
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("employees");   
+        @Bundles.RenderScripts()  
+    }
+    <script type="text/javascript">
+        $(document).ready(function (){
+            $('ul.nav-pills li a').click(function (e){
+                e.preventDefault();
+                $(this).tab('show');
+            });
+
+            var titles = @Html.Raw(Json.Encode(Model.Titles));
+            var nationalities = @Html.Raw(Json.Encode(Model.Nationalities));
+            var sexes = @Html.Raw(Json.Encode(Model.Sexes));            
+            var sites = @Html.Raw(Json.Encode(Model.Sites));            
+            var countries = @Html.Raw(Json.Encode(Model.Countries));
+            var employmentStatuses = @Html.Raw(Json.Encode(Model.EmploymentStatuses));
+            var companyVehicleTypes = @Html.Raw(Json.Encode(Model.CompanyVehicleTypes));
+            var isReadOnly = '@(ViewBag.IsReadOnly != null ? true : false)';
+            var canChangeEmail = '@(Model.CanChangeEmail == true ? true : false)';
+            var siteGroups = @Html.Raw(Json.Encode(Model.UserSiteGroups));
+            var userRoles =  @Html.Raw(Json.Encode(Model.UserRoles));
+            employeeAddEditForm.initialise(titles, nationalities, sexes, sites, siteGroups, userRoles, countries, employmentStatuses, companyVehicleTypes, isReadOnly, canChangeEmail);
+
+        });
+    </script>
+}

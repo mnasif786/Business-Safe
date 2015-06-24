@@ -1,0 +1,26 @@
+﻿#employeeMaintenanceContainer {
+    font-size: 14px;
+}
+#employeeMaintenanceContainer .row-fluid {
+    margin-bottom: 20px;
+}
+
+#employeeMaintenanceContainer legend {
+    font-weight: bold;
+}
+
+#employeeMaintenanceContainer .accordianSectionHeader {
+    background-color: #821416;
+    background-image: url("images/header.png");
+    background-size: 100%;
+    display: block;
+}
+
+.accordianSectionHeaderTitle {
+    margin-left: 20px;
+    color: white;    
+}
+
+.disability-text {
+    margin-left: 10px;
+}

@@ -1,0 +1,45 @@
+﻿@model BusinessSafe.WebSite.Areas.HazardousSubstanceInventory.ViewModels.AddEditHazardousSubstanceViewModel
+@Html.HiddenFor(m => m.Id)
+@Html.HiddenFor(m => m.CompanyId, new { id = "companyId" })
+@Html.Hidden("PreviousAssessmentRequired", Model.AssessmentRequired.GetValueOrDefault())
+<fieldset>
+    <legend><h3>Substance Description</h3></legend>
+    <div class="row">
+        <div class="span2"><label for="Name">Substance Name</label></div>
+        @Html.TextBoxFor(m => m.Name, new { @class = "span4" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+    <div class="row">
+        <div class="span2">@Html.LabelFor(m => m.SupplierId, "Supplier:")</div>
+        @Html.TextBox("Supplier",Model.SupplierName, new { @class = "span4" })
+        
+        <button id="AddNewSupplierLink" class="btn"><i class="icon-plus-sign"></i></button>
+        
+
+        @Html.Hidden("SupplierId", Model.SupplierId)
+        @Html.ValidationMessageFor(m => m.SupplierId)
+    </div>
+    <div class="row">
+        <div class="span2">@Html.LabelFor(m => m.SdsDate, "Date of SDS:")</div>
+        @Html.TextBox("SdsDate", Model.GetSdsDate(), new { @class = "span2 calendar" }) 
+        @Html.ValidationMessageFor(m => m.SdsDate)
+    </div>
+    <div class="row">
+        <div class="span2">@Html.LabelFor(m => m.DetailsOfUse, "Details of Use")</div>
+        @Html.TextAreaFor(m => m.DetailsOfUse, new { @class = "input-xxlarge" })
+            @Html.ValidationMessageFor(m => m.DetailsOfUse)
+    </div>
+</fieldset>
+@Html.Partial("_HazardSymbols", Model)
+@Html.Partial("_RiskAndSafetyPhrases", Model)
+<fieldset>
+    <legend><h3>Risk Assessment</h3></legend>
+    <div class="row">
+        <div class="span2">
+            @Html.LabelFor(m => m.AssessmentRequired, "Assessment Required")
+        </div>
+            <div class="span1">@Html.RadioButtonFor(m => m.AssessmentRequired, "true", new { id = "" }) Yes</div>    
+            <div class="span1">@Html.RadioButtonFor(m => m.AssessmentRequired,"false", new { id="" }) No</div>
+            @Html.ValidationMessageFor(m => m.AssessmentRequired)
+    </div>
+</fieldset>

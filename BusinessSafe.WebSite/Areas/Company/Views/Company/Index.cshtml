@@ -1,0 +1,126 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Extensions
+@using Cassette.Views
+@model BusinessSafe.WebSite.Areas.Company.ViewModels.CompanyDetailsViewModel
+@{
+    ViewBag.Title = "Company Details";
+}
+@section StyleSheetSection
+{
+}
+@{
+    string labelVisibility = ViewBag.LabelVisibility ?? string.Empty;
+    string textboxVisibility = ViewBag.TextBoxVisibility ?? "hide";    
+}
+<section>
+    <span class="legend">Company Details</span>
+    <!-- Content -->
+    <div class="content fixed-content container ipad-container">
+        <h2>
+            @if (User.IsInRole(Permissions.EditCompanyDetails.ToString()))
+            {
+                <button class="btn" id="modifyCompanyDetails">
+                    Modify company details</button>
+            }
+            <span class="tick"></span>Summary
+        </h2>
+        @using (Html.BeginForm("SaveAndNotifyAdmin", "Company", FormMethod.Post, new { id="company-details-form", @class = "row form-inline" }))
+        {
+            <fieldset>
+                <div class="span12">
+                    @if (@ViewBag.Message != null)
+                    {
+                        <div class="alert alert-success">
+                            @ViewBag.Message
+                        </div>
+                    }
+                    @Html.ValidationSummary(string.Empty)
+                </div>
+                <div class="span12">
+                    <label class="span2">Company Name</label>
+                    <strong class="@labelVisibility">@Html.DisplayTextFor(m => m.CompanyName)</strong>
+                    @Html.TextBoxFor(m => m.CompanyName, new { @class = @textboxVisibility })
+                </div>
+                <div class="span12">
+                    <label class="span2">CAN</label>
+                        <strong id="CanLabel">@Html.DisplayTextFor(m => m.CAN)</strong>
+                    @Html.HiddenFor(m => m.CAN)
+                </div>
+                <div class="span12">
+                    <label class="span2">Address</label>
+                    <strong class="@labelVisibility">@Html.DisplayTextFor(m => m.AddressLine1)</strong>
+                    @Html.TextBoxFor(m => m.AddressLine1, new { @class = @textboxVisibility })
+                </div>
+                <div class="span12">
+                    <label class="span2">
+                    </label>
+                    <strong class="@labelVisibility">@Html.DisplayTextFor(m => m.AddressLine2)</strong>
+                    @Html.TextBoxFor(m => m.AddressLine2, new { @class = @textboxVisibility })
+                </div>
+                <div class="span12">
+                    <label class="span2">
+                    </label>
+                    <strong class="@labelVisibility">@Html.DisplayTextFor(m => m.AddressLine3)</strong>
+                    @Html.TextBoxFor(m => m.AddressLine3, new { @class = @textboxVisibility })
+                </div>
+                <div class="span12">
+                    <label class="span2">
+                    </label>
+                    <strong class="@labelVisibility">@Html.DisplayTextFor(m => m.AddressLine4)</strong>
+                    @Html.TextBoxFor(m => m.AddressLine4, new { @class = @textboxVisibility })
+                </div>
+                <div class="span12">
+                    <label class="span2">
+                        Post Code</label>
+                    <strong class="@labelVisibility">@Html.DisplayTextFor(m => m.PostCode)</strong>
+                    @Html.TextBoxFor(m => m.PostCode, new { @class = @textboxVisibility })
+                </div>
+                <div class="span12">
+                    <label class="span2">
+                        Telephone</label>
+                    <strong class="@labelVisibility">@Html.DisplayTextFor(m => m.Telephone)</strong>
+                    @Html.TextBoxFor(m => m.Telephone, new { @class = @textboxVisibility })
+                </div>
+                <div class="span12">
+                    <label class="span2">
+                        Website</label>
+                    <strong id="WebsiteLabel" class="@labelVisibility">@Html.DisplayTextFor(m => m.Website)</strong>
+                    @Html.TextBoxFor(m => m.Website, new { @class = @textboxVisibility })
+                </div>
+                <div class="span12">
+                    <label class="span2">
+                        Main Contact</label>
+                    <strong id="MainContactLabel" class="@labelVisibility">@Html.DisplayTextFor(m => m.MainContact)</strong>
+                    @Html.TextBoxFor(m => m.MainContact, new { @class = @textboxVisibility })
+                </div>
+                <div class="span12">
+                    <label class="span2">
+                        BusinessSafe Contact</label>
+                    <strong id="BusinessSafeContactLabel" class="@labelVisibility">@Html.DisplayTextFor(m => m.BusinessSafeContact)</strong>
+                    @Html.TextBoxFor(m => m.BusinessSafeContact, new { @class = @textboxVisibility })
+                    @Html.HiddenFor(m => m.BusinessSafeContactId)
+                </div>
+                <div class="span12">
+                    <label class="span2">
+                        &nbsp;</label>
+                    @if (User.IsInRole(Permissions.EditCompanyDetails.ToString()))
+                    {
+                        <input type="submit" id="notifyAdminButton" class="btn btn-success btn-primary" value="Save" @HtmlExtensions.IsEnabled(false) />
+                    }
+                    @Html.ActionLink("Cancel", "Index", "Company", null, new { @class = "btn btn-link" })
+                </div>
+                @Html.HiddenFor(m => m.Id)
+            </fieldset>
+        }
+    </div>
+</section>
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("companydetail");
+        @Bundles.RenderScripts()  
+        <script>
+        companyDetails.initialise();
+        </script>
+    }
+}

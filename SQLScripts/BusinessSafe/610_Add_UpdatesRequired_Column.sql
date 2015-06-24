@@ -1,0 +1,18 @@
+USE [BusinessSafe]
+GO 
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG = 'BusinessSafe' AND TABLE_NAME = 'SafeCheckCheckList' AND COLUMN_NAME = 'UpdatesRequired')
+BEGIN
+	ALTER TABLE [SafeCheckCheckList]
+	ADD [UpdatesRequired] BIT NOT NULL DEFAULT 0
+END
+GO
+
+--//@UNDO
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG = 'BusinessSafe' AND TABLE_NAME = 'SafeCheckCheckList' AND COLUMN_NAME = 'UpdatesRequired')
+BEGIN
+	ALTER TABLE [SafeCheckCheckList]
+	DROP [UpdatesRequired] 
+END
+GO
+  

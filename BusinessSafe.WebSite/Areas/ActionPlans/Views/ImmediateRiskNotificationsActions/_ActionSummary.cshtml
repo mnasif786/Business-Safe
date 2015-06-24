@@ -1,0 +1,14 @@
+﻿@model BusinessSafe.WebSite.Areas.ActionPlans.ViewModels.ActionSummaryViewModel
+           
+<fieldset class="well">
+    <legend><h3>Action Details</h3></legend>
+    @Html.HiddenFor(m => m.Id)
+    <div class="row">
+        <label class="span2">Title</label>
+        <div class="span7" style="margin-left: 0px; margin-bottom: 5px;padding-top: 5px"><strong>@Model.Title</strong></div>
+    </div>
+    <div class="row">
+        <label class="span2">Description</label>
+        <div class="span7" style="margin-left: 0px; margin-bottom: 5px;padding-top: 5px"><strong>@Model.Description</strong></div>
+    </div>
+</fieldset>

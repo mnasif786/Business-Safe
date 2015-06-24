@@ -1,0 +1,45 @@
+﻿@using System.Globalization
+@using BusinessSafe.WebSite.Extensions
+@using BusinessSafe.WebSite.Helpers
+@model BusinessSafe.WebSite.Areas.Documents.ViewModels.ExistingDocumentsViewModel
+<fieldset>
+    <legend><h3>Attached Documents</h3></legend>
+    <div id="attach-documents-partial">
+        <h4>Documents Previously Added</h4>
+        @Html.Telerik().Grid(Model.PreviouslyAddedDocuments).Footer(false).Name("PreviouslyAddedDocumentsGrid").DataBinding(dataBinding => dataBinding.Server().Delete("todo", "todo")).Columns(columns =>
+                                                                                                                                                                                              {
+                                                                                                                                                                                                  columns.Template(@<text> <a href='@VirtualPathUtility.ToAbsolute("~/Documents/Document/DownloadDocument?enc=" + HttpUtility.UrlEncode(EncryptionHelper.Encrypt("documentLibraryId=" + @item.DocumentLibraryId.ToString(CultureInfo.InvariantCulture))))' >
+                                                                                                                                                                                                                               @item.Filename
+                                                                                                                                                                                                                           </a>
+                                                                                                                                                                                                                    </text>).HeaderTemplate("Filename").HeaderHtmlAttributes(new { @class = "filename" }).HtmlAttributes(new { @class = "filename" });
+                                                                                                                                                                                                  columns.Bound(o => o.DocumentTypeName).HeaderTemplate("Document Type").HeaderHtmlAttributes(new { @class = "doc-type" });
+                                                                                                                                                                                                  columns.Bound(o => o.Description).HeaderTemplate("Description").HeaderHtmlAttributes(new { @class = "description" });
+                                                                                                                                                                                                  columns.Template(@<text>@item.DocumentOriginType.ToString().AddSpacesToName()</text>).HeaderTemplate("Document Origin").HeaderHtmlAttributes(new { @class = "doc-origin" });
+                                                                                                                                                                                                  columns.Template(@<text>@Html.CheckBox("PreviouslyAddedDocumentsRow_" + item.DocumentLibraryId.ToString(CultureInfo.InvariantCulture) + "_Delete")
+                                                                                                                                                                                                                    </text>).HeaderTemplate(@<text>Delete</text>).Visible(Model.CanDeleteDocuments).HeaderHtmlAttributes(new { @class = "delete" }).HtmlAttributes(new { @class = "delete" });
+                                                                                                                                                                                              })
+        @if (ViewBag.IsReadOnly == null || !ViewBag.IsReadOnly)
+        {
+            <div id="new-documents" class="hide">
+                <h4>New Documents</h4>
+                <table id="DocumentsToIncludeTable" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Filename</th>
+                            <th>Document Type</th>
+                            <th>Description</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="visibility: hidden">
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h4>Add New Document</h4>
+            <iframe src="@VirtualPathUtility.ToAbsolute("~/Document/ShowUploadButton?documentOriginTypeId=" + Model.DocumentOriginTypeId + "&canEditDocumentType=" + Model.CanEditDocumentType + "&documentTypeId=" + Model.DocumentTypeId)" style="height: 40px; width: 100%; border-style: none;" id="DocumentUploadFrame">
+            </iframe>
+        }
+    </div>
+</fieldset>

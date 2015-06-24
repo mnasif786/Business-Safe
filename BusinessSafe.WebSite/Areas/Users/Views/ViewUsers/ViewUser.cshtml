@@ -1,0 +1,62 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+@using Cassette.Views
+@model BusinessSafe.WebSite.Areas.Users.ViewModels.ViewUserViewModel
+@{
+    ViewBag.Title = "View User";
+}
+<section id="viewUserContainer" class="container-fluid">
+        <span class="legend">View User</span>
+        <div class="content">
+            <div class="major-index-actions">
+                @if (User.IsInRole(Permissions.EditUsers.ToString()))
+                {               
+                    <a id="edit-user-record" class="btn" href="@Url.Action("Index", "AddUsers", new { employeeId = Model.EmployeeId, companyId = Model.CompanyId })" title="Edit User Record"><i class="icon-edit"></i></a>
+                }
+                <a id="close-user-record" class="btn" href="@Url.Action("Index", "ViewUsers", new { companyId = Model.CompanyId })" title="Close User Record"><i class="icon-remove"></i></a>
+            </div>
+            @Html.HiddenFor(x => x.CompanyId)
+            @Html.Hidden("RoleId", @Model.RoleId)
+            <div class="row-fluid" id="UserPermissionsSelection">
+                    <div class="well">
+                        <div class="row">
+                            <div class="span5">
+                                <label for="Name" class="span2">Employee Name</label>
+                                <strong>@Model.Name</strong>
+                            </div>
+                            <div class="span5">
+                                <label for="EmployeeReference" class="span2">Employee Number</label>
+                                <strong>@Model.EmployeeReference</strong>
+                            </div>
+                            <div class="span5">
+                                <label for="JobTitle" class="span2">Employee Job Title</label>
+                                <strong>@Model.JobTitle</strong>
+                            </div>
+                            <div class="span5">
+                                <label for="Department" class="span2">Department</label>
+                                <strong>@Model.Department</strong>
+                            </div>
+                            <div class="span5">
+                                <label for="Users" class="span2">Manager</label>
+                                <strong>@Model.ManagerName</strong>
+                            </div>
+                            <div class="span5">
+                                <label for="Roles" class="span2">User Role</label>
+                                <strong>@Model.Role</strong>
+                            </div>
+                            <div class="span4">
+                                <label for="SiteGroups" class="span2">Permission Level</label>
+                                <strong>@Model.PermissionLevel</strong>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div id="RolesDetails">
+                @Html.Action("GetUserRolePermissions", "UserRoles", new { companyId = Model.CompanyId, roleId = @Model.RoleId, enableCustomRoleEditing = false })
+            </div>
+        </div>
+    </section>
+
+@{
+    Bundles.Reference("users");
+    @Bundles.RenderScripts()  
+}

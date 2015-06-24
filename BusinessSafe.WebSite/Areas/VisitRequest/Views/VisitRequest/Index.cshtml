@@ -1,0 +1,31 @@
+﻿@using BusinessSafe.WebSite.HtmlHelpers
+@using Cassette.Views
+
+@{
+    ViewBag.Title = "Visit Request";
+} 
+
+<section>
+    <span class="legend">Request A Visit</span>
+    <div class="content">      
+        @Html.Partial("_RequestAVisit")         
+    </div>
+</section>
+
+@section JavaScriptSection
+{
+    @{  
+        Bundles.Reference("visitRequest");          
+        @Bundles.RenderScripts() 
+    }
+    
+    <script type="text/javascript">
+        $(function () 
+        {   
+            var sites = @Html.Raw(Json.Encode(Model.Sites));
+            visitRequestManager.initialise(sites);
+        });
+    </script>
+
+    
+}

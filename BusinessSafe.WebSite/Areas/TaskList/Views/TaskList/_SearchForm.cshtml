@@ -1,0 +1,75 @@
+﻿@model BusinessSafe.WebSite.Areas.TaskList.ViewModels.TaskListViewModel
+<div class="well">
+    @using (Html.BeginForm("Find", "TaskList", FormMethod.Get, new { id = "formEmployeeTasks", @class = "search-form" }))
+    {                
+        @Html.HiddenFor(x => x.IsBulkReassign)
+        @Html.HiddenFor(x => x.CompanyId)
+        @Html.HiddenFor(x => x.TaskStatusId, new { name = "taskStatusId" })
+        <fieldset>
+            <legend>Task Search</legend>
+            <ul>
+                <li>
+                    <label class="thin" for="Site">Site</label>
+                    @Html.TextBox("Site")
+                    @Html.Hidden("SiteId", Model.SiteId)
+                </li>
+                <li>
+                    <label class="wide" for="Employee">Assigned To</label>
+                    @Html.TextBox("Employee", string.Empty, new { @class="two-date-pickers-wide"})
+                    @Html.Hidden("EmployeeId", Model.EmployeeId)
+                </li>
+                <li id="taskSummaryContainer">
+                    <span class="statusWrapperGeneral statusWrapperRed">0</span>
+                    <span class="statusWrapperGeneral statusWrapperGreen">0</span>
+                    <span class="statusWrapperGeneral statusWrapperGray">0</span>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <label class="thin" for="SiteGroup">Site Group</label>
+                    @Html.TextBox("SiteGroup")
+                    @Html.Hidden("SiteGroupId", Model.SiteGroupId)
+                </li>
+                <li>
+                    <label class="wide" for="CreatedFrom">Created From</label>
+                    @Html.TextBoxFor(m => m.CreatedFrom, new { id = "CreatedFrom", @class = "calendar" })
+                </li>
+                <li>
+                    <label for="CreatedTo">To</label>
+                    @Html.TextBoxFor(m => m.CreatedTo, new { id = "CreatedTo", @class = "calendar" })
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <label class="thin" for="TaskCategory">Category</label>
+                    @Html.TextBox("TaskCategory")
+                    @Html.Hidden("TaskCategoryId", Model.TaskCategoryId)
+                </li>
+                <li>
+                    <label class="wide" for="CompletedFrom">Completion Due From</label>
+                    @Html.TextBoxFor(m => m.CompletedFrom, new { id = "CompletedFrom", @class = "calendar" })
+                </li>
+                <li>
+                    <label for="CompletedTo">To</label>
+                    @Html.TextBoxFor(m => m.CompletedTo, new { id = "CompletedTo", @class = "calendar" })
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <label class="thin" for="Title">Title</label>
+                    @Html.TextBoxFor(m => m.Title, new { @class="text-and-date-wide" })
+                </li>
+            </ul>
+            <ul>
+                <li class="buttons thin">
+                    <input type="submit" id="ResponsibilityTaskCategoryGoToResponsibilityTasks" value="Find Tasks" class="btn btn-primary" />
+                    @Html.ActionLink("Reset", "Index", "TaskList", new { id="ResetButton", @class="btn btn-link" })
+                </li>
+            </ul>
+        </fieldset>
+        <div class="hide">
+            <input type="checkbox" id="ShowDeleted" name="ShowDeleted" value="true" />
+            <input type="checkbox" id="ShowCompleted" name="ShowCompleted" value="true" />
+        </div>
+    }
+</div>

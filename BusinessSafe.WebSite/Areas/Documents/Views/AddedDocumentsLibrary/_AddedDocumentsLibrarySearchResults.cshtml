@@ -1,0 +1,29 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Helpers
+@using Telerik.Web.Mvc.UI
+@model BusinessSafe.WebSite.Areas.Documents.ViewModels.AddedDocumentsLibraryViewModel
+<h2><span id="tick"></span>Added Documents</h2>
+    @Html.Telerik().Grid(Model.Documents).Name("DocumentsGrid").DataKeys(keys => keys.Add(d => d.Id)).DataBinding(dataBinding => dataBinding.Server()).Columns(columns =>
+{
+    columns.Bound(o => o.Id).HeaderTemplate("Id").Visible(false);
+    columns.Bound(o => o.DocumentType).Title("Document Type").Width(200);
+    columns.Bound(o => o.Title).Title("Title").Width(400);
+    columns.Bound(o => o.SiteReference).Title("Site").Width(400);
+    columns.Bound(o => o.DocumentReference).Title("Reference").Width(400);
+    columns.Bound(o => o.Description).Title("Description").Width(400);
+    columns.Bound(o => o.UploadedBy).Title("Uploaded By").Width(120);
+    columns.Bound(o => o.DateUploaded).Format("{0:dd/MM/yyyy}").Title("Date Uploaded").Width(120);
+    columns.Template(
+        @<text>
+    @if (User.IsInRole(Permissions.ViewAddedDocuments.ToString()))
+    {
+        <a class="ViewDocumentIconLink" href="@Url.Action("DownloadDocument", "Document", new { enc = EncryptionHelper.Encrypt("documentLibraryId=" + item.DocumentLibraryId) })" data-id="@item.Id" target="_blank" title="View Document"><i class="icon-search"></i></a>
+        <a class="PrintDocumentIconLink" href="@Url.Action("DownloadDocument", "Document", new { enc = EncryptionHelper.Encrypt("documentLibraryId=" + item.DocumentLibraryId) })" target="_blank" title="Print Document"><i class="icon-print"></i></a>
+    }
+    @if (Model.IsDeleteDocumentEnabled(User, item))
+    {
+          <a class="DeleteDocumentIconLink" href="#"title="Delete Document" data-id="@item.Id"><i class="icon-remove">
+        </i></a>
+    }
+    </text>).Width(165);
+}).Pageable(page => page.PageSize(10)).Sortable()

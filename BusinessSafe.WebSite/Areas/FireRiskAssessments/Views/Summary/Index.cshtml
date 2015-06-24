@@ -1,0 +1,24 @@
+﻿@using BusinessSafe.WebSite.Areas.FireRiskAssessments.ViewModels
+@model EditSummaryViewModel
+@{
+    ViewBag.Title = "Summary";
+}
+
+@Html.Partial("_RiskAssessmentSummary", ViewBag.RiskAssessmentSummary as FireRiskAssessmentSummaryViewModel)
+<div class="container ipad-container">
+    @Html.Partial("_Tabs", ViewBag.TabViewModel as FireRiskAssessmentTabViewModel)
+    @Html.Hidden("RiskAssessmentId", Model.RiskAssessmentId)
+    @Html.Partial("_Form", Model)
+</div>
+@section JavaScriptSection
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var initModel = {
+                riskAssessors: @Html.Raw(Json.Encode(Model.RiskAssessmentAssessors)),
+                sites : @Html.Raw(Json.Encode(Model.Sites))
+            };
+            BusinessSafe.RiskAssessment.SummaryTab.ViewModel(BusinessSafe.FireRiskAssessment.SummaryTab, initModel);
+        });
+    </script>
+}

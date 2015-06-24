@@ -1,0 +1,76 @@
+﻿@using Google.ProtocolBuffers.Collections
+@model BusinessSafe.WebSite.Areas.ActionPlans.ViewModels.ReassignActionTaskViewModel
+                      
+@using (Html.BeginForm("Reassign", "ImmediateRiskNotificationsActions", FormMethod.Post, new { id = "ActionPlanTasks", @class = "form-inline" }))
+{
+    @Html.HiddenFor(x => x.CompanyId)
+    @Html.HiddenFor(x => x.ActionPlanId)
+    @Html.HiddenFor(x => x.ActionId)
+
+    <div data-valmsg-summary="true" class="validation-summary-errors hide">
+        <ul>
+        </ul>
+    </div>
+    
+    <fieldset class="well readonly">
+        <legend>
+            <h3>
+                Task Details</h3>
+        </legend>
+        <div class="row">
+            <label class="span2">Area of Non-Compliance:</label>
+            @Html.TextAreaFor(m=>m.Title, new {@class = "span7", maxlength=500, cols=40, rows=2, @readonly="readonly"})
+        </div>
+        <div class="row">
+            <label class="span2">Action Required:</label>
+            @Html.TextAreaFor(m => m.Description, new { @class = "span7", maxlength = 500, cols = 40, rows = 5, @readonly = "readonly" })
+        </div>
+
+        <div class="row">
+            <label class="span2">Guidance Note:</label>
+            @Html.TextBoxFor(m => m.GuidanceNotes, new { @class = "span1", @readonly = "readonly" })
+        </div>
+
+        <div class="row">
+            <label class="span2">Due Date:</label>
+            @Html.TextBoxFor(m => m.DueDate, new { @class = "span2", placeholder = "dd/mm/yyyy", @readonly = "readonly" })
+        </div>
+
+        <div class="row">
+            <label class="span2">Assigned To:</label>
+            @Html.TextBox("ActionTaskAssignedTo", Model.ActionTaskAssignedTo, new { @class = "span4" })
+            @Html.Hidden("ActionTaskAssignedToId", Model.ActionTaskAssignedToId)
+
+        </div>
+    </fieldset>
+    <div id="notificationEmail">
+    <fieldset class="readonly">
+        <legend>
+            <h3>
+                Notification Emails</h3>
+        </legend>
+        <p class="alert" style="margin-bottom: 5px;">
+            If you do not want to send notification emails, please tick the type you do not
+            want to send.</p>
+        <label for="DoNotSendTaskAssignedNotification" class="span3">
+            Task Assigned
+            @Html.CheckBoxFor(m => m.DoNotSendTaskAssignedNotification, new { style = "display: inline-block;", @readonly="readonly" })
+        </label>
+        <label for="DoNotSendTaskCompletedNotification" class="span3">
+            Task Completion
+            @Html.CheckBoxFor(m => m.DoNotSendTaskCompletedNotification, new { style = "display: inline-block;", @readonly="readonly" })
+        </label>
+        <label for="DoNotSendTaskOverdueNotification" class="span3">
+            Task Overdue
+            @Html.CheckBoxFor(m => m.DoNotSendTaskOverdueNotification, new { style = "display: inline-block;", @readonly="readonly" })
+        </label>
+    </fieldset>
+</div>
+    
+<div class="row span10 pull-right readonly">
+        <button type="submit" class="btn btn-primary" id="saveButton">Save</button>
+        <button class="btn btn-link" id="cancelButton">Cancel</button>
+ </div>
+}
+
+

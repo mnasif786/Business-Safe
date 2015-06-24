@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="HazardousSubstanceSafetyPhrase" table="`HazardousSubstanceSafetyPhrase`">
+    <id name="Id" column="Id" type="long">
+      <generator class="identity"/>
+    </id>
+    <property name="AdditionalInformation" type="string" />
+    <many-to-one name="HazardousSubstance" class="HazardousSubstance" column="HazardousSubstanceId" />
+    <many-to-one name="SafetyPhrase" class="SafetyPhrase" column="SafetyPhraseId"/>
+    <property name="Deleted" type ="bool"/>
+    <many-to-one name="CreatedBy" class="UserForAuditing" column="CreatedBy"/>
+    <property name="CreatedOn" type ="datetime"/>
+    <many-to-one name="LastModifiedBy" class="UserForAuditing" column="LastModifiedBy"/>
+    <property name="LastModifiedOn" type ="datetime"/>
+
+  </class>
+</hibernate-mapping>

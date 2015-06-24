@@ -1,0 +1,28 @@
+USE BusinessSafe
+GO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'EscalationTaskDueTomorrow')
+BEGIN
+	CREATE TABLE [dbo].[EscalationTaskDueTomorrow](
+		[Id] [int] IDENTITY(1,1) NOT NULL,
+		[TaskId] [bigint] NOT NULL,
+		[TaskDueTomorrowEmailSentDate] [datetime] NOT NULL,
+		
+
+		CONSTRAINT [PK_EscalationTaskDueTomorrow] PRIMARY KEY CLUSTERED 
+	(
+		[Id] ASC
+	)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+	) ON [PRIMARY]
+
+	GRANT SELECT, INSERT, DELETE, UPDATE ON [EscalationTaskDueTomorrow] TO AllowAll
+
+END
+GO
+
+--//@UNDO
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'EscalationTaskDueTomorrow')
+BEGIN
+	DROP TABLE [EscalationTaskDueTomorrow];
+END
+GO

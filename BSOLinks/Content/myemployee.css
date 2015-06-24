@@ -1,0 +1,60 @@
+﻿#myEmployeeTop label {       
+    font-size: 12px;
+    font-weight: bold;
+    color: black;
+    width: 120px;
+    margin: 0px 5px;
+}
+
+.floatLeftBlock {
+    float: left;
+    margin-left: 5px;
+}
+
+.widthFixed {
+    width: 170px;
+}
+
+.widthSize180 {
+    width: 180px;
+}
+
+.threeColumnPercentage 
+{
+    width: 33%;
+    margin: 7px 0px;
+    min-width:350px;
+    float:left;
+}
+
+.threeColumnPercentage2 {
+    width: 145px;
+     float:left;
+}
+
+.rightControlls {
+    margin-top: 19px;
+    padding: 20px;    
+}
+
+.the-icons {
+    margin-left: 0;
+    list-style: none;
+}
+
+ul.the-icons a {
+    display: block;
+    width: 140px;
+    text-indent: 20px;
+    line-height: 8px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.form-horizontal .controls {
+    margin-left: 140px;
+}
+
+#rightControllsWrapper {
+    margin-left: 0px;
+}

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Tuple<long, string>>
+<div class="span6">
+    <div class="row">
+        <label id="nonEmployeeTitle" class="span2">Non-Employees</label>
+        <input id="nonEmployeesName" class="ui-autocomplete-input attachNonEmployeeAutoComplete"
+            autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" />
+    </div>
+    <div class="row">
+        <label class="span2"></label>
+        <select id="nonEmployeesMultiSelect" multiple="multiple" class="nonEmployeesMultiSelect span3">
+            @if (Model != null)
+            {
+                foreach (var nonEmployee in Model)
+                {
+                <option value="@nonEmployee.Item1" >@nonEmployee.Item2</option>
+                }
+            }
+        </select>
+        <button id="removeNonEmployeesBtn" class="btn btn-danger hide detachNonEmployee">
+            Remove</button>
+    </div>
+    <div class="row">
+        <label class="span2">
+        </label>
+        <button id="addNewNonEmployee" class="btn addNewNonEmployee" disabled="disabled">
+            Add New Non-Employee</button>
+    </div>
+</div>

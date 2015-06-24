@@ -1,0 +1,12 @@
+﻿@model BusinessSafe.WebSite.ViewModels.DocumentsViewModel
+<form method="post" action="@Url.Action("Save", "Documents")" class="form-inline row">
+    @Html.Partial("_DocumentDisplayMessages", Model.DocumentDisplayMessages)
+    <div class="span12 ipad-risk-assessment-attached-document">
+        <div class="content">
+            @Html.Partial("_AttachDocuments", Model.ExistingDocumentsViewModel)
+        </div>
+    </div>
+    @Html.Partial("_RiskAssessmentDocumentsCommandButtons")
+    @Html.Hidden("CompanyId", Model.CompanyId)
+    @Html.Hidden("RiskAssessmentId", Model.RiskAssessmentId)
+</form>

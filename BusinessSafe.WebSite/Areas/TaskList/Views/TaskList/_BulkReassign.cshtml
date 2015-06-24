@@ -1,0 +1,11 @@
+﻿@model BusinessSafe.WebSite.Areas.TaskList.ViewModels.TaskListViewModel
+<div class="row">
+    <form class="form-inline pull-right well">
+        <label class="span2">Reassign To:</label>
+        <div class="input-append">
+            @Html.TextBox("BulkReassignTo")
+            @Html.Hidden("BulkReassignToId")
+            <input type="button" id="BulkReassignSaveButton" class="btn btn-primary" value="Reassign" />
+        </div>
+    </form>
+</div>

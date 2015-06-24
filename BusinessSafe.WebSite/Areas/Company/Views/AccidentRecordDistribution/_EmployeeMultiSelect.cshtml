@@ -1,0 +1,50 @@
+﻿@using BusinessSafe.Application.DataTransferObjects
+@using Telerik.Web.Mvc.UI
+@model BusinessSafe.WebSite.Areas.Company.ViewModels.AccidentRecordDistributionListViewModel 
+
+<div>
+    <div class="row">
+        <div class="span2">
+            <label>Select Employees</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="span11">
+            <div class="search-and-multi-select">
+                <ul>
+                    @foreach (var employee in Model.EmployeesToSelectFrom)
+                    {
+                        <li>@(employee.FullName + " (" + employee.JobTitle + ") ")<input type="checkbox" class="employeeMultiSelectCheckbox" value="@employee.Id"/></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span11">
+            <a class="btn btn-primary pull-right" href="#" id="AddMultipleEmployees">Add</a>
+            <input type="button" class="btn pull-right" id="SelectAllEmployees" value="Select All" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="span11">     
+        @if (@Model.SiteId > 0)
+        { 
+           <h3>Distribution List for @Model.Sites.Where( x => x.value == Model.SiteId.ToString() ).First().label </h3>      
+         }
+        </div>
+    </div>
+    <div class="row">
+        <div class="span11">            
+            @Html.Partial("_EmployeeSelected", Model)                     
+        </div>
+    </div>
+</div>
+
+@*
+<script type="text/javascript">
+    var sites = @Html.Raw(Json.Encode(Model.Sites));
+    var employees = @Html.Raw(Json.Encode(Model.EmployeesToSelectFrom));                 
+</script>
+*@

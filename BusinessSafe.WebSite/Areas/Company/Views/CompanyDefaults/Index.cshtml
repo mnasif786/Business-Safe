@@ -1,0 +1,87 @@
+﻿@using BusinessSafe.WebSite.Areas.Company.ViewModels
+@using Cassette.Views
+@model CompanyDefaultsViewModel
+@{
+    ViewBag.Title = "Company Defaults";
+}
+<section class="company-defaults">
+    <span class="legend">Company Defaults</span>
+    @Html.HiddenFor(x => x.CompanyId)
+    <div class="tabs">
+        <ul class="nav nav-pills">
+            <li class="active"><a href="#tab1" data-toggle="tab">Company &amp; Contacts</a></li>
+            <li><a href="#tab2" data-toggle="tab">Risk Assessments</a></li>
+            <li><a id="risk-assessors" href="#tab3" data-toggle="tab">Risk Assessors</a></li>
+            <li><a id="accident-distribution" href="#tab4" data-toggle="tab">Accident Record Distribution</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="tab1">
+                <div class="span5">
+                    @Html.Partial("_DefaultAddEdit", Model.SpecialistSuppliersViewModel)
+                </div>
+                <div class="span5">
+                    @Html.Partial("_DefaultAddEdit", Model.NonEmployeesViewModel)
+                </div>
+            </div>
+            <div class="tab-pane" id="tab2">
+                <div class="span5">
+                    @Html.Partial("_DefaultAddEdit", Model.HazardsViewModel)
+                </div>
+                <div class="span5">
+                    @Html.Partial("_DefaultAddEdit", Model.PeopleAtRiskViewModel)
+                </div>
+            </div>
+            <div class="tab-pane" id="tab3">
+                <div class="span12" id="riskAssessorsDiv">
+                    @Html.Action("Index", "RiskAssessor", new { companyId = Model.CompanyId, showDeleted = false })
+                </div>
+            </div>
+
+             <div class="tab-pane" id="tab4">
+                <div class="span12" id="accidentRecordDistributionDiv">
+                    @Html.Action("Index", "AccidentRecordDistribution", new { companyId = Model.CompanyId, showDeleted = false })
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="hide">
+    <div id="dialog" title="Delete Item">
+        <p>Are you sure you want to delete this item?</p>
+    </div>
+    <div id="dialogCanNotDeleteSupplier" title="Can Not Delete Supplier">
+        <p>Unfortunately we are unable to delete this supplier. Supplier is currently in use
+            on hazardous substances.</p>
+    </div>
+    <div id="dialogCanNotRiskAssessor" title="Can Not Delete Risk Assessor">
+        <p>Unfortunately we are unable to delete this risk assessor. As they have 'Open' risk assessments linked to them. Please reassign before you delete risk assessor.</p>
+    </div>
+    <div id="dialogCanNotDeleteHazard" title="Can Not Delete Hazard">
+        <p>Unfortunately we are unable to delete this hazard. Hazard is currently in use on
+            one or more risk assessments.</p>
+    </div>
+     <div id="dialogAddRiskAssessor" title="Add Risk Assessor">
+    </div>
+     <div id="dialogEditRiskAssessor" title="Edit Risk Assessor">
+    </div>
+     <div id="dialogReinstateRiskAssessor" title="Reinstate Risk Assessor">
+        <p>Are you sure you want to reinstate this Risk Assessor?</p>
+    </div>
+    @Html.Partial("_AddNonEmployee", new NonEmployeeViewModel(Model))
+</div>
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("companydefaults");
+        @Bundles.RenderScripts()  
+        
+    }
+   <script type="text/javascript">
+       $(document).ready(function () {
+           
+           //the sites variable is set in a partial view
+           accidentRecordDistribution.initialise(sites);
+       });
+    </script>   
+      
+}

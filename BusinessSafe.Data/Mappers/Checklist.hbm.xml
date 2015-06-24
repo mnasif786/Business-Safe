@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="Checklist" table="`Checklist`" mutable="false">
+    <id name="Id" column="Id" type="long">
+      <generator class="identity"/>
+    </id>
+    <property name="Title" type="string" />
+    <property name="Description" type="string" />
+	<property name="ChecklistRiskAssessmentType"/>
+    <property name="Deleted" type="bool" />
+    <property name="CreatedOn" type="DateTime" />
+    <many-to-one name="CreatedBy" class="UserForAuditing" column="CreatedBy"/>
+    <property name="LastModifiedOn" type="DateTime" />
+    <many-to-one name="LastModifiedBy" class="UserForAuditing" column="LastModifiedBy"/>
+	<bag name="Sections" table="Section" lazy="true" cascade="save-update" inverse="false" >
+	  <key column="ChecklistId"></key>
+		<one-to-many class="Section" />
+	</bag>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,89 @@
+﻿@model BusinessSafe.WebSite.Areas.GeneralRiskAssessments.ViewModels.GeneralRiskAssessmentArchiveIndexViewModel
+@{
+    ViewBag.Title = "General Risk Assessments Audit History (Proof Of Concept)";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section>
+    <span class="legend">@ViewBag.Title</span>
+    <div class="sectionContainer centredContent">
+        <div class="page-header">
+            <h1>
+                General Risk Assessment Audit History</h1>
+        </div>
+        <div class="well">
+            <div class="span3 form-horizontal">
+                <label class="">
+                    Title: <span style="font-size: 14px; font-weight: bold;">@Model.Title</span></label>
+            </div>
+            <div class="span3">
+                <label class="">
+                    Reference: <span style="font-size: 14px; font-weight: bold;">@Model.Ref</span></label>
+            </div>
+            <div class="span3">
+                <label class="">
+                    Created On: <span style="font-size: 14px; font-weight: bold;">@Model.CreatedOn</span>
+                </label>
+            </div>
+        </div>
+        @if (Model.Archive.Any())
+        {
+            <div class="t-widget t-grid" id="GeneralRiskAssessmentsGrid">
+                <table cellspacing="0">
+                    <colgroup>
+                        <col />
+                        <col />
+                        <col style="width: 190px" />
+                    </colgroup>
+                    <thead class="t-grid-header">
+                        <tr>
+                            <th class="t-header" scope="col">
+                                Last Modified Date
+                            </th>
+                            <th class="t-header" scope="col">
+                                Last Modified By
+                            </th>
+                            <th class="t-header" scope="col">
+                                <span class="t-link">&nbsp;</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var snapshot in Model.Archive)
+                        {   
+                            <tr>
+                                <td>
+                                    @snapshot.LastModifiedDate.ToShortDateString()
+                                </td>
+                                <td>
+                                    @snapshot.LastModifiedBy
+                                </td>
+                                <td>
+                                    <a data-id="40" href="/GeneralRiskAssessments/AuditHistory/Details" title="View Audit History">
+                                        <i class="icon-search"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="t-grid-pager t-grid-bottom">
+                    <div class="t-status">
+                        <a class="t-icon t-refresh" href="">Refresh</a></div>
+                    <div class="t-pager t-reset">
+                        <a class="t-link t-state-disabled" href="#"><span class="t-icon t-arrow-first">first</span></a><a
+                            class="t-link t-state-disabled" href="#"><span class="t-icon t-arrow-prev">prev</span></a><div
+                                class="t-numeric">
+                                <span class="t-state-active">1</span></div>
+                        <a class="t-link t-state-disabled" href="#"><span class="t-icon t-arrow-next">next</span></a><a
+                            class="t-link t-state-disabled" href="#"><span class="t-icon t-arrow-last">last</span></a></div>
+                    <div class="t-status-text">
+                        Displaying items 1 - 1 of 1</div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <p>
+                There are no snapshots available for this Risk Assessment</p>
+        }
+    </div>
+</section>

@@ -1,0 +1,10 @@
+﻿@model BusinessSafe.Checklists.ViewModels.SectionViewModel
+<fieldset>
+    <legend>@Model.Title</legend>
+    <ol class="section">
+        @foreach (var q in Model.Questions)
+        {
+            <li class="row">@Html.Partial("_Question", q)</li>
+        }
+    </ol>
+</fieldset>

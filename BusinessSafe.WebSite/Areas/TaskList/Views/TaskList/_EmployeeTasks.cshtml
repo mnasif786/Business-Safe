@@ -1,0 +1,70 @@
+﻿@using Telerik.Web.Mvc.UI
+@model BusinessSafe.WebSite.Areas.TaskList.ViewModels.TaskListViewModel
+
+@Html.Partial("_SearchResultsGridTiteBar", Model)
+
+
+@Html.Telerik().Grid(Model.Tasks).Name("TaskGrid").PrefixUrlParameters(false).EnableCustomBinding(true).DataKeys(keys => keys.Add(c => c.Id)).DataBinding(
+    dataBinding => dataBinding
+        .Server()
+             .Select("Find", "TaskList")).Columns(
+        columns => {
+            columns.Bound(o => o.Id).Visible(false);
+            columns.Bound(o => o.IsReoccurring).Template(item => item.GetStatusIcons).HeaderTemplate(" ").Encoded(false).Width(55);
+            if (!Model.IsBulkReassign)
+            {
+                columns.Bound(o => o.Reference).HeaderHtmlAttributes(new { @class = "task-reference" }).HtmlAttributes(new { @class = "task-reference" }).Title("Task Reference").Width(140);
+            }
+            else
+            {
+                columns.Bound(o => o.Reference).Title("Task Reference").Width(140);               
+            }
+            
+            columns.Bound(o => o.TaskCategory).Title("Task Category").Width(180);
+            columns.Bound(o => o.Title).Width(200);
+            columns.Bound(o => o.Description).Width(650);
+            
+            // Checks introduced to hide columns in portrait view of ipad
+            if (Model.IsShowCompleted)
+            {
+                columns.Bound(o => o.TaskAssignedTo).HeaderHtmlAttributes(new { @class = "assigned-to" }).HtmlAttributes(new { @class = "assigned-to" }).Title("Assigned To").Width(130);
+                columns.Bound(o => o.CompletedBy).Title("Completed By").Width(130);
+                columns.Bound(o => o.TaskCompletionDueDate).Template(@<text>@item.TaskCompletionDueDate</text>).Title("Due Date").Width(130);
+                columns.Bound(o => o.CompletedOn).Title("Completed Date").Width(130);
+                
+            }
+            else
+            {
+                columns.Bound(o => o.TaskAssignedTo).Title("Assigned To").Width(130);
+                if (Model.IsBulkReassign)
+                {
+                    columns.Bound(o => o.CreatedDate).HeaderHtmlAttributes(new { @class = "created-date" }).HtmlAttributes(new { @class = "created-date" }).Title("Created Date").Width(130);
+                }
+                else
+                {
+                    columns.Bound(o => o.CreatedDate).Title("Created Date").Width(130);
+                }
+                
+                columns.Bound(o => o.TaskCompletionDueDate).Template(@<text><strong>@item.TaskCompletionDueDate</strong></text>).Title("Due Date").Width(130);
+            }
+            
+            columns.Bound(o => o.DerivedDisplayStatus).Title("Status").Width(100);
+            columns.Template(@<text>
+                @if (!item.IsDeleted)
+                {
+                    @Html.Partial("_TaskViewCommand", item)
+                    @Html.Partial("_TaskCompleteCommand", item)
+                    @Html.Partial("_TaskDeleteCommand", item)
+                    @*Removed until print functionality is in place. @Html.Partial("_TaskPrintCommand", item) *@
+                    @Html.Partial("_TaskReassignCommand", item)
+
+                }
+                
+            </text>).Visible(Model.IsBulkReassign == false).Width(160);
+            columns.Template(@<text>
+                @Html.Partial("_TaskBulkReassignCheckbox", item)
+            </text>)
+            .HeaderTemplate("Reassign").Visible(Model.IsBulkReassign).Width(40);
+        }).Pageable(page =>{page.PageSize(Model.PageSize);
+                            page.Total(Model.Total);
+                        }).Sortable()

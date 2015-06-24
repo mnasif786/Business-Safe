@@ -1,0 +1,10 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+<fieldset class="text-input-and-command row">
+    <div class="span6">
+        <input type="text" class="span3" placeholder="@Model.TextInputWaterMark" />
+        @if (User.IsInRole(Permissions.AddCompanyDefaults.ToString()))
+        {
+            <button type="button" class="btn add btn-success">Add</button>
+        }
+    </div>
+</fieldset>

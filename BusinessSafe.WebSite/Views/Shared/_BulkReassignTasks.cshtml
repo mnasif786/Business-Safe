@@ -1,0 +1,16 @@
+﻿<div id="reassign-task-controls" class="form-inline">
+    <div class="row-fluid employee-not-user-alert-message hide">
+        @Html.Partial("_EmployeeNotAUserWarning")
+    </div>
+   
+    <button type="button" id="init-bulk-reassign-tasks" class="btn">Start Reassigning Tasks</button>
+    <div class="row">
+        <div id="reassignTaskToDropdown" class="span6">
+            <label class="span2">Reassign Tasks to:</label>
+            @Html.TextBox("bulkReassignTaskTo", "", new { @class = "span3" })
+            @Html.Hidden("bulkReassignTaskToId")
+        </div>
+        <button type="submit" id="update-bulk-reassign-tasks" class="btn btn-primary">Save</button>
+        <button type="reset" id="cancel-bulk-reassign-tasks" class="btn btn-link">Cancel</button>
+    </div>
+</div>

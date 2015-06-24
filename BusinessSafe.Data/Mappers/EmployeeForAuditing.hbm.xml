@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="EmployeeForAuditing" table="`Employee`" mutable="false" >
+    <id name="Id" column="Id" type="Guid">
+      <generator class="assigned" />
+    </id>
+    <property name="Forename" type="string" />
+    <property name="Surname" type="string" />
+    <property name="CompanyId" column="ClientId" />
+    <property name="Deleted" type="bool"/>
+  </class>
+  
+</hibernate-mapping>

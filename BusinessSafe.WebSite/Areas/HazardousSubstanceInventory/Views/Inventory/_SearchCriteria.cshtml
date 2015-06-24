@@ -1,0 +1,42 @@
+﻿@using BusinessSafe.WebSite.Extensions
+@model BusinessSafe.WebSite.Areas.HazardousSubstanceInventory.ViewModels.InventoryViewModel
+    <div class="well">
+    @using (Html.BeginForm("Index", "Inventory", FormMethod.Get, new { id="formHazardousSubstancesInventory", @class="search-form"}))    
+    {
+        <fieldset>
+            <legend>Hazardous Substance Search</legend>
+            <ul>
+                <li>
+                    <label for="SubstanceNameLike" class="wide">Substance Name</label>
+                    @Html.TextBoxFor(model => model.SubstanceNameLike)
+                </li>
+                <li>
+                    <label for="Supplier" class="wide">Supplier Name</label>
+                    @Html.TextBox("Supplier")
+                    @Html.Hidden("SupplierId", Model.SupplierId)
+                </li>
+            </ul>
+            <ul>
+                <li class="buttons wide">
+                    <input id="Search" class="btn btn-primary" type="submit" value="Search" />
+                    <a class="btn btn-link" href="@Url.Action("Index", "Inventory", new { companyId = Html.GetUsersCompanyId(User) })">Reset</a>
+                </li>
+            </ul>
+        </fieldset>
+        
+        @Html.HiddenFor(model => model.CompanyId)
+        @Html.HiddenFor(model => model.ShowDeleted)
+    }
+</div>
+
+@*<div style="min-height:26px;margin-bottom:10px;margin-right:11px;margin-top:-10px;">
+    <input type="button" id="PrintHazardousSubstanceInventory" value="Print" style="float:right;" class="btn" />
+</div>
+*@
+
+<div style="min-height:26px;margin-bottom:10px;margin-right:11px;margin-top:-10px;">
+    <input type="button" class="btn" style="float:right;" value="Print" onclick="location.href='@Url.Action("Index", "HazardousSubstancesInventory", new { area = "SqlReports", substanceName=Model.SubstanceNameLike, supplierId=Model.SupplierId })'" />
+</div>
+
+
+

@@ -1,0 +1,8 @@
+﻿@model BusinessSafe.WebSite.ViewModels.AddEditFurtherControlMeasureTaskViewModel
+<form id="FurtherActionTask" class="form-inline" method="POST" action="@Url.Action("UpdateFurtherControlMeasureTask", "GenericFurtherControlMeasureTask", new {area = ""})">
+     @Html.HiddenFor(x => x.FurtherControlMeasureTaskId)
+    @Html.Partial("_FurtherControlMeasureDetails", Model)
+</form>
+<script type="text/javascript">
+    new SetFormToReadOnly('.readonly').execute();
+</script>

@@ -1,0 +1,46 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+@using Telerik.Web.Mvc.UI
+@model BusinessSafe.WebSite.Areas.Users.ViewModels.UserSearchViewModel
+<h2>
+    <a id="showDeletedLink" class="btn pull-right" href="#">Show Deleted</a> 
+    <span class="tick"></span>My Users
+</h2>
+    @Html.Telerik().Grid(Model.Users).Name("ResponsibilitySaveResponsibilityTaskRequestGrid").DataKeys(keys => keys.Add(c => c.Id)).DataBinding(dataBinding => dataBinding.Server().Delete("User", "Delete")).Columns(
+    columns => {
+        columns.Bound(o => o.Id).Visible(false);
+        columns.Bound(o => o.EmployeeReference).Title("Ref");
+        columns.Bound(o => o.Forename).Title("Forename");
+        columns.Bound(o => o.Surname);
+        columns.Bound(o => o.JobTitle).Title("Job Title");
+        columns.Bound(o => o.SiteName).Title("Site");
+        columns.Bound(o => o.Role);
+        columns.Template(@<text>
+    @if (!item.IsDeleted)
+    {
+        if (User.IsInRole(Permissions.ViewUsers.ToString()))
+        {
+        <a id="ViewUserIconLink" class="icon-search" href="@Url.Action("ViewUser", "ViewUsers", new { companyId = Model.CompanyId, employeeId = item.EmployeeId })" title="View User"></a>            
+        }
+        if (User.IsInRole(Permissions.EditUsers.ToString()))
+        {
+        <a id="EditUserIconLink" class="icon-edit" data-id="@item.Id" href="@Url.Action("Index", "AddUsers", new { companyId = Model.CompanyId, employeeId = item.EmployeeId })" title="Edit User"></a>
+        }
+        if (User.IsInRole(Permissions.DeleteUsers.ToString()) && item.ShowDeleteButton)
+        {
+        <a id="DeleteUserIconLink" class="icon-remove" data-id="@item.Id" href="" title="Delete User"></a>
+        }
+        if (User.IsInRole(Permissions.EditUsers.ToString()) && item.ShowResetUserRegistrationButton)
+        {
+        <a id="ResendUserRegistrationIconLink" class="icon-repeat" data-id="@item.Id" href="@Url.Action("Index", "AddUsers", new { companyId = Model.CompanyId, employeeId = item.EmployeeId })" title="Resend Registration"></a>
+        }
+    }
+    else
+    {
+        if (User.IsInRole(Permissions.DeleteUsers.ToString()))
+        {
+        <a id="ReinstateUserIconLink" class="reinstateIcon" data-id="@item.Id" data-is-registered="@item.IsRegistered" href="" title="Reinstate Deleted User">
+            <i class="icon-share"></i></a>
+        }
+    }
+    </text>).Width(165);
+}).Pageable(page => page.PageSize(10)).Sortable()

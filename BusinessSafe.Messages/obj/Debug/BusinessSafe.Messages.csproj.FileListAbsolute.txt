@@ -1,0 +1,8 @@
+D:\Development\BusinessSafe\BusinessSafe.Messages\bin\Debug\BusinessSafe.Messages.dll
+D:\Development\BusinessSafe\BusinessSafe.Messages\bin\Debug\BusinessSafe.Messages.pdb
+D:\Development\BusinessSafe\BusinessSafe.Messages\bin\Debug\NServiceBus.dll
+D:\Development\BusinessSafe\BusinessSafe.Messages\bin\Debug\log4net.dll
+D:\Development\BusinessSafe\BusinessSafe.Messages\bin\Debug\NServiceBus.xml
+D:\Development\BusinessSafe\BusinessSafe.Messages\obj\Debug\BusinessSafe.Messages.dll
+D:\Development\BusinessSafe\BusinessSafe.Messages\obj\Debug\BusinessSafe.Messages.pdb
+D:\Development\BusinessSafe\BusinessSafe.Messages\obj\Debug\BusinessSafe.Messages.csprojResolveAssemblyReference.cache

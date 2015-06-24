@@ -1,0 +1,8 @@
+﻿@model BusinessSafe.WebSite.Areas.TaskList.ViewModels.TaskViewModel
+ @if (Model.IsReassignEnabled(User))
+{
+       
+<a data-id="@Model.Id" href="#" title="Re-assign Task" data-task-type="@Model.GetTaskType()" class="icon-share">
+</a>
+       
+}

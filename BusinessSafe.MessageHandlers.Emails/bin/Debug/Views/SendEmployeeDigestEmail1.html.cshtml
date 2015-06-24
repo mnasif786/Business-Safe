@@ -1,0 +1,127 @@
+﻿@model BusinessSafe.MessageHandlers.Emails.ViewModels.SendEmployeeDigestEmailViewModel
+<head>
+    <style>
+        body
+        {
+            background-color: white;
+            font-size: .85em;
+            font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
+            margin: 0;
+            padding: 0;
+            color: #393939;
+        }
+        
+        h1
+        {
+            font-size: 2em;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+    table {
+        border-spacing: 2px;
+        border-color: #A9A9A9;
+    }
+
+        table th, td {
+                border: 2px solid darkgrey;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 2px;
+        }
+
+    </style>
+</head>
+<body>
+    @* Overdue Tasks Section *@
+
+    @if (Model.GeneralRiskAssessmentsOverdueTasksViewModel.Any() || Model.PersonalRiskAssessmentsOverdueTasksViewModel.Any() || Model.FireRiskAssessmentsOverdueTasksViewModel.Any())
+    {
+        <p>
+            Following tasks are overdue:
+        </p>
+        
+        if (Model.GeneralRiskAssessmentsOverdueTasksViewModel.Any())
+        {
+            <h4>General Risk Assessment Tasks</h4>
+            foreach (var task in Model.GeneralRiskAssessmentsOverdueTasksViewModel)
+            {
+                <table border="1">
+                    <tr>
+                        <td><strong>Reference</strong></td>
+                        <td>@task.TaskReference</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Title</strong></td>
+                        <td>@task.Title</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Due Date</strong></td><td>@task.CompletionDueDate &nbsp;<strong>Assigned To: &nbsp;</strong>@task.TaskAssignedTo</td>
+                    </tr>
+                    <tr>
+                        <td style="margin:0; padding:0; vertical-align:top;"><strong> Description &nbsp;</strong></td>
+                        <td>@task.Description</td>
+                    </tr>
+                </table>
+                <br/><br/>
+            }
+        }
+    
+        if (Model.PersonalRiskAssessmentsOverdueTasksViewModel.Any())
+        {
+            <h4>Personal Risk Assessment Tasks</h4>
+            foreach (var task in Model.PersonalRiskAssessmentsOverdueTasksViewModel)
+            {
+               <table border="1">
+                    <tr>
+                        <td><strong>Reference</strong></td>
+                        <td>@task.TaskReference</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Title</strong></td>
+                        <td>@task.Title</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Due Date</strong></td><td>@task.CompletionDueDate &nbsp;<strong>Assigned To: &nbsp;</strong>@task.TaskAssignedTo</td>
+                    </tr>
+                    <tr>
+                        <td style="margin:0; padding:0; vertical-align:top;"><strong> Description &nbsp;</strong></td>
+                        <td>@task.Description</td>
+                    </tr>
+                </table>
+                <br/><br/>
+            }
+        }
+    
+        if (Model.FireRiskAssessmentsOverdueTasksViewModel.Any())
+        {
+            <h4>Fire Risk Assessment Tasks</h4>
+            foreach (var task in Model.FireRiskAssessmentsOverdueTasksViewModel)
+            {
+                <table border="1">
+                    <tr>
+                        <td><strong>Reference</strong></td>
+                        <td>@task.TaskReference</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Title</strong></td>
+                        <td>@task.Title</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Due Date</strong></td><td>@task.CompletionDueDate &nbsp;<strong>Assigned To: &nbsp;</strong>@task.TaskAssignedTo</td>
+                    </tr>
+                    <tr>
+                        <td style="margin:0; padding:0; vertical-align:top;"><strong> Description &nbsp;</strong></td>
+                        <td>@task.Description</td>
+                    </tr>
+                </table>
+                <br/><br/>
+            }
+         }
+        <p>To view your overdue task, please log into BusinessSafe Online on the following link. http://businesssafe.peninsula-uk.local </p>
+        <hr>
+    }
+    
+</body>

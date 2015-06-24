@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="c8ad0c53-3d39-4e80-80b5-603f74f9bf85" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://uatmaintws1:8064/ClientDocumentService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ClientDocumentService.xsd" MetadataType="Schema" ID="90cc6f48-9e70-4145-9760-7d26666d6db1" SourceId="1" SourceUrl="http://uatmaintws1:8064/ClientDocumentService.svc?xsd=xsd6" />
+    <MetadataFile FileName="ClientDocumentService1.xsd" MetadataType="Schema" ID="3e2fc3fc-6f94-40b3-b04f-2b0dce3b687f" SourceId="1" SourceUrl="http://uatmaintws1:8064/ClientDocumentService.svc?xsd=xsd5" />
+    <MetadataFile FileName="ClientDocumentService2.xsd" MetadataType="Schema" ID="3101ba10-0c91-4db2-8332-b663f644fdce" SourceId="1" SourceUrl="http://uatmaintws1:8064/ClientDocumentService.svc?xsd=xsd4" />
+    <MetadataFile FileName="ClientDocumentService.wsdl" MetadataType="Wsdl" ID="4f3b5952-bd33-4b47-9329-834bb40d7f25" SourceId="1" SourceUrl="http://uatmaintws1:8064/ClientDocumentService.svc?wsdl" />
+    <MetadataFile FileName="ClientDocumentService.disco" MetadataType="Disco" ID="ab70cb61-3f4a-479d-8ad7-099aeba93d51" SourceId="1" SourceUrl="http://uatmaintws1:8064/ClientDocumentService.svc?disco" />
+    <MetadataFile FileName="ClientDocumentService3.xsd" MetadataType="Schema" ID="67abc11b-75fa-4d4d-9e83-87d7b899401f" SourceId="1" SourceUrl="http://uatmaintws1:8064/ClientDocumentService.svc?xsd=xsd3" />
+    <MetadataFile FileName="ClientDocumentService4.xsd" MetadataType="Schema" ID="28df5378-40c7-47f0-b653-224c8a801725" SourceId="1" SourceUrl="http://uatmaintws1:8064/ClientDocumentService.svc?xsd=xsd2" />
+    <MetadataFile FileName="ClientDocumentService5.xsd" MetadataType="Schema" ID="c915ce04-8282-43a5-97ae-880c1070e33e" SourceId="1" SourceUrl="http://uatmaintws1:8064/ClientDocumentService.svc?xsd=xsd1" />
+    <MetadataFile FileName="ClientDocumentService6.xsd" MetadataType="Schema" ID="219f41b9-a470-4ddd-9fed-95a0e0ca5f38" SourceId="1" SourceUrl="http://uatmaintws1:8064/ClientDocumentService.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

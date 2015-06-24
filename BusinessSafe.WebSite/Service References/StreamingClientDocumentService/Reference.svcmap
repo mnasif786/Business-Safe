@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="ff581388-6e00-4985-a6e5-a0b553395b1c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://pbswebtest2:8064/StreamingClientDocumentService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="StreamingClientDocumentService.xsd" MetadataType="Schema" ID="1a907fb2-bf20-4b01-a8d8-71c738b73a40" SourceId="1" SourceUrl="http://pbswebtest2:8064/StreamingClientDocumentService.svc?xsd=xsd4" />
+    <MetadataFile FileName="StreamingClientDocumentService1.xsd" MetadataType="Schema" ID="cbc6fc59-359b-4c62-84c3-8d3c7bbad181" SourceId="1" SourceUrl="http://pbswebtest2:8064/StreamingClientDocumentService.svc?xsd=xsd3" />
+    <MetadataFile FileName="StreamingClientDocumentService2.xsd" MetadataType="Schema" ID="f876ea5c-6c9d-4c21-a0c0-fb0c1709a85e" SourceId="1" SourceUrl="http://pbswebtest2:8064/StreamingClientDocumentService.svc?xsd=xsd2" />
+    <MetadataFile FileName="StreamingClientDocumentService.wsdl" MetadataType="Wsdl" ID="0d6fa2ae-cf18-4f7c-a1a9-e6dce89e65ce" SourceId="1" SourceUrl="http://pbswebtest2:8064/StreamingClientDocumentService.svc?wsdl" />
+    <MetadataFile FileName="StreamingClientDocumentService.disco" MetadataType="Disco" ID="01abaf80-6d44-4377-9927-8dbb84421514" SourceId="1" SourceUrl="http://pbswebtest2:8064/StreamingClientDocumentService.svc?disco" />
+    <MetadataFile FileName="StreamingClientDocumentService3.xsd" MetadataType="Schema" ID="e490fd54-57e3-4ed8-982c-3cec03e9962e" SourceId="1" SourceUrl="http://pbswebtest2:8064/StreamingClientDocumentService.svc?xsd=xsd5" />
+    <MetadataFile FileName="StreamingClientDocumentService4.xsd" MetadataType="Schema" ID="2c85e56c-df61-4300-b816-b260a5143550" SourceId="1" SourceUrl="http://pbswebtest2:8064/StreamingClientDocumentService.svc?xsd=xsd0" />
+    <MetadataFile FileName="StreamingClientDocumentService5.xsd" MetadataType="Schema" ID="b88f0bb3-3648-434d-872b-20f1dc85e160" SourceId="1" SourceUrl="http://pbswebtest2:8064/StreamingClientDocumentService.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

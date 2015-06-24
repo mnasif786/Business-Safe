@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="D:\Inetpub\BusinessSafe\BusinessSafe.WebSite.Test\bin\Debug\BusinessSafe.WebSite.Tests.dll" total="1" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2012-03-22" time="10:07:37">
+  <environment nunit-version="2.6.0.12051" clr-version="2.0.50727.5448" os-version="Microsoft Windows NT 6.1.7601 Service Pack 1" platform="Win32NT" cwd="D:\Inetpub\BusinessSafe\ThirdParty\NUnit" machine-name="PBS42491" user="nima.montazeri" user-domain="HQ" />
+  <culture-info current-culture="en-GB" current-uiculture="en-US" />
+  <test-suite type="Assembly" name="D:\Inetpub\BusinessSafe\BusinessSafe.WebSite.Test\bin\Debug\BusinessSafe.WebSite.Tests.dll" executed="True" result="Success" success="True" time="0.084" asserts="0">
+    <results>
+      <test-suite type="Namespace" name="BusinessSafe" executed="True" result="Success" success="True" time="0.068" asserts="0">
+        <results>
+          <test-suite type="Namespace" name="WebSite" executed="True" result="Success" success="True" time="0.068" asserts="0">
+            <results>
+              <test-suite type="Namespace" name="Tests" executed="True" result="Success" success="True" time="0.068" asserts="0">
+                <results>
+                  <test-suite type="Namespace" name="Controllers" executed="True" result="Success" success="True" time="0.067" asserts="0">
+                    <results>
+                      <test-suite type="Namespace" name="ResponsibilityPlanner" executed="True" result="Success" success="True" time="0.067" asserts="0">
+                        <results>
+                          <test-suite type="TestFixture" name="IndexTest" executed="True" result="Success" success="True" time="0.066" asserts="0">
+                            <categories>
+                              <category name="Unit" />
+                            </categories>
+                            <results>
+                              <test-case name="BusinessSafe.WebSite.Tests.Controllers.ResponsibilityPlanner.IndexTest.Given_user_logged_in_to_business_safe_Then_ResponsibilityPlanner_view_is_returned" executed="True" result="Success" success="True" time="0.054" asserts="1" />
+                            </results>
+                          </test-suite>
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

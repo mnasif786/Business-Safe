@@ -1,0 +1,27 @@
+﻿@using BusinessSafe.WebSite.Areas.HazardousSubstanceRiskAssessments.ViewModels
+@model EditSummaryViewModel
+@{
+    ViewBag.Title = "Summary";
+}
+@Html.Partial("_RiskAssessmentSummary", ViewBag.RiskAssessmentSummary as HazardousSubstanceSummaryViewModel)
+
+<div class="container tabs ipad-container">
+    @Html.Partial("_Tabs", ViewBag.TabViewModel as HazardousSubstanceRiskAssessmentTabViewModel)
+
+    @Html.Hidden("SelectedTabIndex", 1)
+    @Html.Hidden("RiskAssessmentId", Model.RiskAssessmentId)
+    @Html.Partial("_Form", Model)
+</div>
+@section JavaScriptSection
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var initModel = {
+                riskAssessors: @Html.Raw(Json.Encode(Model.RiskAssessmentAssessors)),
+                hazardousSubstances: @Html.Raw(Json.Encode(Model.HazardousSubstances)),
+                sites : @Html.Raw(Json.Encode(Model.Sites))
+            };
+            BusinessSafe.RiskAssessment.SummaryTab.ViewModel(BusinessSafe.HazardousSubstanceRiskAssessment.SummaryTab, initModel);
+        });
+    </script>
+}

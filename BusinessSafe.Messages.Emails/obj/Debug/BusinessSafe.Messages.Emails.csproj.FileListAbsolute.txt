@@ -1,0 +1,8 @@
+D:\Development\BusinessSafe\BusinessSafe.Messages.Emails\bin\Debug\BusinessSafe.Messages.Emails.dll
+D:\Development\BusinessSafe\BusinessSafe.Messages.Emails\bin\Debug\BusinessSafe.Messages.Emails.pdb
+D:\Development\BusinessSafe\BusinessSafe.Messages.Emails\bin\Debug\NServiceBus.dll
+D:\Development\BusinessSafe\BusinessSafe.Messages.Emails\bin\Debug\log4net.dll
+D:\Development\BusinessSafe\BusinessSafe.Messages.Emails\bin\Debug\NServiceBus.xml
+D:\Development\BusinessSafe\BusinessSafe.Messages.Emails\obj\Debug\BusinessSafe.Messages.Emails.dll
+D:\Development\BusinessSafe\BusinessSafe.Messages.Emails\obj\Debug\BusinessSafe.Messages.Emails.pdb
+D:\Development\BusinessSafe\BusinessSafe.Messages.Emails\obj\Debug\BusinessSafe.Messages.Emails.csprojResolveAssemblyReference.cache

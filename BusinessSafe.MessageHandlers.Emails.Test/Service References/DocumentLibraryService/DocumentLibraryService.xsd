@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://uatmaintws1:8056/DocumentLibraryService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" />
+  <xs:import schemaLocation="http://uatmaintws1:8056/DocumentLibraryService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.DataTransferObjects" />
+  <xs:import schemaLocation="http://uatmaintws1:8056/DocumentLibraryService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Responses" />
+  <xs:element name="GetFolderById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" minOccurs="0" name="request" nillable="true" type="q1:GetFolderByIdRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFolderByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.DataTransferObjects" minOccurs="0" name="GetFolderByIdResult" nillable="true" type="q2:FolderDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFoldersByIds">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" minOccurs="0" name="request" nillable="true" type="q3:GetFoldersByIdsRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFoldersByIdsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.DataTransferObjects" minOccurs="0" name="GetFoldersByIdsResult" nillable="true" type="q4:ArrayOfFolderDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SearchFolders">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" minOccurs="0" name="request" nillable="true" type="q5:SearchFoldersRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SearchFoldersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.DataTransferObjects" minOccurs="0" name="SearchFoldersResult" nillable="true" type="q6:ArrayOfFolderDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateFolder">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" minOccurs="0" name="request" nillable="true" type="q7:CreateFolderRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateFolderResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Responses" minOccurs="0" name="CreateFolderResult" nillable="true" type="q8:CreateFolderResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteFolder">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" minOccurs="0" name="request" nillable="true" type="q9:DeleteFolderRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteFolderResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RestoreFolder">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" minOccurs="0" name="request" nillable="true" type="q10:RestoreFolderRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RestoreFolderResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RenameFolder">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" minOccurs="0" name="request" nillable="true" type="q11:RenameFolderRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RenameFolderResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MoveFolder">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" minOccurs="0" name="request" nillable="true" type="q12:MoveFolderRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MoveFolderResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDocumentByIdWithContent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" minOccurs="0" name="request" nillable="true" type="q13:GetDocumentByIdWithContentRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDocumentByIdWithContentResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.DataTransferObjects" minOccurs="0" name="GetDocumentByIdWithContentResult" nillable="true" type="q14:DocumentDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDocumentByIdWithArchiveDocuments">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" minOccurs="0" name="request" nillable="true" type="q15:GetDocumentByIdWithArchiveDocumentsRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDocumentByIdWithArchiveDocumentsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.DataTransferObjects" minOccurs="0" name="GetDocumentByIdWithArchiveDocumentsResult" nillable="true" type="q16:DocumentDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDocumentsByIds">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" minOccurs="0" name="request" nillable="true" type="q17:GetDocumentsByIdsRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetDocumentsByIdsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.DataTransferObjects" minOccurs="0" name="GetDocumentsByIdsResult" nillable="true" type="q18:ArrayOfDocumentDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFolderStructureFromRoot">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" minOccurs="0" name="request" nillable="true" type="q19:GetFolderStructureFromRootRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFolderStructureFromRootResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.DataTransferObjects" minOccurs="0" name="GetFolderStructureFromRootResult" nillable="true" type="q20:FolderDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SearchDocuments">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" minOccurs="0" name="request" nillable="true" type="q21:SearchDocumentsRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SearchDocumentsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.DataTransferObjects" minOccurs="0" name="SearchDocumentsResult" nillable="true" type="q22:ArrayOfDocumentDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateDocumentFromBytes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" minOccurs="0" name="request" nillable="true" type="q23:CreateDocumentFromBytesRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateDocumentFromBytesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Responses" minOccurs="0" name="CreateDocumentFromBytesResult" nillable="true" type="q24:CreateDocumentFromBytesResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateDocumentFromPath">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" minOccurs="0" name="request" nillable="true" type="q25:CreateDocumentFromPathRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateDocumentFromPathResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Responses" minOccurs="0" name="CreateDocumentFromPathResult" nillable="true" type="q26:CreateDocumentFromPathResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteDocument">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" minOccurs="0" name="request" nillable="true" type="q27:DeleteDocumentRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteDocumentResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RestoreDocument">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" minOccurs="0" name="request" nillable="true" type="q28:RestoreDocumentRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RestoreDocumentResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RenameDocument">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" minOccurs="0" name="request" nillable="true" type="q29:RenameDocumentRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RenameDocumentResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MoveDocument">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" minOccurs="0" name="request" nillable="true" type="q30:MoveDocumentRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MoveDocumentResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateDocumentContentFromBytes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" minOccurs="0" name="request" nillable="true" type="q31:UpdateDocumentContentFromBytesRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateDocumentContentFromBytesResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateDocumentContentFromPath">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" minOccurs="0" name="request" nillable="true" type="q32:UpdateDocumentContentFromPathRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateDocumentContentFromPathResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPreviousVersionWithContent">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" minOccurs="0" name="request" nillable="true" type="q33:GetPreviousVersionWithContentRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPreviousVersionWithContentResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.DataTransferObjects" minOccurs="0" name="GetPreviousVersionWithContentResult" nillable="true" type="q34:ArchiveDocumentDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RestoreDocumentContentToPreviousVersion">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" minOccurs="0" name="request" nillable="true" type="q35:RestoreDocumentContentToPreviousVersionRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RestoreDocumentContentToPreviousVersionResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddTagsToDocument">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" minOccurs="0" name="request" nillable="true" type="q36:AddTagsToDocumentRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddTagsToDocumentResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveTag">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.Requests" minOccurs="0" name="request" nillable="true" type="q37:RemoveTagRequest" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RemoveTagResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,55 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.HtmlHelpers
+@using Cassette.Views
+@model BusinessSafe.WebSite.Areas.HazardousSubstanceInventory.ViewModels.InventoryViewModel
+@{
+    ViewBag.Title = "Hazardous Substances";
+}
+<section>
+    <span class="legend">Hazardous Substances</span>
+    <div class="major-index-actions">
+        @if (User.IsInRole(Permissions.AddHazardousSubstanceInventory.ToString()))
+        {
+            <a id="AddHazardousSubstanceLink" class="btn btn-success btn-large" href="@Url.Action("Add")" title="Add Hazardous Substance to Inventory">
+                Add Hazardous Substance</a>
+        }
+    </div>
+    <div class="content">
+        @Html.Partial("_SearchCriteria")
+        @Html.Partial("_SearchResults")
+    </div>
+</section>
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("hazardoussubstanceinventory");
+        @Bundles.RenderScripts()  
+    }
+    <script type="text/javascript">
+        $(function () {
+            var suppliers = @Html.Raw(Json.Encode(Model.Suppliers));
+            BusinessSafe.HazardousSubstance.Search(suppliers);
+        });
+    </script>
+}
+<div class="hide">
+    <div id="dialogDeleteHazardousSubstance" title="Delete Hazardous Substance">
+        <p>
+            Are you sure you want to delete this hazardous substance?</p>
+    </div>
+    <div id="dialogReinstateHazardousSubstance" title="Reinstate Hazardous Substance">
+        <p>
+            Are you sure you want to reinstate this hazardous substance?</p>
+    </div>
+    <div id="dialogCannotRemoveHazardousSubstance" title="<span id='warning'></span>Cannot Delete Hazardous Substance!">
+        <p>
+            This hazardous substance cannot be removed as it has risk assessments attached to
+            it!</p>
+    </div>
+    <div id="dialogHazardousSubstanceHasRiskAssessments" title="<span id='information'></span>Hazardous Substance has linked Risk Assessments!">
+        <p>
+            Please Note: Hazardous Substance Risk Assessments are linked to this Hazardous Substance.
+            Modification to Hazardous Substance may change your Hazardous Substance Risk Assessment.
+            Please review Hazardous Substance Risk Assessment following modification.</p>
+    </div>
+</div>

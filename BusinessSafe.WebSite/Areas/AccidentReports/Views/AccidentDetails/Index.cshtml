@@ -1,0 +1,28 @@
+﻿@using BusinessSafe.WebSite.Areas.AccidentReports.ViewModels
+@model BusinessSafe.WebSite.Areas.AccidentReports.ViewModels.AccidentDetailsViewModel
+
+@{
+    ViewBag.Title = "Accident";
+}
+@Html.Partial("_AccidentRecordSummary", ViewBag.AccidentRecordSummary as AccidentSummaryViewModel)
+<div class="container ipad-container">
+    @Html.Partial("_Tabs", ViewBag.TabViewModel as AccidentRecordTabsViewModel)
+    @Html.Partial("_Form")
+</div>
+@section JavaScriptSectionForPageInitialisation
+{
+       
+    <script type="text/javascript">
+        var employees = @Html.Raw(Json.Encode(Model.Employees));
+         var sites = @Html.Raw(Json.Encode(Model.Sites));
+         var types = @Html.Raw(Json.Encode(Model.AccidentTypes));
+         var causes = @Html.Raw(Json.Encode(Model.AccidentCauses));
+
+         
+        $(document).ready(function () {
+           
+            BusinessSafe.AccidentRecord.AccidentDetails.initialise(employees, sites, types,causes);
+        });
+    </script>
+   
+}

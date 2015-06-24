@@ -1,0 +1,17 @@
+USE [BusinessSafe]
+GO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentDocument' AND COLUMN_NAME = 'DocumentId')
+BEGIN
+	ALTER TABLE [RiskAssessmentDocument]
+	ADD [DocumentId] [bigint] NULL
+END
+GO
+
+--//@UNDO 
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'RiskAssessmentDocument' AND COLUMN_NAME = 'DocumentId')
+BEGIN
+	ALTER TABLE [RiskAssessmentDocument]
+	DROP COLUMN [DocumentId]
+END

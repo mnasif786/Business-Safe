@@ -1,0 +1,99 @@
+﻿@model BusinessSafe.WebSite.Areas.Employees.ViewModels.ViewEmergencyContactDetailViewModel 
+<form id="addEmergencyContactDetails" class="form-inline">
+    <fieldset>
+        <legend><h3>Contact Information</h3></legend>
+        <div class="row-fluid row">
+            <div class="span6">
+                <label for="Title" class="span2">Title</label>
+                @Model.Title
+            </div>
+        </div>
+        <div class="row-fluid row">
+            <div class="span6">
+                <label for="Forename" class="span2">Forename</label>
+                @Model.Forename
+            </div>
+            <div id="emergency-contact-surname" class="span6">
+                <label for="Reference" class="span2">Surname</label>
+                @Model.Surname
+            </div>
+        </div>
+        <div class="row-fluid row">
+            <div class="span6">
+                <label for="Relationship" class="span2">Relationship</label>
+                @Model.Relationship
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend><h3>Telephone Numbers</h3></legend>
+        <div class="row-fluid row">
+            <div class="span6">
+                <label for="WorkTelephone" class="span2">Work</label>
+                @Model.WorkTelephone
+            </div>
+        </div>
+        <div class="row-fluid row">
+            <div class="span6">
+                <label for="HomeTelephone" class="span2">Home</label>
+                @Model.HomeTelephone
+            </div>
+        </div>
+        <div class="row-fluid row">
+            <div class="span6">
+                <label for="MobileTelephone" class="span2">Mobile</label>
+                @Model.MobileTelephone
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend><h3>Address</h3></legend>
+        
+        <div class="row-fluid row">
+            <div class="span12">
+                <label class="span2" for="SameAddressAsEmployee">Same as Employee Address</label>
+                @Html.CheckBox("SameAddressAsEmployee", Model.SameAddressAsEmployee, new { @readonly = "readonly" })
+            </div>
+        </div>
+        <div id="address-details" class="row-fluid row">
+            <div class="span6">
+                <div>
+                    <label for="Address1" class="span2">Address</label>
+                    @Model.Address1
+                </div>
+                <div>
+                    <label for="Address2" class="span2"></label>
+                    @Model.Address2
+                </div>
+                <div>
+                    <label for="Address3" class="span2"></label>
+                    @Model.Address3
+                </div>
+            </div>
+            <div class="span6">
+                <div class="row">
+                    <label for="Town" class="span2">Town</label>
+                    @Model.Town
+                </div>
+                <div class="row">
+                    <label for="County" class="span2">County</label>
+                    @Model.County
+                </div>
+                <div class="row">
+                    <label for="Country" class="span2">Country</label>
+                    @Model.Country
+                </div>
+                <div class="row">
+                    <label for="Postcode" class="span2">Postcode</label>
+                    @Model.PostCode
+                </div>
+            </div>
+        </div>
+    </fieldset>
+        <div class="row-fluid row">
+            <div class="span6">
+                <label class="span2"></label>
+                <button type="submit" id="EmergencyContactDetailsCloseButton" class="btn">Close</button>
+            </div>
+        </div>
+</form>

@@ -1,0 +1,78 @@
+﻿@using System.Web.Mvc.Html
+@using BusinessSafe.WebSite.Areas.Sites.Controllers
+@using BusinessSafe.WebSite.Extensions
+@using Cassette.Views
+@model BusinessSafe.WebSite.Areas.Sites.ViewModels.SiteStructureViewModel
+@{
+    ViewBag.Title = "Sites";
+}
+@section StyleSheetSection
+{
+    @{
+        Bundles.Reference("jquerytreeviewcss");
+        @Bundles.RenderStylesheets()
+    }
+}
+<section>
+    <span class="legend">Sites</span>
+    <div class="content">
+        <div class="row-fluid">
+            @Html.HiddenFor(m => m.ClientId)
+            @if (TempData[SitesController.UpdateSiteIdKey] != null)
+            {
+                @Html.Hidden(SitesController.UpdateSiteIdKey, TempData[SitesController.UpdateSiteIdKey])
+            }
+            @if (TempData[SiteGroupController.UpdateSiteGroupIdKey] != null)
+            {
+                @Html.Hidden(SiteGroupController.UpdateSiteGroupIdKey, TempData[SiteGroupController.UpdateSiteGroupIdKey])
+            }
+            <div id="sitetreeviewcontainer" class="span6">
+                @Html.Partial("_SiteStructureTreeView", Model)
+            </div>
+            <div class="form-horizontal span5">
+                <div id="sitedetailscontainer" style="@HtmlExtensions.HideDisplayHtmlAttribute(Model.DisplaySiteDetails)">
+                    @Html.Partial("_SiteDetails", Model.SiteDetailsViewModel)
+                </div>
+                <div id="sitegroupscontainer" style="@HtmlExtensions.HideDisplayHtmlAttribute(Model.DisplaySiteGroups)">
+                    @if (Model.DisplaySiteGroups)
+                    {
+                        @Html.Partial("_SiteGroup", Model.SiteSiteGroupsViewModel)
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("sites");
+        @Bundles.RenderScripts()  
+    }
+
+    @if (Model.ValidationError)
+    {
+
+        if (Model.DisplaySiteDetails)
+        {
+            <script type="text/javascript">
+                window.siteDetails = {
+                    sites: @Html.Raw(Json.Encode(Model.SiteDetailsViewModel.ExistingSites)),
+                    siteGroups: @Html.Raw(Json.Encode(Model.SiteDetailsViewModel.ExistingGroups))
+                };
+                siteDetailsForm.showDropDowns();
+            </script>
+        }
+
+        if (Model.DisplaySiteGroups)
+        {
+            <script type="text/javascript">
+                window.siteDetails = {
+                    sites: @Html.Raw(Json.Encode(Model.SiteSiteGroupsViewModel.ExistingSites)),
+                    siteGroups: @Html.Raw(Json.Encode(Model.SiteSiteGroupsViewModel.ExistingGroups))
+                };
+                siteGroupDetails.showDropDowns();
+            </script>
+        }
+    }
+}

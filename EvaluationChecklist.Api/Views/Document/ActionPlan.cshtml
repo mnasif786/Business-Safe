@@ -1,0 +1,521 @@
+﻿@using BusinessSafe.Domain.Entities.SafeCheck
+@using EvaluationChecklist.Models
+@model EvaluationChecklist.Models.ComplianceReviewReportViewModel
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Action plan</title>
+    <style type="text/css">
+        	
+            thead   { display: table-header-group;  }
+            tbody   { display: table-row-group;     }
+            tr      { page-break-inside: avoid;     }
+        	tfoot   { display: table-footer-group;  }
+            
+        	#ActionPlanSection          { page-break-after: always  }
+        	#ComplianceReviewSection    { page-break-after: auto    }
+        	
+
+            body 
+            {
+		        font-family: Arial;
+                font-size: 10pt;
+                font-weight: normal;
+                margin: 10px;
+            }
+	         
+	        table.ActionPlan, table.ComplianceReview, table.ImmediateRiskNotificationPlan {
+	        	width: 1024px;
+                display: block;
+	        }
+
+            table.ActionPlan tr,table.ComplianceReview tr {
+            	display: block;
+                width: 1024px;
+            }
+
+        	table.ActionPlanHeader, table.ComplianceReviewHeader,
+        	table.ActionPlan,
+            table.ImmediateRiskNotificationPlan,
+        	table.ComplianceReviewHeader,
+        	 table.ComplianceReview {
+        		border-width: 1px;
+        		border-spacing: 0px;
+        		border-style: none;
+        		border-color: black;
+        		border-collapse: collapse;
+        		background-color: white;
+            }
+
+            
+            table.ComplianceReview tbody {
+                page-break-before: avoid ;
+            }
+
+        	table.ActionPlan th, table.ImmediateRiskNotificationPlan th, table.ComplianceReview th {
+        		border-width: 1px;
+        		padding: 5px;
+        		border-style: inset;
+        		border-color: gray;
+        		background-color: white;
+        		-moz-border-radius: ;                             
+        	}
+
+        	table.ActionPlanHeader td,
+        	table.ActionPlan td,
+            table.ImmediateRiskNotificationPlan td,
+        	table.ComplianceReviewHeader td,
+        	 table.ComplianceReview td {
+        		border-width: 1px;
+        		padding: 5px;
+        		border-style: inset;
+        		border-color: gray;
+        		background-color: white;
+        		-moz-border-radius: ;
+                vertical-align: top;
+        	}
+        	
+        	.center
+            {
+                width:100%;
+        		text-align: center;
+            }
+            
+             @*Area of non-compliance*@
+            table.ActionPlan th:nth-child(1),
+            table.ActionPlan td:nth-child(1)
+            {
+               width: 30px;
+              
+            }
+
+            @*Area of non-compliance*@
+            table.ActionPlan th:nth-child(2),
+            table.ActionPlan td:nth-child(2)
+            {
+               width: 290px;
+              
+            }
+
+            @*Recommended Immediate Action/Action Required*@
+            table.ActionPlan th:nth-child(3),
+            table.ActionPlan td:nth-child(3)
+            {
+                width: 290px;
+              
+            }
+
+            @*Guidance number*@
+            table.ActionPlan th:nth-child(4),
+            table.ActionPlan td:nth-child(4)
+            {
+                width: 50px;
+              
+            }
+
+            @*Target timescale*@
+            table.ActionPlan th:nth-child(5),
+            table.ActionPlan td:nth-child(5)
+            {
+                width: 65px;
+              
+            }
+
+            @*Allocated To*@
+            table.ActionPlan th:nth-child(6),
+            table.ActionPlan td:nth-child(6)
+            {
+                width: 100px;
+               
+            }
+
+            @*Completion Date*@
+            table.ActionPlan th:nth-child(7),
+            table.ActionPlan td:nth-child(7)
+            {
+                width: 100px;
+              
+            }
+
+            @*Compliance qusetion number*@
+            table.ComplianceReview th:nth-child(1),
+            table.ComplianceReview td:nth-child(1)
+            {
+                width: 30px;
+            
+            }
+
+            @*Your Documentation*@
+            table.ComplianceReview th:nth-child(2),
+            table.ComplianceReview td:nth-child(2),
+            table.ComplianceReview th:nth-child(4),
+            table.ComplianceReview td:nth-child(4) {
+            	width: 450px;
+                  
+            }
+
+            @*Compliance reviewstatus*@
+            table.ComplianceReview th:nth-child(3),
+            table.ComplianceReview td:nth-child(3)
+            {
+                width: 40px;
+            }
+
+            .ComplianceReviewAreaOverview { page-break-before: always  }
+
+
+            .greenBall
+            {
+                background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAK3RFWHRDcmVhdGlvbiBUaW1lAEZyIDE1IE5vdiAyMDAyIDEwOjA4OjI5ICswMTAw9aJixgAAAAd0SU1FB9QHBwgaCNppM2EAAAAJcEhZcwAACxEAAAsRAX9kX5EAAAAEZ0FNQQAAsY8L/GEFAAAEuElEQVR42oVWSW8cRRh93dMzY3tizzi2FRtsiBclEFvOosSIAxKKBGI55JZcgzhw4RYJ/gUnxF8ALjkAYokCEYtQWEziOImyeJFjHGfsWT0z3dVdVV18VdMd2s4E2vqmq6u636t636uvbOEp1zu3p/Jeyznrh+oty07NOun0AS4k6m6z2Gh4N1sVebn4deti+VNvi14XFKoTjrW343zzaEbc4R9AZC5MDR4ujBaeR2+mD5LARRiA8wBbzRLulldwbeNurfKo8cn6R62PsYwSfc7/k+Dde8fGGkV2cXb0xMljo3OwQhsB5yjxh6j7W2jwOnzuQhAZpIKt0ri+sYb5e+t/1b7y3pffYIFgvORqUnHjvTuHR5tl/PTGzJnpmeHjsMMUivwBHoib2BFl+KEHITnCUFGEtBoJXzIMdGWxv9AzstpXOy3K4QI2UEyuxBCcv3IsU2Py0mtH3p5+Lj9Jk1NYEfPYCUsIZQgVge4NKUk2ii7HQf++bP9yrjqNP+kvQCUmsfWPm2MfHhmeOTm6b9xofS+4CiY9KCJKRnwln7XGIbUP9PZianL/CZzBeeoao3AMwetXJwuUuwvHnz1FXrCx5M8jEAHpLAxZp5knSTW4pD4uBV4cHASO4hzymCPsgiHoUvbZ8f2H8laYxrbYoERWySncEBgSKTsCP17FYxJq2wqjhb4CTuAlwh7Rq7BdId4cy9OKuMImu0+zVrvAkyRJMh0aXEQEZjWE2J/pAg7hMDXHKXIOfT5b6CqQU+poBHWkLAeWZf0rwR7gZFvo5zj0biNnZdPkmyEDrvPQ46Qc64AlbVRF0WiuEjsjJuhEopIk9B4ncC6UsbHdYw/RKCUEWScIpNG8FewYy9mW6kiwl6idWGkIRDTGfE59oXaWBunWOXAqLisGoTvBhEcfC4SW/QRBUioV3QMKHoEbInqHefS9ovFyuB1jOF7TX1yvb04op51YKyKIfZ4kMKHB6W4IopCq/ey6HIww8BBrenvptNisIr5f3Foih1mGQMsV23SXXaM7i2cf3dvtEDtVBm2s+o4P3CAKmOLn29UfvYu/UVXUxUsXsb2A+h5EwDG4T89+1DbS0HO9FpC8IeqP/CrugliwrleREotg/GWZ89PilaFcdlfijL7a65HesSSmHRU87Z6tDZfcp7C97YJ9K77E33hA4L9QbOpip+SKur1+sPrqUGHfM9rHMpnAhFtiYK70mKKVSWw/dI1EWv/SgncNl2jmCr8S7iJFs12uqyABsbCcq5zu7+vu78k4JpFxArUMsRxm1tS3U2coF5np8xjH5q3mKj6jSsopA8DPevbaI/F5EGIVZSqyN9a66zPMFiO93Vmz9bUEgdlEgoAkGo0AtRKjGQtTe8rbHkrXvOv4nMAZqQ/8QLFEEew6cOiSxFnE7/ijmmJihdcmXI93+wTKKdyWJqCEcwkvEKiSa4qrrQr7TnyByyRLe+ZXKO5Ep1rHM9mKduAYenGKSu8cFa4XMICDqZw9YMpDjdapfX6Lfu+TW4Q5wbTe1yl0clnyyHzi0I+uNEWeYjiqirpwDUbkiGZYiqy4SvGIov6/h36HMX0q9eiyqwtXQlJdPLXXW/GOxVP+bfkHIoYx2bLvcOsAAAAASUVORK5CYII=);
+            	background-repeat: no-repeat;
+            	background-position: center;
+            }
+
+            .amberBall {
+            	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEQAACxEBf2RfkQAAAAd0SU1FB9oEDQggE2ey3zAAAASySURBVEjHfZZLbFVVFIa/ve+5L0rfIBYEKkUQCtEQjOCDxBhQQsJMHTkyMdGBjzBy5EAGjh05MCaM1DgQByaKUBuCJEJ4CRgK9gH0Qlvae3sfveecffbDwTmXe1uoJ1nZj+T8/7/WXmuvLVjmK32/sTsjMm+nXHhQ5uTOVKZ9jTMhulqZDvzatQcVd+rY8MJPR39mCtCAexyOWLrhftyaVTnvMy+d+URs2NspVg3i8t1gNCIKwQa4cgFx/wrR5F/lkdulrz/4xn11ZowHQLQUL9W68P/Y9rRQnPS2v/GOeOHDnOgaAC+HULMINYUL74N/D0wV8h3IVdtyq9uiVw4PzOz3I66eG2c28eZRguD3ZzelfXlavnZki+p7mRQOzAwiGsPZMugATATOgtFgFCKqIdp6yHf0rNnVeXd/YZ6/rxWYBtQiAnd6fV7Me0OpfR9vNh1bSaGR7hbClMAYiBxYDdbEJNaANQijIYoQ6Qz5jq6Owey9549f5nw1ZK4RLgkQFvOfyx0HdrjOATztkzIjEAVgbKJj6UjsSWO0Gq+9i77+jYNHD/EesBHIAMjad5ueTGeyH4n+1xFRBPomqDoYBUbjdAROg9YxmE4M2yQBcJoVfWvZt02+1d/NHqAbEFI69a5YtzePsrhwGqJKHG+tINSxFw1w0wIctRBhIQIpJdn21W2Hd7IHWAukPYk+KNZsxUUG9B0cNo6cS8Ab6rWGKDGnEZiYqEHmNJ7QyGwHu9dODwKbgAkvnU495zK9iGgOp2sxuJCJYsCpWKlTMZlrksRmm4ZFZiQbuticnEObJ3OZbnQIYRGsisEbn254kIyRgkgjXJSotk0SwBiDMYaOvLcKdC+Q9RqKnCrHcfdkM2M0Swga4C0eRPbhXNU1YFEGgBWA59nqfFmaetfDzGkUu0f888NDXQJuHw1TvRKAs5TKptgIgufXq1dX1KZfJVIggkZpxLWoLcKZJEtaQVvWLUT1SgBWMzLlRgEf0LJY4hRTFwGLUCFC+U2zYRz3MIjP56FiFa9bCCvFOs4aKqUaw7cZB+aAUP56gx/02NkQJCi1xAIwQRKSxp6OrQXcGsWDQpV0znHvbs0fGmcBuAPU5fvfMj4xGRxTE5ebQK2m9OJxkfJ4r3CrTEo4ZiZrHL9iT1RCisAosJAC7P0q11/qKRxauXpNj0zLOL7GJBVs4tvTJXMXJQcfezE5UUEHCmMizl2Y//eLM4wYx3ngElBJAfxzn3ouzfXNcvLN9id622RGxqBeQtRQSzMlq/MBhbEyTmuMjrhwbm7m098YripGgGGgAJhGP7BnRpmu1bmxQd/blZX05NrzCNssJOsMquZTnQuZnalRL/lkVwhmp2qcPT8/euQEw7M+48AQMJJk0aKOFl0qUDg5woVOVfby1ZlngppKh4HFryqq8wF+XWGMxvghpbkFbl4p+sfOBr98+ScjifIh4BpQW64nC6AN6N/Uw94DW3hxdx/bn+plYGXK6zXW8WDeFMdmGT19l/HhOyzUFKUE9CIwASy0PgDEMg+BDNAFrAMGgPVAL5BvtO8kz+8AY0m8S0kXc//7qngMUVtyr2STC4SksYdAPVGslnu2/Ac6WzlRZL/8owAAAABJRU5ErkJggg==);
+                background-repeat: no-repeat;
+            	background-position:center;
+            }
+
+            .redBall {
+            	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAK3RFWHRDcmVhdGlvbiBUaW1lAEZyIDE1IE5vdiAyMDAyIDEwOjA4OjI5ICswMTAw9aJixgAAAAd0SU1FB9QHBwgaCNppM2EAAAAJcEhZcwAACxEAAAsRAX9kX5EAAAAEZ0FNQQAAsY8L/GEFAAAE4UlEQVR42nVWXW8UVRh+5szsbofd1u2C1FQKlFYU0WggRBrBKxskBk1M1BtNiHohMVGMeuGVF+of8MpbY7zwRm6M0URIgx+EoJgAjVQoGOgH2213t7s7n2fOHN8zZ4YORTZ9Ojsz57zP+z7vx1kD9/i0j4wMFgqlV0weHmaW8bhVrgxJHiJa7dTdnnOpweXJr244Jz5fxC1aHhHk/9kx1j+QLz5cCgfMjwuF4nFj38R92LkbGBwEQrIRBAQfmJ8Dpi+Anz+7enm5/eWxK/KL3zw0aDtfb8/M33hv7xplPP7Zmjz0qnH0WB+2PwSUbKC7DLTI0eYCsELwesBAP8zxXX2bJT9wxF+a9GJcPOdhOY3mbgL/rUd2FB3jNHvvw52YOEDLYjJcJ4PXAadNnnvkH9fPI0ERhbTJhVGtwd5UG9qzfHNyjuPCtA/ahPAOAnl0xGZd8xR75/g4xshrTk60ZrVhZSwPQe947p7WGoUi7Fp1YPfSwpMnOjjXk1jJ5GLqX+j1fcImJx/D1lEySjovzZB35LEgbyXlLqYr/SGm70LqZxnUuyiCVatieGxk92eb8Cat3EYoJgS9I6MPFPpK7+Lgs2SUvGv8Qxq7JAlFGXGNOPVcxpokIYzvJKJI7G1b8Ew/e3mbif1ke1AVEWOSv27s2W+D04Y2JbK3qqsl5JowELqCEjkUkUiJYh1hjshkBkqb7y+/UEkIhgkFi4X8MHbuIiO0ceWm9lYpJ4U2oDxXBCovUZ4o1mRZNPTdpD1mpR/7rDrVNnYQ/rUKBfMJDFA03SahS2k3dXvIVG/B06RyTXKbKNIEWRQpWIFhq4XxNA9li9mlwUSO9orWnaWVezu5QkenDKp1PCNKqyjOIMkXQQEL9BetTfRyI1kpWcmGgGvtfbqakW76hEBqL6OUgK+TS4g1yAih2k8RcT00NhAsK261V1ngVeG6OrlGNj3kWsVEOZKEgKcEORJa5zm+qmW0XNHMGs1ye72LlfriwUQeP0+AXALjNYIs0VE+F4Q4Qq8bwKD7mUDOqsmjxgZr+jgpL/ylNymCDJ66hikCnZ8w1T/rD5EZj9FpuVR4AqutHqY4aL4k3RywHx18G/1xJkhKMzOWR9YTNKp1gvmaRGke1Bhv1HsoMInFes87yeGQ8RsE1/x+Fd3X7Gi4v8T2mhts7WE+eUKsaX1HYrUs6jp3o5N432w4+Kbu//C7AM1z/EKYVzUZLwpMTzQXnq8MD9WYydLNOYJM52zYRWkD0vO5mx1wkk9QVGevta9+6mOG3p4ju6Q7OknR/x3AtRmmxxfmnhsYqpVZ0UprPF8l4nbHJgnt+JibJ89pXUQS/jmzsvS+iyk6KWhSYkp5TxDZeRD/6qLe5bi8dXFxTwmy1lexYWSNRpDkbegG1C4+Gks9OF0fJdrdIFnOzLZnPyDjKzJJ7iloEm/9kam+D4ya2PtRFW883W+9RNHYdrVMzW0mHSqJ0KAGDKjCWk0X87cc7zs3/unrEC1K+xXaf5pwSUmTndHrz2R1XyZsJ6KJQzae2svw6JYixiqWtVGQ8YYnmtdCzJ6OcH1KwHEkWqnR82q4EZz8D4C7Dv30mTosqoQHCWOEEYKaLXZ2fKd1rkrxWqp3Kz3F5Hpj9/pkROV0rpRU56fv1MEeqDpPPQ5xj58t/wGvtEbbuEOhsAAAAABJRU5ErkJggg==);
+                background-repeat: no-repeat;
+            	background-position:center;
+            }
+            
+    </style>
+</head>
+<body>
+    <div id="ActionPlanSection">
+        <h1 class="center">
+            Health &amp; Safety Action Plan</h1>
+        <p>
+            <table class="ActionPlanHeader" cellspacing="0">
+                <tr>
+                    <td>
+                        Person seen:
+                    </td>
+                    <td>
+                        @Model.PersonSeen
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Visit date:
+                    </td>
+                    <td>
+                        @if (Model.VisitDate.HasValue)
+                        {
+                          
+                            @Model.VisitDate.Value.ToString("dddd dd MMMM yyyy")
+                         
+                        }
+                        else
+                        {
+                            <text>&nbsp;</text>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Premises Description & Areas Visited:
+                    </td>
+                    <td>
+                        @Model.AreasVisited
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Areas Not Visited:or Access Restricted
+                    </td>
+                    <td>
+                        @Model.AreasNotVisited
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Address:
+                    </td>
+                    @if (Model.Site != null)
+                    {
+                        <td>
+                            @Model.Site.Address1, @Model.Site.Postcode
+                        </td>
+                    }
+                    else
+                    {
+                        <td>&nbsp;</td>
+                    }
+                </tr>
+            </table>
+        </p>
+        
+        @if (Model.ImmediateRiskNotifications.Any())
+        {
+            <p>
+                <table class="ImmediateRiskNotificationPlan">
+                    <thead>
+                        <tr>
+                            <th colspan="4">
+                                Immediate Risk Notifications
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                &nbsp;
+                            </th>
+                            <th>
+                                Significant Hazard Identified
+                            </th>
+                            <th>
+                                Recommended Immediate Action
+                            </th>
+                            <th>
+                                Allocated to
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model.ImmediateRiskNotifications)
+                        {
+                            <tr>
+                                <td>
+                                    &nbsp; 
+                                </td>
+                                <td>
+                                    @item.SignificantHazardIdentified
+                                </td>
+                                <td>
+                                    @item.RecommendedImmediateAction
+                                </td>
+                                <td>
+                                    @item.AllocatedTo
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </p>
+        }
+        
+         @if (Model.ActionPlanItems.Any())
+         {
+             <table class="ActionPlan">
+                 <thead>
+                     <tr>
+                         <th>
+                             Ref.
+                         </th>
+                         <th>
+                             Non-compliance
+                         </th>
+                         <th>
+                             Action required
+                         </th>
+                         <th>
+                             GN Number
+                         </th>
+                         <th>
+                             Target timescale
+                         </th>
+                         <th>
+                             Allocated to
+                         </th>
+                         <th>
+                             Completion Date (Initials)
+                         </th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                     @foreach (var item in Model.ActionPlanItems)
+                     {
+                         <tr>
+                             <td>
+                                 @item.CategoryNumber.@item.QuestionNumber
+                             </td>
+                             <td>
+                                 @item.AreaOfNonCompliance
+                             </td>
+                             <td>
+                                 @item.ActionRequired
+                             </td>
+                             <td>
+                                 @item.GuidanceNumber
+                             </td>
+                             <td>
+                                 @item.TargetTimescale
+                             </td>
+                             <td>
+                                 @item.AllocatedTo
+                             </td>
+                             <td>
+                                 &nbsp;
+                             </td>
+                         </tr>
+                     }
+                 </tbody>
+                 <tfoot>
+                 </tfoot>
+             </table>
+         }
+    </div>
+    <div id="ComplianceReviewSection">
+        <h1 class="center">
+            Health &amp; Safety Site Compliance Review</h1>
+        <p>
+            <table class="ComplianceReviewHeader">
+                <tr>
+                    <td>
+                        Person seen:
+                    </td>
+                    <td>
+                        @Model.PersonSeen
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Visit date:
+                    </td>
+                   <td>
+                        @if (Model.VisitDate.HasValue)
+                        {
+                          
+                            @Model.VisitDate.Value.ToString("dddd dd MMMM yyyy")
+                         
+                        }
+                        else
+                        {
+                            <text>&nbsp;</text>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Areas visited:
+                    </td>
+                    <td>
+                        @Model.AreasVisited
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Areas not visited:
+                    </td>
+                    <td>
+                    @Model.AreasNotVisited
+                </tr>
+                <tr>
+                    <td>
+                        Address:
+                    </td>
+                    @if (Model.Site != null)
+                    {
+                        <td>
+                            @Model.Site.Address1, @Model.Site.Postcode
+                        </td>
+                    }
+                    else
+                    {
+                        <td>&nbsp;</td>
+                    }
+                </tr>
+            </table>
+        </p>
+        <h1>
+            Status Key</h1>
+        <p>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAK3RFWHRDcmVhdGlvbiBUaW1lAEZyIDE1IE5vdiAyMDAyIDEwOjA4OjI5ICswMTAw9aJixgAAAAd0SU1FB9QHBwgaCNppM2EAAAAJcEhZcwAACxEAAAsRAX9kX5EAAAAEZ0FNQQAAsY8L/GEFAAAEuElEQVR42oVWSW8cRRh93dMzY3tizzi2FRtsiBclEFvOosSIAxKKBGI55JZcgzhw4RYJ/gUnxF8ALjkAYokCEYtQWEziOImyeJFjHGfsWT0z3dVdVV18VdMd2s4E2vqmq6u636t636uvbOEp1zu3p/Jeyznrh+oty07NOun0AS4k6m6z2Gh4N1sVebn4deti+VNvi14XFKoTjrW343zzaEbc4R9AZC5MDR4ujBaeR2+mD5LARRiA8wBbzRLulldwbeNurfKo8cn6R62PsYwSfc7/k+Dde8fGGkV2cXb0xMljo3OwQhsB5yjxh6j7W2jwOnzuQhAZpIKt0ri+sYb5e+t/1b7y3pffYIFgvORqUnHjvTuHR5tl/PTGzJnpmeHjsMMUivwBHoib2BFl+KEHITnCUFGEtBoJXzIMdGWxv9AzstpXOy3K4QI2UEyuxBCcv3IsU2Py0mtH3p5+Lj9Jk1NYEfPYCUsIZQgVge4NKUk2ii7HQf++bP9yrjqNP+kvQCUmsfWPm2MfHhmeOTm6b9xofS+4CiY9KCJKRnwln7XGIbUP9PZianL/CZzBeeoao3AMwetXJwuUuwvHnz1FXrCx5M8jEAHpLAxZp5knSTW4pD4uBV4cHASO4hzymCPsgiHoUvbZ8f2H8laYxrbYoERWySncEBgSKTsCP17FYxJq2wqjhb4CTuAlwh7Rq7BdId4cy9OKuMImu0+zVrvAkyRJMh0aXEQEZjWE2J/pAg7hMDXHKXIOfT5b6CqQU+poBHWkLAeWZf0rwR7gZFvo5zj0biNnZdPkmyEDrvPQ46Qc64AlbVRF0WiuEjsjJuhEopIk9B4ncC6UsbHdYw/RKCUEWScIpNG8FewYy9mW6kiwl6idWGkIRDTGfE59oXaWBunWOXAqLisGoTvBhEcfC4SW/QRBUioV3QMKHoEbInqHefS9ovFyuB1jOF7TX1yvb04op51YKyKIfZ4kMKHB6W4IopCq/ey6HIww8BBrenvptNisIr5f3Foih1mGQMsV23SXXaM7i2cf3dvtEDtVBm2s+o4P3CAKmOLn29UfvYu/UVXUxUsXsb2A+h5EwDG4T89+1DbS0HO9FpC8IeqP/CrugliwrleREotg/GWZ89PilaFcdlfijL7a65HesSSmHRU87Z6tDZfcp7C97YJ9K77E33hA4L9QbOpip+SKur1+sPrqUGHfM9rHMpnAhFtiYK70mKKVSWw/dI1EWv/SgncNl2jmCr8S7iJFs12uqyABsbCcq5zu7+vu78k4JpFxArUMsRxm1tS3U2coF5np8xjH5q3mKj6jSsopA8DPevbaI/F5EGIVZSqyN9a66zPMFiO93Vmz9bUEgdlEgoAkGo0AtRKjGQtTe8rbHkrXvOv4nMAZqQ/8QLFEEew6cOiSxFnE7/ijmmJihdcmXI93+wTKKdyWJqCEcwkvEKiSa4qrrQr7TnyByyRLe+ZXKO5Ep1rHM9mKduAYenGKSu8cFa4XMICDqZw9YMpDjdapfX6Lfu+TW4Q5wbTe1yl0clnyyHzi0I+uNEWeYjiqirpwDUbkiGZYiqy4SvGIov6/h36HMX0q9eiyqwtXQlJdPLXXW/GOxVP+bfkHIoYx2bLvcOsAAAAASUVORK5CYII=" /> Satisfactory,
+            monitor and review on an on-going basis.<br />
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEQAACxEBf2RfkQAAAAd0SU1FB9oEDQggE2ey3zAAAASySURBVEjHfZZLbFVVFIa/ve+5L0rfIBYEKkUQCtEQjOCDxBhQQsJMHTkyMdGBjzBy5EAGjh05MCaM1DgQByaKUBuCJEJ4CRgK9gH0Qlvae3sfveecffbDwTmXe1uoJ1nZj+T8/7/WXmuvLVjmK32/sTsjMm+nXHhQ5uTOVKZ9jTMhulqZDvzatQcVd+rY8MJPR39mCtCAexyOWLrhftyaVTnvMy+d+URs2NspVg3i8t1gNCIKwQa4cgFx/wrR5F/lkdulrz/4xn11ZowHQLQUL9W68P/Y9rRQnPS2v/GOeOHDnOgaAC+HULMINYUL74N/D0wV8h3IVdtyq9uiVw4PzOz3I66eG2c28eZRguD3ZzelfXlavnZki+p7mRQOzAwiGsPZMugATATOgtFgFCKqIdp6yHf0rNnVeXd/YZ6/rxWYBtQiAnd6fV7Me0OpfR9vNh1bSaGR7hbClMAYiBxYDdbEJNaANQijIYoQ6Qz5jq6Owey9549f5nw1ZK4RLgkQFvOfyx0HdrjOATztkzIjEAVgbKJj6UjsSWO0Gq+9i77+jYNHD/EesBHIAMjad5ueTGeyH4n+1xFRBPomqDoYBUbjdAROg9YxmE4M2yQBcJoVfWvZt02+1d/NHqAbEFI69a5YtzePsrhwGqJKHG+tINSxFw1w0wIctRBhIQIpJdn21W2Hd7IHWAukPYk+KNZsxUUG9B0cNo6cS8Ab6rWGKDGnEZiYqEHmNJ7QyGwHu9dODwKbgAkvnU495zK9iGgOp2sxuJCJYsCpWKlTMZlrksRmm4ZFZiQbuticnEObJ3OZbnQIYRGsisEbn254kIyRgkgjXJSotk0SwBiDMYaOvLcKdC+Q9RqKnCrHcfdkM2M0Swga4C0eRPbhXNU1YFEGgBWA59nqfFmaetfDzGkUu0f888NDXQJuHw1TvRKAs5TKptgIgufXq1dX1KZfJVIggkZpxLWoLcKZJEtaQVvWLUT1SgBWMzLlRgEf0LJY4hRTFwGLUCFC+U2zYRz3MIjP56FiFa9bCCvFOs4aKqUaw7cZB+aAUP56gx/02NkQJCi1xAIwQRKSxp6OrQXcGsWDQpV0znHvbs0fGmcBuAPU5fvfMj4xGRxTE5ebQK2m9OJxkfJ4r3CrTEo4ZiZrHL9iT1RCisAosJAC7P0q11/qKRxauXpNj0zLOL7GJBVs4tvTJXMXJQcfezE5UUEHCmMizl2Y//eLM4wYx3ngElBJAfxzn3ouzfXNcvLN9id622RGxqBeQtRQSzMlq/MBhbEyTmuMjrhwbm7m098YripGgGGgAJhGP7BnRpmu1bmxQd/blZX05NrzCNssJOsMquZTnQuZnalRL/lkVwhmp2qcPT8/euQEw7M+48AQMJJk0aKOFl0qUDg5woVOVfby1ZlngppKh4HFryqq8wF+XWGMxvghpbkFbl4p+sfOBr98+ScjifIh4BpQW64nC6AN6N/Uw94DW3hxdx/bn+plYGXK6zXW8WDeFMdmGT19l/HhOyzUFKUE9CIwASy0PgDEMg+BDNAFrAMGgPVAL5BvtO8kz+8AY0m8S0kXc//7qngMUVtyr2STC4SksYdAPVGslnu2/Ac6WzlRZL/8owAAAABJRU5ErkJggg==" /> Further
+            action is required to improve safety management.<br />
+            <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAK3RFWHRDcmVhdGlvbiBUaW1lAEZyIDE1IE5vdiAyMDAyIDEwOjA4OjI5ICswMTAw9aJixgAAAAd0SU1FB9QHBwgaCNppM2EAAAAJcEhZcwAACxEAAAsRAX9kX5EAAAAEZ0FNQQAAsY8L/GEFAAAE4UlEQVR42nVWXW8UVRh+5szsbofd1u2C1FQKlFYU0WggRBrBKxskBk1M1BtNiHohMVGMeuGVF+of8MpbY7zwRm6M0URIgx+EoJgAjVQoGOgH2213t7s7n2fOHN8zZ4YORTZ9Ojsz57zP+z7vx1kD9/i0j4wMFgqlV0weHmaW8bhVrgxJHiJa7dTdnnOpweXJr244Jz5fxC1aHhHk/9kx1j+QLz5cCgfMjwuF4nFj38R92LkbGBwEQrIRBAQfmJ8Dpi+Anz+7enm5/eWxK/KL3zw0aDtfb8/M33hv7xplPP7Zmjz0qnH0WB+2PwSUbKC7DLTI0eYCsELwesBAP8zxXX2bJT9wxF+a9GJcPOdhOY3mbgL/rUd2FB3jNHvvw52YOEDLYjJcJ4PXAadNnnvkH9fPI0ERhbTJhVGtwd5UG9qzfHNyjuPCtA/ahPAOAnl0xGZd8xR75/g4xshrTk60ZrVhZSwPQe947p7WGoUi7Fp1YPfSwpMnOjjXk1jJ5GLqX+j1fcImJx/D1lEySjovzZB35LEgbyXlLqYr/SGm70LqZxnUuyiCVatieGxk92eb8Cat3EYoJgS9I6MPFPpK7+Lgs2SUvGv8Qxq7JAlFGXGNOPVcxpokIYzvJKJI7G1b8Ew/e3mbif1ke1AVEWOSv27s2W+D04Y2JbK3qqsl5JowELqCEjkUkUiJYh1hjshkBkqb7y+/UEkIhgkFi4X8MHbuIiO0ceWm9lYpJ4U2oDxXBCovUZ4o1mRZNPTdpD1mpR/7rDrVNnYQ/rUKBfMJDFA03SahS2k3dXvIVG/B06RyTXKbKNIEWRQpWIFhq4XxNA9li9mlwUSO9orWnaWVezu5QkenDKp1PCNKqyjOIMkXQQEL9BetTfRyI1kpWcmGgGvtfbqakW76hEBqL6OUgK+TS4g1yAih2k8RcT00NhAsK261V1ngVeG6OrlGNj3kWsVEOZKEgKcEORJa5zm+qmW0XNHMGs1ye72LlfriwUQeP0+AXALjNYIs0VE+F4Q4Qq8bwKD7mUDOqsmjxgZr+jgpL/ylNymCDJ66hikCnZ8w1T/rD5EZj9FpuVR4AqutHqY4aL4k3RywHx18G/1xJkhKMzOWR9YTNKp1gvmaRGke1Bhv1HsoMInFes87yeGQ8RsE1/x+Fd3X7Gi4v8T2mhts7WE+eUKsaX1HYrUs6jp3o5N432w4+Kbu//C7AM1z/EKYVzUZLwpMTzQXnq8MD9WYydLNOYJM52zYRWkD0vO5mx1wkk9QVGevta9+6mOG3p4ju6Q7OknR/x3AtRmmxxfmnhsYqpVZ0UprPF8l4nbHJgnt+JibJ89pXUQS/jmzsvS+iyk6KWhSYkp5TxDZeRD/6qLe5bi8dXFxTwmy1lexYWSNRpDkbegG1C4+Gks9OF0fJdrdIFnOzLZnPyDjKzJJ7iloEm/9kam+D4ya2PtRFW883W+9RNHYdrVMzW0mHSqJ0KAGDKjCWk0X87cc7zs3/unrEC1K+xXaf5pwSUmTndHrz2R1XyZsJ6KJQzae2svw6JYixiqWtVGQ8YYnmtdCzJ6OcH1KwHEkWqnR82q4EZz8D4C7Dv30mTosqoQHCWOEEYKaLXZ2fKd1rkrxWqp3Kz3F5Hpj9/pkROV0rpRU56fv1MEeqDpPPQ5xj58t/wGvtEbbuEOhsAAAAABJRU5ErkJggg==" />
+            Immediate and urgent action required.
+        </p>
+        @{
+            var categories = Model.ComplianceReviewItems.Select(x => x.CategoryName).Distinct();
+
+            foreach (var categ in categories)
+            {
+            <br />
+            <br /> 
+            
+            <div class="ComplianceReviewAreaOverview">
+                <h2><p> Overview Of Areas Relating To @categ</p></h2>                
+            </div>
+
+            <table class="ComplianceReview">
+                <thead>
+                    <tr>
+                        <th>
+                            &nbsp;
+                        </th>
+                        <th>
+                            @categ
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Supporting evidence - Action required
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ComplianceReviewItems.Where(x => x.CategoryName == categ).OrderBy(x=>x.CategoryNumber).ThenBy(x => x.QuestionNumber))
+                    {
+                        <tr>
+                            <td>
+                                @item.CategoryNumber.@item.QuestionNumber
+                            </td>
+                            <td>
+                                @item.QuestionText
+                            </td>
+                            @if (item.Status.HasValue)
+                            {
+                                switch (item.Status)
+                                {
+                                    case ComplianceReviewItemStatus.Satisfactory:
+
+                                <td class="greenBall">
+                                </td>
+                                        break;
+                                    case ComplianceReviewItemStatus.FurtherActionRequired:
+
+                                <td class="amberBall">
+                                </td>
+                                        break;
+                                    case ComplianceReviewItemStatus.ImmediateActionRequired:
+
+                                <td class="redBall">
+                                </td>
+                                        break;
+                                }
+                            }
+                            else
+                            {
+                                <td>
+                                    &nbsp;
+                                </td>
+                            }
+                            <td>
+                                @item.SupportingEvidence
+                                @if (!string.IsNullOrEmpty(item.ActionRequired))
+                                {
+                                    <span class="actionRequired">@item.ActionRequired</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        
+            }
+    
+        }
+    </div>
+</body>
+</html>

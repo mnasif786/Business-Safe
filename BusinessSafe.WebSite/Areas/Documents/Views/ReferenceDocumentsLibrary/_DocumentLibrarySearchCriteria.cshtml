@@ -1,0 +1,38 @@
+﻿@using BusinessSafe.WebSite.Extensions
+@model BusinessSafe.WebSite.Areas.Documents.ViewModels.BusinessSafeSystemDocumentsLibraryViewModel
+<div class="well">
+    <form class="search-form" method="get" action="@Url.Action("Index", "ReferenceDocumentsLibrary")">
+        <fieldset>
+            <legend>Reference Library Document Search</legend>
+            <ul>
+                <li>
+                    <label for="DocumentType" class="wide">Document Type</label>
+                    @Html.TextBox("DocumentType")
+                    @Html.HiddenFor(x => x.DocumentTypeId)
+                </li>
+                <li>
+                    <label for="Title" class="thin">Title</label>
+                    @Html.TextBoxFor(model => model.Title, new { @class = "wide", placeholder = "Search on any word or part of word in title" })
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <label for="DocumentSubType" class="wide">Document Sub Type</label>
+                    @Html.TextBox("DocumentSubType")
+                    @Html.HiddenFor(x => x.DocumentSubTypeId)
+                </li>
+                <li>
+                    <label for="Keywords" class="thin">Keywords</label>
+                    @Html.TextBoxFor(model => model.Keywords, new { @class = "wide", placeholder = "Please seperate multiple keywords with a comma" })
+                </li>
+            </ul>
+            <ul>
+                <li class="buttons wide">
+                    <input id="Search" type="submit" class="btn btn-primary" value="Search" />
+                    <a class="btn-link" href="@Url.Action("Index", "ReferenceDocumentsLibrary", new { companyId = Html.GetUsersCompanyId(User) })">Reset</a>
+                </li>
+            </ul>
+        </fieldset>
+        @Html.Hidden("CompanyId", @Model.CompanyId)
+    </form>
+</div>

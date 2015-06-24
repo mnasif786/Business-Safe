@@ -1,0 +1,159 @@
+﻿@using BusinessSafe.WebSite.Extensions
+@model BusinessSafe.WebSite.ViewModels.HazardViewModel 
+<form id="@Model.RiskAssessmentHazardId" class="form-horizontal hazardContainer">
+<fieldset>
+    <div class="inner-section hazard-title-description"  data-id="@Model.Id">
+        <span class="ui-dialog-title" id="ui-dialog-title-dialogDeleteSiteGroup"></span>
+        <span id="titleContainer">
+            <h3 class="inline">
+                Hazard Title:</h3>
+            <span style="display: inline-block" data-text="@Model.Title">
+                <h3 id="titleDisplay" class="inline">@Model.Title</h3>
+                @if (Model.AllowEditingOfTitle)
+                {
+                    <a href="#" name="edit-hazard-title" id="edit-hazard-title" class="edit-hazard-title add-edit-link" data-id="@Model.RiskAssessmentHazardId" >
+                        <i class="icon-pencil"></i>edit title </a>
+                    <br />
+                }
+            </span>
+            <span id='error-container-@Model.RiskAssessmentHazardId' class="hazard-error-container"></span>
+        </span>
+        <div class="row-fluid" class="span10">
+            <p data-text="@Model.Description"  >
+                <span>@Model.Description</span> <a href="#" name="edit-hazard-description" id="edit-hazard-description" class="edit-hazard-description add-edit-link" data-id="@Model.RiskAssessmentHazardId">
+                                                    <i class="icon-pencil"></i> explain the harm or damage that could be caused</a>
+            </p>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <div>
+                    <h4>
+                        Control Measures Already In Place
+                        <button class="btn add-control-measure" data-id="@Model.RiskAssessmentHazardId" title="Add Control Measure">
+                            <i class="icon-plus-sign"></i>
+                        </button>
+                    </h4>
+                </div>
+                <table id="control-measure-table-@(@Model.RiskAssessmentHazardId)" class="table table-striped control-measure-table">
+                    <thead>
+                        <tr>
+                            <th colspan="2">
+                                Description
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var controlMeasure in Model.ControlMeasures)
+                        {
+                            <tr>
+                                <td data-rah-id="@Model.RiskAssessmentHazardId" data-id="@controlMeasure.Id" data-text="@controlMeasure.ControlMeasure">
+                                    <div class="controlMeasureText">
+                                        <span class="controlCount">@controlMeasure.ControlCount. </span>@controlMeasure.ControlMeasure</div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="hide" id="FurtherControlMeasureTasksRowTemplate">
+            <table>
+                <tr data-id="0" data-rah-id="0">
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                    <td class="fcm-status">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <div>
+                    <h4>
+                        Further Control Measures
+                        <button id="@string.Format("AddFurtherActionTask{0}", Model.Id)" class="btn add-further-action-task" data-id="@Model.Id" data-rah-id="@Model.RiskAssessmentHazardId" title="Add Further Control Measure">
+                            <i class="icon-plus-sign"></i>
+                        </button>
+                    </h4>
+                </div>
+                <table id="FurtherControlMeasureTasksTable" class="table table-striped further-action-task-table" data-rah-id="@Model.RiskAssessmentHazardId">
+                    <thead>
+                        <tr>
+                            <th style="width: 15px;">
+                            </th>
+                            <th>
+                                Title
+                            </th>
+                            <th>
+                                Description
+                            </th>
+                            <th>
+                                Assignee
+                            </th>
+                            <th>
+                                Created
+                            </th>
+                            <th>
+                                Due Date
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var actionRequired in Model.ActionsRequired)
+                        {
+                            const int descriptionMaxLength = 60;
+                            var furtherControlMeasureTaskDescription = actionRequired.ActionDescription.Length > descriptionMaxLength
+                                ? actionRequired.ActionDescription.Substring(0, descriptionMaxLength) + "..."
+                                : actionRequired.ActionDescription;
+
+                            if ((!actionRequired.IsReoccurring) || (actionRequired.IsReoccurring && actionRequired.TaskStatus != "Completed"))
+                            {
+                            <tr data-id="@actionRequired.Id" data-rah-id="@Model.RiskAssessmentHazardId" data-ir="@(actionRequired.IsReoccurring ? 1 : 0)" data-task-guid="@actionRequired.TaskGuid">
+                                <td>
+                                    @if (actionRequired.IsReoccurring)
+                                    {
+                                        <span class='label label-important label-reoccurring-task' title="@actionRequired.GetReoccurringFrequencyDetails()"  rel="tooltip">
+                                            R</span>
+                                    }
+                                </td>
+                                <td>
+                                    @actionRequired.ActionTitle
+                                </td>
+                                <td>
+                                    @furtherControlMeasureTaskDescription
+                                </td>
+                                <td>
+                                    @actionRequired.AssignedTo
+                                </td>
+                                <td>
+                                    @actionRequired.CreatedOn
+                                </td>
+                                <td>
+                                    @actionRequired.TaskCompletionDueDate
+                                </td>
+                                <td class="fcm-status">
+                                    <span>@actionRequired.TaskStatus.AddSpacesToName()</span>                                     
+                                </td>
+                            </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</fieldset>
+</form>

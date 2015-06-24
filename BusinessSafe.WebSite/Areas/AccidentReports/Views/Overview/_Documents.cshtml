@@ -1,0 +1,10 @@
+﻿@model BusinessSafe.WebSite.ViewModels.DocumentsViewModel
+
+    @*@Html.Partial("_DocumentDisplayMessages", Model.DocumentDisplayMessages)*@
+    <div class="span12">
+        <div id="attach-documents" class="content clearfix">
+            @Html.Partial("_AttachDocuments", Model.ExistingDocumentsViewModel)
+        </div>
+    </div>
+        @Html.HiddenFor(x => x.CompanyId)
+

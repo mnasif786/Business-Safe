@@ -1,0 +1,18 @@
+USE [BusinessSafe]
+GO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '[SiteStructureElement]' AND COLUMN_NAME = 'SiteContact')
+BEGIN
+	ALTER TABLE	SiteStructureElement		
+		ADD SiteContact nvarchar(100) NULL
+	
+END
+GO
+
+--//@UNDO 
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '[SiteStructureElement]' AND COLUMN_NAME = 'SiteContact')
+BEGIN
+	ALTER TABLE	SiteStructureElement
+		DROP COLUMN SiteContact
+END

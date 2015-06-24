@@ -1,0 +1,12 @@
+﻿@model BusinessSafe.WebSite.Areas.ActionPlans.ViewModels.AssignedToViewModel
+
+@{
+    var owner = "Owner" + Model.Id;
+    var ownerId = "Owner" + Model.Id + "Id";
+    var selectedValue = Model.SelectedAssignedToId;
+}
+
+<div class="owner responsibilities-auto-select-container" >
+    <input id="@owner" class="owner" type="text" data-initial-value="--Select Option--" value="@Model.Name"/>
+    <input id="@ownerId" class="owner" type="hidden" value="@selectedValue" data-initial-value="" />
+</div>

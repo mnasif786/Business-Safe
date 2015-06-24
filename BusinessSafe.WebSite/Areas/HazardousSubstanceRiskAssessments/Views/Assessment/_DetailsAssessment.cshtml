@@ -1,0 +1,104 @@
+﻿@using BusinessSafe.WebSite.Extensions
+@using BusinessSafe.WebSite.HtmlHelpers
+@using BusinessSafe.WebSite.ViewModels
+@using BusinessSafe.Domain.Entities
+@model BusinessSafe.WebSite.Areas.HazardousSubstanceRiskAssessments.ViewModels.AssessmentViewModel
+<form method="post" action="@Url.Action("Save", "Assessment")" class="row form-inline">
+            <div class="span12">
+        @if (!ViewData.ModelState.IsValid)
+        {
+            @Html.Partial("_DistinctValidationSummary")
+        }
+        @if (TempData["Notice"] != null)
+        {
+            <div class="alert alert-success">
+                <a id="successmessageanchor" href="#successmessage"></a>
+                @TempData["Notice"].ToString()
+            </div>   
+        }
+         </div>
+        @Html.HiddenFor(model => model.RiskAssessmentId)
+        @Html.HiddenFor(model => model.CompanyId)
+    
+        <fieldset>
+            <legend class="span12"><h3>Substance Assessment</h3></legend>
+            <div class="span12">
+                <label for="HazardGroup" class="span2">Hazard Group</label>
+                <div>
+                    <strong id="hazard-group">@Model.HazardGroup</strong>
+                    <div class="hide">
+                        <div>
+                            @Html.RadioButtonFor(x => x.HazardGroup, "A", new { disabled = "disabled" }) A
+                        </div>
+                        <div>
+                            @Html.RadioButtonFor(x => x.HazardGroup, "B", new { disabled = "disabled" }) B
+                        </div>
+                        <div>
+                            @Html.RadioButtonFor(x => x.HazardGroup, "C", new { disabled = "disabled" }) C
+                        </div>
+                        <div>
+                            @Html.RadioButtonFor(x => x.HazardGroup, "D", new { disabled = "disabled" }) D
+                        </div>
+                        <div>
+                            @Html.RadioButtonFor(x => x.HazardGroup, "E", new { disabled = "disabled" }) E
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span12">
+                <label class="span2">How much is being used per batch?</label>
+                <div>
+                    <div>@Html.RadioButtonFor(x => x.Quantity, Quantity.Small) Small (&lt;1kg or &lt;1L)</div>
+                    <div>@Html.RadioButtonFor(x => x.Quantity, Quantity.Medium) Medium (1-1000kg or 1-1000L)</div>
+                    <div>@Html.RadioButtonFor(x => x.Quantity, Quantity.Large) Large (&gt; 1000kg or &gt;1000L)</div>
+                </div>
+            </div>
+            <div class="span12">
+                <label class="span2">Is the substance used as a solid or a liquid?</label>
+                <div>
+                    <div>@Html.RadioButtonFor(x => x.MatterState, MatterState.Liquid) Liquid</div>
+                    <div>@Html.RadioButtonFor(x => x.MatterState, MatterState.Solid) Solid</div>
+                </div>
+            </div>
+            <div class="span12 substance-quantity-question">
+                <label class="span2 solid-substance-quantity-question-label">How dusty is the solid?</label>
+                <label class="span2 liquid-substance-quantity-question-label">How volatile is the liquid?</label>
+                <div>
+                    <div>@Html.RadioButtonFor(x => x.DustinessOrVolatility, DustinessOrVolatility.Low) Low</div>
+                    <div>@Html.RadioButtonFor(x => x.DustinessOrVolatility, DustinessOrVolatility.Medium) Medium</div>
+                    <div>@Html.RadioButtonFor(x => x.DustinessOrVolatility, DustinessOrVolatility.High) High</div>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend class="span12"><h3>Substance Work Approach Required</h3></legend>
+            <div class="span12">
+                <label class="span2" for="WorkApproach">Control System</label>
+                <strong id="WorkApproach">@Model.WorkApproach</strong>
+                <a id="GuidanceNotes" class="hide" href="#">View Guidance Notes</a>
+               @Html.Hidden("ControlSystemId", Model.ControlSystemId)
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend class="span12"><h3>Health Surveillance</h3></legend>
+            <div class="span12">
+                <label class="span2" for="HealthSurveillanceRequired">Is Health Surveillance required?</label>
+                <div>
+                    <div>@Html.RadioButtonFor(x => x.HealthSurveillanceRequired, "true") Yes</div>
+                    <div>@Html.RadioButtonFor(x => x.HealthSurveillanceRequired, "false") No</div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="span12">
+        <label class="span2"></label>
+        @if (Model.IsSaveButtonEnabled(User))
+        {
+            var viewName = Html.IsReadOnly() ? "View" : "Index";
+            var urlAction = Url.Action(viewName, "ControlMeasures", new { area = "HazardousSubstanceRiskAssessments", companyId = Model.CompanyId, riskAssessmentId = Model.RiskAssessmentId });
+           
+            <input type="submit" id="saveButton" value="Save" class="btn btn-success" />
+            <a id="nextBtn" class="btn btn-primary" tabIndex="2" href="@urlAction">Save &amp; Continue <i class="icon-chevron-right icon-white"></i></a>
+        }
+        <a class="btn btn-link" href="@Url.Action("Index", "RiskAssessment", new { area = "HazardousSubstanceRiskAssessments", companyId = @Html.GetUsersCompanyId(User) })">Cancel</a>
+    </div>
+</form>

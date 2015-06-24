@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="43b08ba1-933e-4dce-a5ae-ffc992be7a3b" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://uatmaintws1:8056/DocumentLibraryService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="DocumentLibraryService.xsd" MetadataType="Schema" ID="ec8adca1-ea49-436f-8eb5-38d66b1a82ce" SourceId="1" SourceUrl="http://uatmaintws1:8056/DocumentLibraryService.svc?xsd=xsd0" />
+    <MetadataFile FileName="DocumentLibraryService.disco" MetadataType="Disco" ID="c2f26975-bdf5-44b7-a945-08e041f0ecb5" SourceId="1" SourceUrl="http://uatmaintws1:8056/DocumentLibraryService.svc?disco" />
+    <MetadataFile FileName="DocumentLibraryService1.xsd" MetadataType="Schema" ID="70327b43-3c1a-4f90-9b77-152748a793d5" SourceId="1" SourceUrl="http://uatmaintws1:8056/DocumentLibraryService.svc?xsd=xsd4" />
+    <MetadataFile FileName="DocumentLibraryService2.xsd" MetadataType="Schema" ID="6b3a6855-e0d3-40e6-991e-e9ce2dd67024" SourceId="1" SourceUrl="http://uatmaintws1:8056/DocumentLibraryService.svc?xsd=xsd3" />
+    <MetadataFile FileName="DocumentLibraryService3.xsd" MetadataType="Schema" ID="aa16e95e-0e87-4f84-bed0-1ee077c8bd82" SourceId="1" SourceUrl="http://uatmaintws1:8056/DocumentLibraryService.svc?xsd=xsd1" />
+    <MetadataFile FileName="DocumentLibraryService4.xsd" MetadataType="Schema" ID="90893cb1-923d-4af4-8a55-132677774aa3" SourceId="1" SourceUrl="http://uatmaintws1:8056/DocumentLibraryService.svc?xsd=xsd2" />
+    <MetadataFile FileName="DocumentLibraryService5.xsd" MetadataType="Schema" ID="7308117f-1a82-4274-b1a8-13adba92f4d7" SourceId="1" SourceUrl="http://uatmaintws1:8056/DocumentLibraryService.svc?xsd=xsd5" />
+    <MetadataFile FileName="DocumentLibraryService.wsdl" MetadataType="Wsdl" ID="10a6d606-85d7-43f3-ae40-d214eface5f2" SourceId="1" SourceUrl="http://uatmaintws1:8056/DocumentLibraryService.svc?wsdl" />
+    <MetadataFile FileName="DocumentLibraryService1.wsdl" MetadataType="Wsdl" ID="6c45a9ce-8e3d-410d-9778-61bd6048a756" SourceId="1" SourceUrl="http://uatmaintws1:8056/DocumentLibraryService.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="DocumentLibraryService6.xsd" MetadataType="Schema" ID="40bc88eb-5a55-4c00-b1af-7faa04356be4" SourceId="1" SourceUrl="http://uatmaintws1:8056/DocumentLibraryService.svc?xsd=xsd6" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

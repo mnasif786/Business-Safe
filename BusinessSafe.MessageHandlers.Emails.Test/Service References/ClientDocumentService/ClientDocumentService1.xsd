@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ClientDocumentation.Application.DataTransferObjects.Security" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ClientDocumentation.Application.DataTransferObjects.Security" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://uatmaintws1:8064/ClientDocumentService.svc?xsd=xsd6" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://uatmaintws1:8064/ClientDocumentService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/ClientDocumentation.Application.DataTransferObjects.Documents" />
+  <xs:complexType name="UserDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Deleted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Department" nillable="true" type="tns:DepartmentDto" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:long" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="PermissionKeys" nillable="true" type="q1:ArrayOfstring" />
+      <xs:element minOccurs="0" name="Role" nillable="true" type="tns:RoleDto" />
+      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserDto" nillable="true" type="tns:UserDto" />
+  <xs:complexType name="DepartmentDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="tns:UserDto" />
+      <xs:element minOccurs="0" name="CreatedOn" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Deleted" type="xs:boolean" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/ClientDocumentation.Application.DataTransferObjects.Documents" minOccurs="0" name="DocumentTypes" nillable="true" type="q2:ArrayOfDocumentTypeDto" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="Key" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastModifiedBy" nillable="true" type="tns:UserDto" />
+      <xs:element minOccurs="0" name="LastModifiedOn" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DepartmentDto" nillable="true" type="tns:DepartmentDto" />
+  <xs:complexType name="RoleDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="PermissionRoles" nillable="true" type="tns:ArrayOfPermissionRoleDto" />
+      <xs:element minOccurs="0" name="RoleName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RoleDto" nillable="true" type="tns:RoleDto" />
+  <xs:complexType name="ArrayOfPermissionRoleDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PermissionRoleDto" nillable="true" type="tns:PermissionRoleDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPermissionRoleDto" nillable="true" type="tns:ArrayOfPermissionRoleDto" />
+  <xs:complexType name="PermissionRoleDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="Permission" nillable="true" type="tns:PermissionDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PermissionRoleDto" nillable="true" type="tns:PermissionRoleDto" />
+  <xs:complexType name="PermissionDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="Key" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PermissionDto" nillable="true" type="tns:PermissionDto" />
+</xs:schema>

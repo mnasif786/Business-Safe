@@ -1,0 +1,39 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+@{
+    ViewBag.Title = "Error";
+}
+<section>
+    <span class="legend">Error</span>
+    <div class="content">
+        <div class="page-header">
+            <h1>Sorry, an error occurred.</h1>
+        </div>
+        <p>
+            We have logged this error, and our engineers are looking into it; we apologise for
+            the inconvenience.</p>
+        <p>
+            In the meantime, please use the back button to try again, or close your browser
+            to try again.</p>
+        <input type="button" value="Go back and try again" onclick="Javascript:window.history.back();"
+            class="btn" style="margin-bottom: 20px" />
+        <div class="well">
+            <p>
+                If the problem persists, please contact our Online Support team:</p>
+            <dl>
+                <dt class="pull-left span1">Tel:</dt>
+                <dd>0844 892 2492</dd>
+                <dt class="pull-left span1">Email:</dt>
+                <dd><a href="mailto:businesssafe@peninsula-uk.com">businesssafe@peninsula-uk.com</a></dd>
+            </dl>
+            <p>
+                To help us with your issue, please provide the following information:</p>
+            <ul>
+                <li>Your BusinessSafe username</li>
+                <li>The date and time you last encountered the problem</li>
+                <li>What you were trying to do</li>
+                <li>The browser you are using (e.g. Internet Explorer, Firefox) and the browser version,
+                    if you know it</li>
+            </ul>
+        </div>
+    </div>
+</section>

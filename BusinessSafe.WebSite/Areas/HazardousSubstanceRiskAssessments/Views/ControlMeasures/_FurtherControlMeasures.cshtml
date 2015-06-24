@@ -1,0 +1,90 @@
+﻿@using BusinessSafe.WebSite.Extensions
+@model BusinessSafe.WebSite.Areas.HazardousSubstanceRiskAssessments.ViewModels.ControlMeasuresViewModel 
+<fieldset><div><h3>Further Control Measures
+    <button id="AddFurtherControlMeasureTask" class="btn add-further-action-task" data-id="@Model.RiskAssessmentId" title="Add Further Control Measure Task">
+        <i class="icon-plus-sign"></i>
+    </button>
+</h3></div>
+<div class="row-fluid">
+        <table id="FurtherControlMeasureTasksTable" class="table table-striped further-action-task-table">
+            <thead>
+                <tr>
+                    <th style="width: 15px;">
+                    </th>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Assigned To
+                    </th>
+                    <th>
+                        Completion Due Date
+                    </th>
+                    <th>
+                        Created Date
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var furtherControlMeasure in Model.FurtherControlMeasures)
+                {
+                    if ((!furtherControlMeasure.IsReoccurring) || (furtherControlMeasure.IsReoccurring && furtherControlMeasure.TaskStatus != "Completed"))
+                    {
+                    <tr data-id="@furtherControlMeasure.Id" data-ir="@(furtherControlMeasure.IsReoccurring ? 1 : 0)" data-task-guid="@furtherControlMeasure.TaskGuid">
+                        <td>
+                            @if (furtherControlMeasure.IsReoccurring)
+                            {
+                                <span class='label label-important label-reoccurring-task' title="@furtherControlMeasure.GetReoccurringFrequencyDetails()"  rel="tooltip">
+                                    R</span>
+                            }
+                        </td>
+                        <td>
+                            @furtherControlMeasure.ActionTitle
+                        </td>
+                        <td>
+                            @furtherControlMeasure.ActionDescription
+                        </td>
+                        <td>
+                            @furtherControlMeasure.AssignedTo
+                        </td>
+                        <td>
+                            @furtherControlMeasure.TaskCompletionDueDate
+                        </td>
+                        <td>
+                            @furtherControlMeasure.CreatedOn
+                        </td>
+                        <td class="fcm-status">
+                            <span>@furtherControlMeasure.TaskStatus</span>                            
+                        </td>
+                    </tr>
+                    }
+                }
+            </tbody>
+        </table>
+</div>
+<div class="hide" id="FurtherControlMeasureTasksRowTemplate">
+    <table>
+        <tr data-id="0">
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td class="fcm-status">
+            </td>
+        </tr>
+    </table>
+</div></fieldset>

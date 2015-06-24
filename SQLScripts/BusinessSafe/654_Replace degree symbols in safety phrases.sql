@@ -1,0 +1,10 @@
+SET XACT_ABORT ON
+
+BEGIN TRANSACTION
+
+UPDATE dbo.SafetyPhrase
+SET Title = REPLACE(title,' Â°','°')
+WHERE title LIKE '% Â°%'
+
+
+COMMIT TRANSACTION

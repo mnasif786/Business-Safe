@@ -1,0 +1,13 @@
+﻿@model IEnumerable<HtmlString>
+           
+@if (Model.Any())
+{
+<div class="span12">
+    <div class="alert alert-error">
+        @foreach (var displayMessage in Model)
+        {
+            <p>@displayMessage</p>    
+        }
+    </div>   
+</div>   
+}

@@ -1,0 +1,8 @@
+﻿@model BusinessSafe.WebSite.Areas.HazardousSubstanceInventory.ViewModels.AddEditHazardousSubstanceViewModel
+           
+<label class="span2"></label>
+ @if (Model.IsSaveButtonEnabled(User))
+ {
+    <button type="submit" class="btn btn-success" id="AddEditHazardousSubstanceSaveButton">Save</button>
+ }
+@Html.ActionLink("Cancel", "Index", "Inventory", new { companyId = Model.CompanyId }, new { id = "AddEditHazardousSubstanceCancelButton", @class = "btn btn-link" })

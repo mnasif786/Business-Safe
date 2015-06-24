@@ -1,0 +1,1195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://WebServices_ActiveDirectory/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://WebServices_ActiveDirectory/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://WebServices_ActiveDirectory/">
+      <s:element name="IsAllowed">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GroupName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Domain" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IsAllowedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="IsAllowedResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGroupsForUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Domain" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGroupsForUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGroupsForUserResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetGroupsForDomain">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Domain" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGroupsForDomainResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGroupsForDomainResult" type="tns:ArrayOfActiveDirectoryGroup" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfActiveDirectoryGroup">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ActiveDirectoryGroup" nillable="true" type="tns:ActiveDirectoryGroup" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ActiveDirectoryGroup">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="DistinguishedName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SamAccountName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetManager">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Domain" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManagerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetManagerResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManagerGroups">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Domain" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetManagerGroupsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetManagerGroupsResult" type="tns:ArrayOfActiveDirectoryGroup" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIPPhone">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Domain" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetIPPhoneResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetIPPhoneResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserProperties">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Domain" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserPropertiesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserPropertiesResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetActiveDirectoryUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Domain" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetActiveDirectoryUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetActiveDirectoryUserResult" type="tns:ActiveDirectoryUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ActiveDirectoryUser">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="DistinguishedName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Forename" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Surname" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DisplayName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="JobTitle" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Department" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Office" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Mobile" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Extension" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SpeedDial" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FaxNo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DirectDial" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Manager" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ManagerUsername" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ManagerDistinguishedName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EmailAddress" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Disabled" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Groups" type="tns:ArrayOfActiveDirectoryGroup" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdateActiveDirectoryUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="activeDirectoryUser" type="tns:ActiveDirectoryUser" />
+            <s:element minOccurs="1" maxOccurs="1" name="Domain" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateActiveDirectoryUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateActiveDirectoryUserResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserNamesInGroup">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ADGroupName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Domain" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserNamesInGroupResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserNamesInGroupResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddUserToGroup">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="activeDirectoryUser" type="tns:ActiveDirectoryUser" />
+            <s:element minOccurs="1" maxOccurs="1" name="Domain" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="activeDirectoryGroup" type="tns:ActiveDirectoryGroup" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddUserToGroupResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddUserToGroupResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveUserFromGroup">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="activeDirectoryUser" type="tns:ActiveDirectoryUser" />
+            <s:element minOccurs="1" maxOccurs="1" name="Domain" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="activeDirectoryGroup" type="tns:ActiveDirectoryGroup" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveUserFromGroupResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RemoveUserFromGroupResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DoesUserExist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Domain" type="tns:peninsulaDomains" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="peninsulaDomains">
+        <s:restriction base="s:string">
+          <s:enumeration value="DEFAULT" />
+          <s:enumeration value="HQ" />
+          <s:enumeration value="Hinckley" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="DoesUserExistResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="DoesUserExistResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUsersByExtension">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="searchTerm" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUsersByExtensionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchUsersByExtensionResult" type="tns:ArrayOfActiveDirectoryUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfActiveDirectoryUser">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ActiveDirectoryUser" nillable="true" type="tns:ActiveDirectoryUser" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SearchUsersByMobile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="searchTerm" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUsersByMobileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchUsersByMobileResult" type="tns:ArrayOfActiveDirectoryUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUsersByJobTitle">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="searchTerm" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUsersByJobTitleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchUsersByJobTitleResult" type="tns:ArrayOfActiveDirectoryUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUsersByOffice">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="searchTerm" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUsersByOfficeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchUsersByOfficeResult" type="tns:ArrayOfActiveDirectoryUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUsersBySpeedDial">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="searchTerm" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUsersBySpeedDialResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchUsersBySpeedDialResult" type="tns:ArrayOfActiveDirectoryUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUsersByDirectDial">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="searchTerm" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUsersByDirectDialResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchUsersByDirectDialResult" type="tns:ArrayOfActiveDirectoryUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUsersByDepartment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="searchTerm" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUsersByDepartmentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchUsersByDepartmentResult" type="tns:ArrayOfActiveDirectoryUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUsersByUsername">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="searchTerm" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUsersByUsernameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchUsersByUsernameResult" type="tns:ArrayOfActiveDirectoryUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUsersByForename">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="searchTerm" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUsersByForenameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchUsersByForenameResult" type="tns:ArrayOfActiveDirectoryUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUsersBySurname">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="searchTerm" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUsersBySurnameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchUsersBySurnameResult" type="tns:ArrayOfActiveDirectoryUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUsersByAnyField">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="searchTerm" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUsersByAnyFieldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchUsersByAnyFieldResult" type="tns:ArrayOfActiveDirectoryUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserByUsername">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserByUsernameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserByUsernameResult" type="tns:ActiveDirectoryUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUsers">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="searchFields" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="searchTerms" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchUsersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchUsersResult" type="tns:ArrayOfActiveDirectoryUser" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="IsAllowedSoapIn">
+    <wsdl:part name="parameters" element="tns:IsAllowed" />
+  </wsdl:message>
+  <wsdl:message name="IsAllowedSoapOut">
+    <wsdl:part name="parameters" element="tns:IsAllowedResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGroupsForUserSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGroupsForUser" />
+  </wsdl:message>
+  <wsdl:message name="GetGroupsForUserSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGroupsForUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGroupsForDomainSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGroupsForDomain" />
+  </wsdl:message>
+  <wsdl:message name="GetGroupsForDomainSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGroupsForDomainResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetManagerSoapIn">
+    <wsdl:part name="parameters" element="tns:GetManager" />
+  </wsdl:message>
+  <wsdl:message name="GetManagerSoapOut">
+    <wsdl:part name="parameters" element="tns:GetManagerResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetManagerGroupsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetManagerGroups" />
+  </wsdl:message>
+  <wsdl:message name="GetManagerGroupsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetManagerGroupsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetIPPhoneSoapIn">
+    <wsdl:part name="parameters" element="tns:GetIPPhone" />
+  </wsdl:message>
+  <wsdl:message name="GetIPPhoneSoapOut">
+    <wsdl:part name="parameters" element="tns:GetIPPhoneResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserPropertiesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserProperties" />
+  </wsdl:message>
+  <wsdl:message name="GetUserPropertiesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserPropertiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetActiveDirectoryUserSoapIn">
+    <wsdl:part name="parameters" element="tns:GetActiveDirectoryUser" />
+  </wsdl:message>
+  <wsdl:message name="GetActiveDirectoryUserSoapOut">
+    <wsdl:part name="parameters" element="tns:GetActiveDirectoryUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateActiveDirectoryUserSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateActiveDirectoryUser" />
+  </wsdl:message>
+  <wsdl:message name="UpdateActiveDirectoryUserSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateActiveDirectoryUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserNamesInGroupSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserNamesInGroup" />
+  </wsdl:message>
+  <wsdl:message name="GetUserNamesInGroupSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserNamesInGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddUserToGroupSoapIn">
+    <wsdl:part name="parameters" element="tns:AddUserToGroup" />
+  </wsdl:message>
+  <wsdl:message name="AddUserToGroupSoapOut">
+    <wsdl:part name="parameters" element="tns:AddUserToGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserFromGroupSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveUserFromGroup" />
+  </wsdl:message>
+  <wsdl:message name="RemoveUserFromGroupSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveUserFromGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="DoesUserExistSoapIn">
+    <wsdl:part name="parameters" element="tns:DoesUserExist" />
+  </wsdl:message>
+  <wsdl:message name="DoesUserExistSoapOut">
+    <wsdl:part name="parameters" element="tns:DoesUserExistResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchUsersByExtensionSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchUsersByExtension" />
+  </wsdl:message>
+  <wsdl:message name="SearchUsersByExtensionSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchUsersByExtensionResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchUsersByMobileSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchUsersByMobile" />
+  </wsdl:message>
+  <wsdl:message name="SearchUsersByMobileSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchUsersByMobileResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchUsersByJobTitleSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchUsersByJobTitle" />
+  </wsdl:message>
+  <wsdl:message name="SearchUsersByJobTitleSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchUsersByJobTitleResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchUsersByOfficeSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchUsersByOffice" />
+  </wsdl:message>
+  <wsdl:message name="SearchUsersByOfficeSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchUsersByOfficeResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchUsersBySpeedDialSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchUsersBySpeedDial" />
+  </wsdl:message>
+  <wsdl:message name="SearchUsersBySpeedDialSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchUsersBySpeedDialResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchUsersByDirectDialSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchUsersByDirectDial" />
+  </wsdl:message>
+  <wsdl:message name="SearchUsersByDirectDialSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchUsersByDirectDialResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchUsersByDepartmentSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchUsersByDepartment" />
+  </wsdl:message>
+  <wsdl:message name="SearchUsersByDepartmentSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchUsersByDepartmentResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchUsersByUsernameSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchUsersByUsername" />
+  </wsdl:message>
+  <wsdl:message name="SearchUsersByUsernameSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchUsersByUsernameResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchUsersByForenameSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchUsersByForename" />
+  </wsdl:message>
+  <wsdl:message name="SearchUsersByForenameSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchUsersByForenameResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchUsersBySurnameSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchUsersBySurname" />
+  </wsdl:message>
+  <wsdl:message name="SearchUsersBySurnameSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchUsersBySurnameResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchUsersByAnyFieldSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchUsersByAnyField" />
+  </wsdl:message>
+  <wsdl:message name="SearchUsersByAnyFieldSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchUsersByAnyFieldResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserByUsernameSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserByUsername" />
+  </wsdl:message>
+  <wsdl:message name="GetUserByUsernameSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserByUsernameResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchUsersSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchUsers" />
+  </wsdl:message>
+  <wsdl:message name="SearchUsersSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchUsersResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WS_ActiveDirectorySoap">
+    <wsdl:operation name="IsAllowed">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;Returns&lt;/b&gt; - Result indicating whether the user is a member of a particular Group in the Active Directory&lt;br/&gt;True or False, the user is in Active Directory Group</wsdl:documentation>
+      <wsdl:input message="tns:IsAllowedSoapIn" />
+      <wsdl:output message="tns:IsAllowedSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupsForUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;Gets&lt;/b&gt; - Active Directory Groups the user is a member of&lt;br/&gt;List of Active Directory Groups</wsdl:documentation>
+      <wsdl:input message="tns:GetGroupsForUserSoapIn" />
+      <wsdl:output message="tns:GetGroupsForUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupsForDomain">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;Gets ALL&lt;/b&gt; - Active Directory Groups for the Domain&lt;br/&gt;List of Active Directory Groups</wsdl:documentation>
+      <wsdl:input message="tns:GetGroupsForDomainSoapIn" />
+      <wsdl:output message="tns:GetGroupsForDomainSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManager">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;Gets&lt;/b&gt; - Name of Manager the user is assigned to&lt;br/&gt;String</wsdl:documentation>
+      <wsdl:input message="tns:GetManagerSoapIn" />
+      <wsdl:output message="tns:GetManagerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetManagerGroups">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;Gets&lt;/b&gt; - Active Directory Groups the Manager of the user is a member of&lt;br/&gt;List of Active Directory Groups</wsdl:documentation>
+      <wsdl:input message="tns:GetManagerGroupsSoapIn" />
+      <wsdl:output message="tns:GetManagerGroupsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetIPPhone">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;Gets&lt;/b&gt; - The Extension number of the user if not a 'One Number Service' employee&lt;br/&gt;String</wsdl:documentation>
+      <wsdl:input message="tns:GetIPPhoneSoapIn" />
+      <wsdl:output message="tns:GetIPPhoneSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserProperties">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;Gets&lt;/b&gt; - Active Directory Properties the user&lt;br/&gt;List of Active Directory Properties</wsdl:documentation>
+      <wsdl:input message="tns:GetUserPropertiesSoapIn" />
+      <wsdl:output message="tns:GetUserPropertiesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetActiveDirectoryUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;Gets&lt;/b&gt; - Active Directory Properties the user&lt;br/&gt;List of Active Directory Properties</wsdl:documentation>
+      <wsdl:input message="tns:GetActiveDirectoryUserSoapIn" />
+      <wsdl:output message="tns:GetActiveDirectoryUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateActiveDirectoryUser">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;Updates&lt;/b&gt; - Active Directory Properties for the user&lt;br/&gt;</wsdl:documentation>
+      <wsdl:input message="tns:UpdateActiveDirectoryUserSoapIn" />
+      <wsdl:output message="tns:UpdateActiveDirectoryUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserNamesInGroup">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;Gets&lt;/b&gt; - String List of Active Directory user names for the AD Group Name passed in.&lt;br/&gt;</wsdl:documentation>
+      <wsdl:input message="tns:GetUserNamesInGroupSoapIn" />
+      <wsdl:output message="tns:GetUserNamesInGroupSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUserToGroup">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;Adds&lt;/b&gt; - Active Directory User to an AD Group&lt;br/&gt;</wsdl:documentation>
+      <wsdl:input message="tns:AddUserToGroupSoapIn" />
+      <wsdl:output message="tns:AddUserToGroupSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserFromGroup">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;Removes&lt;/b&gt; - Active Directory User from an AD Group&lt;br/&gt;</wsdl:documentation>
+      <wsdl:input message="tns:RemoveUserFromGroupSoapIn" />
+      <wsdl:output message="tns:RemoveUserFromGroupSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DoesUserExist">
+      <wsdl:input message="tns:DoesUserExistSoapIn" />
+      <wsdl:output message="tns:DoesUserExistSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByExtension">
+      <wsdl:input message="tns:SearchUsersByExtensionSoapIn" />
+      <wsdl:output message="tns:SearchUsersByExtensionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByMobile">
+      <wsdl:input message="tns:SearchUsersByMobileSoapIn" />
+      <wsdl:output message="tns:SearchUsersByMobileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByJobTitle">
+      <wsdl:input message="tns:SearchUsersByJobTitleSoapIn" />
+      <wsdl:output message="tns:SearchUsersByJobTitleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByOffice">
+      <wsdl:input message="tns:SearchUsersByOfficeSoapIn" />
+      <wsdl:output message="tns:SearchUsersByOfficeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersBySpeedDial">
+      <wsdl:input message="tns:SearchUsersBySpeedDialSoapIn" />
+      <wsdl:output message="tns:SearchUsersBySpeedDialSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByDirectDial">
+      <wsdl:input message="tns:SearchUsersByDirectDialSoapIn" />
+      <wsdl:output message="tns:SearchUsersByDirectDialSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByDepartment">
+      <wsdl:input message="tns:SearchUsersByDepartmentSoapIn" />
+      <wsdl:output message="tns:SearchUsersByDepartmentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByUsername">
+      <wsdl:input message="tns:SearchUsersByUsernameSoapIn" />
+      <wsdl:output message="tns:SearchUsersByUsernameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByForename">
+      <wsdl:input message="tns:SearchUsersByForenameSoapIn" />
+      <wsdl:output message="tns:SearchUsersByForenameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersBySurname">
+      <wsdl:input message="tns:SearchUsersBySurnameSoapIn" />
+      <wsdl:output message="tns:SearchUsersBySurnameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByAnyField">
+      <wsdl:input message="tns:SearchUsersByAnyFieldSoapIn" />
+      <wsdl:output message="tns:SearchUsersByAnyFieldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByUsername">
+      <wsdl:input message="tns:GetUserByUsernameSoapIn" />
+      <wsdl:output message="tns:GetUserByUsernameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsers">
+      <wsdl:input message="tns:SearchUsersSoapIn" />
+      <wsdl:output message="tns:SearchUsersSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WS_ActiveDirectorySoap" type="tns:WS_ActiveDirectorySoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="IsAllowed">
+      <soap:operation soapAction="http://WebServices_ActiveDirectory/IsAllowed" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupsForUser">
+      <soap:operation soapAction="http://WebServices_ActiveDirectory/GetGroupsForUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupsForDomain">
+      <soap:operation soapAction="http://WebServices_ActiveDirectory/GetGroupsForDomain" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManager">
+      <soap:operation soapAction="http://WebServices_ActiveDirectory/GetManager" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManagerGroups">
+      <soap:operation soapAction="http://WebServices_ActiveDirectory/GetManagerGroups" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIPPhone">
+      <soap:operation soapAction="http://WebServices_ActiveDirectory/GetIPPhone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserProperties">
+      <soap:operation soapAction="http://WebServices_ActiveDirectory/GetUserProperties" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetActiveDirectoryUser">
+      <soap:operation soapAction="http://WebServices_ActiveDirectory/GetActiveDirectoryUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateActiveDirectoryUser">
+      <soap:operation soapAction="http://WebServices_ActiveDirectory/UpdateActiveDirectoryUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserNamesInGroup">
+      <soap:operation soapAction="http://WebServices_ActiveDirectory/GetUserNamesInGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserToGroup">
+      <soap:operation soapAction="http://WebServices_ActiveDirectory/AddUserToGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserFromGroup">
+      <soap:operation soapAction="http://WebServices_ActiveDirectory/RemoveUserFromGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoesUserExist">
+      <soap:operation soapAction="http://WebServices_ActiveDirectory/DoesUserExist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByExtension">
+      <soap:operation soapAction="http://WebServices_ActiveDirectory/SearchUsersByExtension" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByMobile">
+      <soap:operation soapAction="http://WebServices_ActiveDirectory/SearchUsersByMobile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByJobTitle">
+      <soap:operation soapAction="http://WebServices_ActiveDirectory/SearchUsersByJobTitle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByOffice">
+      <soap:operation soapAction="http://WebServices_ActiveDirectory/SearchUsersByOffice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersBySpeedDial">
+      <soap:operation soapAction="http://WebServices_ActiveDirectory/SearchUsersBySpeedDial" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByDirectDial">
+      <soap:operation soapAction="http://WebServices_ActiveDirectory/SearchUsersByDirectDial" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByDepartment">
+      <soap:operation soapAction="http://WebServices_ActiveDirectory/SearchUsersByDepartment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByUsername">
+      <soap:operation soapAction="http://WebServices_ActiveDirectory/SearchUsersByUsername" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByForename">
+      <soap:operation soapAction="http://WebServices_ActiveDirectory/SearchUsersByForename" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersBySurname">
+      <soap:operation soapAction="http://WebServices_ActiveDirectory/SearchUsersBySurname" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByAnyField">
+      <soap:operation soapAction="http://WebServices_ActiveDirectory/SearchUsersByAnyField" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByUsername">
+      <soap:operation soapAction="http://WebServices_ActiveDirectory/GetUserByUsername" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsers">
+      <soap:operation soapAction="http://WebServices_ActiveDirectory/SearchUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WS_ActiveDirectorySoap12" type="tns:WS_ActiveDirectorySoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="IsAllowed">
+      <soap12:operation soapAction="http://WebServices_ActiveDirectory/IsAllowed" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupsForUser">
+      <soap12:operation soapAction="http://WebServices_ActiveDirectory/GetGroupsForUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupsForDomain">
+      <soap12:operation soapAction="http://WebServices_ActiveDirectory/GetGroupsForDomain" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManager">
+      <soap12:operation soapAction="http://WebServices_ActiveDirectory/GetManager" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetManagerGroups">
+      <soap12:operation soapAction="http://WebServices_ActiveDirectory/GetManagerGroups" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIPPhone">
+      <soap12:operation soapAction="http://WebServices_ActiveDirectory/GetIPPhone" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserProperties">
+      <soap12:operation soapAction="http://WebServices_ActiveDirectory/GetUserProperties" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetActiveDirectoryUser">
+      <soap12:operation soapAction="http://WebServices_ActiveDirectory/GetActiveDirectoryUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateActiveDirectoryUser">
+      <soap12:operation soapAction="http://WebServices_ActiveDirectory/UpdateActiveDirectoryUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserNamesInGroup">
+      <soap12:operation soapAction="http://WebServices_ActiveDirectory/GetUserNamesInGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUserToGroup">
+      <soap12:operation soapAction="http://WebServices_ActiveDirectory/AddUserToGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveUserFromGroup">
+      <soap12:operation soapAction="http://WebServices_ActiveDirectory/RemoveUserFromGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoesUserExist">
+      <soap12:operation soapAction="http://WebServices_ActiveDirectory/DoesUserExist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByExtension">
+      <soap12:operation soapAction="http://WebServices_ActiveDirectory/SearchUsersByExtension" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByMobile">
+      <soap12:operation soapAction="http://WebServices_ActiveDirectory/SearchUsersByMobile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByJobTitle">
+      <soap12:operation soapAction="http://WebServices_ActiveDirectory/SearchUsersByJobTitle" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByOffice">
+      <soap12:operation soapAction="http://WebServices_ActiveDirectory/SearchUsersByOffice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersBySpeedDial">
+      <soap12:operation soapAction="http://WebServices_ActiveDirectory/SearchUsersBySpeedDial" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByDirectDial">
+      <soap12:operation soapAction="http://WebServices_ActiveDirectory/SearchUsersByDirectDial" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByDepartment">
+      <soap12:operation soapAction="http://WebServices_ActiveDirectory/SearchUsersByDepartment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByUsername">
+      <soap12:operation soapAction="http://WebServices_ActiveDirectory/SearchUsersByUsername" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByForename">
+      <soap12:operation soapAction="http://WebServices_ActiveDirectory/SearchUsersByForename" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersBySurname">
+      <soap12:operation soapAction="http://WebServices_ActiveDirectory/SearchUsersBySurname" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsersByAnyField">
+      <soap12:operation soapAction="http://WebServices_ActiveDirectory/SearchUsersByAnyField" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByUsername">
+      <soap12:operation soapAction="http://WebServices_ActiveDirectory/GetUserByUsername" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchUsers">
+      <soap12:operation soapAction="http://WebServices_ActiveDirectory/SearchUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WS_ActiveDirectory">
+    <wsdl:port name="WS_ActiveDirectorySoap" binding="tns:WS_ActiveDirectorySoap">
+      <soap:address location="http://pbsnet:8028/WS_ActiveDirectory.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WS_ActiveDirectorySoap12" binding="tns:WS_ActiveDirectorySoap12">
+      <soap12:address location="http://pbsnet:8028/WS_ActiveDirectory.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

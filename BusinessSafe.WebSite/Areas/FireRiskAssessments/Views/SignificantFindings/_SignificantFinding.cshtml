@@ -1,0 +1,97 @@
+﻿@using BusinessSafe.WebSite.Extensions
+@model BusinessSafe.WebSite.Areas.FireRiskAssessments.ViewModels.SignificantFindingViewModel
+           
+<form id="@Model.Id" class="form-horizontal significantfindingContainer">
+<fieldset>
+    <div class="inner-section hazard-title-description"  data-id="@Model.Id">
+        
+        <span class="ui-dialog-title" id="ui-dialog-title-dialogDeleteSiteGroup"></span>
+
+        <span>@Model.QuestionNumber. @Model.QuestionText</span>
+        @if (!string.IsNullOrEmpty(@Model.AdditionalInfo))
+        {
+            <br/>
+            <span>@Model.AdditionalInfo </span>
+        }
+        <br/>
+        <br/>
+        <div class="row-fluid">
+            <div class="span12">
+                <div>
+                    <h4>Further Control Measures
+                        <button id="@string.Format("AddFurtherActionTask{0}", Model.Id)" class="btn add-further-action-task" data-id="@Model.Id" title="Add Further Control Measure">
+                            <i class="icon-plus-sign"></i>
+                        </button>
+                    </h4>
+                </div>
+                <table id="FurtherControlMeasureTasksTable" class="table table-striped further-action-task-table" data-id="@Model.Id">
+                    <thead>
+                        <tr>
+                            <th style="width: 15px;">
+                            </th>
+                            <th>
+                                Title
+                            </th>
+                            <th>
+                                Description
+                            </th>
+                            <th>
+                                Assignee
+                            </th>
+                            <th>
+                                Created
+                            </th>
+                            <th>
+                                Due Date
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var actionRequired in Model.ActionsRequired)
+                        {
+                            const int descriptionMaxLength = 60;
+                            var furtherControlMeasureTaskDescription = actionRequired.ActionDescription.Length > descriptionMaxLength
+                                                                           ? actionRequired.ActionDescription.Substring(0, descriptionMaxLength) + "..."
+                                                                           : actionRequired.ActionDescription;
+
+                            if ((!actionRequired.IsReoccurring) || (actionRequired.IsReoccurring && actionRequired.TaskStatus != "Completed"))
+                            {
+                                <tr data-id="@actionRequired.Id" data-ir="@(actionRequired.IsReoccurring ? 1 : 0)">
+                                    <td>
+                                        @if (actionRequired.IsReoccurring)
+                                        {
+                                            <span class='label label-important label-reoccurring-task' title="@actionRequired.GetReoccurringFrequencyDetails()"  rel="tooltip">
+                                                R</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @actionRequired.ActionTitle
+                                    </td>
+                                    <td>
+                                        @furtherControlMeasureTaskDescription
+                                    </td>
+                                    <td>
+                                        @actionRequired.AssignedTo
+                                    </td>
+                                    <td>
+                                        @actionRequired.CreatedOn
+                                    </td>
+                                    <td>
+                                        @actionRequired.TaskCompletionDueDate
+                                    </td>
+                                    <td class="fcm-status">
+                                        <span>@actionRequired.TaskStatus.AddSpacesToName()</span>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</fieldset>
+</form>

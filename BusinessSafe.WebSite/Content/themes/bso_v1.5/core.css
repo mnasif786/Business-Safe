@@ -1,0 +1,1579 @@
+/* =================================================================================================================
+TYPOGRAPHY
+================================================================================================================= */
+h2
+{
+    font-size: 15px;
+    font-weight: normal;
+    color: white;
+    background: #a8181c url('images/bgnd-heading.png') left top repeat-x;
+    margin: 0;
+    padding: 3px 10px;
+    vertical-align: middle;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+}
+.fixed-content h2
+{
+    margin-bottom: 15px;
+}
+
+h2 .tick
+{
+    display: block;
+    width: 21px;
+    height: 22px;
+    background-image: url('images/bs-tick.png');
+    float: left;
+    margin-top: 9px;
+    margin-right: 7px;
+}
+h3, h4
+{
+    font-size: 14px;
+    color: black;
+    line-height: 25px;
+}
+
+.content a:not(.btn)
+{
+    color: #08C;
+}
+
+.fixed-content .inner-section h3
+{
+    font-size: 18px;
+    margin-left: 0;
+}
+
+
+.inner-section ol, .inner-section ul
+{
+    color: #636363;
+    padding-left: 15px;
+}
+
+.greyed-out { color: #D3D3D3 }
+
+/* =================================================================================================================
+LAYOUT
+================================================================================================================= */
+*
+{
+    margin: 0;
+    padding: 0;
+}
+body
+{
+    background-color: #000;
+    font-family: "Helvetica Neue" , Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: black;
+}
+img
+{
+    border: 0;
+}
+
+.container-fluid
+{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+body > #siteContainer, body > #main
+{
+    background: #535152;
+}
+
+.content
+{
+    margin: 10px;
+}
+
+.fixed-content
+{
+    border: 1px solid lightgray;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 15px;
+    background-color: rgba(255,255,255,0.5);
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+section
+{
+    background: white url('images/bgnd-bs.gif') right bottom no-repeat;
+    margin: 0 20px 20px 20px;
+    min-height: 600px;
+    position: relative;
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+section .legend
+{
+    color: white;
+    font-size: 12px;
+    background: #ca1c21 url('images/bgnd-legend.gif') right center no-repeat;
+    padding: 5px 15px 4px 10px;
+    position: absolute;
+    top: 0px;
+    margin-bottom: 20px;
+    clear: both;
+}
+section .major-index-actions
+{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 10px;
+}
+
+.summary
+{
+    background-color: #f0f0f0;
+    border-top: 1px solid #dbdbdb;
+    border-bottom: 1px solid #dbdbdb;
+    padding: 10px 0;
+    position: relative;
+}
+.summary .form-inline div
+{
+    margin-right: 10px;
+}
+
+iframe
+{
+    border: none;
+    overflow: hidden;
+}
+
+/* HEADER ======================================================================================================== */
+
+header
+{
+    width: 100%;
+    background: #811317 url('images/bgnd-header.jpg') left top no-repeat;
+}
+#logo
+{
+    float: left;
+    margin-left: 20px;
+}
+#WelcomeBar
+{
+    float: right;
+    padding: 25px;
+    color: white;
+}
+#WelcomeBar a#LogOutLink
+{
+    margin-left: 20px;
+    padding-left: 20px;
+    border-left: 1px solid silver;
+    color: #08C;
+}
+
+/* NAV =========================================================================================================== */
+nav
+{
+    background-color: #2c2c2c;
+    height: 30px;
+    padding-left: 10px;
+    font-size: 14px;
+}
+
+#siteContainer nav .nav > li > a
+{
+    padding-top: 6px;
+    color: #ebebeb;
+    text-shadow: none;
+}
+#siteContainer nav .nav > li > a:hover
+{
+    text-decoration: underline;
+    cursor: pointer;
+}
+#siteContainer nav .nav li.dropdown.open .dropdown-toggle
+{
+    background: none;
+    color: white;
+    padding-bottom: 3px;
+}
+
+nav .dropdown-menu
+{
+    margin-left: 15px;
+    padding: 10px;
+}
+nav .dropdown-menu-col
+{
+    white-space: nowrap;
+    width: 500px;
+}
+nav .dropdown-menu-col li
+{
+    float: left;
+    padding-right: 0px;
+    text-indent: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: #999;
+}
+nav .dropdown-menu-col li ul
+{
+    list-style: none;
+    margin-left: 0px;
+    margin-top: 3px;
+    width: 250px;
+}
+nav .dropdown-menu-col li ul li
+{
+    float: none;
+    text-transform: none;
+}
+nav .dropdown-menu-col li ul li > a
+{
+    padding: 3px 20px 3px 0;
+    vertical-align: middle;
+}
+
+/* FOOTER ======================================================================================================== */
+footer
+{
+    background-color: #ae191d;
+    color: white;
+    padding: 15px 20px;
+    text-align: right;
+    border-top: 1px solid #000;
+}
+footer p, footer ul
+{
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+}
+footer li
+{
+    display: inline;
+    margin-left: 4px;
+}
+footer li > a
+{
+    color: white;
+    text-decoration: underline;
+}
+footer li a:hover
+{
+    color: white;
+    text-decoration: none;
+}
+
+/* BUTTONS ======================================================================================================= */
+.btn
+{
+    font-size: 13px;
+}
+.btn-link
+{
+    color: #08C;
+    cursor: pointer;
+    border-color: transparent;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+.btn-link, .btn-link:active, .btn-link[disabled]
+{
+    background-color: transparent;
+    background-image: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.btn-group, h2 .btn
+{
+    float: right;
+    display: inline;
+    margin: 0 5px;
+}
+
+h2 .btn:first-child, td .btn:first-child
+{
+    margin-right: 0;
+}
+
+h2 .btn
+{
+    margin-top: 6px;
+}
+
+h2 .btn-group a, section h2 .btn
+{
+    color: #333;
+}
+
+section .summary .btn-large
+{
+    font-size: 16px;
+    white-space: nowrap;
+    position: absolute;
+    top: 37%;
+    color: white;
+}
+
+#add-responsibility-task { margin-left: 10px }
+
+/* TABS ========================================================================================================= */
+.tabs
+{
+    margin: 10px auto 0 auto;
+    font-size: 13px;
+    font-weight: 500;
+}
+.tabs .nav-pills
+{
+    margin: 5px 10px;
+}
+.tabs.container .nav-pills
+{
+    margin: 5px 0;
+}
+.tabs .nav-pills li.active
+{
+    background: url('images/tab-arrow.png') bottom center no-repeat;
+    padding-bottom: 3px;
+}
+.tabs .nav-pills li.active a
+{
+    background-color: #2c2c2c;
+    color: white;
+}
+
+/* =================================================================================================================
+FORMS
+================================================================================================================= */
+fieldset div
+{
+    margin-bottom: 10px;
+}
+legend { margin-bottom: 12px }
+label
+{
+    color: #636363;
+}
+label + p
+{
+    padding-top: 6px;
+}
+.form-inline label
+{
+    padding-top: 5px;
+}
+.fixed-content .row div
+{
+    margin-bottom: 10px;
+}
+.fixed-content label[class*="span"], .fixed-content .row h3
+{
+    margin-left: 12px;
+}
+.fixed-content .row h3.popover-title
+{
+    background-color: #2c2c2c;
+    color: white;
+    margin-left: 0;
+}
+input, select, textarea
+{
+    font-weight: 500;
+    color: black;
+}
+fieldset.well legend
+{
+    display: block;
+    padding: 0px 0 40px 0;
+    margin: 0 0 -20px -20px;
+    border-bottom: none;
+}
+ul.form-inline
+{
+    list-style: none;
+}
+ul.form-inline li
+{
+    display: inline-block;
+    margin-right: 1em;
+}
+ul.form-inline li input
+{
+    margin-top: -4px;
+}
+
+.search-form { margin: -13px 0 0 0; }
+.search-form fieldset { display: inline-block; width: 880px }
+.search-form legend { font-weight: bold; font-size: 14px }
+.search-form ul { list-style: none; margin: 0;padding: 0;width: 940px; clear: left }
+.search-form ul li { float: left; margin-right: 10px }
+.search-form ul li.new-row,
+.search-form ul li.after-dropdown { padding-left: 30px }
+.search-form ul li.buttons { clear: left }
+.search-form ul li.buttons.thin { margin-left: 73px }
+.search-form ul li.buttons.medium { margin-left: 100px }
+.search-form ul li.buttons.wide { margin-left: 138px }
+.search-form ul li.buttons.x-wide { margin-left: 176px }
+.search-form ul ul { list-style: disc; margin: 5px;padding: 5px; }
+.search-form ul ul li {float: none; margin-right: 10px }
+.search-form label { float: left;margin-right: 10px; padding-top: 5px }
+.search-form label.thin { width: 63px }
+.search-form label.medium { width: 90px }
+.search-form label.wide { width: 128px }
+.search-form label.x-wide { width: 156px }
+.search-form label.massive { width: 404px }
+.search-form input[type="text"] + .btn { margin-top: -9px }
+.search-form input[type="text"].two-date-pickers-wide { width: 239px }
+.search-form input[type="text"].two-date-pickers-and-a-button-wide { width: 274px }
+.search-form input[type="text"].wide { width: 400px }
+.search-form input[type="text"].text-and-date-wide { width: 519px }
+.search-form input[type="text"].two-dropdowns-medium-label-wide { width: 611px } /* ! */
+.search-form input[type="text"].calendar { width: 80px }
+.search-form input[type="text"].site-dropdown-wide { width: 245px } /* ! */
+
+/* =================================================================================================================
+ALERTS/ERRORS
+================================================================================================================= */
+.fixed-content .alert
+{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+span.field-validation-error, span.field-validation-error span
+{
+    background-color: #F89406;
+    display: inline-block;
+    padding: 2px 4px;
+    font-size: 11.844px;
+    font-weight: bold;
+    line-height: 14px;
+    color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    white-space: nowrap;
+    vertical-align: baseline;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.input-validation-error, .input-validation-error:focus
+{
+    border-color: #B94A48;
+}
+
+.input-validation-error:focus
+{
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
+}
+
+.validation-summary-errors
+{
+    color: #B94A48;
+    background-color: #F2DEDE;
+    border-color: #EED3D7;
+    margin: 10px;
+    padding: 5px 10px 0px 10px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    border: 1px solid #EED3D7;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.form-inline .alert
+{
+    margin-left: 30px;
+    clear: both;
+}
+
+/* =================================================================================================================
+TABLES
+================================================================================================================= */
+table
+{
+    width: 100%;
+    margin-bottom: 10px;
+}
+table thead th
+{
+    background-color: #2c2c2c;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 11px;
+    border-right: 1px solid black;
+    text-align: left;
+}
+table th .icon-filter
+{
+    float: right;
+    margin-top: 3px;
+}
+th:last-child, td:last-child
+{
+    border-right: none;
+}
+table thead th, table tbody td
+{
+    padding: 5px 10px;
+}
+table thead a
+{
+    color: white !important;
+}
+
+table thead .t-grid-filter
+{
+    display: inline;
+    margin-left: 10px;
+}
+table thead .t-icon
+{
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    line-height: 14px;
+    margin-left: 10px;
+    vertical-align: text-top;
+    background-image: url("/Content/images/glyphicons-halflings-white.png");
+    text-indent: -9999px;
+}
+
+table thead .t-arrow-up 
+{
+    background-position: -289px -96px;
+}
+table thead .t-arrow-down
+{
+    background-position: -312px -96px;
+}
+table thead .t-filter
+{
+    background-position: -408px -144px;
+}
+
+table tbody
+{
+    font-size: 13px;
+}
+table tbody tr
+{
+    background-color: white;
+}
+table tbody tr:nth-child(odd) td
+{
+    background-color: #f0f0f0;
+}
+table tbody td
+{
+    border-bottom: 1px solid #e2e2e2;
+}
+table tbody td.actions
+{
+    text-align: center;
+}
+
+table tfoot td
+{
+    position: relative;
+    vertical-align: middle;
+}
+
+table.tablesorter .header {
+	background-image: url('/Content/images/bg.gif');
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+table.tablesorter thead tr .headerSortUp {
+    background-image: url('/Content/images/asc.gif');
+}
+table.tablesorter thead tr .headerSortDown {
+    background-image: url('/Content/images/desc.gif');
+}
+
+.nosort {
+    background-image: none !important;
+}
+
+#RolePermissionsResult table th:first-child { text-transform: none; text-align: left }
+
+/* TELERIK GRID PAGINATION ====================================================================================== */
+.t-grid-pager
+{
+    position: relative;
+    text-align: center;
+    padding: 10px;
+}
+.t-status-text
+{
+    position: absolute;
+    font-weight: bold;
+    font-size: 12px;
+    left: 65px;
+    top: 13px;
+}
+.t-status
+{
+    position: absolute;
+    left: 0;
+    top: 12px;
+}
+.t-status a
+{
+    font-weight: normal;
+    background: url('images/icon-refresh.png') left center no-repeat;
+    padding-left: 15px;
+    font-size: 13px;
+}
+.t-pager
+{
+    width: auto;
+    white-space: nowrap;
+    display: inline-block;
+    margin: 0 auto;
+    border-left: 1px solid #DDD;
+    padding: 0px 0;
+    text-align: center;
+    float: right;
+}
+.t-pager a, .t-pager div
+{
+    display: inline;
+    float: left;
+    white-space: nowrap;
+    padding: 3px 0;
+}
+.t-pager a > span, .t-pager div > span, .t-pager .t-numeric > *
+{
+    display: inline;
+    padding: 4px 12px;
+    line-height: 20px;
+    text-decoration: none;
+    background-color: white;
+    border: 1px solid #DDD;
+    border-left-width: 0;
+}
+.t-pager .t-state-active
+{
+    background-color: #2c2c2c;
+    color: white;
+}
+.t-pager .t-numeric *
+{
+    float: left;
+    margin-top: -5px;
+}
+
+/* =================================================================================================================
+PAGE/SECTION SPECIFIC
+================================================================================================================= */
+
+/* COOKIES ====================================================================================================== */
+#businesssafecookieholder
+{
+    z-index: 100;
+    display: block;
+    float: left;
+    top: 0px;
+    background-color: #323232;
+    width: 100%;
+    padding: 10px 0;
+}
+#businesssafecookiesheader
+{
+    color: white;
+    float: left;
+    font-size: 1.8em;
+    font-weight: bold;
+    text-align: right;
+    line-height: 1.12;
+}
+#businesssafecookiesheader h3
+{
+    color: white;
+    line-height: 27px;
+    font-size: 18px;
+}
+#businesssafecookiemessage
+{
+    padding-top: 5px;
+}
+#businesssafecookiemessage p
+{
+    float: left;
+    color: #BEBEBE;
+    font-size: 15px;
+    line-height: 1.24;
+}
+#businesssafecookiemessage a
+{
+    color: #fff;
+    font-size: 1em;
+    font-weight: bold;
+    line-height: 1.24;
+    text-decoration: none;
+}
+#businesssafecookiemessage a:hover
+{
+    color: white;
+}
+
+/* TASK LIST ======================================================================================== */
+select.dropDownResponsibilityPlanner
+{
+    float: left;
+}
+.row .span
+{
+    margin-left: 0px;
+}
+
+#formEmployeeTasks
+{
+    position: relative;
+}
+#formEmployeeTasks #taskSummaryContainer
+{
+    margin-top: -3px;
+}
+
+.statusWrapperGeneral
+{
+    display: block;
+    background-image: url('images/ImageFile.png');
+    width: 35px;
+    height: 35px;
+    float: left;
+    margin: 1px;
+    vertical-align: middle;
+    line-height: 32px;
+    text-align: center;
+    font-size: 10px;
+    color: black;
+}
+
+.statusWrapperRed
+{
+    background-position: 0px -72px;
+}
+.statusWrapperAmber
+{
+    background-position: 0px -37px;
+}
+.statusWrapperGreen
+{
+    background-position: 0px -107px;
+}
+.statusWrapperGray
+{
+    background-position: 0px -1px;
+}
+
+.t-grid table td:last-child
+{
+    text-align: center;
+}
+
+.label-reoccurring-task
+{
+    cursor: pointer;
+}
+
+/* COMPANY DEFAULTS ============================================================================================= */
+#company-details-form label + strong {display: block; margin-top: 6px; }
+
+.company-defaults table td:last-child
+{
+    width: 40px;
+    text-align: center;
+}
+
+#riskAssessors #controls { margin-bottom: 10px }
+
+/* SITE STRUCTURE =============================================================================================== */
+.treeview li
+{
+    cursor: pointer;
+}
+.siteGroupLabel
+{
+    color: blue;
+}
+
+/* USERS/PERMISSIONS ============================================================================================ */
+#userRolesMaintenanceContainer th, #userRolesMaintenanceContainer td
+{
+    text-align: center;
+}
+#userRolesMaintenanceContainer td:first-child
+{
+    text-align: left;
+}
+
+/* HAZARDOUS SUBSTANCES ========================================================================================= */
+div.form-buttons
+{
+    text-align: center;
+}
+div.form-buttons .btn-large
+{
+    min-width: 125px;
+}
+
+form#AddEditHazardousSubstanceForm .control-group.span5
+{
+    margin: 0;
+}
+form#AddEditHazardousSubstanceForm .offset2
+{
+    margin-left: 180px;
+}
+form#AddEditHazardousSubstanceForm .underneath-validation .offset2
+{
+    margin-left: 160px;
+    min-height: 1em;
+}
+form#AddEditHazardousSubstanceForm
+{
+    margin: 0 auto;
+    float: none;
+}
+div#hazardousSubstanceStandards ul
+{
+    list-style: none;
+}
+form#AddEditHazardousSubstanceForm div#hazardousSubstanceStandards
+{
+    text-align: center;
+}
+form#AddEditHazardousSubstanceForm div#hazardousSubstanceStandards ul
+{
+    display: inline-block;
+}
+form#AddEditHazardousSubstanceForm div#hazardousSubstanceStandards ul li
+{
+    margin-top: 1em;
+}
+form#AddEditHazardousSubstanceForm div#hazardousSubstanceStandards ul li, form#AddEditHazardousSubstanceForm div#hazardousSubstanceStandards ul li *
+{
+    float: left;
+    margin-right: 0.5em;
+}
+form#AddEditHazardousSubstanceForm div#hazardousSubstanceStandards ul li input
+{
+    margin-top: 29px;
+}
+form#AddEditHazardousSubstanceForm div#hazardousSubstanceStandards ul li span
+{
+    margin-top: 27px;
+}
+form#AddEditHazardousSubstanceForm div#supplier-row div.control-group *
+{
+    float: left;
+}
+form#AddEditHazardousSubstanceForm a#AddNewSupplierLink
+{
+    margin: -1px 0 0 1em;
+    float: left;
+}
+
+#substance-hazard-symbols
+{
+    text-align: center;
+}
+#substance-hazard-symbols ul
+{
+    display: inline-block;
+    list-style: none;
+    margin: 0 0 0 20px;
+    padding: 20px 0;
+    text-align: center;
+}
+#substance-hazard-symbols ul li
+{
+    float: left;
+    display: inline;
+    margin-right: 1em;
+    padding: 0 0 2em 0;
+    width: 75px;
+}
+#substance-hazard-symbols ul li *
+{
+    display: block;
+    margin: 0 auto;
+}
+
+#substance-hazard-symbols ul li:last-child
+{
+    margin-right: 0;
+}
+#substance-hazard-symbols ul li label
+{
+    margin-bottom: 10px;
+}
+#substance-hazard-symbols ul li input
+{
+    width: 20px;
+}
+
+ul.hazardousSubstanceSymbols li label
+{
+    display: inline-block;
+    height: 70px;
+    width: 75px;
+    text-indent: -9999px;
+    margin-bottom: 6px;
+}
+ul.hazardousSubstanceSymbols li.Global label
+{
+    background-image: url("/Content/images/hazardousSubstances/global_hazard_symbols.png");
+}
+ul.hazardousSubstanceSymbols li.European label
+{
+    background-image: url("/Content/images/hazardousSubstances/european_hazard_symbols.png");
+}
+
+/* global symbols =============================================================================================== */
+ul.hazardousSubstanceSymbols li.Global.hazardous-to-the-aquatic-environment label
+{
+    background-position: 150px 0px;
+}
+ul.hazardousSubstanceSymbols li.Global.acute-toxicity label
+{
+    background-position: 150px 75px;
+}
+ul.hazardousSubstanceSymbols li.Global.gases-under-pressure label
+{
+    background-position: 0px 75px;
+}
+ul.hazardousSubstanceSymbols li.Global.corrosive label
+{
+    background-position: 75px 150px;
+}
+ul.hazardousSubstanceSymbols li.Global.explosive label
+{
+    background-position: 150px 150px;
+}
+ul.hazardousSubstanceSymbols li.Global.flammable label
+{
+    background-position: 0px 150px;
+}
+ul.hazardousSubstanceSymbols li.Global.caution label
+{
+    background-position: 75px 0px;
+}
+ul.hazardousSubstanceSymbols li.Global.oxidising label
+{
+    background-position: 75px 75px;
+}
+ul.hazardousSubstanceSymbols li.Global.longer-term-health-hazards label
+{
+    background-position: 0px 0px;
+}
+
+/* european symbols ============================================================================================= */
+ul.hazardousSubstanceSymbols li.European.explosive label
+{
+    background-position: 0px 0px;
+}
+ul.hazardousSubstanceSymbols li.European.oxidising label
+{
+    background-position: 300px 0px;
+}
+ul.hazardousSubstanceSymbols li.European.highly-flammable label
+{
+    background-position: 225px 0px;
+}
+ul.hazardousSubstanceSymbols li.European.extremely-flammable label
+{
+    background-position: 150px 0px;
+}
+ul.hazardousSubstanceSymbols li.European.toxic label
+{
+    background-position: 75px 0px;
+}
+ul.hazardousSubstanceSymbols li.European.very-toxic label
+{
+    background-position: 0px 75px;
+}
+ul.hazardousSubstanceSymbols li.European.harmful label
+{
+    background-position: 300px 75px;
+}
+ul.hazardousSubstanceSymbols li.European.irritant label
+{
+    background-position: 225px 75px;
+}
+ul.hazardousSubstanceSymbols li.European.corrosive label
+{
+    background-position: 150px 75px;
+}
+ul.hazardousSubstanceSymbols li.European.dangerous-for-the-environment label
+{
+    background-position: 75px 75px;
+}
+
+/* duplicates modal ============================================================================================= */
+div#SimilarHazardousSubtanceFound p, div#SimilarHazardousSubtanceFound li
+{
+    font-size: 13px;
+}
+
+/* RISK ASSESSMENTS ============================================================================================= */
+.task-details-summary
+{
+    width: 300px;
+}
+.task-details-summary table th
+{
+    background: black;
+    color: white;
+    padding: 4px;
+    font-weight: bold;
+    font-size: 11px;
+    text-align: left;
+    text-transform: uppercase;
+}
+.task-details-summary ol
+{
+    list-style: none;
+    margin-left: 0;
+}
+
+#FurtherControlMeasureTasksTable td:nth-child(2), #FurtherControlMeasureTasksTable td:nth-child(3)
+{
+    max-width: 200px;
+}
+#FurtherControlMeasureTasksTable td.fcm-status
+{
+    width: 120px;
+}
+#FurtherControlMeasureTasksTable td.fcm-status span
+{
+    display: block;
+    clear: both;
+}
+#FurtherControlMeasureTasksTable td.fcm-status .btn
+{
+    float: left;
+    margin: 10px 5px 0 0;
+}
+#FurtherControlMeasureTasksTable td.fcm-status .btn:last-child
+{
+    margin-right: 0px;
+}
+
+#ResponsibilitiesTaskGrid div.rsp-status .btn
+{
+    float: left;
+    margin: 10px 2px 0 0;
+}
+
+#ResponsibilitiesTaskGrid.t-grid table td:last-child
+{
+    text-align: left;
+}
+
+#ResponsibilitiesTaskGrid.t-grid table td
+{
+    vertical-align: top;
+}
+
+#dialogCopyRiskAssessmentMenu h1 { font-size: 14px; font-weight: bold }
+
+#dialogCopyRiskAssessmentMenu ul {
+    margin-left: 0px;
+    list-style-type: none;
+    font-size: 13px;
+}
+
+/* GRA ========================================================================================================== */
+/* control measures/further control measures ==================================================================== */
+.inner-section
+{
+    background-color: #fcf8e3;
+    border: 1px solid #fbeed5;
+    border-radius: 5px;
+    margin: 0 10px 20px 10px;
+    padding: 10px 10px 0 10px;
+}
+
+/* reviews ====================================================================================================== */
+.fixed-content .content h2
+{
+    margin-bottom: 0px;
+}
+
+/* HSRA ========================================================================================================= */
+/* HSRA description form ======================================================================================== */
+form#add-edit-risk-assessment-description-form dd
+{
+    padding-bottom: 10px;
+}
+form#add-edit-risk-assessment-description-form dd ul
+{
+    list-style: none;
+    margin-left: 0;
+}
+form#add-edit-risk-assessment-description-form #substance-hazard-symbols
+{
+    text-align: left;
+}
+form#add-edit-risk-assessment-description-form #substance-hazard-symbols ul.hazardousSubstanceSymbols
+{
+    padding-bottom: 0;
+    margin: 0;
+}
+form#add-edit-risk-assessment-description-form #substance-hazard-symbols ul.hazardousSubstanceSymbols li
+{
+    padding-bottom: 0;
+}
+form#add-edit-risk-assessment-description-form #route-of-entry ul
+{
+    list-style: none;
+    margin-left: 0;
+}
+form#add-edit-risk-assessment-description-form #route-of-entry ul li
+{
+    clear: both;
+}
+form#add-edit-risk-assessment-description-form #route-of-entry ul input[type=checkbox]
+{
+    float: left;
+    margin-right: 0.5em;
+}
+form#add-edit-risk-assessment-description-form #route-of-entry ul label
+{
+    float: left;
+}
+
+/* Assessment =================================================================================================== */
+label + div
+{
+    margin-left: 155px;
+}
+#hazard-group, #WorkApproach
+{
+    font-size: 24px;
+}
+
+/* PRA ========================================================================================================== */
+#send-checklists-button-container
+{
+    margin: 0 0 20px 40px;
+}
+#employee-checklist-email-dialog div#message-body
+{
+    margin-left: 160px;
+}
+
+/* checklist generator */
+#EmployeeMultiSelect { padding-right: 16px }
+#EmployeeMultiSelect ul { margin-left: -3px!important; height: 210px }
+#EmployeeMultiSelect ul input { float: right }
+#EmployeeMultiSelect #SelectAllEmployees { }
+#EmployeeMultiSelect .btn { float: right; margin-left: 10px }
+#EmployeesSelected { padding: 0 16px 0 16px }
+#EmployeesSelected tr td:first-child { width: 33% }
+
+#checklist-manager #review-wrapper legend,
+#checklist-manager #review-wrapper #EmployeeChecklists { width: 899px }
+#checklist-manager .search-form { margin: 10px 0 }
+#further-action-required > * { float: left; margin-right: 10px }
+#employee-checklist-email-contents .btn { margin-right: 4px }
+#EmployeesSelected .t-grid-pager { visibility: hidden }
+
+/* MODAL POPUPS ================================================================================================= */
+.ui-widget-content, .ui-widget-content input, .ui-widget-content textarea, .ui-widget-content select, .ui-widget-content button
+{
+    font-family: "Helvetica Neue" , Helvetica, Arial, sans-serif;
+}
+.ui-widget-content input, .ui-widget-content textarea, .ui-widget-content select, .ui-widget-content button
+{
+    font-size: 13px;
+}
+.ui-dialog-title
+{
+    font-weight: normal;
+}
+
+/* FRA ========================================================================================================== */
+
+.sitesMultiSelect { padding-right: 16px }
+.sitesMultiSelect ul { margin-left: 0px; height: 210px }
+.sitesMultiSelect ul input { float: right }
+.sitesMultiSelect .btn { float: right; margin-left: 10px }
+.sitesMultiSelect { padding: 0 16px 0 0  }
+.sitesMultiSelect tr td:first-child { width: 33% }
+.sitesMultiSelectAll { float: right }
+
+/* WIDGETS ====================================================================================================== */
+/*  multi value selector ======================================================================================== */
+.custom-multivalueselector
+{
+    margin-left: 0;
+}
+.add-remove-buttons
+{
+    width: 30px;
+    float: left;
+    padding: 0 4px;
+}
+select.multivalueselector_multiSelect, select.multivalueselector_multiSelectSelected
+{
+    float: left;
+    height: 130px;
+}
+
+/* autocomplete ddl ============================================================================================= */
+ul.ui-autocomplete
+{
+    width: 248px;
+    max-height: 160px;
+    overflow-y: scroll;
+    -moz-box-shadow: 1px 2px 5px 1px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 1px 2px 5px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 2px 5px 1px rgba(0, 0, 0, 0.2);
+}
+ul.ui-autocomplete li a
+{
+    font-size: 13px;
+}
+
+
+/* multi-selector =============================================================================================== */
+.search-and-multi-select ul, .search-and-multi-select select
+{
+    height: 120px;
+    overflow-y: scroll;
+    background: white;
+    border: 1px solid silver;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+.search-and-multi-select ul li, .search-and-multi-select select option
+{
+    display: block;
+    padding: 4px;
+}
+.search-and-multi-select ul li:hover, .search-and-multi-select select option:hover
+{
+    background: #efefef;
+    cursor: pointer;
+}
+.search-and-multi-select ul li.selected, .search-and-multi-select ul li.multiselectable-previous, .search-and-multi-select ul li.multiselectable-shift
+{
+    background: blue;
+    color: white;
+}
+.search-and-multi-select div.buttons
+{
+    text-align: center;
+    float: left;
+    width: 60px;
+    padding-top: 33px;
+}
+
+/* drop down auto complete =============================================================================================== */
+#riskAssessorForm .auto-complete-dropdown button, #accidentRecordDistributionDiv .auto-complete-dropdown button { margin-top: -9px; }
+
+/* next/previous pane =============================================================================================== */
+
+.next-previous
+{
+    text-align: right;
+}
+
+/* previous-button =============================================================================================== */
+
+.previous
+{
+    background-image: url("/Content/images/glyphicons-halflings.png");
+    background-position: -230px -66px;
+    margin-left: 14px;
+    margin-top: 14px;
+    width: 14px;
+    height: 18px;
+}
+
+.previous:hover
+{
+    background-position: -230px -66px;
+}
+
+.previous:active
+{
+    background-image: url("/Content/images/glyphicons-halflings.png");
+    background-position: -230px -66px;
+}
+
+/* next-button =============================================================================================== */
+
+.next
+{
+    background-image: url("/Content/images/glyphicons-halflings.png");
+    background-position: -326px -66px;
+    margin-left: 14px;
+    margin-top: 14px;
+    width: 14px;
+    height: 18px;
+}
+
+.next:hover
+{
+    background-position: -326px -66px;
+}
+
+.next:active
+{
+    background-image: url("/Content/images/glyphicons-halflings.png");
+    background-position: -326px -66px;
+}
+
+/* IMPERSONATING USER BANNER ====================================================================================================== */
+#impersonating-user-banner
+{
+    z-index: 100;
+    display: block;
+    float: left;
+    top: 0px;
+    background-color: #323232;
+    width: 100%;
+    padding: 10px 0;
+}
+#impersonating-user-banner .label
+{
+    padding: 1px 4px 2px;
+    font-size: 20.998px;
+    font-weight: bold;
+    line-height: 25px;
+    color: #ffffff;
+    vertical-align: middle;
+    white-space: nowrap;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #999999;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+#notificationEmail
+{
+    margin-bottom: 5px;
+}
+#notificationEmail legend
+{
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+#notificationEmail p.alert
+{
+    margin-left: 0px;
+}
+#notificationEmail label
+{
+    margin-left: 0px;
+}
+
+#FurtherControlMeasureCompletedTaskLegend
+{
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+
+.centredContent {
+    text-align: center !important;    
+} 
+
+#RiskAssessmentAdviceLine {
+    margin-top: -25px;
+    padding-bottom: 25px;
+}
+
+#RiskAssessmentAdviceLine strong {
+    padding-left: 10px;
+}
+
+.phoneIcon
+{
+    background-image: url("/Content/images/phone.png");
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    vertical-align: text-top;
+    background-position: 16px 16px;
+}
+
+/* RESPONSIBILITY WIZARD ====================================================================================================== */
+#add-responsibility-dialog h1 { font-size: 14px; font-weight: bold }
+#add-responsibility-dialog ul { list-style: none;font-size: 13px;margin-bottom: 0; margin-left: 0 }
+#add-responsibility-dialog ul li{ padding: 2px; }
+
+#responsibilities-wizard .content > *:not(h2) { margin: 10px }
+#responsibilities-wizard legend { font-weight: bold;font-size: 14px; margin-bottom: 0px }
+#responsibilities-wizard .search-and-multi-select { width: 680px }
+#responsibilities-wizard .search-and-multi-select div div.buttons { width: 60px; float: left; padding-top: 23px }
+#responsibilities-wizard .search-and-multi-select div:first-child label:last-child { margin-left: 60px }
+#responsibilities-wizard a.icon-question-sign { cursor: pointer }
+
+.select-responsibilities td:nth-child(1) { width: 30px }
+.select-responsibilities td:nth-child(2) { width: 15% }
+.select-responsibilities td:nth-child(4) { width: 80px }
+
+.generate-tasks td.description-icon {text-align: center }
+.generate-tasks td:nth-child(1) { min-width: 120px }
+.generate-tasks td:nth-child(2) { width: 20px }
+.generate-tasks td:nth-child(3) { width: 120px }
+.generate-tasks td:nth-child(4) { width: 200px }
+.generate-tasks td:nth-child(5),
+.generate-tasks td:nth-child(6) { width: 125px }
+.generate-tasks td:nth-child(5) input[type=text],
+.generate-tasks td:nth-child(6) input[type=text] { width: 70px;margin-bottom: 0px;}
+.generate-tasks td:nth-child(7)
+{
+    width: 70px;
+    text-align: center;
+}
+
+.popover { max-width: 400px }
+
+.responsibilities-auto-select-container { white-space: nowrap;}
+                                       
+/* ACCIDENT REPORTING ====================================================================================================== */
+#accident-reporting legend { font-weight: bold;font-size: 14px;padding: 0 10px; line-height: 25px }
+#accident-reporting #attach-documents legend,
+#accident-reporting #attach-documents legend h3 { padding-left: 0; margin-left: 0 }
+#accident-reporting #next-steps { padding: 20px 10px }
+#accident-reporting #next-steps .btn { margin-bottom: 20px }
+#accident-reporting .row-of-radios { list-style: none; margin-left: 0 }
+#accident-reporting .row-of-radios li input { margin-left: 6px; margin-top: -1px }
+/* #accident-reporting #other-person-involved-type label { text-align: right; padding-right: 10px }*/
+
+#accident-reporting ul.row-of-radios .span { margin-right: 30px; }
+
+#EmployeeSelectionSection .t-refresh { visibility: hidden }
+/* #EmployeeSelectionSection .btn { float: right; margin-left: 10px }*/
+#EmployeeSelectionSection .search-and-multi-select ul { margin-left: 0px }                    
+#EmployeeSelectionSection .search-and-multi-select ul input { float: right }
+
+/* HELPERS ====================================================================================================== */
+
+.ca { margin: 0 auto; width: inherit; display: table; }
+
+.dateInputBox {width: 80px;}
+
+.frequency.responsibilities-auto-select-container, .owner.responsibilities-auto-select-container {
+	margin-bottom: 0px;
+	vertical-align: middle;
+}
+
+.frequency.responsibilities-auto-select-container input, .owner.responsibilities-auto-select-container input {
+	margin-bottom: 0px;
+}
+
+
+#EditResponsibiltyForm  { margin-left: 0px; padding-left: 0px}
+#EditResponsibiltyDetail, #EditResponsibiltyTasks   {  margin-left:10px;padding-left: 0px; width:930px}
+#EditResponsibiltyDetail legend {margin-left: 0px; width:930px}
+#EditResponsibiltyDetail h3, #EditResponsibiltyTasks h3 {margin-left: 0px}
+#EditResponsibiltyDetail label[class*="span"],  #EditResponsibiltyTask label[class*="span"] { margin-left: 0px}
+#EditResponsibiltyDetail div { margin-left: 0px; width:930px}
+#EditResponsibiltyTasks .tabs { width: 920px; margin-left: 0px}
+#EditResponsibiltyTasks legend {margin-left: 0px; width:900px}
+#responsibilityTaskTabs {width:850px; margin-bottom:0px; border-bottom: 0px}
+#outstanding-tab div {margin-left: 0px}
+
+#InjuryDetailsForm legend,#injurydetails legend { width: 920px}
+#InjuryDetailsForm legend, #injurydetails li {margin-left: 0px; }
+#InjuryDetailsForm fieldset { width: 920px;}
+#InjuryDetailsForm ul.row-of-radios li { display: inline;list-style-type: none;padding-right:25px }
+#InjuryDetailsForm .alert{    margin-left: 10px; }
+
+
+.next-steps h3 {
+    color: rgb(129, 19, 23);
+    margin-top: 20px;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.next-steps img {
+    margin-bottom: 2px;
+    margin-right: 3px;
+}
+
+input[type="text"].calendar { width: 80px }
+input[type="text"].time { width: 60px }
+
+/* control measures */
+.cancel-hazard-description { vertical-align: bottom;}
+.save-hazard-description-button { vertical-align: bottom;margin-left: 5px;}
+
+/* calander dropdown margin fix in action Grid*/
+.action-grid + .btn.ui-datepicker-trigger {
+    margin-top: -9px;
+}
+
+th.action-grid-fixed-date-column, td.action-grid-fixed-date-column {
+    width: 130px;
+    padding-top: 10px;
+}
+#availableHazards li[class=ui-state-default], #selectedHazards li[class=ui-state-default]
+{
+	color: black;
+	border: none;
+	background: none;
+}
+
+/* fix for employee screen. This can be removed when boostrap layout has been used as designed*/
+#risk-assessor-details  h3, #risk-assessor-details p[class="alert"]  {
+	margin-left: 0px;
+}
+
+#risk-assessor-details .row-fluid [class*="span"]:first-child
+{
+	padding-left: 10px;
+	width: 98.5%;
+}
+
+#risk-assessor-details p input:first-child
+{
+	margin-top: -3px;
+}
+
+#every-monday {
+         margin-left: 4px;
+     }
+
+
+.show-hide-closed-sites-text{
+    margin-top: 4px !important;
+    font-size: 13px !important;
+    text-decoration: none !important;
+}
+
+.show-hide-closed-sites-text img {
+    margin-bottom: 4px;
+}

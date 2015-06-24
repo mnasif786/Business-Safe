@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="EmployeeChecklist" table="`EmployeeChecklist`">
+    <id name="Id" column="Id" type="Guid">
+      <generator class="assigned" />
+    </id>
+    <many-to-one name="Employee" class="Employee" column="EmployeeId" />
+    <many-to-one name="Checklist" class="Checklist" column="ChecklistId" />
+    <property name="StartDate" type="DateTime" />
+    <property name="CompletedDate" type="DateTime" />
+    <property name="Password" type="string" />
+    <property name="Deleted" type="bool" />
+    <property name="CreatedOn" type="DateTime" />
+    <many-to-one name="CreatedBy" class="UserForAuditing" column="CreatedBy"/>
+    <property name="LastModifiedOn" type="DateTime" />
+    <many-to-one name="LastModifiedBy" class="UserForAuditing" column="LastModifiedBy"/>
+    <many-to-one name="PersonalRiskAssessment" class="PersonalRiskAssessment" column="PersonalRiskAssessmentId" lazy="false" cascade="save-update"/>
+    <property name="DueDateForCompletion" type="DateTime" />
+    <property name="CompletionNotificationEmailAddress" />
+    <property name="SendCompletedChecklistNotificationEmail" type="bool" />
+    <property name="ReferencePrefix" />
+    <property name="ReferenceIncremental"/>
+    <many-to-one name="CompletedOnEmployeesBehalfBy" class="User" column="CompletedOnEmployeesBehalfById"/>
+    
+    <property name="IsFurtherActionRequired" />
+    <many-to-one name="AssessedByEmployee" class="EmployeeForAuditing" column="AssessedByEmployeeId" />
+    <property name="AssessmentDate" type="DateTime" />
+
+    <bag name="Answers" table="Answer" lazy="true" cascade="save-update" inverse="true" >
+      <key column="EmployeeChecklistId"></key>
+      <one-to-many class="Answer" />
+    </bag>
+    <bag name="EmployeeChecklistEmails" table="EmployeeChecklistEmployeeChecklistEmail" lazy="true" cascade="save-update" inverse="false" >
+      <key column="EmployeeChecklistId"></key>
+      <many-to-many column="EmployeeChecklistEmailId" class="EmployeeChecklistEmail" />
+    </bag>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,118 @@
+﻿@using BusinessSafe.WebSite.Areas.AccidentReports.ViewModels
+@using BusinessSafe.WebSite.Extensions
+@model AccidentDetailsViewModel
+<div class="fixed-content">
+    @Html.Partial("_TitleBar", ViewBag.AccidentRecordSummary as AccidentSummaryViewModel)
+    <form class="row form-inline" method="post" action="@Url.Action("Save")" >
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div>
+                @Html.Partial("_DistinctValidationSummary")
+            </div>
+        }        
+        @Html.HiddenFor(m => m.AccidentRecordId)
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div>
+                @*@Html.Partial("_DistinctValidationSummary")*@
+            </div>
+        }  
+               
+             
+        <fieldset>
+            <legend class="span12">When did the Accident happen?</legend>
+            <div class="span4">
+                <label class="span2" for="DateOfAccident">Date of Accident</label>
+                @Html.TextBoxFor(m => m.DateOfAccident, new {@class = "span2 calendar", placeholder="dd/mm/yyyy"})
+            </div>
+            <div class="span4">
+                <label class="span2" for="TimeOfAccident">Time of Accident</label>
+                @Html.TextBoxFor(m => m.TimeOfAccident, new {@class = "span2 time"})
+                <label>hh:mm</label>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend class="span12">Where did the Accident happen?</legend>
+            <div class="span12">
+                <label class="span2" for="SiteId">Site</label>
+                @Html.TextBoxFor(m => m.Site, new {@class = "span4"})
+                @Html.HiddenFor(m => m.SiteId)
+            </div>
+            <div id="offsite-name" class="span12 hide">
+                <label class="span2" for="OffSiteName">Please specify</label>
+                @Html.TextBoxFor(m => m.OffSiteName, new {@class = "span4"})
+            </div>
+            <div class="span12">
+                <label class="span2" for="Location">Location</label>
+                @Html.TextBoxFor(m => m.Location, new {@class = "span4"})
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend class="span12">What kind of Accident?</legend>
+            <div class="span12">
+                <label class="span2" for="AccidentTypeId">Accident Type</label>
+                @Html.TextBoxFor(m => m.AccidentType, new {@class = "span4"})
+                @Html.HiddenFor(m => m.AccidentTypeId)
+            </div>
+            <div id="other-accident-type" class="span12 hide">
+                <label class="span2" for="OtherAccidentType">Please describe</label>
+                @Html.TextBoxFor(m => m.OtherAccidentType, new {@class = "span4"})
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend class="span12">What was the main cause of the Accident?</legend>
+            <div class="span12">
+                <label class="span2" for="AccidentCauseId">Cause</label>
+                @Html.TextBoxFor(m => m.AccidentCause, new {@class = "span6"})
+                @Html.HiddenFor(m => m.AccidentCauseId)
+            </div>
+            <div id="other-accident-cause" class="span12 hide">
+                <label class="span2" for="OtherAccidentCause">Please describe</label>
+                @Html.TextBoxFor(m => m.OtherAccidentCause, new {@class = "span4"})
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend class="span12">Was any First Aid treatment administered?</legend>
+            <div class="span12">
+                <ul class="row-of-radios clearfix">
+                    <li class="span2">
+                        <label>Yes</label>
+                        @Html.RadioButtonFor(m => m.FirstAidAdministered,"true")
+                        
+                    </li>
+                    <li class="span2">
+                        <label>No</label>
+                        @Html.RadioButtonFor(m => m.FirstAidAdministered,"false")
+                    </li>
+                </ul>
+            </div>
+            <div id="details-of-first-aid" class="hide">
+                <div class="span12">
+                    <label class="span2" for="FirstAiderEmployeeId">Name of First Aider</label>
+                    @Html.TextBoxFor(m => m.FirstAiderEmployee, new {@class = "span4"})
+                    @Html.HiddenFor(m => m.FirstAiderEmployeeId)
+                    @Html.HiddenFor(m=>m.ShowNonEmployeeFirstAidInputs)
+                </div>
+                <div id="non-employee-firstaider-name" class="span12 hide">
+                    <label class="span2" for="NonEmployeeFirstAiderName">Please specify</label>
+                    @Html.TextBoxFor(m => m.NonEmployeeFirstAiderName, new {@class = "span4"})
+                </div>
+                <div class="span12">
+                    <label class="span2" for="DetailsOfFirstAid">Details of treatment</label>
+                    @Html.TextAreaFor(m => m.DetailsOfFirstAid, new {@class = "span8", rows = 6})
+                </div>
+            </div>
+        </fieldset>
+        @{
+            var viewName = Html.IsReadOnly() ? "View" : "Index";
+            var urlAction = Url.Action(viewName, "InjuryDetails", new { area = "AccidentReports", companyId = Model.CompanyId, accidentRecordId = Model.AccidentRecordId });
+        }
+        <div class="span12">
+            <label class="span2"></label>
+            <input type="submit" id="saveButton" value="Save" class="btn btn-success" />
+            <a id="nextBtn" class="btn btn-primary" mainurl="" href="@urlAction">Save &amp; Continue <i class="icon-chevron-right icon-white"></i></a>
+            @Html.ActionLink("Cancel", "Index", "Search", null, new {@class = "btn btn-link"})
+        </div>
+    </form>
+</div>

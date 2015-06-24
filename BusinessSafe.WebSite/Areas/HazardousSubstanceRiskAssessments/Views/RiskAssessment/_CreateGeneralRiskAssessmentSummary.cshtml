@@ -1,0 +1,38 @@
+﻿@using BusinessSafe.WebSite.Areas.HazardousSubstanceRiskAssessments.ViewModels
+@using BusinessSafe.WebSite.Extensions
+@model CreateRiskAssessmentViewModel
+<div class="container fixed-content ipad-container">
+<h2><i class="tick"></i>New Hazardous Substance Risk Assessment</h2>
+    <form id="CreateRiskAssessmentSummary" class="row form-inline" method="POST" action="@Url.Action("Create", "RiskAssessment")">
+        <fieldset>
+            <legend class="span12"><h3>Create New Hazardous Substance Risk Assessment</h3></legend>
+            <div class="span12">
+                <label class="span2" for="Title">Title:</label>
+                @Html.TextBoxFor(m => m.Title, new { @class = "span4" })
+            </div>
+            <div class="span12">
+                <label class="span2" for="Reference">Reference:</label>
+                @Html.TextBox("Reference", @Model.Reference, new { @class = "span4" })
+            </div>
+            <div class="span12">
+                <label class="span2" for="NewHazardousSubstanceId">Hazardous Substance:</label>
+                @Html.TextBox("NewHazardousSubstance", "", new { @class = "span4" })
+                @Html.Hidden("NewHazardousSubstanceId", Model.NewHazardousSubstanceId)
+            </div>
+            <div class="span12">
+                <label class="span2"></label>
+                <button type="submit" class="btn btn-primary" id="createSummary">Create and Start Risk Assessment</button>
+                <button type="submit" class="btn" id="createDraft">Create Draft</button>
+                <a class="btn btn-link" href="@Url.Action("Index", "RiskAssessment", new { companyId = Html.GetUsersCompanyId(User) })">Cancel</a>
+            </div>
+            <div class="span12">
+            @if (!ViewData.ModelState.IsValid)
+            {
+                @Html.ValidationSummary(false)
+            }
+            </div>
+            @Html.HiddenFor(m => m.IsCreateDraft)
+        </fieldset>
+        @Html.HiddenFor(model => model.CompanyId, new { id = "CompanyId", name = "CompanyId" })
+    </form>
+</div>

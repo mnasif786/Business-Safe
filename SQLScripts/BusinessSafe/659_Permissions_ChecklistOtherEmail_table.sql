@@ -1,0 +1,8 @@
+USE [BusinessSafe]
+GO
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_CATALOG = 'BusinessSafe' AND TABLE_NAME = 'SafeCheckChecklistOtherEmails')
+BEGIN
+	GRANT SELECT,UPDATE,INSERT, DELETE ON SafeCheckChecklistOtherEmails TO AllowAll
+	GRANT SELECT,UPDATE,INSERT, DELETE ON SafeCheckChecklistOtherEmails TO AllowSelectInsertUpdate
+END

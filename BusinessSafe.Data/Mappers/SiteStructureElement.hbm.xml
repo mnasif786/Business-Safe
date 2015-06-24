@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="SiteStructureElement" table="`SiteStructureElement`" abstract="true">
+    <id name="Id" column="Id" type="long">
+      <generator class="identity"/>
+    </id>
+    <discriminator column="SiteType" type="string"/>
+    
+    <property name="Name" type="string" />
+    <property name="ClientId" type="long" />
+    <property name="SiteContact" type="string" />
+
+    <property name="LastModifiedOn" type="DateTime" />
+    <property name="SiteClosedDate" type="DateTime" />
+    <many-to-one name="LastModifiedBy" class="UserForAuditing" column="LastModifiedBy" />
+    <property name="CreatedOn" type="datetime" />
+    <many-to-one name="CreatedBy" class="UserForAuditing" column="CreatedBy"/>
+    
+    <property name="Deleted" type="bool" />
+    <many-to-one name="Parent" class="SiteStructureElement" column="ParentId" lazy="false" />
+
+    <bag name="Children" table="`SiteStructureElement`" inverse="true" cascade="none" mutable="false" where="deleted = 0">
+      <key column="ParentId"/>
+      <one-to-many class="SiteStructureElement" />
+    </bag>
+
+    <bag name="AccidentRecordNotificationMembers" lazy="true" cascade="save-update" inverse="true" access="field.camelcase-underscore">
+      <key column="SiteId"></key>
+      <one-to-many class="AccidentRecordNotificationMember" />
+    </bag>
+
+    <subclass name="Site" discriminator-value="1">
+      <property name="SiteId" type="long" />
+      <property name="Reference" type="string" />  
+    </subclass>
+
+    <subclass name="SiteGroup" discriminator-value="2">
+    </subclass> 
+  </class>
+
+    <sql-query name="GetSiteElementStructureChildIds">
+
+        WITH hierarchy AS (
+
+        SELECT t.id, t.parentid, t.name, t.Deleted
+        FROM SiteStructureElement t
+        WHERE t.id = :id
+        AND t.Deleted = 0
+
+        UNION ALL
+
+        SELECT x.id, x.parentid, x.name, x.Deleted
+        FROM SiteStructureElement x
+        JOIN hierarchy h ON h.id = x.parentid
+        WHERE x.Deleted = 0
+        )
+
+        SELECT h.id
+        FROM hierarchy h
+    </sql-query>
+    
+</hibernate-mapping>

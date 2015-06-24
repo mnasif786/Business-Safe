@@ -1,0 +1,19 @@
+USE [BusinessSafe]
+GO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Task' AND COLUMN_NAME = 'SignificantFindingId')
+BEGIN
+	ALTER TABLE [Task]
+	ADD [SignificantFindingId] [bigint] NULL
+
+END
+GO	
+
+--//@UNDO 
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Task' AND COLUMN_NAME = 'SignificantFindingId')
+BEGIN
+	ALTER TABLE [Task]
+	DROP COLUMN [SignificantFindingId] 
+END
+GO

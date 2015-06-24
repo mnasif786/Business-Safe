@@ -1,0 +1,6 @@
+﻿@model BusinessSafe.WebSite.Areas.TaskList.ViewModels.TaskViewModel
+@if (Model.IsDeleteEnabled(User))
+{
+    <a class="icon-remove" data-id="@Model.Id" data-is-reoccurring="@Model.IsReoccurring"  data-task-type="@Model.GetTaskType()" href="#" title="Delete Task">
+    </a>
+}

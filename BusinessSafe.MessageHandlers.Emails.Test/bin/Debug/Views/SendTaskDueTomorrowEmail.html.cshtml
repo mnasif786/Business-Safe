@@ -1,0 +1,48 @@
+﻿@model BusinessSafe.MessageHandlers.Emails.ViewModels.TaskDueTomorrowViewModel
+<head>
+    <style>
+        body
+        {
+            background-color: white;
+            font-size: .85em;
+            font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
+            margin: 0;
+            padding: 0;
+            color: #393939;
+        }
+        
+        h1
+        {
+            font-size: 2em;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+    </style>
+ </head>
+ <body>
+      <h1>
+        BusinessSafe Online - @Model.TaskType task is due tomorrow @Model.DueDate
+    </h1>
+     <p>
+        The Completion date for @Model.TaskType task is tomorrow @Model.DueDate
+     </p>
+    <p>
+        Reference: @Model.TaskReference
+    </p>
+    <p>
+        Title: @Model.Title
+    </p>
+    <p>
+        Description: @Model.Description
+    </p>
+    <p>
+        Assigned By: @Model.AssignedBy
+    </p>
+    <p>
+       Please ensure this task is completed on its due date or it will become overdue.
+       <br/>
+       To view and complete the task, please log into BusinessSafe Online on the following link
+       <br/>
+       @Model.BusinessSafeOnlineLink
+    </p>
+ </body>

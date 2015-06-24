@@ -1,0 +1,46 @@
+﻿@model BusinessSafe.MessageHandlers.Emails.ViewModels.SendUpdateRequiredEmailViewModel
+<head>
+    <style>
+        body
+        {
+            background-color: white;
+            font-size: .85em;
+            font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
+            margin: 0;
+            padding: 0;
+            color: #393939;
+        }
+        
+        h1
+        {
+            font-size: 2em;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+        
+    </style>
+</head>
+<body>
+    
+    <p>Subject: @Model.Subject</p>
+
+    <h1>
+        SafeCheck - Evaluation report has been reviewed and further updates are required
+    </h1>
+
+    <p>
+        Please re-visit the Evaluation Report below and make the relevant changes:
+    </p>
+    <p>
+        CAN: @Model.Can
+    </p>
+    <p>
+        Visit Date: @Model.VisitDate
+    </p>
+    <p>
+        Reviewed By: @Model.AdvisorName
+    </p>
+    <p>
+        QA Comments: @Model.QaComments
+    </p>    
+</body>

@@ -1,0 +1,28 @@
+﻿@using BusinessSafe.WebSite.Areas.FireRiskAssessments.ViewModels
+@model PremisesInformationViewModel
+@{
+    ViewBag.Title = "Premises Information";
+}
+@Html.Partial("_RiskAssessmentSummary", ViewBag.RiskAssessmentSummary as FireRiskAssessmentSummaryViewModel)
+<div class="container ipad-container">
+    @Html.Partial("_Tabs", ViewBag.TabViewModel as FireRiskAssessmentTabViewModel)
+
+    @Html.HiddenFor(x => x.CompanyId)
+    @Html.Hidden("RiskAssessmentId", Model.RiskAssessmentId)
+    @Html.Partial("_DetailsAssessment", Model)
+</div>
+<div class="hide">
+    <div id="dialogSleepingAccommodation" title="Sleeping Accommodation">
+        <p>
+            As the building is used to provide sleeping accommodation, we recommend that you contact us directly so we can assist with the completion of the FRA.
+        </p>
+    </div>
+</div>
+@section JavaScriptSection
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            BusinessSafe.FireRiskAssessment.PremisesInformation.initialize();
+        });
+    </script>
+}

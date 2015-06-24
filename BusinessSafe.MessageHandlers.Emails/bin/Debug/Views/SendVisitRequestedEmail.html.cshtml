@@ -1,0 +1,40 @@
+﻿@model BusinessSafe.MessageHandlers.Emails.ViewModels.VisitRequestedViewModel     
+<head>
+    <style>
+        body
+        {
+            background-color: white;
+            font-size: .85em;
+            font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
+            margin: 0;
+            padding: 0;
+            color: #393939;
+        }
+        
+        h1
+        {
+            font-size: 2em;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+    </style>
+ </head>
+ <body>
+    <h1>
+        BusinessSafe Online - @Model.CompanyName have requested a visit
+    </h1>
+     
+    <p>Company Name: @Model.CompanyName</p>
+    <p>Site name: @Model.SiteName  Postcode: @Model.Postcode</p>
+
+    <p>CAN: @Model.CAN</p>    
+    <p>Contact Name: @Model.ContactName</p>
+    <p>Contact Email: @Model.ContactEmail</p>
+    <p>Contact Phone: @Model.ContactPhone</p>
+
+    <p>Visit Request Date: From @Model.DateFrom To  @Model.DateTo </p>
+    <p>Visit Request Time: @Model.RequestTime</p>
+
+    <p>Comments: @Model.Comments</p>
+    
+ </body>

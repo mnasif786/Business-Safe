@@ -1,0 +1,42 @@
+﻿@using BusinessSafe.WebSite.Extensions
+@model BusinessSafe.WebSite.Areas.Documents.ViewModels.AddedDocumentsLibraryViewModel
+<div class="well">
+    @using (Html.BeginForm("Index", "AddedDocumentsLibrary", FormMethod.Get, new { @class = "search-form", id="document-search" }))
+    {
+        <fieldset>
+            <legend>Added Documents Search</legend>
+            <ul>
+                <li>
+                    <label for="DocumentType" class="wide">Document Type</label>
+                    @Html.TextBox("DocumentType")
+                    @Html.Hidden("DocumentTypeId", Model.DocumentTypeId)
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <label for="Site" class="wide">Site</label>
+                    @Html.TextBox("Site")
+                    @Html.Hidden("SiteId", Model.SiteId)
+                </li>
+                <li>
+                    <label for="SiteGroup" class="medium">Site Group</label>
+                    @Html.TextBox("SiteGroup")
+                    @Html.Hidden("SiteGroupId", Model.SiteGroupId)
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <label for="Title" class="wide">Title</label>
+                    @Html.TextBoxFor(model => model.Title, new { @class = "two-dropdowns-medium-label-wide" })
+                </li>
+            </ul>
+            <ul>
+                <li class="buttons wide">
+                    <input id="Search" type="submit" class="btn btn-primary" value="Search" />
+                    @Html.ActionLink("Reset", "Index", "AddedDocumentsLibrary", new { companyId = Html.GetUsersCompanyId(User), @class="btn btn-link" })
+                </li>
+            </ul>
+        </fieldset>
+        @Html.Hidden("CompanyId", @Model.CompanyId)
+    }
+</div>

@@ -1,0 +1,19 @@
+﻿@using BusinessSafe.WebSite.Extensions
+@model BusinessSafe.WebSite.ViewModels.PermissionsGroupViewModel
+<table>
+    <thead>
+        <tr>
+            <th>@Model.PermissionGroupName.AddSpacesToName()</th>
+            <th class="span2">View</th>
+            <th class="span2">Add</th>
+            <th class="span2">Edit</th>
+            <th class="span2">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var permissionViewAddEditDelete in Model.PermissionTargets)
+    {
+        @Html.Partial("_ViewAddEditDeleteSelections", permissionViewAddEditDelete)
+    }
+    </tbody>
+</table>

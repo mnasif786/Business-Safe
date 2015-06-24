@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="FireRiskAssessmentControlMeasure" table="`FireRiskAssessmentFireSafetlyControlMeasures`">
+    <id name="Id" column="Id" type="long">
+      <generator class="identity"/>
+    </id>
+    <many-to-one name="RiskAssessment" class="FireRiskAssessment" column="RiskAssessmentId" />
+    <many-to-one name="FireSafetyControlMeasure" class="FireSafetyControlMeasure" column="FireSafetyControlMeasureId"/>
+
+    <property name="Deleted" type ="bool"/>
+    <many-to-one name="CreatedBy" class="UserForAuditing" column="CreatedBy"/>
+    <property name="CreatedOn" type ="datetime"/>
+    <many-to-one name="LastModifiedBy" class="UserForAuditing" column="LastModifiedBy"/>
+    <property name="LastModifiedOn" type ="datetime"/>
+  </class>
+</hibernate-mapping>

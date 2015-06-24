@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>ActionMailer.Standalone</id>
+    <version>0.7.4</version>
+    <authors>Scott Anderson</authors>
+    <owners>Scott Anderson</owners>
+    <licenseUrl>https://bitbucket.org/swaj/actionmailer.net/wiki/License</licenseUrl>
+    <projectUrl>https://bitbucket.org/swaj/actionmailer.net</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>ActionMailer.Net aims to be an easy, and relatively painless way to send email from your application. The concept is pretty simple. We can render HTML by utilizing some pretty snazzy view engines, so why can't we do the same thing for email?</description>
+    <summary>A simple library to allow you to render emails using the Razor view engine.</summary>
+    <tags>email mvc asp.net razor</tags>
+    <dependencies>
+      <dependency id="RazorEngine" />
+    </dependencies>
+  </metadata>
+</package>

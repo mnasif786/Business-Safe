@@ -1,0 +1,59 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Extensions
+@using Telerik.Web.Mvc.UI
+@model BusinessSafe.WebSite.Areas.HazardousSubstanceInventory.ViewModels.InventoryViewModel
+<h2>
+    <a id="showDeletedLink" class="btn" href="#">@Model.ShowDeletedButtonText</a>
+    <span id="tick"></span>Hazardous Substances – Inventory
+</h2>
+    @Html.Telerik().Grid(Model.Substances).Name("HazardousSubstancesGrid").DataKeys(keys => keys.Add(c => c.Id)).DataBinding(dataBinding => dataBinding.Server()).Columns(
+    columns =>
+    {
+        columns.Bound(o => o.Id).HeaderTemplate("Id").Visible(false);
+        columns.Template(@<text>
+    @if (item.HasLinkedRiskAssessments)
+    {
+        if (item.HasOneLinkredRiskAssessment)
+        {
+        <a data-id="@item.Id" href="@Url.Action("View", "Description", new { area = "HazardousSubstanceRiskAssessments", companyId = User.GetUsersCompanyId(), riskAssessmentId = item.GetRiskAssessmentId() })" title="Load the linked risk assessment"  rel='tooltip'>
+            <i class="icon-tags label-hazardous-substance-risk-assessment-link'"></i>
+        </a>
+        }
+        else
+        {
+        <a data-id="@item.Id" href="@Url.Action("Index", "RiskAssessment", new { area="HazardousSubstanceRiskAssessments", companyId = User.GetUsersCompanyId(), hazardousSubstanceId = item.Id })" title="Show linked risk assessments"  rel='tooltip'>
+            <i class="icon-tags label-hazardous-substance-risk-assessment-link'"></i>
+        </a>
+        }
+    }
+    </text>).Width(50).Title("HSRA");
+        columns.Bound(o => o.Name).Title("Substance Name");
+        columns.Bound(o => o.Supplier).Title("Supplier");
+        columns.Bound(o => o.SdsDate).Title("Date Of SDS Sheet");
+        columns.Bound(o => o.Standard).Title("Hazard Classification");
+        columns.Bound(o => o.RiskPhraseReferences).Title("Risk No And Phrases");
+        columns.Bound(o => o.SafetyPhraseReferences).Title("Safety No And Phrases");
+        columns.Bound(o => o.DetailsOfUse).Title("Usage");
+        columns.Template(@<text>
+    @if (User.IsInRole(Permissions.ViewHazardousSubstanceInventory.ToString()))
+    {
+        <a class="icon-search" data-id="@item.Id" href="@Url.Action("View", "Inventory", new { companyId = @Html.GetUsersCompanyId(User), hazardousSubstanceId = item.Id })" title="View Hazardous Substance">
+            <i class="icon-search"></i></a>
+    }
+    @if (User.IsInRole(Permissions.EditHazardousSubstanceInventory.ToString()) && !Model.ShowDeleted)
+    {
+        <a class="editIcon icon-edit" data-id="@item.Id" href="@Url.Action("Edit", "Inventory", new { companyId = @Html.GetUsersCompanyId(User), hazardousSubstanceId = item.Id })" title="Edit Hazardous Substance">
+            <i class="icon-edit"></i></a>
+    }
+    @if (User.IsInRole(Permissions.DeleteHazardousSubstanceInventory.ToString()) && !Model.ShowDeleted)
+    {
+        <a class="deleteIcon icon-remove" data-id="@item.Id" href="" title="Delete Hazardous Substance">
+            <i class="icon-remove"></i></a>
+    }
+    @if (User.IsInRole(Permissions.EditHazardousSubstanceInventory.ToString()) && Model.ShowDeleted)
+    {
+        <a class="reinstateIcon icon-refresh" data-id="@item.Id" href="" title="Reinstate Hazardous Substance">
+            <i class="icon-refresh"></i></a>
+    }
+    </text>).Width(160);
+    }).Pageable(page => page.PageSize(10)).Sortable()

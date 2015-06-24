@@ -1,0 +1,115 @@
+﻿@model BusinessSafe.WebSite.Areas.PersonalRiskAssessments.ViewModels.EmployeeChecklistSummaryViewModel
+@using BusinessSafe.WebSite.Extensions;
+@{
+    var notificationRequired = (Model.NotificationRequired) ? "Yes" : "No";
+}
+
+<div id="employee-checklist-email-contents">
+    <fieldset>
+        <div id="checklist-validation-message" class="alert alert-error hide"></div>
+        <legend>
+            <h3>
+                Employee Checklist Details</h3>
+        </legend>
+        @Html.Hidden("checklistId",Model.Id)
+        <div class="row">
+            <label class="span2" for="FriendlyReference">
+                Reference</label>
+            @Html.TextBox("friendlyReference", Model.FriendlyReference, new { @readonly = "readonly" })
+        </div>
+        <div class="row">
+            <label class="span2">
+                Checklist</label>
+            @Html.TextBox("checklistTitle", Model.ChecklistTitle, new { @readonly = "readonly" })
+        </div>
+        <div class="row">
+            <label class="span2">
+                Checklist Sent To</label>
+            @Html.TextBox("recipientFullName", Model.RecipientFullName, new { @readonly = "readonly" })
+        </div>
+        <div class="row">
+            <label class="span2">
+                Last Email Sent To</label>
+            <div class="span">@Model.LastRecipientEmail
+            </div>
+        </div>
+        <div class="row">
+            <label class="span2">
+                Due Date</label>
+            <div class="span">@Model.DueDateForCompletion</div>
+        </div>
+        <div class="row">
+            <label class="span2">Completion Date</label>
+            <div class="span">@Model.CompleteDate</div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend><h3>Checklist Details</h3></legend>
+        <div class="row">
+            <label class="span2">
+                Checklist Link</label>
+            <div class="span">
+                <a href="@Model.ChecklistUrl" id="ChecklistUrl" target="_blank">@(Model.RecipientFullName + ", " + Model.ChecklistTitle)</a>
+            </div>
+        </div>
+        @if (Model.ShowCompletedOnEmployeesBehalfBySection)
+        {
+        <div class="row" id="CompletedOnEmployeesBehalfDiv">
+            <label class="span2">Completed By</label>
+            <div class="span" id="CompletedOnEmployeesBehalfNameDiv">@Model.CompletedOnEmployeesBehalfName</div>
+        </div>
+        }
+    </fieldset>
+    <fieldset>
+        <legend><h3>Message Details</h3></legend>
+        <div class="row">
+            <label class="span2">Message Body</label>
+            <div id="message-body">@Html.BuildParagraphs(Model.MessageBody)</div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend><h3>Notification Details</h3></legend>
+        <div class="row">
+            <label class="span2">Notification Required</label>
+            <div class="span">@notificationRequired</div>
+        </div>
+        @if (Model.NotificationRequired)
+        {
+            <div class="row">
+                <label class="span2">Notifications Sent To</label>
+                <div class="span">@Model.CompletionNotificationEmailAddress</div>
+            </div>
+        }
+    </fieldset>
+    @if (Model.CompleteDate != string.Empty)
+    {
+        bool? furtherActionRequired = Model.IsFurtherActionRequired != null && Model.IsFurtherActionRequired.Value;
+        <fieldset>  
+            <legend><h3>Assessment of Checklist</h3></legend>
+            <div id="further-action-required" class="row">
+                <label class="span2">Further Action Required</label>
+                <label for="FurtherActionIsRequired">Yes</label>
+                <input id="FurtherActionIsRequired" type="radio" name="IsFurtherActionRequired" value="true" @if (Model.IsFurtherActionRequired.HasValue && Model.IsFurtherActionRequired.Value)
+                                                                                                             {
+                                                                                                                 <text>checked="checked"</text>
+                                                                                                             } />
+                <label for="FurtherActionIsNotRequired">No</label>
+                <input id="FurtherActionIsNotRequired" type="radio" name="IsFurtherActionRequired" value="false" @if (Model.IsFurtherActionRequired.HasValue && !Model.IsFurtherActionRequired.Value)
+                                                                                                                 {
+                                                                                                                     <text>checked="checked"</text>
+                                                                                                                 } />
+                @if (!string.IsNullOrEmpty(Model.AssessedBy))
+                {
+                    <label for="assessed-by">Last Assessed By:</label>
+                    <span id="assessed-by">@Model.AssessedBy</span>
+                    <span id="assessment-date">@Model.AssessmentDate</span>
+                }
+            </div>
+            <div class="row ca">
+                <input id="save-and-generate" type="button" class="btn btn-success @if (!furtherActionRequired.HasValue) { <text>hidden</text>}" value="Save and Start Risk Assessement" />
+                <input id="save" type="button" class="btn btn-primary" value="Save" />
+                <a id="cancel-button" class="btn btn-link">Cancel</a></div>
+            @Html.HiddenFor(x => x.Id)
+        </fieldset>
+    }
+</div>

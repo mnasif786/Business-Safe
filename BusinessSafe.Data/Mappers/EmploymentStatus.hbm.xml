@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+
+  <class name="EmploymentStatus" table="`EmploymentStatus`">
+
+    <id name="Id" type="int" >
+      <generator class="native" />
+    </id>
+    <property name="Name" type="string" />
+
+
+  </class>
+</hibernate-mapping>

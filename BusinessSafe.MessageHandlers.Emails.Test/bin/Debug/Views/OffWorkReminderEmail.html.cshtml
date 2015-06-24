@@ -1,0 +1,70 @@
+﻿@model BusinessSafe.MessageHandlers.Emails.ViewModels.OffWorkReminderViewModel
+<head>
+    <style>
+        body
+        {
+            background-color: white;
+            font-size: .85em;
+            font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
+            margin: 0;
+            padding: 0;
+            color: #393939;
+        }
+        
+        h1
+        {
+            font-size: 2em;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+        
+        strong { font-weight: bold }
+    </style>
+</head>
+<body>
+    <h1>
+        @Model.Title
+    </h1>
+
+    <p>
+        Reference: <strong>@Model.AccidentRecordReference</strong>
+    </p>
+    <p>
+        This BusinessSafe Online message is to remind you that an accident record has been created
+        for <strong>@Model.InjuredPerson</strong> about a work related injury that occurred on <strong>@Model.DateOfAccident</strong>
+    </p>
+    <p>
+        When the entry was made they had not returned to work and the number of days that they
+        were unable to work was not completed. This information is required to determine whether the injury
+        is reportable to the enforcing authorities.
+    </p>
+    @if (Model.Jurisdiction == "GB")
+    {
+        <p>
+            Please use the link below to take you to BusinessSafe Online where you
+            can add this information. If the person has still not returned to work or is unable to do their
+            normal work select ‘8 or more days’ which means the accident is reportable to the local
+            enforcing authority. To find out how to report, please visit ‘Next Steps’ section of the accident
+            record. 
+        </p>
+    }
+    else
+    {
+        <p>
+            Please use the link below to take you to BusinessSafe Online where you
+            can add this information. If the person has still not returned to work or is unable to do their
+            normal work select ‘4 or more days’ which means the accident is reportable to the local
+            enforcing authority. To find out how to report, please visit ‘Next Steps’ section of the accident
+            record. 
+        </p>        
+    }
+    <p>
+        @Model.BusinessSafeOnlineLink
+    </p>
+    <p>
+        Many thanks
+    </p>
+    <p>
+        BusinessSafe Online
+    </p>
+</body>

@@ -1,0 +1,30 @@
+<project name="DBDeploy"
+         default="DBDeployBusinessSafe" >
+  <include buildfile="C:\NantBuildFiles\NantCommonTasks.include" />
+
+  <property name="Target.BusinessSafe.SQLServer.Filename" value="localhost_SQL2008R2" />
+  <property name="BuildPath" value="." />
+  <property name="Target.BusinessSafe.SQLServer" value="(local)\sql2008r2" />
+
+
+  <target name="DBDeployBusinessSafe" description="generate a sql upgrade script">
+        <tstamp property="dbdeploy.timestamp" pattern="yyyyMMdd_HHmm" />
+
+        <property name="dbdeploy.filename" value="DBDeploy_BusinessSafe_${Target.BusinessSafe.SQLServer.Filename}_${dbdeploy.timestamp}.sql"/>
+        <property name="dbdeploy.undo.filename" value="DBDeploy_UNDO_BusinessSafe_${Target.BusinessSafe.SQLServer.Filename}_${dbdeploy.timestamp}.sql"/>
+		
+        <loadtasks assembly="${BuildPath}/ThirdParty/DBDeploy/Net.Sf.Dbdeploy.dll" />
+            <dbdeploy dbType="mssql" 
+                      dbConnection="Data Source=${Target.BusinessSafe.SQLServer};Initial Catalog=BusinessSafe;Trusted_Connection=True"
+                      dir="${BuildPath}/SQLScripts/BusinessSafe" 
+                      outputFile="${BuildPath}/SQLScripts/BusinessSafe/${dbdeploy.filename}" 
+                      undoOutputFile="${BuildPath}/SQLScripts/BusinessSafe/${dbdeploy.undo.filename}" />
+
+        <property name="SQL.Server" value="${Target.BusinessSafe.SQLServer}"/>
+        <property name="SQL.Database" value="BusinessSafe"/>
+
+        <property name="SQL.SqlScript" value="${BuildPath}/SQLScripts/BusinessSafe/${dbdeploy.filename}"/>
+        <call target="SQL.RunScript" />
+
+     </target>
+</project>

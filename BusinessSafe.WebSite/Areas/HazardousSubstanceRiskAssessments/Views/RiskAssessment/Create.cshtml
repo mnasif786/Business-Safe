@@ -1,0 +1,23 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "Hazardous Substance Risk Assessments";
+}
+@Html.Partial("_CreateGeneralRiskAssessmentSummary")
+@section JavaScriptSection
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#createDraft').click(function (event) {
+                event.preventDefault();
+                $('#IsCreateDraft').val(true);
+                $('#CreateRiskAssessmentSummary').submit();
+            });
+            var hazardousSubstances = @Html.Raw(Json.Encode(Model.HazardousSubstances));
+            $("#NewHazardousSubstance").combobox({
+                selectedId: $("#NewHazardousSubstanceId").val(),
+                initialValues: hazardousSubstances,
+                url: ''
+            });
+        });
+    </script>
+}

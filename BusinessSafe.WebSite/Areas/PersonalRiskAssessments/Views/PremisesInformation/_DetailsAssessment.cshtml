@@ -1,0 +1,73 @@
+﻿@using BusinessSafe.WebSite.Areas.Company.ViewModels
+@using BusinessSafe.WebSite.Areas.PersonalRiskAssessments.ViewModels
+@using BusinessSafe.WebSite.Extensions
+@model PremisesInformationViewModel
+   
+<div id="PremisesInformationTabContentHolder" class="fixed-content">
+    @Html.Partial("_TitleBar", ViewBag.RiskAssessmentSummary as PersonalRiskAssessmentSummaryViewModel)
+    <form class="row form-inline" method="post" action="@Url.Action("Save", "PremisesInformation")" >
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="span12">
+            @Html.Partial("_DistinctValidationSummary")
+        </div>
+        
+    }
+    @if (TempData["Notice"] != null)
+    {
+        <div class="alert alert-success">
+            <a id="successmessageanchor" href="#successmessage"></a>
+            @TempData["Notice"].ToString()
+        </div>    
+    }
+    @Html.HiddenFor(model => model.RiskAssessmentId)
+    @Html.HiddenFor(model => model.CompanyId)
+    <fieldset>
+        <legend class="span12">
+            <h3>
+                Details of Premises</h3>
+        </legend>
+        <div class="span12">
+            <label class="span2" for="LocationAreaDepartment">
+                Location/Area/Dept</label>
+            @Html.TextBoxFor(model => model.LocationAreaDepartment, new { @class = "span4" })
+        </div>
+        <div class="span12">
+            <label class="span2" for="TaskProcessDescription">
+                Task/Process Description</label>
+            @Html.TextBoxFor(model => model.TaskProcessDescription, new { @class = "span4" })
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend class="span12">
+            <h3>
+                People Involved in Assessment</h3>
+        </legend>
+        <div id="employeeContainer" class="span6">
+            @Html.Partial("_Employees", @Model.Employees)
+        </div>
+        <div id="nonemployeeContainer" class="span6">
+            @Html.Partial("_NonEmployees", @Model.NonEmployees)
+        </div>
+    </fieldset>
+    @{
+        var viewName = Html.IsReadOnly() ? "View" : "Index";
+        var urlAction = Url.Action(viewName, "ChecklistGenerator", new { area = "PersonalRiskAssessments", companyId = Model.CompanyId, riskAssessmentId = Model.RiskAssessmentId });
+    }
+    <div class="span12">
+        <label class="span2">
+        </label>
+        @if (Model.IsSaveButtonEnabled(User))
+        {
+            <input type="submit" id="saveButton" value="Save" class="btn btn-success" />
+            <a id="nextBtn" class="btn btn-primary"mainUrl="Hazards" tabIndex="2" href="@urlAction">
+                Save &amp; Continue <i class="icon-chevron-right icon-white"></i></a>
+            <a class="btn btn-link" href="@Url.Action("Index", "RiskAssessment", new { area = "PersonalRiskAssessments", companyId = @Html.GetUsersCompanyId(User) })">
+                Cancel</a>
+        }
+    </div>
+    </form>
+</div>
+<div class="hide">
+    @Html.Partial("_AddNonEmployee", new NonEmployeeViewModel(Model))
+</div>

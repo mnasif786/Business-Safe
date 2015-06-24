@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2F802F88-FBF0-49DB-8D24-03F0EC3511E1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BusinessSafe.MessageHandlers.Emails.Test</RootNamespace>
+    <AssemblyName>BusinessSafe.MessageHandlers.Emails.Test</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ActionMailer.Net, Version=0.7.4.0, Culture=neutral, PublicKeyToken=e62db3114c02a1c2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ActionMailer.0.7.4\lib\Net40\ActionMailer.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="ActionMailer.Net.Standalone">
+      <HintPath>..\packages\ActionMailer.Standalone.0.7.4\lib\Net40\ActionMailer.Net.Standalone.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="NServiceBus">
+      <HintPath>..\packages\NServiceBus.3.2.6\lib\net40\NServiceBus.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Integration Tests\SendChecklistDocumentTestscs.cs" />
+    <Compile Include="SendEmployeeDigestEmailTests.cs" />
+    <Compile Include="SendTaskDueTomorrowEmailTest.cs" />
+    <Compile Include="SendTechnicalSupportEmailTests.cs" />
+    <Compile Include="SendAccidentRecordEmailTests.cs" />
+    <Compile Include="SendActionTaskCompletedEmailHandlerTests.cs" />
+    <Compile Include="SendHardCopyToOfficeEmailHandlerTests.cs" />
+    <Compile Include="SendIRNNotificationEmailHandlerTest.cs" />
+    <Compile Include="SendSafeCheckChecklistCompletedEmailTests.cs" />
+    <Compile Include="SendOffWorkReminderEmailHandlerTests.cs" />
+    <Compile Include="SendResponsibilityTaskCompletedEmailHandlerTests.cs" />
+    <Compile Include="GenerateEmployeeChecklistEmailsHandlerTests.cs" />
+    <Compile Include="MySendCompanyDetailsUpdatedEmailHandler.cs" />
+    <Compile Include="ReviewAssignedHandlerTests.cs" />
+    <Compile Include="SendReviewCompletedEmailHandlerTests.cs" />
+    <Compile Include="SendReviewOverdueRiskAssessorEmailHandlerTests.cs" />
+    <Compile Include="SendEmployeeChecklistEmailHandlerTests.cs" />
+    <Compile Include="SendSiteDetailsUpdatedEmailHandlerTests.cs" />
+    <Compile Include="SendCompanyDetailsUpdatedEmailHandlerTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SendSubmitChecklistEmailHandlerTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SendTaskCompletedEmailHandlerTests.cs" />
+    <Compile Include="SendVisitRequestedEmailTests.cs" />
+    <Compile Include="Service References\ClientDocumentService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\DocumentLibraryService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessSafe.Application\BusinessSafe.Application.csproj">
+      <Project>{5DBF972D-D624-4FE6-8483-F9828C37CF52}</Project>
+      <Name>BusinessSafe.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Data\BusinessSafe.Data.csproj">
+      <Project>{0E42764A-6356-461F-9473-D452EFC22AC7}</Project>
+      <Name>BusinessSafe.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Domain\BusinessSafe.Domain.csproj">
+      <Project>{EA0B55F3-6232-400F-8BE0-FEC49883253F}</Project>
+      <Name>BusinessSafe.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.MessageHandlers.Emails\BusinessSafe.MessageHandlers.Emails.csproj">
+      <Project>{2FAE47AD-2C27-4A38-BA85-5AB2167B583E}</Project>
+      <Name>BusinessSafe.MessageHandlers.Emails</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.MessageHandlers\BusinessSafe.MessageHandlers.csproj">
+      <Project>{9CAEB00B-32E2-4E42-91EC-97FB0E5E2529}</Project>
+      <Name>BusinessSafe.MessageHandlers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Messages.Emails\BusinessSafe.Messages.Emails.csproj">
+      <Project>{CFC682DE-01ED-45D9-925A-8F764368514A}</Project>
+      <Name>BusinessSafe.Messages.Emails</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.Messages\BusinessSafe.Messages.csproj">
+      <Project>{EE24F1BE-1BB4-413F-895D-7DC49325F36A}</Project>
+      <Name>BusinessSafe.Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BusinessSafe.WebSite\BusinessSafe.WebSite.csproj">
+      <Project>{3CF88FC7-ED75-48C1-A2CE-A16754F3FA0F}</Project>
+      <Name>BusinessSafe.WebSite</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Service References\ClientDocumentService\ClientDocumentService.wsdl" />
+    <None Include="Service References\ClientDocumentService\ClientDocumentService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientDocumentService\ClientDocumentService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientDocumentService\ClientDocumentService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientDocumentService\ClientDocumentService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientDocumentService\ClientDocumentService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientDocumentService\ClientDocumentService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ClientDocumentService\ClientDocumentService6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService.wsdl" />
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService1.wsdl" />
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ClientDocumentService\" />
+    <WCFMetadataStorage Include="Service References\DocumentLibraryService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientDocumentService\ClientDocumentService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientDocumentService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientDocumentService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ClientDocumentService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DocumentLibraryService\DocumentLibraryService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DocumentLibraryService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DocumentLibraryService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\DocumentLibraryService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

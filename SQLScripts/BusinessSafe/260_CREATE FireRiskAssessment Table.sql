@@ -1,0 +1,15 @@
+USE [BusinessSafe]
+GO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'FireRiskAssessment')
+BEGIN
+	CREATE TABLE [dbo].[FireRiskAssessment](
+		[Id] [bigint] NULL
+	) ON [PRIMARY]
+END
+
+--//@UNDO
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'FireRiskAssessment')
+BEGIN
+	DROP TABLE [FireRiskAssessment];
+END

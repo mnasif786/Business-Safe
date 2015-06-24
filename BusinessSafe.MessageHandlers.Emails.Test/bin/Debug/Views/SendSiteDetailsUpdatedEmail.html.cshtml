@@ -1,0 +1,77 @@
+﻿@using System
+@model BusinessSafe.MessageHandlers.Emails.ViewModels.SendSiteDetailsUpdatedEmailViewModel
+
+<head>
+    <style>
+        body
+        {
+            background-color: white;
+            font-size: .85em;
+            font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
+            margin: 0;
+            padding: 0;
+            color: #393939;
+        }
+        
+        h1
+        {
+            font-size: 2em;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+
+@Model.ActioningUserName requested following site details to be changed:
+<br />
+CAN: @Model.CAN
+
+<h3>Changing to:</h3>
+
+Site Contact: @Model.SiteContactUpdated
+<br />
+Site Address:
+<br />
+@Model.AddressLine1Updated
+<br />
+@Model.AddressLine2Updated
+<br />
+@Model.AddressLine3Updated
+<br />
+@Model.AddressLine4Updated
+<br />
+@Model.AddressLine5Updated
+<br />
+@Model.AddressLine5Updated
+<br />
+@Model.CountyUpdated
+<br/>
+Postcode: @Model.PostcodeUpdated
+<br />
+Telephone: @Model.TelephoneUpdated
+<br />
+Site Status: @Model.SiteStatusUpdated
+
+<h3>Changing from:</h3>
+
+Site Contact: @Model.SiteContactCurrent
+<br />
+Site Address:
+<br />
+@Model.AddressLine1Current
+<br />
+@Model.AddressLine2Current
+<br />
+@Model.AddressLine3Current
+<br />
+@Model.AddressLine4Current
+<br />
+@Model.AddressLine5Current
+<br />
+@Model.CountyCurrent
+<br />
+Postcode: @Model.PostcodeCurrent
+<br />
+Telephone: @Model.TelephoneCurrent
+<br />
+Site Status: @Model.SiteStatusCurrent

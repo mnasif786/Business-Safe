@@ -1,0 +1,93 @@
+﻿@model BusinessSafe.WebSite.Areas.Users.ViewModels.AddUsersViewModel
+<div class="container-fluid" id="UserPermissionsSelection">
+    <fieldset class="well">
+        <div class="container ipad-container">
+            <form id="UserPermissions" class="row form-inline" method="POST" action="@Url.Action((Model.EmployeeAlreadyExistsAsUser == false ? "CreateUser" : "UpdateUser"), "AddUsers")">
+                @Html.ValidationSummary("The following validation errors occured:")
+                @Html.Hidden("CompanyId", @Model.CompanyId)
+                @Html.Hidden("UserId", @Model.UserId)
+                @Html.HiddenFor(m=>m.IsUserDeleted)
+                @Html.HiddenFor(m=>m.IsUserRegistered)
+                @Html.Hidden("EmployeeAlreadyExistsAsUser", @Model.EmployeeAlreadyExistsAsUser)
+                @Html.Hidden("CanChangeEmployeeDdl", @Model.CanChangeEmployeeDdl)
+                @Html.Hidden("MainSiteId", @Model.MainSiteId)
+
+                <div class="span6">
+                    <h3>Employee Details</h3>
+                    <div class="row">
+                        <label for="Users" class="span2">Employee Name</label>
+                        @if(Model.CanChangeEmployeeDdl)
+                        {
+                            @Html.TextBox("Employee", "-- Select Option --", new { @class = "span3" })
+                            <a class="icon-question-sign" data-title="Information" data-content="In this list you can see only those employees with no active user account or those employees with an associated deleted user account.  This way you can create a new user or reinstate a deleted user and select new user settings.  Please note that you can also reinstate users from the deleted users section." data-original-title=""></a>
+                        }
+                        else
+                        {
+                            <strong>@Model.EmployeeName</strong>
+                        }
+                        @Html.Hidden("EmployeeId", Model.EmployeeId)    
+                    </div>
+                    <div class="row">
+                        <label for="EmployeeReference" class="span2">Employee Number</label>
+                        <strong>@Model.EmployeeReference</strong>
+                    </div>
+                    <div class="row">
+                        <label for="JobTitle" class="span2">Employee Job Title</label>
+                        <strong>@Model.JobTitle</strong>
+                    </div>
+                    <div class="row">
+                        <label for="Department" class="span2">Department</label>
+                        <strong>@Model.Department</strong>
+                    </div>
+                    <div class="row">
+                        <label for="ManagerName" class="span2">Manager</label>
+                        <strong>@Model.ManagerName</strong>
+                    </div>
+                </div>
+                <div class="span6">
+                    <h3>User Permissions</h3>
+                    <div class="row">
+                        <label for="Roles" class="span2">User Roles</label>
+                            
+                        @if (Model.CanChangeRoleDdl)
+                        {
+                            @Html.TextBox("Role", "", new { @class = "span3" })
+                        }
+                        else
+                        {
+                            <strong>@Model.RoleDescription</strong>
+                        }
+                        @Html.Hidden("RoleId", Model.RoleId)
+                    </div>
+                    <div class="row">
+                        <label for="SiteGroups" class="span2">Site Groups</label>
+                        @Html.TextBox("SiteGroup", "", new { @class = "span3" })
+                        @Html.Hidden("SiteGroupId", Model.SiteGroupId)
+                    </div>
+                    <div class="row">
+                        <label for="Sites" class="span2">Site</label>
+                        @Html.TextBox("Site", "", new { @class = "span3" })
+                        @Html.Hidden("SiteId", Model.SiteId)
+                    </div>
+                    <div class="row">
+                        <label for="Sites" class="span2">All Sites</label>
+                        @Html.CheckBoxFor(m => m.PermissionsApplyToAllSites)
+                        @Html.ValidationMessageFor(x => x.PermissionsApplyToAllSites, "*")
+                    </div>
+                    <div id="SaveCancelButtons" class="row @(Model.SaveCancelButtonsVisible ? string.Empty : "hide")">
+                        <label class="span2"></label>
+                        <button type="submit" class="btn btn-success" id="SaveButton">Save</button>
+                        <a  href="@Url.Action("Index", "ViewUsers", new { companyId = Model.CompanyId })" class="btn-link btn-cancel" id="CancelButton">Cancel</a>
+                    </div>
+                    @if (!Model.CanChangeRoleDdl)
+                    {
+                        <div class="alert-full-width">
+                            As a User Admin you are unable to change your role. If you wish to change it please contact Peninsula Online Service Desk 0844 892 2492.
+                        </div>
+                    }
+                </div>
+            </form>
+        </div>
+    </fieldset>
+</div>
+<div id="ReinstateUserDialog" class="hide"><p>This user had a deleted pending registration.  Do you wish to reinstate and resend the registration?</p></div>

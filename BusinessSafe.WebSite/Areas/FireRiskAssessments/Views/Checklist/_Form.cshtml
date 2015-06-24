@@ -1,0 +1,66 @@
+﻿@using BusinessSafe.WebSite.Areas.FireRiskAssessments.ViewModels
+@using BusinessSafe.WebSite.Extensions
+@model FireRiskAssessmentChecklistViewModel
+<div class="fire checklists">
+        
+    @if (TempData["Notice"] != null)
+    {
+        <div class="alert alert-success">
+            <a id="success-message-anchor" href="#successmessage"></a>
+            @TempData["Notice"].ToString()
+        </div>    
+    }
+    
+    @if (!Model.IsValid)
+    {
+        <div id="checklists-error" class="alert alert-error">There were errors trying to complete your checklist, please correct them before completing again.</div>
+    }
+   
+    @Html.Partial("_SectionTabs", Model)
+  
+    <form action="" class="tab-content" >
+        @Html.HiddenFor(x => x.CompanyId)
+        @Html.HiddenFor(x => x.RiskAssessmentId)
+        @Html.HiddenFor(x => x.FireRiskAssessmentChecklistId)
+        
+        
+        @foreach (var section in Model.Sections)
+        {
+            @Html.Partial("_Section", section)
+        }
+        
+        
+       
+       <label id="successMessage" class="pull-left" style="color: green; margin-bottom: 0;">Checklist has been saved.</label>    
+       
+        <div class="next-previous">
+            <a class="btn previous" href="#" id="previousButton">
+            </a>
+            <a class="btn next" href="#" id="nextButton">
+            </a>
+        </div>
+        <div class="row-fluid">
+            
+        </div>
+        
+        @if (Model.IsSaveButtonEnabled(User))
+        {
+            var viewName = Html.IsReadOnly() ? "View" : "Index";
+            var urlAction = Url.Action(viewName, "SignificantFindings", new { area = "FireRiskAssessments", companyId = Model.CompanyId, riskAssessmentId = Model.RiskAssessmentId });
+            <input type="submit" id="saveButton" value="Save" class="btn btn-success" />
+            <input type="button" id="save" value="Save" class="btn btn-success" />
+            <a id="saveAndContinue" class="btn btn-primary" href="#">
+                Save &amp; Continue <i class="icon-chevron-right icon-white"></i></a>
+            <a id="nextBtn" class="btn btn-primary"mainUrl="SignificantFindings" href="@urlAction">
+                Save &amp; Continue <i class="icon-chevron-right icon-white"></i></a>
+           
+        }
+        
+        <a class="btn btn-link" href="@Url.Action("Index", "RiskAssessment", new { area = "FireRiskAssessments", companyId = @Model.CompanyId })">
+            Cancel</a>
+        @if (Model.IsSaveButtonEnabled(User))
+        {
+            <input type="submit" id="complete-checklists" value="Complete Fire Checklist" class="tab-dependent-visibility-button btn btn-inverse pull-right" />
+        }
+    </form>
+</div>

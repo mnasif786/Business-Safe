@@ -1,0 +1,11 @@
+﻿@model BusinessSafe.WebSite.Areas.Responsibilities.ViewModels.ResponsibilitiesIndexViewModel
+
+<h2>
+    <a id="show-deleted" class="btn @(Model.IsShowDeleted ? "disabled" : string.Empty)" href="#">Show Deleted</a>
+@if(Model.IsShowDeleted)
+{
+    @Html.ActionLink("Show Open", "Index", "Responsibility", null, new { @class = "btn" })
+}
+    @* <a id="showCompletedLink" class="btn @(Model.IsShowCompleted ? "disabled" : string.Empty)" href="#">Show Completed</a>*@
+    <span class="tick"></span>Responsibilities@* - @Model.GetAdditionalTitle()*@
+</h2>

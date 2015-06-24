@@ -1,0 +1,30 @@
+﻿@using BusinessSafe.Domain.Entities
+@using BusinessSafe.WebSite.Extensions
+@model BusinessSafe.WebSite.ViewModels.PermissionTarget
+<tr>
+    @* Hack here to display "Tasks"*@    
+    @{
+        string permissionName = @Model.PermissionTargetName.AddSpacesToName();
+        if (permissionName == "Risk Assessment Tasks")
+        {
+            permissionName = "Tasks";
+        }
+    }
+    <td>
+        <strong>@permissionName</strong>
+    </td>
+    @{
+    }
+    @for (var i = 0; i < 4; i++)
+    {
+        <td>
+            @{
+                var correspondingPermission = Model.Permissions.FirstOrDefault(p => (int)p.PermissionActivity - 1 == i);
+                if (correspondingPermission != null)
+                {
+                    <input type="checkbox" class="permissioncheckbox" data-permission-name="@correspondingPermission.PermissionName" data-id="@correspondingPermission.PermissionId" @Model.GetChecked(correspondingPermission) @Model.GetEnabled() />
+                }
+            }
+        </td>
+    }
+</tr>

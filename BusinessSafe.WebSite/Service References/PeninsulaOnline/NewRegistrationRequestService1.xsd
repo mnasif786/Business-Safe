@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Peninsula.Online.Application.Requests" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Peninsula.Online.Application.Requests" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8073/NewRegistrationRequestService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="RegisterAdminUserRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ClientId" type="xs:long" />
+      <xs:element minOccurs="0" name="Forename" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RegisteredBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RegistrationEmail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SiteId" type="xs:long" />
+      <xs:element minOccurs="0" name="Surname" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RegisterAdminUserRequest" nillable="true" type="tns:RegisterAdminUserRequest" />
+  <xs:complexType name="RegisterNonAdminUserRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ClientId" type="xs:long" />
+      <xs:element minOccurs="0" name="PeninsulaApplicationId" type="ser:guid" />
+      <xs:element minOccurs="0" name="RegistrationEmail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TelephoneNumber" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RegisterNonAdminUserRequest" nillable="true" type="tns:RegisterNonAdminUserRequest" />
+</xs:schema>

@@ -1,0 +1,45 @@
+﻿@model BusinessSafe.MessageHandlers.Emails.ViewModels.SendSubmitChecklistEmailViewModel
+<head>
+    <style>
+        body
+        {
+            background-color: white;
+            font-size: .85em;
+            font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
+            margin: 0;
+            padding: 0;
+            color: #393939;
+        }
+        
+        h1
+        {
+            font-size: 2em;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>
+        SafeCheck - Evaluation Report has been uploaded to BusinessSafe Online
+    </h1>
+    <p>
+        Further to the recent visit from our Business Safety Consultant, your Evaluation Report has been uploaded to BusinessSafe Online. To view your Evaluation Report, please log into BusinessSafe Online using the following link:
+    </p>
+    <p>
+        @Model.BusinessSafeOnlineLink
+    </p>
+    <p>
+        An Action Plan has been created in the 'My Responsibilities' section, which you should use to assist your organisation in achieving health and safety compliance and where you can assign relevant tasks to you key employees.
+    </p>
+    <p>
+       You will find a full version of your Evaluation Report under 'My Documentation – BusinessSafe System'.
+    </p>
+    <p>
+        Should you require any assistance with the navigation of BusinessSafe Online, please contact the help desk on 0844 892 2492 or by e-mail to <a href="mailto:support@peninsula-online.com">support@peninsula-online.com</a>.
+    </p>
+    <p>
+        If you have any technical queries please contact the BusinessSafe Advice Team on 0844 892 2772 (option 2) or by e-mail to <a href="mailto:BSAdvice@peninsula-uk.com">BSAdvice@peninsula-uk.com</a>.
+    </p>
+</body>

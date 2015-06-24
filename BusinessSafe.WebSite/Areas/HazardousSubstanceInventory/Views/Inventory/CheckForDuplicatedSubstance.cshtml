@@ -1,0 +1,17 @@
+﻿@model IEnumerable<BusinessSafe.Application.DataTransferObjects.HazardousSubstanceDto>
+<div id="SimilarHazardousSubtanceFound">
+    <div class="well">
+        <p>The following similar hazardous substances already exist in your inventory, are
+            you sure you wish to add a new one?</p>
+        <ul>
+            @foreach (var item in Model)
+            {
+                <li>@Html.DisplayFor(modelItem => item.Name)</li>
+            }
+        </ul>
+    </div>
+    <div class="well form-buttons">
+        <button class="btn btn-primary" id="ConfirmDuplicatesButton">Save</button>
+        <button class="btn btn-link" id="CancelDuplicatesButton">Cancel</button>
+    </div>
+</div>

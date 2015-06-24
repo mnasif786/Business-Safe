@@ -1,0 +1,55 @@
+﻿@using BusinessSafe.WebSite.HtmlHelpers
+@using Cassette.Views
+@model BusinessSafe.WebSite.Areas.TaskList.ViewModels.TaskListViewModel
+@{
+    ViewBag.Title = "Task List";
+}
+<section>
+    <span class="legend">Task List</span>
+    <div class="content">
+        @Html.Partial("_SearchForm", Model)
+        @Html.Partial("_EmployeeTasks", Model)
+        @if (Model.IsBulkReassign)
+        {
+            @Html.Partial("_BulkReassign", Model)    
+        }
+    </div>
+</section>
+<div class="hide">
+    <div id="completeTaskDialog" title="Further Control Measure Task">
+    </div>
+    <div id="dialogDeleteResponsibilityTask" title="Delete Responsibility Task">
+        <p>
+            Are you sure you want to delete this Responsibility Task?</p>
+    </div>
+    <div id="TaskDialog" title="Further Control Measure Task">
+    </div>
+   
+    <div id="dialogDeleteFurtherControlMeasureTask" title="Delete Further Control Measure Task">
+        <p>
+            Are you sure you want to delete this further action task?</p>
+    </div>
+    <div id="dialogDeleteReoccurringFurtherControlMeasureTask" title="Delete Reoccurring Task">
+        <p>
+            Deleting this task will also delete all related future scheduled tasks. Do you want
+            to proceed?</p>
+    </div>
+    <div id="dialogDeleteFurtherControlMeasureTaskResponse" title="Existing Completed Tasks">
+    </div>
+</div>
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("taskslist");
+        @Bundles.RenderScripts()  
+    }
+    <script type="text/javascript">
+        $(function () {
+            var sites = @Html.Raw(Json.Encode(Model.Sites));
+            var siteGroups = @Html.Raw(Json.Encode(Model.SiteGroups));
+            var employees = @Html.Raw(Json.Encode(Model.Employees));
+            var taskCategories = @Html.Raw(Json.Encode(Model.TaskCategories));
+            employeeTasksManager.initialize(employees, taskCategories, sites, siteGroups);
+        });
+    </script>
+}

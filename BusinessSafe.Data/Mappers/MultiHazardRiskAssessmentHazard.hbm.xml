@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="MultiHazardRiskAssessmentHazard" table="`MultiHazardRiskAssessmentHazard`" dynamic-update="true">
+    <id name="Id" column="Id" type="long">
+      <generator class="identity"/>
+    </id>
+
+    <many-to-one name="MultiHazardRiskAssessment" class="MultiHazardRiskAssessment" column="RiskAssessmentId" />
+    <many-to-one name="Hazard" class="Hazard" cascade="save-update" column="HazardId" lazy="false" />
+    <property name="Description" />
+
+    <bag name="ControlMeasures" table="GeneralRiskAssessmentControlMeasure" lazy="true" cascade="save-update" inverse="true" where="Deleted = 0" >
+      <key column="MultiHazardRiskAssessmentHazardId"></key>
+      <one-to-many class="BusinessSafe.Domain.Entities.MultiHazardRiskAssessmentControlMeasure, BusinessSafe.Domain.Entities"  />
+    </bag>
+
+    <bag name="FurtherControlMeasureTasks" lazy="true" cascade="save-update" inverse="false" where="deleted = 0" >
+      <key column="MultiHazardRiskAssessmentHazardId"></key>
+      <one-to-many class="BusinessSafe.Domain.Entities.MultiHazardRiskAssessmentFurtherControlMeasureTask, BusinessSafe.Domain.Entities" />
+    </bag>
+
+    <property name="Deleted" />
+    <property name="CreatedOn" update="false" />
+    <many-to-one name="CreatedBy" class="UserForAuditing" column="CreatedBy" update="false"/>
+    <property name="LastModifiedOn" />
+    <many-to-one name="LastModifiedBy" class="UserForAuditing" column="LastModifiedBy"/>
+    <property name="OrderNumber" />
+    
+  </class>
+</hibernate-mapping>

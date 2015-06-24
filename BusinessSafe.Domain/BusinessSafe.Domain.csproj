@@ -1,0 +1,452 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EA0B55F3-6232-400F-8BE0-FEC49883253F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BusinessSafe.Domain</RootNamespace>
+    <AssemblyName>BusinessSafe.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CI|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\CI\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'UAT|AnyCPU'">
+    <OutputPath>bin\UAT\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'LIVE|AnyCPU'">
+    <OutputPath>bin\LIVE\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentValidation">
+      <HintPath>..\packages\FluentValidation.3.3.1.0\lib\Net40\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\packages\structuremap.2.6.3\lib\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\BaseEntity.cs" />
+    <Compile Include="Common\Entity.cs" />
+    <Compile Include="Common\IAuditable.cs" />
+    <Compile Include="Common\IRepository.cs" />
+    <Compile Include="Common\ValidationMessage.cs" />
+    <Compile Include="Common\ValidationMessageCollection.cs" />
+    <Compile Include="Constants\JurisdictionNames.cs" />
+    <Compile Include="Constants\NotificationTypeParameters.cs" />
+    <Compile Include="CustomExceptions\AttemptingToCompleteFurtherControlMeasureTaskThatIsCompletedException.cs" />
+    <Compile Include="CustomExceptions\AttemptingToCompleteFurtherControlMeasureTaskThatIsNotRequiredException.cs" />
+    <Compile Include="CustomExceptions\AttemptingToCompleteRiskAssessmentReviewTaskThatIsCompletedException.cs" />
+    <Compile Include="CustomExceptions\AttemptingToCompleteRiskAssessmentReviewWithoutArchiveOrNextReviewDateSetException.cs" />
+    <Compile Include="CustomExceptions\AttemptingToCreateEmployeeAsUserWhenUserExistsException.cs" />
+    <Compile Include="CustomExceptions\AttemptingToDeleteFurtherControlMeasureTaskThatIsCompletedException.cs" />
+    <Compile Include="CustomExceptions\AttemptingToDeleteRiskAssessmentReviewTaskException.cs" />
+    <Compile Include="CustomExceptions\AttemptingToDeleteRiskAssessmentReviewTaskWithNoRiskAssessmentReviewSetException.cs" />
+    <Compile Include="CustomExceptions\AttemptingToDeleteRoleCurrentlyUsedByUsersException.cs" />
+    <Compile Include="CustomExceptions\AttemptingToDeleteSystemDefaultException.cs" />
+    <Compile Include="CustomExceptions\AttemptingToDeleteSystemRoleException.cs" />
+    <Compile Include="CustomExceptions\AttemptingToMarkAsNoLongerRequiredFurtherActionTaskThatIsCompletedException.cs" />
+    <Compile Include="CustomExceptions\AttemptingToMarkForDeleteEmergencyContactEmergencyContactNotFoundOnEmployeeException.cs" />
+    <Compile Include="CustomExceptions\AttemptingToReassignFurtherActionTaskThatIsCompletedException.cs" />
+    <Compile Include="CustomExceptions\AttemptingToRegisterEmployeeAsUserForDifferentCompanyException.cs" />
+    <Compile Include="CustomExceptions\AttemptingToCreateEmployeeAsUserNoUserSiteSetException.cs" />
+    <Compile Include="CustomExceptions\AttemptingToResendEmailForEmployeeChecklistThatDoesNotHaveExistingEmailsException.cs" />
+    <Compile Include="CustomExceptions\AttemptingToUpdateEmergencyContactEmergencyContactsDetailsNotFoundForEmployeeException.cs" />
+    <Compile Include="CustomExceptions\CompanyMismatchException.cs" />
+    <Compile Include="CustomExceptions\ContactDetailsAlreadyAttachedToEmployeeException.cs" />
+    <Compile Include="CustomExceptions\ControlMeasureDoesNotExistOnRiskAssessmentException.cs" />
+    <Compile Include="CustomExceptions\ControlMethodDoesNotExistInHazard.cs" />
+    <Compile Include="CustomExceptions\AttemptingToCompleteRiskAssessmentReviewThatIsCompletedException.cs" />
+    <Compile Include="CustomExceptions\AttemptingToMarkAsNoLongerRequiredRiskAssessmentReviewTaskThatIsCompletedException.cs" />
+    <Compile Include="CustomExceptions\AttemptingToCompleteFurtherControlMeasureTaskThatTheUserDoesNotHavePermissionToAccess.cs" />
+    <Compile Include="CustomExceptions\AttemptingToTaskThatIsCompletedException.cs" />
+    <Compile Include="CustomExceptions\AttemptingToMarkAsNoLongerRequiredResponsibilityTaskThatIsCompletedException.cs" />
+    <Compile Include="CustomExceptions\AttemptingToDeleteMandatorySafeCheckQuestionException.cs" />
+    <Compile Include="CustomExceptions\AttemptingToMarkAsNoLongerRequiredActionTaskThatIsCompletedException.cs" />
+    <Compile Include="CustomExceptions\DocumentAlreadyAttachedToRiskAssessmentException.cs" />
+    <Compile Include="CustomExceptions\EmployeeNotAttachedToRiskAssessmentException.cs" />
+    <Compile Include="CustomExceptions\ExceptionRiskAssessmentTypeHelper.cs" />
+    <Compile Include="CustomExceptions\FireSafetyControlMeasureNotAttachedToRiskAssessmentException.cs" />
+    <Compile Include="CustomExceptions\FurtherActionTaskDoesNotExistInRiskAssessmentHazardException.cs" />
+    <Compile Include="CustomExceptions\HazardDoesNotExistInRiskAssessmentException.cs" />
+    <Compile Include="CustomExceptions\HazardNotAttachedToRiskAssessmentException.cs" />
+    <Compile Include="CustomExceptions\InvalidAddUpdateEmployeeContactDetailsParameters.cs" />
+    <Compile Include="CustomExceptions\MarkForDeleteSiteGroupException.cs" />
+    <Compile Include="CustomExceptions\NoneMatchingControlSystemRuleException.cs" />
+    <Compile Include="CustomExceptions\NonEmployeeAlreadyAttachedToRiskAssessmentException.cs" />
+    <Compile Include="CustomExceptions\NonEmployeeNotAttachedToRiskAssessmentException.cs" />
+    <Compile Include="CustomExceptions\AttemptingToUpdateSystemDefaultException.cs" />
+    <Compile Include="CustomExceptions\PersonAtRiskAlreadyAttachedToRiskAssessmentException.cs" />
+    <Compile Include="CustomExceptions\PersonAtRiskNotAttachedToRiskAssessmentException.cs" />
+    <Compile Include="CustomExceptions\RiskAssessmentDocumentDoesNotExistInRiskAssessmentException.cs" />
+    <Compile Include="CustomExceptions\SafeCheckChecklistAlreadySubmittedException.cs" />
+    <Compile Include="CustomExceptions\SourceOfFuelAlreadyAttachedToRiskAssessmentException.cs" />
+    <Compile Include="CustomExceptions\SourceOfFuelNotAttachedToRiskAssessmentException.cs" />
+    <Compile Include="CustomExceptions\SourceOfIgnitionAlreadyAttachedToRiskAssessmentException.cs" />
+    <Compile Include="CustomExceptions\SourceOfIgnitionNotAttachedToRiskAssessmentException.cs" />
+    <Compile Include="CustomExceptions\UserAttemptingToDeleteSelfException.cs" />
+    <Compile Include="CustomExceptions\UserNotAssignedToSiteElementStructureException.cs" />
+    <Compile Include="Entities\AccidentRecord.cs" />
+    <Compile Include="Entities\AccidentRecordBodyPart.cs" />
+    <Compile Include="Entities\AccidentRecordDocument.cs" />
+    <Compile Include="Entities\AccidentRecordNextStepSection.cs" />
+    <Compile Include="Entities\AccidentRecordNotificationMember.cs" />
+    <Compile Include="Entities\AccidentRecordStatusEnum.cs" />
+    <Compile Include="Entities\AccidentType.cs" />
+    <Compile Include="Entities\Action.cs" />
+    <Compile Include="Entities\ActionCategory.cs" />
+    <Compile Include="Entities\ActionPlanStatus.cs" />
+    <Compile Include="Entities\ActionQuestionStatus.cs" />
+    <Compile Include="Entities\AddedDocument.cs" />
+    <Compile Include="Entities\Answer.cs" />
+    <Compile Include="Entities\ApplicationToken.cs" />
+    <Compile Include="Entities\AuthenticationToken.cs" />
+    <Compile Include="Entities\BodyPart.cs" />
+    <Compile Include="Entities\BusinessSafeCompanyDetail.cs" />
+    <Compile Include="Entities\CauseOfAccident.cs" />
+    <Compile Include="Entities\ChecklistGeneratorEmployee.cs" />
+    <Compile Include="Entities\ChecklistRiskAssessmentType.cs" />
+    <Compile Include="Entities\AccidentRecordInjury.cs" />
+    <Compile Include="Entities\ActionPlan.cs" />
+    <Compile Include="Entities\ActionTask.cs" />
+    <Compile Include="Entities\ActionPlanIndex.cs" />
+    <Compile Include="Entities\EmployeeTaskNotification.cs" />
+    <Compile Include="Entities\Injury.cs" />
+    <Compile Include="Entities\Jurisdiction.cs" />
+    <Compile Include="Entities\LengthOfTimeUnableToCarryOutWorkEnum.cs" />
+    <Compile Include="Entities\NextStepsSectionEnum.cs" />
+    <Compile Include="Entities\NotificationType.cs" />
+    <Compile Include="Entities\OthersInvolvedAccidentDetails.cs" />
+    <Compile Include="Entities\PersonInvolvedEnum.cs" />
+    <Compile Include="Entities\SafeCheck\Category.cs" />
+    <Compile Include="Entities\SafeCheck\Checklist.cs" />
+    <Compile Include="Entities\SafeCheck\ChecklistAnswer.cs" />
+    <Compile Include="Entities\SafeCheck\ChecklistQuestion.cs" />
+    <Compile Include="Entities\SafeCheck\ChecklistTemplateQuestionComparer.cs" />
+    <Compile Include="Entities\SafeCheck\ClientQuestion.cs" />
+    <Compile Include="Entities\SafeCheck\Consultant.cs" />
+    <Compile Include="Entities\SafeCheck\ChecklistUpdatesRequired.cs" />
+    <Compile Include="Entities\SafeCheck\ChecklistOtherEmail.cs" />
+    <Compile Include="Entities\SafeCheck\FavouriteChecklist.cs" />
+    <Compile Include="Entities\SafeCheck\MaintenanceUser.cs" />
+    <Compile Include="Entities\SafeCheck\SafeCheckChecklistPersonSeen.cs" />
+    <Compile Include="Entities\SafeCheck\LastQaAdvisorAssigned.cs" />
+    <Compile Include="Entities\SafeCheck\SummaryReportHeader.cs" />
+    <Compile Include="Entities\SafeCheck\QaAdvisor.cs" />
+    <Compile Include="Entities\SafeCheck\ImmediateRiskNotification.cs" />
+    <Compile Include="Entities\SafeCheck\ImpressionType.cs" />
+    <Compile Include="Entities\SafeCheck\ReportLetterStatementCategory.cs" />
+    <Compile Include="Entities\SafeCheck\ResponseType.cs" />
+    <Compile Include="Entities\SafeCheck\Timescale.cs" />
+    <Compile Include="Entities\SafeCheck\Question.cs" />
+    <Compile Include="Entities\SafeCheck\QuestionResponse.cs" />
+    <Compile Include="Entities\SafeCheck\ChecklistTemplate.cs" />
+    <Compile Include="Entities\SafeCheck\ChecklistTemplateQuestion.cs" />
+    <Compile Include="Entities\SeverityOfInjuryEnum.cs" />
+    <Compile Include="Entities\StatutoryResponsibilityTaskTemplate.cs" />
+    <Compile Include="Entities\StatutoryResponsibilityTemplate.cs" />
+    <Compile Include="Entities\TargetTimeScales.cs" />
+    <Compile Include="Entities\TaskStatus.cs" />
+    <Compile Include="Entities\FireRiskAssessmentSourceOfFuel.cs" />
+    <Compile Include="Entities\FireRiskAssessmentSourceOfIgnition.cs" />
+    <Compile Include="Entities\ResponsibilityTask.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskPhrase.cs" />
+    <Compile Include="Entities\PersonalRiskAssessmentChecklist.cs" />
+    <Compile Include="Entities\Responsibility.cs" />
+    <Compile Include="Entities\ResponsibilityReason.cs" />
+    <Compile Include="Entities\EmployeeForAuditing.cs" />
+    <Compile Include="Entities\FireAnswer.cs" />
+    <Compile Include="Entities\FireRiskAssessmentChecklist.cs" />
+    <Compile Include="Entities\FireRiskAssessmentFurtherControlMeasureTask.cs" />
+    <Compile Include="Entities\ResponsibilityCategory.cs" />
+    <Compile Include="Entities\RiskAssessmentEmployee.cs" />
+    <Compile Include="Entities\RiskAssessmentNonEmployee.cs" />
+    <Compile Include="Entities\RiskAssessmentPeopleAtRisk.cs" />
+    <Compile Include="Entities\RiskAssessor.cs" />
+    <Compile Include="Entities\RolePermission.cs" />
+    <Compile Include="Entities\SignificantFinding.cs" />
+    <Compile Include="Entities\TaskListItem.cs" />
+    <Compile Include="Entities\UserForAuditing.cs" />
+    <Compile Include="Entities\YesNoNotApplicableEnum.cs" />
+    <Compile Include="Entities\PersonalAnswer.cs" />
+    <Compile Include="Entities\Checklist.cs" />
+    <Compile Include="Entities\ControlSystem.cs" />
+    <Compile Include="Entities\DocumentTypeEnum.cs" />
+    <Compile Include="Entities\EmployeeChecklist.cs" />
+    <Compile Include="Entities\EmployeeChecklistEmail.cs" />
+    <Compile Include="Entities\FireRiskAssessment.cs" />
+    <Compile Include="Entities\FireSafetyControlMeasure.cs" />
+    <Compile Include="Entities\FurtherControlMeasureTaskCategoryEnum.cs" />
+    <Compile Include="Entities\PersonalRiskAssessementEmployeeChecklistStatus.cs" />
+    <Compile Include="Entities\PersonalRiskAssessment.cs" />
+    <Compile Include="Entities\FurtherControlMeasureTask.cs" />
+    <Compile Include="Entities\HazardHazardType.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentFurtherControlMeasureTask.cs" />
+    <Compile Include="Entities\ControlSystemEnum.cs" />
+    <Compile Include="Entities\DocHandlerDocumentTypeGroup.cs" />
+    <Compile Include="Entities\CompanyDetails.cs" />
+    <Compile Include="Entities\CompanyVehicleType.cs" />
+    <Compile Include="Entities\DocHandlerDocumentType.cs" />
+    <Compile Include="Entities\Document.cs" />
+    <Compile Include="Entities\DocumentKeyword.cs" />
+    <Compile Include="Entities\DustinessOrVolatility.cs" />
+    <Compile Include="Entities\HazardousSubstanceGroup.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessment.cs" />
+    <Compile Include="Entities\HazardousSubstance.cs" />
+    <Compile Include="Entities\HazardousSubstanceRiskAssessmentControlMeasure.cs" />
+    <Compile Include="Entities\HazardousSubstanceSafetyPhrase.cs" />
+    <Compile Include="Entities\HazardousSubstanceStandard.cs" />
+    <Compile Include="Entities\HazardTypeEnum.cs" />
+    <Compile Include="Entities\MultiHazardRiskAssessment.cs" />
+    <Compile Include="Entities\PermissionActivity.cs" />
+    <Compile Include="Entities\PermissionTarget.cs" />
+    <Compile Include="Entities\Quantity.cs" />
+    <Compile Include="Entities\Keyword.cs" />
+    <Compile Include="Entities\MatterState.cs" />
+    <Compile Include="Entities\Pictogram.cs" />
+    <Compile Include="Entities\Question.cs" />
+    <Compile Include="Entities\QuestionType.cs" />
+    <Compile Include="Entities\RiskAssessmentReview.cs" />
+    <Compile Include="Entities\Country.cs" />
+    <Compile Include="Entities\DocumentOriginType.cs" />
+    <Compile Include="Entities\DocumentType.cs" />
+    <Compile Include="Entities\Employee.cs" />
+    <Compile Include="Entities\EmployeeContactDetail.cs" />
+    <Compile Include="Entities\EmployeeEmergencyContactDetail.cs" />
+    <Compile Include="Entities\ICompanyDefault.cs" />
+    <Compile Include="Entities\ReoccurringSchedule.cs" />
+    <Compile Include="Entities\RiskAssessmentDocument.cs" />
+    <Compile Include="Entities\RiskAssessmentReviewTask.cs" />
+    <Compile Include="Entities\RiskAssessmentStatus.cs" />
+    <Compile Include="Entities\RiskAssessment.cs" />
+    <Compile Include="Entities\RiskPhrase.cs" />
+    <Compile Include="Entities\SafetyPhrase.cs" />
+    <Compile Include="Entities\Section.cs" />
+    <Compile Include="Entities\SourceOfFuel.cs" />
+    <Compile Include="Entities\SourceOfIgnition.cs" />
+    <Compile Include="Entities\Supplier.cs" />
+    <Compile Include="Entities\Task.cs" />
+    <Compile Include="Entities\EmploymentStatus.cs" />
+    <Compile Include="Entities\TaskDocument.cs" />
+    <Compile Include="Entities\Hazard.cs" />
+    <Compile Include="Entities\Nationality.cs" />
+    <Compile Include="Entities\NonEmployee.cs" />
+    <Compile Include="Entities\EmailTemplate.cs" />
+    <Compile Include="Entities\PeopleAtRisk.cs" />
+    <Compile Include="Entities\Permission.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entities\PermissionGroup.cs" />
+    <Compile Include="Entities\ResponsibilityTaskStatus.cs" />
+    <Compile Include="Entities\GeneralRiskAssessment.cs" />
+    <Compile Include="Entities\MultiHazardRiskAssessmentControlMeasure.cs" />
+    <Compile Include="Entities\MultiHazardRiskAssessmentFurtherControlMeasureTask.cs" />
+    <Compile Include="Entities\MultiHazardRiskAssessmentHazard.cs" />
+    <Compile Include="Entities\TaskHistoryRecord.cs" />
+    <Compile Include="Entities\TaskReoccurringType.cs" />
+    <Compile Include="Entities\DerivedTaskStatusForDisplay.cs" />
+    <Compile Include="Entities\WorkApproach.cs" />
+    <Compile Include="Entities\YesNoUnknownEnum.cs" />
+    <Compile Include="Factories\RiskAssessmentReviewFactory.cs" />
+    <Compile Include="FireRiskAssessmentControlMeasure.cs" />
+    <Compile Include="ParameterClasses\AddUpdateEmployeeContactDetailsParameters.cs" />
+    <Compile Include="ParameterClasses\AddUpdateEmployeeParameters.cs" />
+    <Compile Include="ParameterClasses\CreateAddedDocumentParameters.cs" />
+    <Compile Include="ParameterClasses\CreateDocumentParameters.cs" />
+    <Compile Include="ParameterClasses\EmergencyContactDetailParameters.cs" />
+    <Compile Include="ParameterClasses\EmergencyShutOffParameters.cs" />
+    <Compile Include="ParameterClasses\EmployeesWithNewEmailsParameters.cs" />
+    <Compile Include="ParameterClasses\ExistingReferenceParameters.cs" />
+    <Compile Include="ParameterClasses\RegisterEmployeeAsUserParameters.cs" />
+    <Compile Include="ParameterClasses\SafeCheck\AddImmediateRiskNotificationParameters.cs" />
+    <Compile Include="ParameterClasses\SafeCheck\CreateUpdateActionParameters.cs" />
+    <Compile Include="ParameterClasses\SafeCheck\CreateUpdateChecklistParameters.cs" />
+    <Compile Include="ParameterClasses\SafeCheck\SubmitAnswerParameters.cs" />
+    <Compile Include="ParameterClasses\SafetyPhraseParameters.cs" />
+    <Compile Include="ParameterClasses\SubmitPersonalAnswerParameters.cs" />
+    <Compile Include="ParameterClasses\SubmitFireAnswerParameters.cs" />
+    <Compile Include="RepositoryContracts\IAccidentRecordRepository.cs" />
+    <Compile Include="RepositoryContracts\IActionRepository.cs" />
+    <Compile Include="RepositoryContracts\IActionTaskRepository.cs" />
+    <Compile Include="RepositoryContracts\IBodyPartRepository.cs" />
+    <Compile Include="RepositoryContracts\IInjuryRepository.cs" />
+    <Compile Include="RepositoryContracts\ICauseOfAccidentRepository.cs" />
+    <Compile Include="RepositoryContracts\IAccidentTypeRepository.cs" />
+    <Compile Include="RepositoryContracts\IJurisdictionRepository.cs" />
+    <Compile Include="RepositoryContracts\IOthersInvolvedAccidentDetailsRepository.cs" />
+    <Compile Include="RepositoryContracts\IStatutoryResponsibilityTaskTemplateRepository.cs" />
+    <Compile Include="RepositoryContracts\IStatutoryResponsibilityTemplateRepository.cs" />
+    <Compile Include="RepositoryContracts\IResponsibilityRepository.cs" />
+    <Compile Include="RepositoryContracts\IResponsibilityReasonRepository.cs" />
+    <Compile Include="RepositoryContracts\IEmployeeForAuditingRepository.cs" />
+    <Compile Include="RepositoryContracts\IBusinessSafeCompanyDetailRepository.cs" />
+    <Compile Include="RepositoryContracts\IResponsibilityCategoryRepository.cs" />
+    <Compile Include="RepositoryContracts\IResponsibilityTaskRepository.cs" />
+    <Compile Include="RepositoryContracts\IRiskAssessorRepository.cs" />
+    <Compile Include="RepositoryContracts\IApplicationTokenRepository.cs" />
+    <Compile Include="RepositoryContracts\IUserForAuditingRepository.cs" />
+    <Compile Include="RepositoryContracts\IAuthenticationTokenRepository.cs" />
+    <Compile Include="RepositoryContracts\IFireAnswerRepository.cs" />
+    <Compile Include="RepositoryContracts\IFireRiskAssessmentChecklistRepository.cs" />
+    <Compile Include="RepositoryContracts\IEmployeeChecklistEmailRepository.cs" />
+    <Compile Include="RepositoryContracts\IChecklistRepository.cs" />
+    <Compile Include="RepositoryContracts\IEmployeeChecklistRepository.cs" />
+    <Compile Include="RepositoryContracts\IFireRiskAssessmentRepository.cs" />
+    <Compile Include="RepositoryContracts\IFireSafetyControlMeasureRepository.cs" />
+    <Compile Include="RepositoryContracts\IQuestionRepository.cs" />
+    <Compile Include="RepositoryContracts\IFurtherControlMeasureTasksRepository.cs" />
+    <Compile Include="RepositoryContracts\IHazardousSubstanceRiskAssessmentFurtherControlMeasureTaskRepository.cs" />
+    <Compile Include="RepositoryContracts\IMultiHazardRiskAssessmentRepository.cs" />
+    <Compile Include="RepositoryContracts\IPersonalRiskAssessmentRepository.cs" />
+    <Compile Include="RepositoryContracts\IHazardTypeRepository.cs" />
+    <Compile Include="RepositoryContracts\IRiskAssessmentDocumentRepository.cs" />
+    <Compile Include="RepositoryContracts\IRiskAssessmentRepository.cs" />
+    <Compile Include="RepositoryContracts\IControlSystemRepository.cs" />
+    <Compile Include="RepositoryContracts\IPictogramRepository.cs" />
+    <Compile Include="RepositoryContracts\ISafetyPhraseRepository.cs" />
+    <Compile Include="RepositoryContracts\IHazardousSubstancesRepository.cs" />
+    <Compile Include="RepositoryContracts\IAddedDocumentRepository.cs" />
+    <Compile Include="RepositoryContracts\IDocHandlerDocumentTypeRepository.cs" />
+    <Compile Include="RepositoryContracts\IDocumentRepository.cs" />
+    <Compile Include="RepositoryContracts\IHazardousSubstanceRiskAssessmentRepository.cs" />
+    <Compile Include="RepositoryContracts\IMultiHazardRiskAssessmentHazardRepository.cs" />
+    <Compile Include="RepositoryContracts\IRiskAssessmentReviewRepository.cs" />
+    <Compile Include="RepositoryContracts\IDocumentTypeRepository.cs" />
+    <Compile Include="RepositoryContracts\ICompanyVehicleTypeRepository.cs" />
+    <Compile Include="RepositoryContracts\ICountriesRepository.cs" />
+    <Compile Include="RepositoryContracts\IEmployeeEmergencyContactDetailsRepository.cs" />
+    <Compile Include="RepositoryContracts\IEmployeeRepository.cs" />
+    <Compile Include="RepositoryContracts\IRiskPhraseRepository.cs" />
+    <Compile Include="RepositoryContracts\ISignificantFindingRepository.cs" />
+    <Compile Include="RepositoryContracts\ISourceOfFuelRepository.cs" />
+    <Compile Include="RepositoryContracts\ISourceOfIgnitionRepository.cs" />
+    <Compile Include="RepositoryContracts\ISupplierRepository.cs" />
+    <Compile Include="RepositoryContracts\ITaskDocumentRepository.cs" />
+    <Compile Include="RepositoryContracts\ITasksRepository.cs" />
+    <Compile Include="RepositoryContracts\IEmploymentStatusRepository.cs" />
+    <Compile Include="RepositoryContracts\IMultiHazardRiskAssessmentFurtherControlMeasureTaskRepository.cs" />
+    <Compile Include="RepositoryContracts\INationalityRepository.cs" />
+    <Compile Include="RepositoryContracts\IPermissionRepository.cs" />
+    <Compile Include="RepositoryContracts\IMultiHazardRiskAssessmentControlMeasureRepository.cs" />
+    <Compile Include="RepositoryContracts\IActionPlanRepository.cs" />
+    <Compile Include="RepositoryContracts\SafeCheck\IMaintenanceUserRepository.cs" />
+    <Compile Include="RepositoryContracts\SafeCheck\IConsultantRepository.cs" />
+    <Compile Include="RepositoryContracts\SafeCheck\IChecklistTemplateQuestionRepository.cs" />
+    <Compile Include="RepositoryContracts\SafeCheck\IFavouriteChecklistRepository.cs" />
+    <Compile Include="RepositoryContracts\SafeCheck\IQaAdvisorRepository.cs" />
+    <Compile Include="RepositoryContracts\SafeCheck\IImpressionTypeRepository.cs" />
+    <Compile Include="RepositoryContracts\SafeCheck\IChecklistQuestionRepository.cs" />
+    <Compile Include="RepositoryContracts\SafeCheck\ICategoryRepository.cs" />
+    <Compile Include="RepositoryContracts\SafeCheck\IChecklistRepository.cs" />
+    <Compile Include="RepositoryContracts\SafeCheck\IChecklistTemplateRepository.cs" />
+    <Compile Include="RepositoryContracts\SafeCheck\IQuestionRepository.cs" />
+    <Compile Include="RepositoryContracts\SafeCheck\IQuestionResponseRepository.cs" />
+    <Compile Include="Services\ControlSystemCalculationService.cs" />
+    <Compile Include="Services\IControlSystemCalculationService.cs" />
+    <Compile Include="Validators\EmployeeContactDetailValidator.cs" />
+    <Compile Include="Validators\RegisterEmployeeAsUserValidator.cs" />
+    <Compile Include="Validators\SiteRequestValidator.cs" />
+    <Compile Include="Validators\SiteAddressRequestValidator.cs" />
+    <Compile Include="Entities\Role.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Entities\TaskCategory.cs" />
+    <Compile Include="Entities\ResponsibilityTaskType.cs" />
+    <Compile Include="Entities\SiteStructureElement.cs" />
+    <Compile Include="Entities\Site.cs" />
+    <Compile Include="Entities\SiteGroup.cs" />
+    <Compile Include="Entities\User.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="InfrastructureContracts\Email\Attachment.cs" />
+    <Compile Include="InfrastructureContracts\Email\IEmail.cs" />
+    <Compile Include="InfrastructureContracts\Logging\IPeninsulaLog.cs" />
+    <Compile Include="InfrastructureContracts\Logging\Log.cs" />
+    <Compile Include="InfrastructureContracts\Logging\LogIgnoreAttribute.cs" />
+    <Compile Include="InfrastructureContracts\Logging\StubPeninsulaLog.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositoryContracts\IRoleRepository.cs" />
+    <Compile Include="RepositoryContracts\IUserRepository.cs" />
+    <Compile Include="RepositoryContracts\IHazardRepository.cs" />
+    <Compile Include="RepositoryContracts\IPeopleAtRiskRepository.cs" />
+    <Compile Include="RepositoryContracts\ISiteStructureElementRepository.cs" />
+    <Compile Include="RepositoryContracts\INonEmployeeRepository.cs" />
+    <Compile Include="RepositoryContracts\IGeneralRiskAssessmentRepository.cs" />
+    <Compile Include="RepositoryContracts\ISiteGroupRepository.cs" />
+    <Compile Include="RepositoryContracts\IEmailTemplateRepository.cs" />
+    <Compile Include="RepositoryContracts\ITaskCategoryRepository.cs" />
+    <Compile Include="RepositoryContracts\ISiteRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\" />
+    <Folder Include="Specification\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BusinessSafe.Domain.dll.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

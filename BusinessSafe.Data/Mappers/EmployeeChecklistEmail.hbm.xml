@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="EmployeeChecklistEmail" table="`EmployeeChecklistEmail`">
+    <id name="Id" column="Id" type="Guid">
+      <generator class="assigned" />
+    </id>
+    <property name="EmailPusherId" />
+	<property name="Message" />
+    <property name="Deleted" type="bool" />
+    <property name="CreatedOn" type="DateTime" />
+    <property name="RecipientEmail" />
+    <many-to-one name="CreatedBy" class="UserForAuditing" column="CreatedBy"/>
+    <property name="LastModifiedOn" type="DateTime" />
+    <many-to-one name="LastModifiedBy" class="UserForAuditing" column="LastModifiedBy"/>
+
+	<bag name="EmployeeChecklists" table="EmployeeChecklistEmployeeChecklistEmail" lazy="true" cascade="save-update" inverse="true" >
+      <key column="EmployeeChecklistEmailId"></key>
+      <many-to-many column="EmployeeChecklistId" class="EmployeeChecklist" />
+	</bag>
+  </class>
+</hibernate-mapping>

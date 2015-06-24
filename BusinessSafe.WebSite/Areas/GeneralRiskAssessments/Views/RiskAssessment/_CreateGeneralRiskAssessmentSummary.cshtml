@@ -1,0 +1,32 @@
+﻿@using BusinessSafe.WebSite.Extensions
+@using BusinessSafe.WebSite.ViewModels
+@model CreatingRiskAssessmentSummaryViewModel
+<div class="container fixed-content ipad-container">
+    <h2><i class="tick"></i>New General Risk Assessment</h2>
+    <form id="CreateRiskAssessmentSummary" class="row form-inline" method="POST" action="@Url.Action("Create", "RiskAssessment")">
+        <fieldset>
+            <legend class="span12"><h3>Create New Risk Assessment</h3></legend>
+            <div class="span12">
+                <label class="span2" for="Title">Title</label>
+                @Html.TextBoxFor(x => x.Title, new { @class = "span3"})
+            </div>
+            <div class="span12">
+                <label class="span2" for="Reference">Reference</label>
+                @Html.TextBoxFor(x => x.Reference, new { @class = "span3" })
+            </div>
+            <div class="span12">
+                <label class="span2"></label>
+                <button type="submit" class="btn btn-success" id="createSummary">Start Risk Assessment</button>
+                <a class="btn btn-link" href="@Url.Action("Index", "RiskAssessment", new { companyId = Html.GetUsersCompanyId(User) })">Cancel</a>
+            </div>
+            @if (!ViewData.ModelState.IsValid)
+            {
+            <div>
+                @Html.Partial("_DistinctValidationSummary")
+            </div>
+            }
+            @Html.HiddenFor(model => model.CompanyId, new { id = "CompanyId", name = "CompanyId" })
+            @Html.HiddenFor(m => m.IsCreateDraft)
+        </fieldset>
+    </form>
+</div>

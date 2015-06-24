@@ -1,0 +1,18 @@
+USE [BusinessSafe]
+GO 
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'SafeCheckQuestion' AND COLUMN_NAME = 'SpecificToClientId')
+BEGIN
+	ALTER TABLE [SafeCheckQuestion]
+	ADD [SpecificToClientId] [bigint] NULL
+END
+GO
+
+--//@UNDO
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'SafeCheckQuestion' AND COLUMN_NAME = 'SpecificToClientId')
+BEGIN
+	ALTER TABLE [SafeCheckQuestion]
+	DROP COLUMN [SpecificToClientId]
+END
+GO

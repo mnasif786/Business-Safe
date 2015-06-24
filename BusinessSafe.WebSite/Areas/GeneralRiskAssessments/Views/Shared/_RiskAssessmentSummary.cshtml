@@ -1,0 +1,30 @@
+﻿@model BusinessSafe.WebSite.Areas.GeneralRiskAssessments.ViewModels.GeneralRiskAssessmentSummaryViewModel
+<div id="RiskAssessmentSummaryView" class="well">
+    <div class="container ipad-container">
+        <div class="row">
+            <div class="span6">
+                <div class="row">
+                    <label class="span2">Title</label>
+                    <strong>@Model.Title</strong>
+                </div>
+                <div class="row">
+                    <label class="span2">Created On</label>
+                    <strong>@Model.CreatedOn.ToShortDateString()</strong>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="row">
+                    <label class="span2">Reference</label>
+                    <strong>@Model.Reference</strong>
+                </div>
+                <div class="row">
+                    <label class="span2">Draft</label>
+                    @Html.CheckBox("IsDraft", Model.RiskAssessmentStatus == "Draft", new { @id = "IsDraft" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="hide">
+    <div id="DialogMarkAsLive" title="Unable to make this Draft Live"></div>
+</div>

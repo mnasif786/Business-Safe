@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.DataTransferObjects" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary.ServiceLayer.DataTransferObjects" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://pbswebtest2:8056/StreamingDocumentLibraryService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary" />
+  <xs:import schemaLocation="http://pbswebtest2:8056/StreamingDocumentLibraryService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="DocumentDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ArchiveDocuments" nillable="true" type="tns:ArrayOfArchiveDocumentDto" />
+      <xs:element minOccurs="0" name="ContentVersion" type="xs:int" />
+      <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedOn" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Deleted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DeletedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DeletedOn" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Extension" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary" minOccurs="0" name="ExternalApplication" nillable="true" type="q1:ExternalApplication" />
+      <xs:element minOccurs="0" name="FileBytes" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="Filename" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FilesizeByte" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="FormattedFileSize" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:long" />
+      <xs:element minOccurs="0" name="IsChanged" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsDeleted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ModifiedOn" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ModifiedReason" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParentFolder" nillable="true" type="tns:FolderDto" />
+      <xs:element minOccurs="0" name="PhysicalFilePath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhysicalFilename" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PreviousContentVersions" nillable="true" type="tns:ArrayOfArchiveDocumentDto" />
+      <xs:element minOccurs="0" name="Tags" nillable="true" type="tns:ArrayOfTagDto" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="DocumentDto" nillable="true" type="tns:DocumentDto" />
+  <xs:complexType name="ArrayOfArchiveDocumentDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ArchiveDocumentDto" nillable="true" type="tns:ArchiveDocumentDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfArchiveDocumentDto" nillable="true" type="tns:ArrayOfArchiveDocumentDto" />
+  <xs:complexType name="ArchiveDocumentDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ContentVersion" type="xs:int" />
+      <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedOn" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Deleted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DeletedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DeletedOn" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DocumentId" type="xs:long" />
+      <xs:element minOccurs="0" name="Extension" nillable="true" type="xs:string" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Peninsula.DocumentLibrary" minOccurs="0" name="ExternalApplication" nillable="true" type="q2:ExternalApplication" />
+      <xs:element minOccurs="0" name="FileBytes" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="Filename" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FilesizeByte" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="FormattedFileSize" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:long" />
+      <xs:element minOccurs="0" name="LastVersionWithThisContent" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ModifiedOn" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ModifiedReason" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParentFolder" nillable="true" type="tns:FolderDto" />
+      <xs:element minOccurs="0" name="PhysicalFilePath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhysicalFilename" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="ArchiveDocumentDto" nillable="true" type="tns:ArchiveDocumentDto" />
+  <xs:complexType name="FolderDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ArchiveFolders" nillable="true" type="tns:ArrayOfArchiveFolderDto" />
+      <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedOn" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Deleted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DeletedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DeletedOn" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Documents" nillable="true" type="tns:ArrayOfDocumentDto" />
+      <xs:element minOccurs="0" name="Folders" nillable="true" type="tns:ArrayOfFolderDto" />
+      <xs:element minOccurs="0" name="Id" type="xs:long" />
+      <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ModifiedOn" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ModifiedReason" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParentFolder" nillable="true" type="tns:FolderDto" />
+      <xs:element minOccurs="0" name="Path" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="FolderDto" nillable="true" type="tns:FolderDto" />
+  <xs:complexType name="ArrayOfArchiveFolderDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ArchiveFolderDto" nillable="true" type="tns:ArchiveFolderDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfArchiveFolderDto" nillable="true" type="tns:ArrayOfArchiveFolderDto" />
+  <xs:complexType name="ArchiveFolderDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedOn" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Deleted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DeletedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DeletedOn" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FolderId" type="xs:long" />
+      <xs:element minOccurs="0" name="Id" type="xs:long" />
+      <xs:element minOccurs="0" name="ModifiedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ModifiedOn" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ModifiedReason" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParentFolder" nillable="true" type="tns:FolderDto" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="ArchiveFolderDto" nillable="true" type="tns:ArchiveFolderDto" />
+  <xs:complexType name="ArrayOfDocumentDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DocumentDto" nillable="true" type="tns:DocumentDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDocumentDto" nillable="true" type="tns:ArrayOfDocumentDto" />
+  <xs:complexType name="ArrayOfFolderDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FolderDto" nillable="true" type="tns:FolderDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFolderDto" nillable="true" type="tns:ArrayOfFolderDto" />
+  <xs:complexType name="ArrayOfTagDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TagDto" nillable="true" type="tns:TagDto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTagDto" nillable="true" type="tns:ArrayOfTagDto" />
+  <xs:complexType name="TagDto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedOn" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Documents" nillable="true" type="tns:ArrayOfDocumentDto" />
+      <xs:element minOccurs="0" name="Id" type="xs:long" />
+      <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="TagDto" nillable="true" type="tns:TagDto" />
+</xs:schema>

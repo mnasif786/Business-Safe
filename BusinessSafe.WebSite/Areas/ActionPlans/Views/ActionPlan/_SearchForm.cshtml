@@ -1,0 +1,44 @@
+﻿@model BusinessSafe.WebSite.Areas.ActionPlans.ViewModels.ActionPlanIndexViewModel
+
+
+@using (Html.BeginForm("", "ActionPlan", FormMethod.Get, new {id = "formActionPlans", @class = "search-form"}))
+{   
+    <div class="well">
+        <fieldset>
+            <legend>Search Action Plans</legend>
+            <ul>
+                <li>
+                    <label class="thin" for="Site">Site</label>
+                    @Html.TextBox("Site", null, new { @class = "siteDropDownList" })
+                    @Html.Hidden("SiteId", Model.SiteId)
+                </li>
+                <li>
+                    <label class="wide" for="SubmittedFrom" class="medium">Submitted From</label>
+                    @Html.TextBoxFor(model => model.SubmittedFrom, new { id = "SubmittedFrom", name = "submittedFrom", @class = "calendar" })
+                </li>
+                <li>
+                    <label for="SubmittedTo">To</label>
+                    @Html.TextBoxFor(model => model.SubmittedTo, new { id = "SubmittedTo", name = "submittedTo", @class = "calendar" })
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <label class="thin" for="SiteGroup">Site Group</label>
+                    @Html.TextBox("SiteGroup", null, new { @class = "siteDropDownList" })
+                    @Html.Hidden("SiteGroupId", Model.SiteGroupId)
+                </li>
+            </ul>
+            <ul>
+                <li class="buttons thin">
+                    <input type="submit" id="Search" value="Search" class="btn btn-primary" />
+                    @Html.ActionLink("Reset", "Index", "ActionPlan", new { @class = "btn btn-link", id = "ResetButton" })
+                </li>
+            </ul>
+             <input id="showArchived" name="isShowArchived" type="hidden" value="false" />
+        </fieldset>
+        <div class="hide">            
+            @Html.CheckBoxFor(x => x.IsShowDeleted)
+            @Html.CheckBoxFor(x => x.IsShowCompleted)           
+        </div>
+    </div>
+}

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                  namespace="BusinessSafe.Domain.Entities.SafeCheck"
+                   assembly="BusinessSafe.Domain">
+
+  <class name="ChecklistTemplateQuestion" table="`SafeCheckIndustryQuestion`" dynamic-update="true">
+    <id name="Id" column="Id" type="Guid">
+      <generator class="assigned"/>
+    </id>
+
+    <many-to-one name="ChecklistTemplate" column="IndustryId" lazy="false" />
+    <many-to-one name="Question" column="QuestionId" lazy="false" />
+
+    <property name="Deleted" type="bool" />
+    <property name="CreatedOn" update="false"/>
+    <many-to-one name="CreatedBy" class="BusinessSafe.Domain.Entities.UserForAuditing" column="CreatedBy" lazy="false" update="false"/>
+    <property name="LastModifiedOn" />
+    <many-to-one name="LastModifiedBy" class="BusinessSafe.Domain.Entities.UserForAuditing" column="LastModifiedBy"/>
+
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,31 @@
+﻿@using Cassette.Views
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section StyleSheetSection
+{
+    @RenderSection("StyleSheetSection", false)
+}
+<section>
+    <span class="legend">General Risk Assessments</span>
+    <div class="content">
+        <div class="tabs">
+            @Html.Partial("_AdviceLine")
+            @RenderBody()
+        </div>
+    </div>
+    @Html.Hidden("MarkRiskAssessmentDraftStatusUrl", Url.Action("MarkRiskAssessmentIsDraftStatus", "RiskAssessmentStatus", new { area = "" }))
+</section>
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("sharedriskassessment");
+        Bundles.Reference("generalriskassessment");
+        @Bundles.RenderScripts()  
+    }
+    @if (ViewBag.IsReadOnly != null)
+    {
+        @Html.Hidden("IsReadOnly", true)
+    }
+    @RenderSection("JavaScriptSection", false)
+}

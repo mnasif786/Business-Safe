@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="BusinessSafe.Domain.Entities.SafeCheck"
+                   assembly="BusinessSafe.Domain"  auto-import="false">
+
+  <class name="Question" table="`SafeCheckQuestion`">
+
+    <id name="Id" column="Id" type="Guid">
+      <generator class="assigned"/>    
+    </id>
+
+    <property name="Title" />
+    <property name="CustomQuestion"/>
+    <property name="Mandatory"/>
+    <property name="SpecificToClientId"/>
+    
+    <many-to-one name="Category" column="RelatedCategoryId" lazy="false" />
+
+    <bag name="PossibleResponses" table="SafeCheckQuestionResponse" inverse="true" cascade="save-update">
+      <key column="QuestionId"></key>
+      <one-to-many class="QuestionResponse"  />
+    </bag>
+
+    <property name="Deleted" type="bool" />
+    <property name="CreatedOn" update="false" />
+    <many-to-one name="CreatedBy" class="BusinessSafe.Domain.Entities.UserForAuditing" column="CreatedBy" lazy="false" update="false" />
+    <property name="LastModifiedOn" />
+    <many-to-one name="LastModifiedBy" class="BusinessSafe.Domain.Entities.UserForAuditing" column="LastModifiedBy"/>
+    <property name="OrderNumber" />
+
+    <bag name="Industries" table="SafeCheckIndustryQuestion" inverse="true" cascade="save-update">
+      <key column="QuestionId"></key>
+      <one-to-many class="ChecklistTemplateQuestion"  />
+    </bag>
+    
+  </class>
+</hibernate-mapping>
+    

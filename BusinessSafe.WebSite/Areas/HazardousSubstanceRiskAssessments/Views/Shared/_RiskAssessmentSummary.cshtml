@@ -1,0 +1,41 @@
+﻿@model BusinessSafe.WebSite.Areas.HazardousSubstanceRiskAssessments.ViewModels.HazardousSubstanceSummaryViewModel
+@{
+    string status = Model.RiskAssessmentStatus;
+}
+<div id="RiskAssessmentSummaryView" class="well">
+    <div class="container ipad-container">
+        <div class="row">
+            <div class="span6">
+                <div class="row">
+                    <label class="span2">Title</label>
+                    <strong>@Model.Title</strong>
+                </div>
+                <div class="row">
+                    <label class="span2">Created On</label>
+                    <strong>@Model.CreatedOn.ToShortDateString()</strong>
+                </div>
+            </div>
+            <div class="span6">
+                <div class="row">
+                    <label class="span2">Reference</label>
+                    <strong>@Model.Reference</strong>
+                </div>
+                <div class="row">
+                    <label class="span2">Draft</label>
+                    @Html.CheckBox("IsDraft", status == "Draft", new { @id = "IsDraft" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span6">
+                <div class="row">
+                    <label class="span2">Hazardous Substance</label>
+                    <strong>@Model.HazardousSubstance</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="hide">
+    <div id="DialogMarkAsLive" title="Unable to make this Draft Live"></div>
+</div>

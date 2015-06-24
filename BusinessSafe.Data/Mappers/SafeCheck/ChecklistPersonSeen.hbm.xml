@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities.SafeCheck"
+                   assembly="BusinessSafe.Domain">
+
+  <class name="ChecklistPersonSeen" table="`SafeCheckChecklistPersonSeen`" >
+
+    <id name="Id" column="Id">
+      <generator class="assigned"/>
+    </id>
+
+    <many-to-one name="Checklist" column="CheckListId" />
+    <many-to-one name="Employee" column="EmployeeId"  cascade="none"/>
+    <property name="FullName" />
+    <property name="EmailAddress" />
+    <property name="CreatedOn" update="false"/>
+    <property name="LastModifiedOn" type="DateTime" />
+    
+
+    
+
+  </class>
+</hibernate-mapping>

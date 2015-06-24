@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ClientDocumentation.Application.Requests" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ClientDocumentation.Application.Requests" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://uatmaintws1:8064/ClientDocumentService.svc?xsd=xsd6" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="CreateClientDocumentRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ClientId" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocumentSubTypeId" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="DocumentTypeId" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="OriginalFilename" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhysicalFilePath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SiteId" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="TagString" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreateClientDocumentRequest" nillable="true" type="tns:CreateClientDocumentRequest" />
+  <xs:complexType name="UpdateClientDocumentRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocumentSubTypeId" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="DocumentTypeId" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="Id" type="xs:long" />
+      <xs:element minOccurs="0" name="NewContent" type="xs:boolean" />
+      <xs:element minOccurs="0" name="OriginalFilename" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhysicalFilePath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TagString" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UpdateClientDocumentRequest" nillable="true" type="tns:UpdateClientDocumentRequest" />
+  <xs:complexType name="SearchClientDocumentsRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Ascending" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ClientId" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="CreatedOnFrom" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreatedOnTo" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DepartmentId" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="DescriptionLike" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DocumentSubTypeId" nillable="true" type="xs:long" />
+      <xs:element minOccurs="0" name="DocumentTypeId" nillable="true" type="xs:long" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="DocumentTypeIds" nillable="true" type="q1:ArrayOflong" />
+      <xs:element minOccurs="0" name="IgnoreNotDeleted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IncludeCrossClientDocuments" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IncludeDeleted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="OrderBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TagString" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TitleLike" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SearchClientDocumentsRequest" nillable="true" type="tns:SearchClientDocumentsRequest" />
+</xs:schema>

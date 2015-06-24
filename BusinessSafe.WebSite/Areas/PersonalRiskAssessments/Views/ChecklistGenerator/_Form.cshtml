@@ -1,0 +1,178 @@
+﻿@using BusinessSafe.Domain.Entities
+@using BusinessSafe.WebSite.Areas.PersonalRiskAssessments.ViewModels
+@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Extensions
+@model EmployeeChecklistGeneratorViewModel
+
+           
+<form class="row form-inline" method="post" action="@Url.Action("Save", "ChecklistGenerator")">
+@{
+    var saveAndNextViewName = Html.IsReadOnly() ? "View" : "Index";
+    var urlSaveAndNextNextAction = Url.Action(saveAndNextViewName, "ChecklistManager", new { area = "PersonalRiskAssessments", companyId = Model.CompanyId, riskAssessmentId = Model.RiskAssessmentId });
+    if (Model.PersonalRiskAssessementEmployeeChecklistStatus == PersonalRiskAssessementEmployeeChecklistStatusEnum.NotSet)
+    {
+        urlSaveAndNextNextAction = Url.Action(saveAndNextViewName, "Hazards", new { area = "PersonalRiskAssessments", companyId = Html.GetUsersCompanyId(User), riskAssessmentId = Model.RiskAssessmentId });
+    }
+
+    // Possibly Not needed in JavaScript
+    var sendViewName = Html.IsReadOnly() ? "View" : "Generate";
+    var urlSendAction = Url.Action(sendViewName, "ChecklistGenerator", new { area = "PersonalRiskAssessments", companyId = Model.CompanyId, riskAssessmentId = Model.RiskAssessmentId });
+
+    if (!ViewData.ModelState.IsValid)
+    {
+        @Html.Partial("_DistinctValidationSummary")
+    }
+}
+@if (TempData["Notice"] != null)
+{
+    <div class="alert alert-success">
+        <a id="success-message-anchor" href="#successmessage"></a>
+        @TempData["Notice"].ToString()
+    </div>    
+}
+<div class="validation-summary-errors alert alert-error hide">
+    <ul>
+    </ul>
+</div>
+@Html.HiddenFor(model => model.RiskAssessmentId)
+@Html.HiddenFor(model => model.CompanyId)
+@Html.HiddenFor(model => model.SingleEmployeesSectionVisible)
+@Html.HiddenFor(model => model.MultipleEmployeesSectionVisible)
+@Html.HiddenFor(model => model.NewEmployeeEmailVisible)
+@Html.HiddenFor(model => model.Generating)
+<fieldset>
+    <legend class="span12">
+        <h3>Select Recipients</h3>
+    </legend>
+    <div class="span12">
+        <label class="span4" for="Title">Send to Single or Multiple Employees</label>
+        <ul class="form-inline">
+            <li>@Html.RadioButtonFor(model => model.IsForMultipleEmployees, "single", new { id = "singleEmployee" })
+                <label for="singleEmployee">Single</label></li>
+            <li>@Html.RadioButtonFor(model => model.IsForMultipleEmployees, "multiple", new { id = "multipleEmployees" })
+                <label for="multipleEmployees">Multiple</label></li>
+        </ul>
+    </div>
+</fieldset>
+<fieldset id="single-employee-select" class='@(Model.SingleEmployeesSectionVisible ? "" : "hide")'>
+    <legend class="span12">
+        <h3>Single Employees</h3>
+    </legend>
+    <div class="span12">
+        <label class="span2" for="Employee">
+            Employee</label>
+        @Html.TextBox("Employee", "", new { @class = "span7" })
+        @Html.Hidden("EmployeeId", Model.EmployeeId)
+    </div>
+    <div class="span12">
+        <label class="span2">Email</label>
+        @Html.HiddenFor(model => model.ExistingEmployeeEmailVisible)
+        <p id="ExistingEmployeeEmail" class='@(Model.ExistingEmployeeEmailVisible ? "" : "hide")'>
+            @Model.ExistingEmployeeEmail
+        </p>
+        @Html.HiddenFor(model => model.NewEmployeeEmailVisible)
+        @Html.TextBoxFor(model => model.NewEmployeeEmail, new { @class = Model.NewEmployeeEmailVisible ? "" : "hide" })
+    </div>
+</fieldset>
+<fieldset id="multiple-employee-select" class='@(Model.MultipleEmployeesSectionVisible ? "" : "hide")'>
+    <legend class="span12">
+        <h3>Multiple Employees</h3>
+    </legend>
+    <div class="span12">
+        <label class="span2" for="SiteId">
+            Site</label>
+        @Html.TextBoxFor(m => m.Site)
+        @Html.HiddenFor(x => x.SiteId)
+
+    </div>
+    <div class="span12 row">
+        
+        <label class="span2" for="EmployeeMultiSelect">
+            Employees</label>
+        
+        <div class="search-and-multi-select" id="EmployeeMultiSelect">
+            @Html.Partial("_EmployeeMultiSelect", Model.MultiSelectEmployees)
+        </div>
+
+    </div>
+    <div class="row span12">
+<div id="EmployeesSelected">
+        @Html.Partial("_EmployeeSelected", Model.MultiSelectedEmployees)
+    </div>
+    </div>
+
+</fieldset>
+<fieldset id="checklist-select">
+    <legend class="span12">
+        <h3>Details of Checklists Required</h3>
+    </legend>
+    <div class="span12">
+        <ul class="form-inline">
+            @foreach (var checklist in Model.Checklists)
+            {
+                <li>@Html.CheckBox(checklist.ControlId, Model.IsChecklistSelected(checklist.Id))
+                    <label for="@checklist.ControlId" class="control-label">@checklist.Title</label></li>
+            }
+        </ul>
+    </div>
+</fieldset>
+<fieldset id="notification-email-details">
+    <legend class="span12">
+        <h3>
+            Notification Email Details
+        </h3>
+    </legend>
+    <div class="span12">
+        <p class="span11">
+            Text entered into the box below will form the body of the email sent out to the
+            recipients.</p>
+        <div class="span11">
+            @Html.TextAreaFor(model => model.Message, new { @class = "span11", rows = "6" })
+        </div>
+    </div>
+</fieldset>
+<fieldset id="notification-completition-details">
+    <legend class="span12">
+        <h3>
+            Checklist Completion Details
+        </h3>
+    </legend>
+    <div class="span12">
+        <label class="span4" for="Employee">
+            Completion Due Date for checklist(s):</label>
+        @Html.TextBox("CompletionDueDateForChecklists", Model.GetCompletionDueDateForChecklists, new { id = "CompletionDueDateForChecklists", name = "CompletionDueDateForChecklists", @class = "calendar span2" })
+    </div>
+    <div class="span12">
+        <label class="span4" for="Employee">
+            Setup Completed Checklist Notification?</label>
+        <ul class="form-inline">
+            <li>@Html.RadioButtonFor(model => model.SendCompletedChecklistNotificationEmail, "True", new { id = "SendCompletedChecklistNotificationEmailYes" })
+                <label for="singleEmployee">
+                    Yes</label></li>
+            <li>@Html.RadioButtonFor(model => model.SendCompletedChecklistNotificationEmail, "False", new { id = "SendCompletedChecklistNotificationEmailNo" })
+                <label for="multipleEmployees">
+                    No</label></li>
+        </ul>
+    </div>
+    <div id="SendNotificationEmailAddress"  class="span12 @(Model.SendCompletedChecklistNotificationEmail.GetValueOrDefault() ? "" : "hide") ">
+        <label class="span4" for="Employee">
+            If Yes, Email Address to receive Notification:</label>
+        @Html.TextBoxFor(model => model.CompletionNotificationEmailAddress)
+    </div>
+    <div id="send-checklists-button-container" class="span12">
+        <a id="sendButton" class="btn btn-inverse" mainUrl="ChecklistGenerator" tabIndex="2" href="@urlSendAction">Send Checklists</a>
+    </div>
+    </fieldset>
+<div class="span12">
+    <p class="span11">
+        @if (User.IsInRole(Permissions.AddRiskAssessmentTasks.ToString()) || User.IsInRole(Permissions.EditRiskAssessmentTasks.ToString()))
+        {
+            <input type="submit" id="saveButton" value="Save" class="btn btn-success" />
+            <a id="nextBtn" class="btn btn-primary" mainUrl="ChecklistGenerator" tabIndex="2" href="@urlSaveAndNextNextAction">
+                Save &amp; Continue <i class="icon-chevron-right icon-white"></i></a>
+        }
+        <a class="btn btn-link" href="@Url.Action("Index", "RiskAssessment", new { area = "PersonalRiskAssessments", companyId = Model.CompanyId })">
+            Cancel</a>
+    </p>
+</div>
+</form>

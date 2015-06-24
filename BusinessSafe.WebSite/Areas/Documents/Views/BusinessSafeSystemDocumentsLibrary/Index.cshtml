@@ -1,0 +1,34 @@
+﻿@using Cassette.Views
+@model BusinessSafe.WebSite.Areas.Documents.ViewModels.BusinessSafeSystemDocumentsLibraryViewModel
+@{
+    ViewBag.Title = "BusinessSafe System Document Library";
+}
+<div class="container-fluid">
+    <section>
+        <span class="legend">@ViewBag.Title</span>
+        <div class="content">
+            @Html.Partial("_BusinessSafeSystemDocumentsLibrarySearchCriteria", Model)
+            @Html.Partial("_BusinessSafeSystemDocumentsLibrarySearchResults", Model)
+        </div>
+    </section>
+</div>
+<div class="hide">
+    <div id="dialogDeleteDocument" title="Delete Document">
+        <p>
+            Are you sure you want to delete this document?</p>
+    </div>
+</div>
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("businesssafesystemdocuments");
+        @Bundles.RenderScripts()  
+    }
+    <script type="text/javascript">
+        $(function () {
+            var documentTypes = @Html.Raw(Json.Encode(Model.DocumentTypes));
+            var sites = @Html.Raw(Json.Encode(Model.Sites));
+            businessSafeSystemDocumentsLibraryManager.initialise(documentTypes, sites);
+        });    
+    </script>
+}

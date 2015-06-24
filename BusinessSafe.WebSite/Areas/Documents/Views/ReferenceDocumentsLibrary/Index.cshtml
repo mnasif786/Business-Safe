@@ -1,0 +1,29 @@
+﻿@using Cassette.Views
+@model BusinessSafe.WebSite.Areas.Documents.ViewModels.BusinessSafeSystemDocumentsLibraryViewModel
+@{
+    ViewBag.Title = "Reference Library";
+}
+<div class="container-fluid">
+    <section>
+        <span class="legend">@ViewBag.Title</span>
+        <div class="content">
+            @Html.Partial("_DocumentLibrarySearchCriteria", Model)
+            @Html.Partial("_DocumentLibrarySearchResults", Model)
+        </div>
+    </section>
+</div>
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("referencelibrarydocuments");
+        @Bundles.RenderScripts()  
+    }
+    <script type="text/javascript">
+        $(function () {
+            var documentTypes = @Html.Raw(Json.Encode(Model.DocumentTypes));
+            var documentSubTypes = @Html.Raw(Json.Encode(Model.DocumentSubTypes));
+            documentLibraryManager.initialise(documentTypes, documentSubTypes);
+        });    
+    </script>
+
+}

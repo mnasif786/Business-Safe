@@ -1,0 +1,37 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Extensions
+@using Telerik.Web.Mvc.UI
+@model BusinessSafe.WebSite.Areas.ActionPlans.ViewModels.ActionPlanIndexViewModel
+
+@Html.Partial("_SearchResultsGridTiteBar", Model)
+
+@Html.Telerik().Grid(Model.ActionPlans).Name("ActionPlansGrid").PrefixUrlParameters(false).EnableCustomBinding(true).DataKeys(keys => keys.Add(c => c.Id)).DataBinding(dataBinding =>
+    dataBinding.Server().Delete("todo", "todo")).Columns(
+    columns =>
+    {
+        columns.Bound(o => o.Id).Visible(false);
+        columns.Bound(o => o.Title).Width("10%").Title("Action Plan Title");
+        columns.Bound(o => o.Site).Width("10%");
+        columns.Bound(o => o.VisitDateFormatted).Title("Date Of Visit").Width("7%");
+        columns.Bound(o => o.VisitBy).Width("6%");
+        columns.Bound(o => o.SubmittedDateFormatted).Title("Date Submitted").Width("7%");
+        columns.Bound(o => o.Status).Width("6%");              
+        columns.Template(@<text>
+                            <a class="PrintDocumentIconLink icon-print" 
+                                href="@Url.Action("DownloadClientDocument", "ActionPlan", new { clientDocumentId = item.EvaluationReportId })" 
+                                target="_blank" 
+                                title="Print Document">                                 
+                                <i class="icon-print"></i>
+                            </a>
+                            <a    data-id="@item.Id" 
+                                    href="@Url.Action("View", "ImmediateRiskNotificationsActions", new { actionPlanId = item.Id, companyId = @Html.GetUsersCompanyId(User) })" 
+                                    title="View Action Plan">
+                                  <i class="icon-search"></i>
+                            </a>                            
+                            </text>).Width("6%");
+             
+    }).Pageable(page =>
+    {
+        page.PageSize(Model.Size);
+        page.Total(Model.Total);
+    }).Sortable()

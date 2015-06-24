@@ -1,0 +1,19 @@
+
+USE BusinessSafe
+GO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG = 'BusinessSafe' AND TABLE_NAME = 'Employee' AND COLUMN_NAME = 'NotificationType') 
+
+BEGIN
+	ALTER TABLE [Employee]
+	ADD [NotificationType] smallint NOT NULL DEFAULT 1
+END
+GO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_CATALOG = 'BusinessSafe' AND TABLE_NAME = 'Employee' AND COLUMN_NAME = 'NotificationFrequecy') 
+
+BEGIN
+	ALTER TABLE [Employee]
+	ADD [NotificationFrequecy] smallint NULL
+END
+GO

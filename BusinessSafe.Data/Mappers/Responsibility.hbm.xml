@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="Responsibility" table="`Responsibility`">
+    <id name="Id" column="Id" type="long">
+      <generator class="identity"/>
+    </id>
+    <many-to-one name="ResponsibilityCategory" class="ResponsibilityCategory" column="ResponsibilityCategoryId" lazy="false" />
+    <property name="CompanyId" />
+    <property name="Title" />
+    <property name="Description" />
+    <many-to-one name="Site" class="SiteStructureElement" column="SiteId" lazy="false"/>
+    <many-to-one name="ResponsibilityReason" class="ResponsibilityReason" column="ResponsibilityReasonId" lazy="false" />
+    <many-to-one name="Owner" class="Employee" column="OwnerId" lazy="false" />
+    <property name="InitialTaskReoccurringType" column="InitialTaskReoccurringTypeId" />
+    <property name="Deleted" type="bool" />
+    <property name="CreatedOn" />
+    <many-to-one name="CreatedBy" class="UserForAuditing" column="CreatedBy" lazy="false" />
+    <property name="LastModifiedOn" />
+    <many-to-one name="LastModifiedBy" class="UserForAuditing" column="LastModifiedBy"/>
+
+    <bag name="ResponsibilityTasks" table="Task" lazy="true" cascade="save-update" where="deleted = 0">
+      <key column="ResponsibilityId"></key>
+      <one-to-many class="ResponsibilityTask"  />
+    </bag>
+
+    <many-to-one name="StatutoryResponsibilityTemplateCreatedFrom" class="StatutoryResponsibilityTemplate" column="StatutoryResponsibilityTemplateCreatedFromId" cascade="none" />
+  </class>
+</hibernate-mapping>

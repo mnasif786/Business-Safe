@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="RiskAssessmentReview" table="`RiskAssessmentReview`">
+    <id name="Id" column="Id" type="long">
+      <generator class="identity"/>
+    </id>
+    
+    <many-to-one name="RiskAssessment" class="RiskAssessment" column="RiskAssessmentId" cascade="save-update"/>
+    <property name="Comments" />
+
+    <property name="Deleted" type="bool" />
+    <property name="CreatedOn" />
+    <many-to-one name="CreatedBy" class="UserForAuditing" column="CreatedBy"/>
+    <property name="LastModifiedOn" />
+    <many-to-one name="LastModifiedBy" class="UserForAuditing" column="LastModifiedBy"/>
+    <property name="CompletionDueDate" />
+    <many-to-one name="ReviewAssignedTo" class="Employee" column="ReviewAssignedToId"/>
+    <property name="CompletedDate" />
+    <many-to-one name="CompletedBy" class="Employee" column="CompletedById"/>
+    <one-to-one name="RiskAssessmentReviewTask" class="RiskAssessmentReviewTask" property-ref="RiskAssessmentReview" cascade="save-update"></one-to-one>
+    
+  </class>
+</hibernate-mapping>

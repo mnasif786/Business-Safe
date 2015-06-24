@@ -1,0 +1,11 @@
+﻿@model IEnumerable<BusinessSafe.WebSite.Areas.GeneralRiskAssessments.ViewModels.Person>
+<table class="table">
+    @foreach (var employee in Model)
+    {
+        <tr>
+            <th>@if (employee.Name == Model.First().Name) 
+                { <text>Name</text>}</th>
+            <td>@employee.Name</td>
+        </tr>
+    }
+</table>

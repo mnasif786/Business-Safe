@@ -1,0 +1,22 @@
+﻿@model BusinessSafe.WebSite.Areas.ActionPlans.ViewModels.CompleteActionTaskViewModel
+<fieldset>
+    <legend id="ActionCompletedTaskLegend">
+        <h3>
+            Complete Task</h3> 
+    </legend>
+    <div class="row">
+        <label for="TaskCompleted" class="span2">Completed</label>
+        <input type="checkbox" id="TaskComplete" name="TaskStatusId" value="1" />
+    </div>
+    <div class="row">
+        <label for="Description" class="span2">Completed Comments</label>
+        @Html.TextAreaFor(m => m.CompletedComments, new { maxlength = 250, @class = "span8" })
+    </div>
+</fieldset>
+@Html.Partial("_AttachDocuments", Model.ActionTask.ExistingDocuments)
+<div data-valmsg-summary="true" class="validation-summary-errors hide">
+    <ul>
+    </ul>
+</div>
+
+

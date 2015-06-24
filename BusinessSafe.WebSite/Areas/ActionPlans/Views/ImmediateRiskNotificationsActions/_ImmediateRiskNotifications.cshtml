@@ -1,0 +1,28 @@
+﻿@using BusinessSafe.WebSite.Extensions
+@using Telerik.Web.Mvc.UI
+@model BusinessSafe.WebSite.Areas.ActionPlans.ViewModels.ImmediateRiskNotificationActionsIndexViewModel
+
+
+@Html.Telerik().Grid(Model.ImmediateRiskNotification).Name("ImmediateRiskNotificationsGrid").PrefixUrlParameters(false).EnableCustomBinding(true).DataKeys(keys => keys.Add(c => c.Id)).DataBinding(dataBinding =>
+    dataBinding.Server().Delete("todo", "todo")).Columns(
+    columns =>
+    {
+        columns.Bound(o => o.Id).Visible(false);
+        columns.Bound(o => o.Reference).Width("7%");
+        columns.Bound(o => o.Title).Width("7%");
+        columns.Bound(o => o.SignificantHazardIdentified).Width("15%");
+        columns.Bound(o => o.RecommendedImmediateAction).Width("15%");
+        columns.Bound(o => o.Status).Width("6%");
+        columns.Bound(o => o.AssignedTo).Width("10%");
+       
+        columns.Bound(o => o.DueDate).Width("6%");
+        columns.Template(@<text>
+                              <a data-id="@item.Id"href="@Url.Action("View", "ImmediateRiskNotificationsActions", new { actionPlanId = item.Id, companyId = @Html.GetUsersCompanyId(User) })" title="View Responsibility">
+                                  <i class="icon-search"></i></a>
+                          </text>).Width("7%");
+    }).Pageable(page =>
+    {
+        // TODO ADD BACK IN WHEN CONTROL RETURNS THESE
+      //  page.PageSize(Model.PageSize);
+      //  page.Total(Model.Total);
+    }).Sortable()

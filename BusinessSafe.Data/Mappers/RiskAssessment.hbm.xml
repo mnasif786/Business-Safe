@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                 namespace="BusinessSafe.Domain.Entities"
+                 assembly="BusinessSafe.Domain"> 
+  <class name="RiskAssessment" table="`RiskAssessment`">
+    <id name="Id" column="Id" type="long">
+      <generator class="identity"/>
+    </id>
+    <property name="Title" type="string" />
+    <property name="Reference" type="string" />
+    <property name="AssessmentDate"  />
+
+    <property name="CompanyId" column="`ClientId`" type="long" />
+    <property name="Deleted" type="bool" />
+    <property name="CreatedOn" update="false"/>
+    <many-to-one name="CreatedBy" class="UserForAuditing" column="CreatedBy" update="false" cascade="none"/>
+    <property name="LastModifiedOn" />
+    <many-to-one name="LastModifiedBy" class="UserForAuditing" column="LastModifiedBy"/>
+    <many-to-one name="RiskAssessor" class="RiskAssessor" column="RiskAssessorId" lazy="false" />
+    <property name="Status" column="StatusId" />
+    <many-to-one name="RiskAssessmentSite" class="SiteStructureElement" column="SiteId" lazy="false" />
+
+    <bag name="NonEmployees" lazy="true" cascade="save-update" inverse="true" where="Deleted = 0">
+      <key column="RiskAssessmentId"></key>
+      <one-to-many class="RiskAssessmentNonEmployee" />
+    </bag>
+
+    <bag name="Employees" lazy="true" cascade="save-update" inverse="true" where="Deleted = 0">
+      <key column="RiskAssessmentId"></key>
+      <one-to-many class="RiskAssessmentEmployee" />
+    </bag>
+
+    <bag name="Reviews" table="RiskAssessmentReview" lazy="true" cascade="save-update" >
+      <key column="RiskAssessmentId"></key>
+      <one-to-many class="RiskAssessmentReview"  />
+    </bag>
+
+    <!-- Can't put where Deleted = 0 here because it tries to do it on RiskAssessmentDocument, not Document and so throws an error. So remember it will load deleted 
+        documents too.  -->
+    <bag name="Documents" table="RiskAssessmentDocument" lazy="true" cascade="save-update" >
+      <key column="RiskAssessmentId"></key>
+      <one-to-many class="RiskAssessmentDocument"  />
+    </bag>
+    
+    <property name="NextReviewDate" access="field.camelcase-underscore" />
+
+    <joined-subclass name="MultiHazardRiskAssessment" abstract="true" table="MultiHazardRiskAssessment">
+      <key column="Id"/>
+      <property name="Location" type="string" />
+      <property name="TaskProcessDescription" type="string" />
+      <bag name="Hazards" table="MultiHazardRiskAssessmentHazard" lazy="true" cascade="save-update" inverse="true" where="Deleted = 0">
+        <key column="RiskAssessmentId"></key>
+        <one-to-many class="BusinessSafe.Domain.Entities.MultiHazardRiskAssessmentHazard, BusinessSafe.Domain.Entities"  />
+      </bag>
+
+      <joined-subclass name="GeneralRiskAssessment" extends="MultiHazardRiskAssessment">
+        <key column="Id"/>
+
+        <bag name="PeopleAtRisk" lazy="true" cascade="save-update" inverse="true" where="Deleted = 0" >
+          <key column="RiskAssessmentId"></key>
+          <one-to-many class="RiskAssessmentPeopleAtRisk"/>
+        </bag>
+      </joined-subclass>
+
+      <joined-subclass name="PersonalRiskAssessment" extends="MultiHazardRiskAssessment">
+        <key column="Id"/>
+        <property name="Sensitive" />
+        <property name="HasMultipleChecklistRecipients" />
+        <property name="ChecklistGeneratorMessage" />
+
+        <property name="SendCompletedChecklistNotificationEmail" />
+        <property name="CompletionDueDateForChecklists" />
+        <property name="CompletionNotificationEmailAddress" type="string"/>
+        <property name="PersonalRiskAssessementEmployeeChecklistStatus" column="PersonalRiskAssessementEmployeeChecklistStatusId"/>
+
+
+        <bag name="ChecklistGeneratorEmployees" lazy="true" cascade="save-update" inverse="true"  where="Deleted = 0">
+          <key column="PersonalRiskAssessmentId"></key>
+          <one-to-many class="ChecklistGeneratorEmployee" />
+        </bag>
+
+        <bag name="Checklists" lazy="true" cascade="save-update" inverse="true" where="Deleted = 0">
+          <key column="PersonalRiskAssessmentId"></key>
+          <one-to-many  class="PersonalRiskAssessmentChecklist" />
+        </bag>
+        
+        <bag name="EmployeeChecklists" table="EmployeeChecklist" lazy="true" cascade="none" inverse="true" >
+          <key column="PersonalRiskAssessmentId"></key>
+          <one-to-many class="EmployeeChecklist" />
+        </bag>
+      </joined-subclass>
+    </joined-subclass>
+
+    <joined-subclass name="HazardousSubstanceRiskAssessment">
+      <key column="Id"/>
+      <property name="IsInhalationRouteOfEntry"  />
+      <property name="IsIngestionRouteOfEntry"  />
+      <property name="IsAbsorptionRouteOfEntry"  />
+      <property name="WorkspaceExposureLimits"  />
+      <property name="Quantity"  />
+      <property name="MatterState"  />
+      <property name="DustinessOrVolatility"  />
+      <property name="HealthSurveillanceRequired" />
+      <many-to-one name="LastRecommendedControlSystem" class="ControlSystem" column="LastRecommendedControlSystem"/>
+      <many-to-one name="HazardousSubstance" class="HazardousSubstance" column="`HazardousSubstanceId`" />
+
+      <bag name="ControlMeasures" table="HazardousSubstanceRiskAssessmentControlMeasure" lazy="true" cascade="save-update" inverse="true" where="Deleted = 0" >
+        <key column="HazardousSubstanceRiskAssessmentId"></key>
+        <one-to-many class="BusinessSafe.Domain.Entities.HazardousSubstanceRiskAssessmentControlMeasure, BusinessSafe.Domain.Entities"  />
+      </bag>
+
+      <bag name="FurtherControlMeasureTasks" lazy="false" cascade="save-update" inverse="true" where="deleted = 0">
+        <key column="HazardousSubstanceRiskAssessmentId"></key>
+        <one-to-many class="BusinessSafe.Domain.Entities.HazardousSubstanceRiskAssessmentFurtherControlMeasureTask, BusinessSafe.Domain.Entities"  />
+      </bag>
+
+    </joined-subclass>
+
+    <joined-subclass name="FireRiskAssessment">
+      <key column="Id"/>
+      <property name="PersonAppointed"  />
+      <property name="PremisesProvidesSleepingAccommodation" />
+      <property name="PremisesProvidesSleepingAccommodationConfirmed" />
+      <property name="Location" type="string" />
+      <property name="BuildingUse" type="string" />
+      <property name="NumberOfFloors"  />
+      <property name="NumberOfPeople"  />
+      <property name="ElectricityEmergencyShutOff"  />
+      <property name="GasEmergencyShutOff"  />
+      <property name="WaterEmergencyShutOff"  />
+      <property name="OtherEmergencyShutOff"  />
+
+      <bag name="PeopleAtRisk" lazy="true" cascade="save-update" inverse="true" where="Deleted = 0" >
+        <key column="RiskAssessmentId"></key>
+        <one-to-many class="RiskAssessmentPeopleAtRisk"/>
+      </bag>
+
+      <bag name="FireSafetyControlMeasures" lazy="true" cascade="save-update" inverse="true" where="Deleted = 0">
+        <key column="RiskAssessmentId"></key>
+        <one-to-many class="FireRiskAssessmentControlMeasure" />
+      </bag>
+
+      <bag name="FireRiskAssessmentSourcesOfIgnition" lazy="true" cascade="save-update" inverse="true" where="Deleted = 0">
+        <key column="RiskAssessmentId"></key>
+        <one-to-many class="FireRiskAssessmentSourceOfIgnition" />
+      </bag>
+
+      <bag name="FireRiskAssessmentSourcesOfFuel" lazy="true" cascade="save-update" inverse="true" where="Deleted = 0" >
+        <key column="RiskAssessmentId"></key>
+        <one-to-many class="FireRiskAssessmentSourceOfFuel" />
+      </bag>
+
+      <bag name="FireRiskAssessmentChecklists" lazy="true" cascade="save-update" inverse="false" >
+        <key column="FireRiskAssessmentId"></key>
+        <one-to-many class="FireRiskAssessmentChecklist" />
+      </bag>
+
+    </joined-subclass>
+
+  </class>
+</hibernate-mapping>

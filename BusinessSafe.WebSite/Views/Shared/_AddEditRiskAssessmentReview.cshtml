@@ -1,0 +1,60 @@
+﻿@model BusinessSafe.WebSite.ViewModels.AddEditRiskAssessmentReviewViewModel
+@using (Html.BeginForm("SaveRiskAssessmentReview", "RiskAssessmentReview", FormMethod.Post, new { id = "CreateRiskAssessmentReviewForm", @class="form-inline" }))
+{
+    @Html.HiddenFor(m => m.CompanyId)
+    @Html.HiddenFor(m => m.RiskAssessmentId)
+    @Html.HiddenFor(m => m.RiskAssessmentReviewId)
+    <fieldset>
+        <legend><h3>Review Details</h3></legend>
+        <div class="row">
+            <label for="ReviewDate" class="span2">Date of Review</label>
+            @Html.TextBoxFor(m => m.ReviewDate, new { id = "ReviewDate", @class = "span2 calendar" })
+        </div>
+        <div class="row">
+            <label for="ReviewingEmployeeId" class="span2">Reviewer</label>
+            <div>
+                @Html.TextBox("ReviewingEmployee", "", new { @class = "span3" })
+                @Html.Hidden("ReviewingEmployeeId", Model.ReviewingEmployeeId)
+            </div>
+        </div>
+        <div class="employee-not-user-alert-message hide">
+            @Html.Partial("_EmployeeNotAUserWarning")
+        </div>
+        <div id="employee-cannot-complete-review" class="hide">
+            <p class="alert">Note: The User you have selected does not have sufficient permissions to complete this review. Please select an Administrator or Health and Safety Manager.</p>
+        </div>
+        <div data-valmsg-summary="true" class="validation-summary-errors hide">
+            <ul>
+            </ul>
+        </div>
+    </fieldset>
+        <div class="row">
+            <label class="span2"></label>
+            <button id="SaveButton" class="btn btn-primary">Save</button>    
+
+    <button id="CancelButton" class="btn btn-link">Cancel</button>
+        </div>
+}
+
+<script type="text/javascript">
+    var riskAssessmentReviewers = @Html.Raw(Json.Encode(Model.RiskAssessmentReviewers));
+
+    var reviewingEmployeeId = $("#ReviewingEmployeeId").val();
+    var companyId = $("#CompanyId").val();
+
+    $("#ReviewingEmployee").combobox({
+        selectedId: reviewingEmployeeId,
+        initialValues: riskAssessmentReviewers,
+        url : window.globalajaxurls.getEmployees,
+        data: {
+            companyId: companyId,
+            pageLimit: 500
+        },
+        afterSelect: function (event, ui) {
+            var reviewingEmployeeId = $("#ReviewingEmployeeId").val();
+            IsEmployeeAbleToCompleteReviewTask.initialise(reviewingEmployeeId, companyId);
+
+            return false;
+        }
+    });
+</script>

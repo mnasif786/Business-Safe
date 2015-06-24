@@ -1,0 +1,40 @@
+﻿@using BusinessSafe.WebSite.Areas.Company.ViewModels
+@using Cassette.Views
+@model AccidentRecordDistributionListViewModel   
+<h3>Distribution List</h3>
+<div class="well">
+    <div class="row">
+        <div id="accidentRecordDistributionValidationSummary" class="validation-summary-errors alert alert-error hide span11">
+        </div>    
+        <div id="accidentRecordDistributionSuccessMessage" class="alert alert-success hide span11" style="padding-right:0px;">  
+        </div> 
+    </div>                 
+
+    <div class="auto-complete-dropdown">
+        <div class="row">
+            <div class="span2">
+                <label class="thin" for="Site">Select Site</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span11">
+                @Html.TextBox("ARDistributionSite")
+                @Html.Hidden("ARDistributionSiteId", Model.SiteId)
+                @Html.HiddenFor(x => x.CompanyId)
+            </div>
+        </div>
+    </div>
+
+    <div class="hide" id="EmployeeSelectionSection">
+        @Html.Partial("_EmployeeMultiSelect", Model )       
+    </div>
+
+    <div class="hide">
+    @Html.Partial("_AddNonEmployee")
+    </div>
+</div>
+<script type="text/javascript">
+    var sites = @Html.Raw(Json.Encode(Model.Sites));
+    var employees = @Html.Raw(Json.Encode(Model.EmployeesToSelectFrom));                 
+</script>

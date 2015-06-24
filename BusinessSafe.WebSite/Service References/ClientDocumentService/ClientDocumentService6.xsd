@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ClientDocumentation.Application.Common" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ClientDocumentation.Application.Common" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ValidationFault">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Messages" nillable="true" type="tns:ArrayOfValidationFaultMessage" />
+      <xs:element minOccurs="0" name="Summary" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ValidationFault" nillable="true" type="tns:ValidationFault" />
+  <xs:complexType name="ArrayOfValidationFaultMessage">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ValidationFaultMessage" nillable="true" type="tns:ValidationFaultMessage" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfValidationFaultMessage" nillable="true" type="tns:ArrayOfValidationFaultMessage" />
+  <xs:complexType name="ValidationFaultMessage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Field" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ValidationFaultMessage" nillable="true" type="tns:ValidationFaultMessage" />
+</xs:schema>

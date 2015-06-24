@@ -1,0 +1,14 @@
+﻿@using BusinessSafe.WebSite.Extensions
+@model BusinessSafe.WebSite.Areas.HazardousSubstanceRiskAssessments.ViewModels.HazardousSubstanceSummaryViewModel
+<h2>
+    Hazardous Substance Risk Assessment
+    @Html.Partial("_AssessmentStatus", Model.RiskAssessmentStatus)
+    <a class="btn" href="@Url.Action("Index", "RiskAssessment", new { area = "HazardousSubstanceRiskAssessments", companyId = @Html.GetUsersCompanyId(User) })" title="Close Risk Assessment"><i class="icon-remove"></i></a>
+    <a class="btn" href="@Url.Action("Index", "HazardousSubstanceRiskAssessment", new { area = "SqlReports", riskAssessmentId = Model.Id, })" title="Print Hazardous Substance Risk Assessment"><i class="icon-print"></i></a>
+    
+    
+    @if (Model.IsEditEnabled(User) && !Model.IsArchived)
+    {
+        <a class="btn" href="@Url.Action("Index", @ViewBag.CurrentController, new { hazardousSubstanceRiskAssessmentId = Model.Id, companyId = @Html.GetUsersCompanyId(User), riskAssessmentId = Model.Id })" title="Edit Risk Assessment"><i class="icon-edit"></i></a>
+    }
+</h2>

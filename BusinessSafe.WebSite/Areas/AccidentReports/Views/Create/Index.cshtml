@@ -1,0 +1,17 @@
+﻿@model BusinessSafe.WebSite.Areas.AccidentReports.ViewModels.CreateAccidentRecordSummaryViewModel
+
+@{
+    ViewBag.Title = "Summary";
+}
+
+<div class="container ipad-container">
+    @Html.Partial("_Form", Model)
+</div>
+@section JavaScriptSectionForPageInitialisation
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            
+        });
+    </script>
+}

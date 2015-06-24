@@ -1,0 +1,48 @@
+﻿@using Cassette.Views
+@model BusinessSafe.WebSite.Areas.HazardousSubstanceInventory.ViewModels.AddEditHazardousSubstanceViewModel
+@{
+    ViewBag.Title = "Add Hazardous Substances";
+}
+<section>
+    <span class="legend">Add Hazardous Substance</span>
+    <div class="content">
+        <div id="AddEditHazardousSubstance" class="container fixed-content ipad-container">
+            <h2>
+                <span class="tick"></span>Add Hazardous Substance</h2>
+            <div class="content">
+                @using (@Html.BeginForm("Add", "Inventory", FormMethod.Post, new { id = "AddEditHazardousSubstanceForm", @class = "form-inline" }))
+                {
+                    @Html.Partial("_EditableHazardousSubstanceDetails", Model)
+                    @Html.Partial("_EditableHazardousSubstanceCommandButtons", Model)
+                }
+            </div>
+        </div>
+    </div>
+</section>
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("hazardoussubstanceinventory");
+        @Bundles.RenderScripts()  
+    }
+    <script type="text/javascript">
+        $(document).ready(function () {
+    
+            var url = window.globalajaxurls.getSuppliers;
+            var data = {
+                companyId : $("#companyId").val()
+            };
+            var callback = function(result){
+                BusinessSafe.HazardousSubstance.Inventory(result);        
+            };
+            AjaxCall.execute(url, callback, data, "GET");
+
+        });
+    </script>
+}
+<div class="hide">
+    <div id="dialogContainer" title="Possible Duplicates Already Present in Inventory">
+    </div>
+    <div id="dialogAddNewSupplierContainer" title="New Supplier">
+    </div>
+</div>

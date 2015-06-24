@@ -1,0 +1,106 @@
+﻿@using BusinessSafe.Domain.Entities
+@model BusinessSafe.WebSite.Areas.Responsibilities.ViewModels.ViewResponsibilityTaskViewModel
+
+@Html.HiddenFor(m => m.CompanyId)
+@Html.HiddenFor(m => m.ResponsibilityTaskId)      
+<fieldset class="well readonly">
+        <legend>
+        <h3>
+            Responsibility Task Details</h3>
+    </legend>
+    <div class="row">
+        <label class="span2">Task Title:</label>
+        @Html.TextBoxFor(x => x.Title, new {maxlength = 100, @class = "span7"})
+    </div>
+    <div class="row">
+        <label class="span2">Description:</label>
+        @Html.TextAreaFor(x => x.Description, new {maxlength = 500, @class = "span7"})
+    </div>
+    <div class="row">
+        <label for="IsRecurring" class="span2">
+            Is Recurring</label>
+        @Html.CheckBoxFor(m => m.IsRecurring)
+    </div>
+    <div id="recurringDiv" class="@(Model.IsRecurring ? "" : "hide")">
+        <div class="row">
+            <label class="span2" for="Frequency">
+                Frequency</label>
+            @Html.TextBoxFor(m => m.TaskReoccurringType, new {@class = "span2"})
+            @Html.HiddenFor(x => x.TaskReoccurringTypeId)
+        </div>
+        <div class="row-fluid row">
+            <div class="span5">
+                <label for="ReoccurringStartDate" class="span2">First Due Date</label>
+                @Html.TextBox("ReoccurringStartDate", Model.ReoccurringStartDate, new {id = "FirstDueDate", @class = "span2", placeholder = "dd/mm/yyyy"})
+            </div>
+            <div class="span6">
+                <label for="TaskReoccurringEndDate" class="span2">
+                    Last Due Date</label>
+                @Html.TextBox("ReoccurringEndDate", Model.ReoccurringEndDate != null ? Model.ReoccurringEndDate.Value.ToShortDateString() : string.Empty, new {@class = "span2", placeholder = "dd/mm/yyyy"})
+            </div>
+        </div>
+    </div>
+    <div class="row @(!Model.IsRecurring ? "" : "hide")" id="nonReoccurringDiv">
+        <label class="span2">Completion Due Date:</label>
+        @Html.TextBox("CompletionDueDate", Model.CompletionDueDate, new {@class = "span2 calendar", placeholder = "dd/mm/yyyy"})
+    </div>
+    <div class="row">
+        <label class="span2">Site:</label>
+        @Html.TextBoxFor(m => m.ResponsibilityTaskSite, new {@class = "span3"})
+        @Html.HiddenFor(m => m.ResponsibilityTaskSiteId)
+    </div>
+    <div class="row">
+        <label class="span2">Assigned To:</label>
+        @Html.TextBoxFor(m => m.AssignedTo, new {@class = "span3"})
+        @Html.HiddenFor(x => x.AssignedToId)
+    </div>
+    <div class="row-fluid employee-not-user-alert-message hide">
+        @Html.Partial("_EmployeeNotAUserWarning")
+    </div>
+</fieldset>
+
+<div id="notificationEmail">
+    <fieldset class="readonly">
+        <legend>
+            <h3>
+                Notification Emails</h3>
+        </legend>
+        <p class="alert" style="margin-bottom: 5px;">
+            If you do not want to send notification emails, please tick the type you do not
+            want to send.</p>
+        <label for="DoNotSendTaskAssignedNotification" class="span3">
+            Task Assigned
+            @Html.CheckBoxFor(m => m.DoNotSendTaskAssignedNotification, new {style= "display: inline-block;"})
+        </label>
+        <label for="DoNotSendTaskCompletedNotification" class="span3">
+            Task Completion
+            @Html.CheckBoxFor(m => m.DoNotSendTaskCompletedNotification, new {style = "display: inline-block;"})
+        </label>
+        <label for="DoNotSendTaskOverdueNotification" class="span3">
+            Task Overdue
+            @Html.CheckBoxFor(m => m.DoNotSendTaskOverdueNotification, new {style = "display: inline-block;"})
+        </label>
+    </fieldset>
+</div>
+@if (Model.TaskStatusId == (int)TaskStatus.Completed)
+{
+    <fieldset class="well readonly">
+        <legend>
+            <h3>
+                Complete Task</h3>
+        </legend>
+        <div class="row">
+            <label for="TaskCompletedDate" class="span2">
+                Completed Date</label>
+            @Html.TextBoxFor(x => x.TaskCompletedDate, new { @class = "span2" })
+        </div>
+        <div class="row">
+            <label for="TaskCompletedComments" class="span2">
+                Completed Comments</label>
+            @Html.TextAreaFor(x => x.TaskCompletedComments, new { @class = "span7" })
+        </div>
+    </fieldset>
+}
+<script type="text/javascript">
+    new SetFormToReadOnly('.readonly').execute();
+</script>

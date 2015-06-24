@@ -1,0 +1,227 @@
+﻿@using BusinessSafe.WebSite.Areas.SqlReports.Controllers
+@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Controllers
+@using BusinessSafe.WebSite.Extensions
+@using BusinessSafe.WebSite.HtmlHelpers
+<!-- Nav bar -->
+<nav class="navbar">
+    <ul class="nav">
+        <li class="dropdown">
+            <a id="my-planner" class="dropdown-toggle" data-toggle="dropdown" href="#">
+            My Responsibilities <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                @if (FeatureSwitchChecker.Enabled(FeatureSwitches.FeatureSwitch_ActionPlan, User.GetCustomPrinciple()))
+                {
+                    if (User.IsInRole(Permissions.ViewActionPlan.ToString()))
+                    {
+                        <li><a id="my-action-plan" href="@Url.Action("Index", "ActionPlan", new {area = "ActionPlans", companyId = @Html.GetUsersCompanyId(User)})">
+                              <i class="icon-list-alt"></i>My Action Plan</a> 
+                        </li>
+                    }
+                }
+                @if (FeatureSwitchChecker.Enabled(FeatureSwitches.FeatureSwitch_Responsibilities, User.GetCustomPrinciple()))
+                {
+                    <li><a id="my-responsibilities-planner" href="@Url.Action("Index", "Responsibility", new { area = "Responsibilities", companyId = @Html.GetUsersCompanyId(User) })">
+                            <i class="icon-list-alt"></i>My Responsibilities Planner</a> </li>
+                }
+                <li><a id="my-task-list" href="@Url.Action("Index", "TaskList", new { area = "TaskList", companyId = @Html.GetUsersCompanyId(User) })">
+                        <i class="icon-list-alt"></i>My Task List</a> </li>
+            </ul>
+        </li>
+        <li class="dropdown"><a id="myProfileLink" class="dropdown-toggle" data-toggle="dropdown" href="#">
+            My Company Profile <b class="caret"></b></a>
+            <ul class="dropdown-menu dropdown-menu-col">
+                <li>Company Profile
+                    <ul>
+                        @if (User.IsInRole(Permissions.ViewCompanyDetails.ToString()))
+                        {
+                            <li><a id="ViewCompanyDetailsLink" href="@Url.Action("Index", "Company", new { area = "Company" })">
+                                <i class="icon-home"></i>Company Details</a> </li>
+                        }
+                        @if (User.IsInRole(Permissions.ViewSiteDetails.ToString()))
+                        {
+
+                            <li><a id="ViewSitesLink" href="@Url.Action("Index", "SitesStructure", new { area = "Sites" })">
+                                <i class="icon-home"></i>Sites</a> </li>
+                        }
+                        @if (User.IsInRole(Permissions.ViewCompanyDefaults.ToString()))
+                        {
+                            <li><a id="companyDefaultsLink" href="@Url.Action("Index", "CompanyDefaults", new { area = "Company", companyId = @Html.GetUsersCompanyId(User) })">
+                                <i class="icon-home"></i>Defaults</a> </li>
+                        }
+                    </ul>
+                </li>
+                @if (User.IsInRole(Permissions.ViewUsers.ToString()))
+                {
+                <li>User Profile
+                    <ul>
+                            <li><a id="ViewUsersLink" href="@Url.Action("Index", "ViewUsers", new { area = "Users", companyId = @Html.GetUsersCompanyId(User) })">
+                                <i class="icon-user"></i>View Users</a> </li>
+                        @if (User.IsInRole(Permissions.AddUsers.ToString()))
+                        { 
+                            <li><a id="UserPermissionsLink" href="@Url.Action("Index", "AddUsers", new { area = "Users", companyId = @Html.GetUsersCompanyId(User) })">
+                                <i class="icon-user"></i>Add Users</a> </li>
+                        }
+                        @if (User.IsInRole(Permissions.ViewUsers.ToString()))
+                        {
+                            <li><a id="UserRolesLink" href="@Url.Action("Index", "UserRoles", new { area = "Users", companyId = @Html.GetUsersCompanyId(User) })">
+                                <i class="icon-user"></i>User Roles</a> </li>
+                        }
+                    </ul>
+                </li>
+                }
+            </ul>
+        </li>
+        @if (User.IsInRole(Permissions.ViewEmployeeRecords.ToString()))
+        {
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">My Employees
+            <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                    <li><a id="ViewEmployeesLink" href="@Url.Action("Index", "EmployeeSearch", new { area = "Employees", companyId = @Html.GetUsersCompanyId(User) })">
+                        <i class="icon-user"></i>View My Employees</a> </li>
+                @if (User.IsInRole(Permissions.AddEmployeeRecords.ToString()))
+                {
+                    <li><a id="AddEmployeeLink" href="@Url.Action("Index", "Employee", new { area = "Employees", companyId = @Html.GetUsersCompanyId(User) })">
+                        <i class="icon-user"></i>Add Employee</a> </li>
+                }
+            </ul>
+        </li>
+        }
+        <li class="dropdown"><a id="my-businesssafe-link" class="dropdown-toggle" data-toggle="dropdown" href="#">
+            My BusinessSafe <b class="caret"></b></a>
+            <ul class="dropdown-menu dropdown-menu-col">
+                <li>Risk Assessments
+                    <ul>
+                        @if (User.IsInRole(Permissions.ViewGeneralandHazardousSubstancesRiskAssessments.ToString()))
+                        {
+                            <li><a id="ViewGeneralRiskAssessmentsLink" href="@Url.Action("Index", "RiskAssessment", new { area = "GeneralRiskAssessments", companyId = @Html.GetUsersCompanyId(User) })">
+                                <i class="icon-warning-sign"></i>General Risk Assessments</a> </li>
+                        }
+                        @if (FeatureSwitchChecker.Enabled(FeatureSwitches.FeatureSwitch_FireRiskAssessments, User.GetCustomPrinciple()))
+                        {
+                            if (User.IsInRole(Permissions.ViewFireRiskAssessments.ToString()))
+                            {
+                            <li><a id="ViewFireRiskAssessmentsLink" href="@Url.Action("Index", "RiskAssessment", new { area = "FireRiskAssessments", companyId = @Html.GetUsersCompanyId(User) })">
+                                <i class="icon-warning-sign"></i>Fire Risk Assessments</a> </li>
+                            }
+                        }
+                        @if (FeatureSwitchChecker.Enabled(FeatureSwitches.FeatureSwitch_PersonalRiskAssessments, User.GetCustomPrinciple()))
+                        {
+                            if (User.IsInRole(Permissions.ViewPersonalRiskAssessments.ToString()))
+                            {
+                            <li><a id="ViewPersonalRiskAssessmentsLink" href="@Url.Action("Index", "RiskAssessment", new { area = "PersonalRiskAssessments", companyId = @Html.GetUsersCompanyId(User) })">
+                                <i class="icon-warning-sign"></i>Personal Risk Assessments</a> </li>
+                            }
+                        }
+                        @if (User.IsInRole(Permissions.ViewGeneralandHazardousSubstancesRiskAssessments.ToString()))
+                        {
+                            <li><a id="ViewHazardousSubstancesAssessmentsLink" href="@Url.Action("Index", "RiskAssessment", new { area = "HazardousSubstanceRiskAssessments", companyId = @Html.GetUsersCompanyId(User) })">
+                                <i class="icon-warning-sign"></i>Hazardous Substances</a> </li>
+                        }
+                    </ul>
+                </li>
+                <li>Miscellaneous
+                    <ul>
+                        @if (FeatureSwitchChecker.Enabled(FeatureSwitches.FeatureSwitch_Accident_Reports, User.GetCustomPrinciple())
+                                && (User.IsInRole(Permissions.ViewAccidentRecords.ToString()) || User.IsInRole(Permissions.AddAccidentRecords.ToString())
+                                || User.IsInRole(Permissions.EditAccidentRecords.ToString()) || User.IsInRole(Permissions.DeleteAccidentRecords.ToString())))
+                        {
+                            <li><a id="accident-reports-link" href="@Url.Action("Index", "Search", new { area = "AccidentReports" })">
+                                    <i class="icon-warning-sign"></i>Accident Records</a> </li>
+                        }
+                        @if (User.IsInRole(Permissions.ViewHazardousSubstanceInventory.ToString()))
+                        {
+                            <li><a id="hazardous-substance-inventory-link" href="@Url.Action("Index", "Inventory", new { area = "HazardousSubstanceInventory", companyId = @Html.GetUsersCompanyId(User) })">
+                                    <i class="icon-warning-sign"></i>Hazardous Substances Inventory</a> </li>
+                        }
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li class="dropdown"><a id="myDocumentationLink" class="dropdown-toggle" data-toggle="dropdown" href="#">
+            My Documentation <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                @if (User.IsInRole(Permissions.ViewBusinessSafeSystem.ToString()))
+                {
+                    <li><a id="businesssafe-system-documents-link" href="@Url.Action("Index", "BusinessSafeSystemDocumentsLibrary", new { area = "Documents", companyId = @Html.GetUsersCompanyId(User) })">
+                            <i class="icon-file"></i>BusinessSafe System</a> </li>
+                }
+                @if (User.IsInRole(Permissions.ViewReferenceLibrary.ToString()))
+                {
+                    <li><a id="reference-library-link" href="@Url.Action("Index", "ReferenceDocumentsLibrary", new { area = "Documents", companyId = @Html.GetUsersCompanyId(User) })">
+                            <i class="icon-file"></i>Reference Library</a> </li>
+                }
+                @if (User.IsInRole(Permissions.ViewAddedDocuments.ToString()))
+                {
+                    <li><a id="addedDocumentsLibraryLink" href="@Url.Action("Index", "AddedDocumentsLibrary", new { area = "Documents", companyId = @Html.GetUsersCompanyId(User) })">
+                        <i class="icon-file"></i>Added Documents</a> </li>
+                }
+            </ul>
+        </li>
+        @if (FeatureSwitchChecker.Enabled(FeatureSwitches.FeatureSwitch_MyReports, User.GetCustomPrinciple()))
+        {
+            <li class="dropdown" >
+                <a id="myReportsLink" href="@Url.Action("Index", "SqlReports", new { area = "SqlReports" })">My Reports</a> 
+            </li>
+        }
+
+        <li class="dropdown">
+            <a id="myHelpLink" class="dropdown-toggle" data-toggle="dropdown" href="#">
+                      Help <b class="caret"></b></a>
+            <ul class="dropdown-menu dropdown-menu-col">
+                <li>How To Guides                 
+                    <ul>
+                        <li><a id="help-getting-started-link" href="@Url.Action("Index", "Help", new { area = "", documentToLoad = HelpDocuments.GettingStarted, companyId = @Html.GetUsersCompanyId(User) })">
+                                <i class="icon-file"></i>Getting Started</a> </li>
+                        <li><a id="help-set-up-employees-link" href="@Url.Action("Index", "Help", new { area = "", documentToLoad = HelpDocuments.SetUpEmployees, companyId = @Html.GetUsersCompanyId(User) })">
+                                <i class="icon-file"></i>Set Up & Employees</a> </li>
+                        <li><a id="help-tasklist-link" href="@Url.Action("Index", "Help", new { area = "", documentToLoad = HelpDocuments.TaskList, companyId = @Html.GetUsersCompanyId(User) })">
+                                <i class="icon-file"></i>Task List</a> </li>
+                        <li><a id="help-gra-link" href="@Url.Action("Index", "Help", new { area = "", documentToLoad = HelpDocuments.GeneralRiskAssessment, companyId = @Html.GetUsersCompanyId(User) })"><i class="icon-file"></i>General Risk Assessment</a>
+                        </li>
+                        <li><a id="help-hazardous-substances-link" href="@Url.Action("Index", "Help", new { area = "", documentToLoad = HelpDocuments.HazardousSubstances, companyId = @Html.GetUsersCompanyId(User) })">
+                                <i class="icon-file"></i>Hazardous Substances</a> </li>
+                        <li><a href="@Url.Action("Index", "ContactUs", new { area = "Contact" })"><i class="icon-envelope"></i> Contact Us</a>
+                    </ul>
+                </li>
+                <li>
+                    How To Videos
+                    <ul>
+                        <li><a id="site-setup-video-link" href="@Url.Action("Index", "Help", new { area = "", documentToLoad = HelpDocuments.SiteSetupVideo, companyId = @Html.GetUsersCompanyId(User) })">
+                                <i class="icon-play"></i>Site Set Up</a> </li>
+
+                        <li><a id="add-employees-video-link" href="@Url.Action("Index", "Help", new { area = "", documentToLoad = HelpDocuments.AddEmployeesVideo, companyId = @Html.GetUsersCompanyId(User) })">
+                                <i class="icon-play"></i>Add Employee</a> </li>
+
+                        <li><a id="add-users-video-link" href="@Url.Action("Index", "Help", new { area = "", documentToLoad = HelpDocuments.AddUsersVideos, companyId = @Html.GetUsersCompanyId(User) })">
+                                <i class="icon-play"></i>Add Users</a> </li>
+
+                        <li><a id="responsibilities-wizard-video-link" href="@Url.Action("Index", "Help", new { area = "", documentToLoad = HelpDocuments.ResponsibilitiesWizardVideo, companyId = @Html.GetUsersCompanyId(User) })">
+                                <i class="icon-play"></i>Responsibilities Wizard</a> </li>
+                       
+                        <li><a id="general-risk-assessment-video-link" href="@Url.Action("Index", "Help", new { area = "", documentToLoad = HelpDocuments.GeneralRiskAssessmentVideo, companyId = @Html.GetUsersCompanyId(User) })">
+                                <i class="icon-play"></i>General Risk Assessment</a> </li>
+
+                        <li><a id="fire-risk-assessment-video-link" href="@Url.Action("Index", "Help", new { area = "", documentToLoad = HelpDocuments.FireRiskAssessmentVideo, companyId = @Html.GetUsersCompanyId(User) })">
+                                <i class="icon-play"></i>Fire Risk Assessment</a> </li>
+
+                        <li><a id="personal-risk-assessment-video-link" href="@Url.Action("Index", "Help", new { area = "", documentToLoad = HelpDocuments.PersonalRiskAssessmentVideo, companyId = @Html.GetUsersCompanyId(User) })">
+                                <i class="icon-play"></i>Personal Risk Assessment</a> </li>
+
+                        <li><a id="hazardous-substances-video-link" href="@Url.Action("Index", "Help", new { area = "", documentToLoad = HelpDocuments.HazardousSubstancesVideo, companyId = @Html.GetUsersCompanyId(User) })">
+                                <i class="icon-play"></i>Hazardous Substances</a> </li>
+
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+
+        @if (FeatureSwitchChecker.Enabled(FeatureSwitches.FeatureSwitch_RequestAVisit, User.GetCustomPrinciple()))
+        {
+            <li class="dropdown" >
+                <a id="requestAVisitLink" href="@Url.Action("Index", "VisitRequest", new { area = "VisitRequest" })">Request A Visit</a> 
+            </li>
+        }
+    </ul>
+</nav>

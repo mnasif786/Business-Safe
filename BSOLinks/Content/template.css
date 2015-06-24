@@ -1,0 +1,59 @@
+﻿html, body {
+
+}
+
+#siteContainer {
+    padding-left: 0px;
+    padding-right: 0px;
+    float: left;
+    width: 100%;
+}
+
+#header
+{
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    background-image: url('images/header.png');
+    background-repeat: repeat-y;
+    background-color: rgb(130, 20, 22);
+    background-repeat: repeat-y;
+    background-position: left;
+    height: 142px;
+    z-index: 5;
+}
+
+.footer {height: 45px; }
+
+.footer a {color:#fff;}
+
+.footer 
+{
+    border-style: solid;
+    border-width: 1px;
+    border-color: #FFFFFF #ce1c22 #ce1c22 #ce1c22;
+    background-color: #ce1c22;
+    text-align: center;
+    color: #fff;
+    text-align: right;
+    padding-right: 30px;    
+    position: relative;
+    bottom: 0;
+    display: block;
+    clear: both;
+}
+
+.margin-top {
+    margin-top: 10px;
+}
+
+#logo {
+    margin-left: 25px;
+    clear: both;
+    display: block;
+}
+
+#bg-wrapper {
+    float: left;
+    width: 100%;
+}

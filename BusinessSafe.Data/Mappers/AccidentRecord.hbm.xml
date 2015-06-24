@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="AccidentRecord" table="`AccidentRecord`">
+    <id name="Id" column="Id" type="long">
+      <generator class="identity"/>
+    </id>
+    <property name="CompanyId" />
+    <property name="Title" column="`Title`" />
+    <property name="Reference" />
+    <many-to-one name="Jurisdiction" class="Jurisdiction" column="JurisdictionId" />
+    <property name="PersonInvolved" column="PersonInvolvedId"/>
+    <property name="PersonInvolvedOtherDescription" />
+    <many-to-one name="EmployeeInjured" class="Employee" column="EmployeeInjuredId" lazy="false"/>
+    <property name="NonEmployeeInjuredForename" />
+    <property name="NonEmployeeInjuredSurname" />
+    <property name="NonEmployeeInjuredAddress1" />
+    <property name="NonEmployeeInjuredAddress2" />
+    <property name="NonEmployeeInjuredAddress3" />
+    <property name="NonEmployeeInjuredCountyState" />
+    <many-to-one name="NonEmployeeInjuredCountry" class="Country" column="NonEmployeeInjuredCountryId" />
+    <property name="NonEmployeeInjuredPostcode" />
+    <property name="NonEmployeeInjuredContactNumber" />
+    <property name="NonEmployeeInjuredOccupation" />
+    <property name="DateAndTimeOfAccident" />
+    <many-to-one name="SiteWhereHappened" class="Site" column="SiteWhereHappenedId" />
+    <property name="OffSiteSpecifics" />
+    <property name="Location" />
+    <many-to-one name="AccidentType" class="AccidentType" column="AccidentTypeId" />
+    <property name="AccidentTypeOther" />
+    <many-to-one name="CauseOfAccident" class="CauseOfAccident" column="CauseOfAccidentId" />
+    <property name="CauseOfAccidentOther" />
+    <property name="FirstAidAdministered" />
+    <many-to-one name="EmployeeFirstAider" class="Employee" column="EmployeeFirstAiderId" lazy="false"/>
+    <property name="NonEmployeeFirstAiderSpecifics" />
+    <property name="DetailsOfFirstAidTreatment" />
+    <property name="SeverityOfInjury" column="SeverityOfInjuryId" />
+    <bag name="AccidentRecordInjuries" table="AccidentRecordInjury" inverse="true" lazy="false" cascade="save-update" where="Deleted = 0" access="field.camelcase-underscore">
+      <key column="AccidentRecordId"></key>
+      <one-to-many class="AccidentRecordInjury"/>
+    </bag>
+    <bag name="AccidentRecordBodyParts" table="AccidentRecordBodyPart" inverse="true" lazy="false" cascade="save-update" where="Deleted = 0" access="field.camelcase-underscore">
+      <key column="AccidentRecordId"></key>
+      <one-to-many class="AccidentRecordBodyPart"/>
+    </bag>
+    <property name="InjuredPersonWasTakenToHospital" />
+    <property name="InjuredPersonAbleToCarryOutWork" column="InjuredPersonAbleToCarryOutWorkId" />
+    <property name="LengthOfTimeUnableToCarryOutWork" column="LengthOfTimeUnableToCarryOutWorkId" />
+    <property name="DescriptionHowAccidentHappened" />
+
+    <property name="Deleted" type="bool" />
+    <property name="CreatedOn" />
+    <many-to-one name="CreatedBy" class="UserForAuditing" column="CreatedBy" lazy="false" />
+    <property name="LastModifiedOn" />
+    <many-to-one name="LastModifiedBy" class="UserForAuditing" column="LastModifiedBy"/>
+    
+    <bag name="AccidentRecordDocuments" table="AccidentRecordDocument" inverse="true" lazy="false" cascade="save-update" access="field.camelcase-underscore">
+      <key column="AccidentRecordId"></key>
+      <one-to-many class="AccidentRecordDocument"/>
+    </bag>
+    <bag name="AccidentRecordNextStepSections" table="AccidentRecordNextStepSection" inverse="true" lazy="false" cascade="save-update" where="Deleted = 0" >
+      <key column="AccidentRecordId"></key>
+      <one-to-many class="AccidentRecordNextStepSection"/>
+    </bag>
+
+    <property name="IsReportable" />
+    <property name="Status" column="IsOpen" />
+    <property name="DoNotSendEmailNotification" />
+    <property name="EmailNotificationSent" />
+    <property name="PersonInvolvedOtherDescriptionId" />
+  </class>
+</hibernate-mapping>   
+    
+  

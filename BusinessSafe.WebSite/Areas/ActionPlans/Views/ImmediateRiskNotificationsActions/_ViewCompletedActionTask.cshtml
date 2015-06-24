@@ -1,0 +1,13 @@
+﻿@model BusinessSafe.WebSite.Areas.ActionPlans.ViewModels.CompleteActionTaskViewModel
+@using (Html.BeginForm("Complete", "ImmediateRiskNotificationsActions", FormMethod.Post, new {id = "ActionTask", @class = "form-inline"}))
+{
+    <div class="readonly">      
+        
+        @Html.Partial("_ReadOnlyActionTaskDetail", Model)       
+    </div>
+
+    <script type="text/javascript">
+        new SetFormToReadOnly('.readonly').execute();
+    </script>
+   
+}

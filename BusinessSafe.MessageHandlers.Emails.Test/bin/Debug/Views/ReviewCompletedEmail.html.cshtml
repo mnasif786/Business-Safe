@@ -1,0 +1,46 @@
+﻿@model BusinessSafe.MessageHandlers.Emails.ViewModels.ReviewCompletedEmailViewModel
+<head>
+    <style>
+        body
+        {
+            background-color: white;
+            font-size: .85em;
+            font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
+            margin: 0;
+            padding: 0;
+            color: #393939;
+        }
+        
+        h1
+        {
+            font-size: 2em;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        BusinessSafe Online - Risk Assessment Review Completed
+    </h1>
+    <p>
+        The following Risk Assessment Review has been completed.
+    </p>
+    <p>
+        Reference: @Model.TaskReference
+    </p>
+    <p>
+        Title: @Model.Title
+    </p>
+    <p>
+        Description: @Model.Description
+    </p>
+    <p>
+        Assigned To: @Model.RiskAssessorName
+    </p>
+    <p>
+        The Risk Assessment Review has now been completed by @Model.TaskAssignedTo. To view the
+        Risk Assessment, please log into BusinessSafe Online on the following link.
+        @Model.BusinessSafeOnlineLink
+    </p>
+</body>

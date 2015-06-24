@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+
+  <class name="CompanyVehicleType" table="`CompanyVehicleType`" mutable="false">
+
+    <id name="Id" type="int" >
+      <generator class="native" />
+    </id>
+    <property name="Name" type="string" />
+    <property name="Deleted" type ="bool"/>
+    <property name="CreatedOn" type="datetime" />
+    <property name="LastModifiedOn" type="datetime" />
+    <many-to-one name="LastModifiedBy" class="UserForAuditing" column="LastModifiedBy" />
+    <many-to-one name="CreatedBy" class="UserForAuditing" column="CreatedBy"/>
+
+  </class>
+</hibernate-mapping>

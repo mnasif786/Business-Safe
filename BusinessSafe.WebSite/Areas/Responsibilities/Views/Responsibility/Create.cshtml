@@ -1,0 +1,32 @@
+﻿@using BusinessSafe.WebSite.Extensions
+@using BusinessSafe.WebSite.Areas.Responsibilities.ViewModels
+@using Cassette.Views
+@model ResponsibilityViewModel
+@{
+    ViewBag.Title = "Responsibilities";
+
+}
+<div class="container fixed-content">
+    <h2>
+        <a class="btn" href="@Url.Action("Index", "Responsibility", new { area = "Responsibilities" })" title="Close Responsibility"><i class="icon-remove"></i></a>
+        <i class="tick"></i>New Responsibility
+    </h2>
+    @Html.Partial("_ResponsibilityDetail",Model)
+</div>
+
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("responsibilities");
+    }
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var sites = @Html.Raw(Json.Encode(Model.Sites));
+            var employees = @Html.Raw((Json.Encode(Model.Employees)));
+            var frequencyOptions = @Html.Raw((Json.Encode(Model.FrequencyOptions)));
+            var categories = @Html.Raw((Json.Encode(Model.Categories)));
+            var reasons = @Html.Raw((Json.Encode(Model.Reasons)));
+           responsibilities.initialise(sites,employees,frequencyOptions, categories, reasons);
+        });
+    </script>
+}

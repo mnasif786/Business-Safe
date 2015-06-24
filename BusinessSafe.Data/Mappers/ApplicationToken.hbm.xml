@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="ApplicationToken" table="`ApplicationToken`">
+    <id name="Id" column="Id" type="Guid">
+      <generator class="assigned" />
+    </id>
+    <property name="IsEnabled" type="bool" />
+    <property name="AppName" type="string" />
+  </class>
+</hibernate-mapping>

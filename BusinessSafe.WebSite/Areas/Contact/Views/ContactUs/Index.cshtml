@@ -1,0 +1,67 @@
+﻿@using Cassette.Views
+@model BusinessSafe.WebSite.Areas.Contact.ViewModels.ContactUsViewModel
+@{
+    ViewBag.Title = "Contact Us";
+}
+    <section>
+        <span class="legend">Contact Us</span>
+        <div class="content">
+            <p>For technical support , please speak to one of our advisors or email us your query, we will be in touch.</p>
+            <div class="row-fluid">
+                <p><i class="phoneIcon"></i><strong> Phone:</strong> 0844 892 2492 from 9:00 AM till 5:30 PM Mon - Fri.</p>
+            </div>
+            <div class="row-fluid">
+                <p><i class="icon-envelope"></i><strong> Email Address:</strong> <a href="mailto:support@peninsula-online.com">support@peninsula-online.com</a></p>
+            </div>
+            <form class="row form-inline span12 ipad-container" method="POST" action="@Url.Action("Send")">
+                <fieldset>
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <label class="span2" for="Name">Name:</label>
+                            @Html.TextBoxFor(m => m.Name, new { @class = "span4", @maxlength = 50 })
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <label class="span2" for="EmailAddress">Email Address:</label>
+                            @Html.TextBoxFor(m => m.EmailAddress, new { @class = "span4", @maxlength = 100 })
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span9">
+                            <label class="span2" for="Message">Message:</label>
+                            @Html.TextAreaFor(m => m.Message, new { @rows = 9, @class = "span7", @maxlength = 500 })
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span9">
+                            <input type="submit" id="sendButton" value="Send" class="btn btn-success pull-right" />    
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="row-fluid">
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="span10">
+                            @Html.Partial("_DistinctValidationSummary")
+                        </div>
+                    }
+
+                    @if (TempData["Notice"] != null)
+                    {
+                        <div class="alert alert-success span6">
+                            <a id="successmessageanchor" href="#successmessage"></a>
+                            @TempData["Notice"].ToString()
+                        </div>
+                    }
+                </div>
+            </form>
+        </div>
+</section>    
+
+@section JavaScriptSection
+{
+    @{
+        @Bundles.RenderScripts()
+    }
+}

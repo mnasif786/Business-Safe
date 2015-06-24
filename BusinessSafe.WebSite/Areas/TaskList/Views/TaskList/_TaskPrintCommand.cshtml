@@ -1,0 +1,11 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+@model BusinessSafe.WebSite.Areas.TaskList.ViewModels.TaskViewModel
+@if (User.IsInRole(Permissions.ViewRiskAssessmentTasks.ToString()))
+{
+
+    if (Model.IsPrintAvailable())
+    {
+    <a data-id="@Model.Id" class="icon-print" href="#" data-task-type="@Model.GetTaskType()" title="Print Task">
+    </a>
+    }
+}

@@ -1,0 +1,57 @@
+﻿@model BusinessSafe.WebSite.Areas.Responsibilities.ViewModels.ResponsibilitiesIndexViewModel
+
+
+@using (Html.BeginForm("Find", "Responsibility", FormMethod.Get, new {id = "formResponsibilities", @class = "search-form"}))
+{   
+    <div class="well">
+        <fieldset>
+            <legend>Responsibilities Search</legend>
+            <ul>
+                <li>
+                    <label class="thin" for="Site">Site</label>
+                    @Html.TextBox("Site", null, new { @class = "siteDropDownList" })
+                    @Html.Hidden("SiteId", Model.SiteId)
+                </li>
+                <li>
+                    <label for="Title" class="medium">Title</label>
+                    @Html.TextBoxFor(model => model.Title, new { @class = "two-date-pickers-and-a-button-wide" })
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <label class="thin" for="SiteGroup">Site Group</label>
+                    @Html.TextBox("SiteGroup", null, new { @class = "siteDropDownList" })
+                    @Html.Hidden("SiteGroupId", Model.SiteGroupId)
+                </li>
+                <li>
+                    <label for="createdFrom" class="medium">Created From</label>
+                    @Html.TextBoxFor(model => model.CreatedFrom, new { id = "createdFrom", name = "createdFrom", @class = "calendar" })
+                </li>
+                <li>
+                    <label for="createdTo">To</label>
+                    @Html.TextBoxFor(model => model.CreatedTo, new { id = "createdTo", name = "createdTo", @class = "calendar" })
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <label class="thin" for="Category">Category</label>
+                    @Html.TextBox("Category")
+                    @Html.Hidden("CategoryId", Model.CategoryId)
+                </li>
+            </ul>
+            <ul>
+                <li class="buttons thin">
+                    <input type="submit" id="ResponsibilityTaskCategoryGoToResponsibilityTasks" value="Search" class="btn btn-primary" />
+                    @Html.ActionLink("Reset", "Index", "Responsibility", new { @class = "btn btn-link", id = "ResetButton" })
+                </li>
+            </ul>
+        </fieldset>
+        <div class="hide">
+            @Html.CheckBoxFor(x => x.IsShowDeleted)
+            @Html.CheckBoxFor(x => x.IsShowCompleted)
+        </div>
+    </div>
+    <div style="min-height:26px;margin-bottom:10px;margin-right:11px;margin-top:-10px;">
+        <input type="button" id="printSearchResults" value="Print" style="float:right;" class="btn" />
+    </div>
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://pbsnet:8028/WS_ActiveDirectory.asmx?wsdl" docRef="http://pbsnet:8028/WS_ActiveDirectory.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://pbsnet:8028/WS_ActiveDirectory.asmx" xmlns:q1="http://WebServices_ActiveDirectory/" binding="q1:WS_ActiveDirectorySoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://pbsnet:8028/WS_ActiveDirectory.asmx" xmlns:q2="http://WebServices_ActiveDirectory/" binding="q2:WS_ActiveDirectorySoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

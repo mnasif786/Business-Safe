@@ -1,0 +1,61 @@
+﻿@model BusinessSafe.Checklists.ViewModels.EmployeeChecklistViewModel
+<header>
+    <h1>@Model.ChecklistTitle <span>Reference: <strong>@Model.FriendlyReference </strong> </span></h1>
+</header>
+<div class="content">
+    <p>
+        @Model.ChecklistDescription
+    </p>
+    @if (TempData["message"] != null)
+    {
+        <div class="alert">
+            @TempData["message"]
+        </div>
+    }
+    @using (Html.BeginForm("Save", "Home", FormMethod.Post))
+    {
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.EmployeeChecklistId)
+        @Html.HiddenFor(model => model.CompletedOnEmployeesBehalf)
+        foreach (var s in Model.Sections)
+        {
+            @Html.Partial("_Section", s)
+        }
+        var disabledText = string.Empty;
+        if (Model.IsCompleted)
+        {
+            disabledText = " disabled=\"disabled\"";
+        }
+        <button id="SaveForLaterButton" class="btn btn-primary btn-large pull-right"@disabledText>Save for Later</button>
+        <input class="btn btn-success btn-large pull-right"@disabledText type="submit" value="Submit Checklist" />
+    }</div>
+    
+    
+<div class="hide">
+    <div id="completeChecklistDialog" title="Complete Checklist">
+        <p>Are you sure you want to submit your Checklist?</p>
+    </div>
+</div>
+@section StyleSheetSection
+{
+<link rel="stylesheet" href="@Url.Content("/Content/smoothness/jquery-ui-1.8.18.custom.css")" />
+}
+@section JavaScriptSection
+{
+<script type="text/javascript" src="@Url.Content("/Scripts/Libraries/jquery-ui-1.8.18.js")"></script>
+<script type="text/javascript" src="@Url.Content("/Scripts/BusinessSafe/Application/application.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/BusinessSafe/businesssafe-checklists.js")"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var saveForLaterURL = "@Url.Action("Save", "Home")";
+            var completeChecklistURL = "@Url.Action("Complete", "Home")";
+
+            BusinessSafe.Checklists.initialise(saveForLaterURL, completeChecklistURL);
+        });
+        
+
+
+    </script>
+}
+
+           

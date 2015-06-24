@@ -1,0 +1,25 @@
+﻿@using BusinessSafe.WebSite.Areas.GeneralRiskAssessments.ViewModels
+@model EditSummaryViewModel
+@{
+    ViewBag.Title = "Summary";
+}
+@Html.Partial("_RiskAssessmentSummary", ViewBag.RiskAssessmentSummary as GeneralRiskAssessmentSummaryViewModel)
+<div class="container ipad-container">
+    @Html.Partial("_Tabs", ViewBag.TabViewModel as GeneralRiskAssessmentTabViewModel)
+
+    @Html.Hidden("SelectedTabIndex", 1)
+    @Html.Hidden("RiskAssessmentId", Model.RiskAssessmentId)
+    @Html.Partial("_Form", Model)
+</div>
+@section JavaScriptSection
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var initModel = {
+                riskAssessors: @Html.Raw(Json.Encode(Model.RiskAssessmentAssessors)),
+                sites : @Html.Raw(Json.Encode(Model.Sites))
+            };
+            BusinessSafe.RiskAssessment.SummaryTab.ViewModel(BusinessSafe.GeneralRiskAssessment.SummaryTab, initModel);
+        });
+    </script>
+}

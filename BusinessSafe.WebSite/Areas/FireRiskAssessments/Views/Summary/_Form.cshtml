@@ -1,0 +1,75 @@
+﻿@using BusinessSafe.WebSite.Areas.FireRiskAssessments.ViewModels
+@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Extensions
+@model EditSummaryViewModel
+<div id="SummaryTabContentHolder" class="fixed-content">
+    
+    @Html.Partial("_TitleBar", ViewBag.RiskAssessmentSummary as FireRiskAssessmentSummaryViewModel)
+
+    <form class="row form-inline" method="post" action="@Url.Action("Save", "Summary")" >
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div>
+            @Html.Partial("_DistinctValidationSummary")
+        </div>
+    }
+    @if (TempData["Notice"] != null)
+    {
+        <div class="alert alert-success">
+            <a id="successmessageanchor" href="#successmessage"></a>
+            @TempData["Notice"].ToString()
+        </div>    
+    }
+    @Html.HiddenFor(model => model.RiskAssessmentId)
+    @Html.HiddenFor(model => model.CompanyId)
+    <fieldset>
+        <legend class="span12">
+            <h3>Assessment Summary</h3>
+        </legend>
+        <div class="span12">
+            <label class="span2" for="Title">Title</label>
+            @Html.TextBoxFor(m => m.Title, new { @class = "span4", maxLength = 250 })
+        </div>
+        <div class="span12">
+            <label class="span2" for="Reference">Reference</label>
+            @Html.TextBoxFor(model => model.Reference, new { @class = "span4", maxLength = 50 })
+        </div>
+        <div class="span12">
+            <label class="span2" for="dateOfAssessment">Date of Assessment</label>
+            @Html.TextBox("DateOfAssessment", @Model.GetDateOfAssessment(), new { id = "DateOfAssessment", @class = "span2 calendar" })
+        </div>
+         <div class="span12">
+            <label class="span2" for="SelectedSiteId">
+                Site</label>
+            @Html.TextBoxFor(m => m.Site, new { @class = "span4" })
+            @Html.HiddenFor(x => x.SiteId)
+        </div>
+        <div class="span12" id="riskAssessorsContainer" style="display: none;">
+            <label class="span2" for="RiskAssessor">
+                Risk Assessor(s)</label>
+            @Html.TextBoxFor(m => m.RiskAssessor, new { @class = "span4" })
+            @Html.HiddenFor(x => x.RiskAssessorId)
+        </div>
+        <div class="span12">
+            <label class="span2" for="RiskAssessor">
+                Person Appointed</label>
+            @Html.TextBoxFor(m => m.PersonAppointed, new { @class = "span4", maxLength = 100})
+            
+        </div>
+    </fieldset>
+    @{
+        var viewName = Html.IsReadOnly() ? "View" : "Index";
+        var urlAction = Url.Action(viewName, "PremisesInformation", new { area = "FireRiskAssessments", companyId = Model.CompanyId, riskAssessmentId = Model.RiskAssessmentId });}
+        <div class="span12">
+            <label class="span2"></label>
+            @if (User.IsInRole(Permissions.AddRiskAssessmentTasks.ToString()) || User.IsInRole(Permissions.EditRiskAssessmentTasks.ToString()))
+            {
+                <input type="submit" id="saveButton" value="Save" class="btn btn-success" />
+                <a id="nextBtn" class="btn btn-primary" mainUrl="PremisesInformation" tabIndex="2" href="@urlAction">
+                    Save &amp; Continue <i class="icon-chevron-right icon-white"></i></a>
+            }
+            <a class="btn btn-link" href="@Url.Action("Index", "RiskAssessment", new { area = "FireRiskAssessments", companyId = @Html.GetUsersCompanyId(User) })">
+                Cancel</a>
+        </div>
+    </form>
+</div>

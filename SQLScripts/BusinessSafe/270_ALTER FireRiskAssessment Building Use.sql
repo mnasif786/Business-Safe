@@ -1,0 +1,46 @@
+USE [BusinessSafe]
+GO
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'FireRiskAssessment' AND COLUMN_NAME = 'BuildingUse' AND CHARACTER_MAXIMUM_LENGTH = 200)
+BEGIN
+	ALTER TABLE [dbo].[FireRiskAssessment]
+	ALTER COLUMN [BuildingUse] [nvarchar](500)
+END
+GO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'FireRiskAssessment' AND COLUMN_NAME = 'NumberOfFloors')
+BEGIN
+	ALTER TABLE [dbo].[FireRiskAssessment]
+	ADD [NumberOfFloors] [int] NULL
+END
+GO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'FireRiskAssessment' AND COLUMN_NAME = 'NumberOfPeople')
+BEGIN
+	ALTER TABLE [dbo].[FireRiskAssessment]
+	ADD [NumberOfPeople] [int] NULL
+END
+GO
+
+--//@UNDO
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'FireRiskAssessment' AND COLUMN_NAME = 'BuildingUse' AND CHARACTER_MAXIMUM_LENGTH = 500)
+BEGIN
+	ALTER TABLE [dbo].[FireRiskAssessment]
+	ALTER COLUMN [BuildingUse] [nvarchar](200)
+END
+GO
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'FireRiskAssessment' AND COLUMN_NAME = 'NumberOfFloors')
+BEGIN
+	ALTER TABLE [dbo].[FireRiskAssessment]
+	DROP [NumberOfFloors]
+END
+GO
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'FireRiskAssessment' AND COLUMN_NAME = 'NumberOfPeople')
+BEGIN
+	ALTER TABLE [dbo].[FireRiskAssessment]
+	DROP [NumberOfPeople]
+END
+GO

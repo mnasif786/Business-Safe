@@ -1,0 +1,68 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Extensions
+@using Cassette.Views
+@{
+    ViewBag.Title = "Data Protection Policy";
+}
+<div>
+    <section>
+        <span class="legend">Data Protection Policy</span>        
+        <div class="content">           
+            <div>
+                <p><H1>Data Protection Statement of BusinessSafe Online which is owned and operated by Peninsula Business Services Limited</H1></p>
+            </div>
+            <div>
+                <p>The Data Protection Act 1998 allows us to hold and process personal data. We will use the personal data provided to us only for its intended purpose, and in accordance with the requirements of the Data Protection Act 1998. Should an employee, whose details appear on BusinessSafe Online, that any information held about them is incorrect, then they should notify their line manager at the earliest available opportunity, so that they can either address the matter or raise it with us. This statement sets out how the information on BusinessSafe Online is to be used. The information provided by which employees can be identified, will only be used in accordance for its intended purpose in accordance with this statement.</p>                
+            
+                <p><strong>What information will be collected?</strong></p>
+                <p>The following information about employees may be collected:</p>
+                <p>
+                    <ol>                    
+                        <li><p>Name</p></li>
+                        <li><p>Address</p></li>
+                        <li><p>Date of Birth</p></li> 
+                        <li><p>Nationality</p></li>
+                        <li><p>Job title</p></li>
+                        <li><p>Contact details, for example, details of next of kin</p></li>
+                        <li><p>Ethnic origin</p></li>
+                        <li><p>Immigration status details i.e. passport number/visa number and expiry dates</p></li>
+                        <li><p>Company vehicle details & driving licence details</p></li>
+                        <li><p>National Insurance Number/PPS Number</p></li>
+                        <li><p>Involvement in and responsibility of health and safety records and possible accident records where the employee was involved in an accident.</p></li>
+                    </ol>
+                </p>
+
+                <p><strong>What is the information used for?</strong></p>
+                <p>Clients of BusinessSafe Online will use the information to maintain current and accurate BusinessSafe Records, which can be used for such purposes as Employee Contact Information (in case of emergencies) risk assessments, responsibilities, accident recording, health and safety tasks and other health and safety related matters.</p>
+                <p>Personal Data will not be used for any other purpose outside of the scope of your employment.</p>
+
+                <p><strong>Retention of BusinessSafe Online Records</strong></p>
+                <p>If a client of BusinessSafe Online terminates their service agreement with BusinessSafe Online, their employee data will be retained for a period of 12 months after their service agreement ends before being deleted. The data during the 12month period will be held securely as described under the Security section below. </p>
+
+                <p><strong>Security</strong></p>
+                <p>We are committed to ensuring that employee information is kept secure at all times, and we will implement appropriate technical and organisational measures against the unauthorised or unlawful disclosure of such information, and so as to prevent its accidental loss, destruction or damage.</p>
+                <p>Personal access to BusinessSafe Online will only be via a secure username and password. The username and password for each individual is unique and only allows access to their own personal information. Only certain authorised staff, who are required to have access to the personal information of other employees for the purposes of their job role, will be authorised and will have the necessary access rights to do so. They will receive relevant training and will be asked to agree to abide by the terms of this Data Protection Statement.</p>
+                <p>All users of BusinessSafe Online are encouraged to keep their unique user and password strictly confidential. Users of BusinessSafe Online must notify us if they become aware of any unauthorised access, and we will notify clients of BusinessSafe Online should we become aware of any security breach involving loss, corruption or theft of employee information.</p>
+
+                <p><strong>Storage and Encryption</strong></p>
+                <p>The data stored on BusinessSafe Online is kept securely in our on-site data centre in Manchester, UK. The information is replicated to an offsite hosted environment for disaster recovery purposes. We use 128 Bit SSL Encryption for the transportation of data and a Hash Algorithm 128 Bit for passwords. Our systems are periodically penetration tested and kept up to date with ISO 27001best practices</p>
+
+                <p><strong>Subject Access Requests</strong></p>
+                <p>Details of the personal information held about individual employees on BusinessSafe Online may be requested, in writing, by that individual. A payment of a £10 fee will be requested and the individual will be asked to provide two forms of identification. Such a request must be made to BusinessSafe Online’s Compliance Manager, who will ensure that it is dealt with in accordance with Section 7 of the Data Protection Act 1998. The individual’s employer will be notified that such a request has been received.</p>
+
+                <p><strong>Disclosure</strong></p>
+                <p>No personal information held on BusinessSafe Online will be passed to third parties, without the consent of the individual employee concerned, unless such disclosure is legally required in accordance with provisions of the Data Protection Act 1998.</p>           
+            </div>
+        </div>
+    </section>
+</div>
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("employees");   
+        @Bundles.RenderScripts()  
+    }
+    <script type="text/javascript">
+       
+    </script>
+}

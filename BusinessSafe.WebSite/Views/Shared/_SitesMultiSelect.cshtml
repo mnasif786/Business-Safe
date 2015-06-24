@@ -1,0 +1,11 @@
+﻿@using BusinessSafe.WebSite.ViewModels
+@model IEnumerable<SiteMultiSelectViewModel>
+<div class="search-and-multi-select sitesMultiSelect" id="SitesMultiSelect">
+    <ul>
+        @foreach (var site in Model)
+        {
+            <li>@site.Name<input type="checkbox" name="SiteIdForCopy" id="SiteIdForCopy" class="siteMultiSelectCheckbox" value="@site.Id"/></li>
+        }
+    </ul>
+    <input type="button" id="SelectAllSites" class="btn sitesMultiSelectAll" value="Select All" />
+</div>

@@ -1,0 +1,101 @@
+﻿#sitetreeviewcontainer, #sitedetailscontainer, #sitegroupscontainer
+{
+    width: 40%;
+    background: white;
+    margin-bottom: 50px;
+    padding-top: 20px;     
+}
+
+#sitedetailscontainer, #sitegroupscontainer
+{
+    padding-left: 100px;
+    float: right;
+    margin-left: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    background: transparent;    
+}
+
+#sitegroupscontainer {
+    display: none;
+}
+
+#sitetreeviewcontainer
+{
+    float: left;
+    margin-left: 20px;
+    padding-left: 30px;
+    border-right: 2px solid #EEE; 
+}
+
+#sitetreeviewcontainer li
+{
+    cursor: pointer;
+}
+
+#tree
+{
+    padding-bottom: 50px;    
+}
+
+.clear
+{
+    clear: both;
+}
+
+.form-actions {
+    width: auto;
+}
+
+.page-header {
+    min-height: 50px;
+}
+
+fieldset {
+    width: 80%;    
+}
+
+#sidetreecontrol {
+    height: auto;
+    min-height: 220px;
+    max-height: 655px;
+    overflow: auto;
+    background: transparent;    
+    font-size: 13px  !important;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+#unlinkedSites {
+    height: 300px;
+    overflow: auto;
+    font-size: 13px  !important;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+#addSiteGroupbtn {
+    margin-left: 5px;
+}
+
+#dialogDelinkSite, #dialogDeleteSiteGroup {
+    display: none;
+}
+
+.siteGroupLabel {
+    color: #B94A48;
+    font-weight: bold;  
+    line-height: 18px;
+}
+
+.form-horizontal .form-actions {
+    padding-left: 50px;
+}
+
+button#deleteSiteBtn {
+    margin-left: 70px;
+}
+
+button#delinkSiteBtn {
+    margin: 10px;   
+}

@@ -1,0 +1,9 @@
+﻿@model BusinessSafe.WebSite.ViewModels.ViewFurtherControlMeasureTaskViewModel
+@using BusinessSafe.Domain.Entities      
+<div id="view-further-control-measure-task">
+    @Html.Partial("_ReadOnlyTaskDetails", Model)
+    @Html.Partial("_AttachDocuments", Model.ExistingDocuments)
+</div>
+<script type="text/javascript">
+    new SetFormToReadOnly('.readonly').execute();
+</script>

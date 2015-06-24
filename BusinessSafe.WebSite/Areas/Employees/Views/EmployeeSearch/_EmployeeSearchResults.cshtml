@@ -1,0 +1,43 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Extensions
+@using Telerik.Web.Mvc.UI
+@model BusinessSafe.WebSite.Areas.Employees.ViewModels.EmployeeSearchViewModel
+<h2><a id="showDeletedLink" class="btn" href="#">Show Deleted</a> 
+            <span class="tick"></span>My Employees
+</h2>
+    @Html.Telerik().Grid(Model.Employees).Name("ResponsibilitySaveResponsibilityTaskRequestGrid").DataKeys(keys => keys.Add(c => c.Id)).DataBinding(dataBinding => 
+    dataBinding.Server().Delete("Delete", "ResponsibilityPlanner")
+    ).Columns(
+        columns => {
+            columns.Bound(o => o.Id).Visible(false);
+            columns.Bound(o => o.Forename).Title("Forename");
+            columns.Bound(o => o.Surname);
+            columns.Bound(o => o.JobTitle).Title("Job Title");
+            columns.Bound(o => o.OrgUnit).Title("Org Unit").Visible(false);
+            columns.Bound(o => o.Site);
+            columns.Bound(o => o.Status);
+            columns.Template(@<text>
+                @if (!item.IsDeleted)
+                {
+                    if (User.IsInRole(Permissions.ViewEmployeeRecords.ToString()))
+                    {
+                    <a class="viewLink icon-search" href="@Url.Action("View", "Employee", new { companyId = Html.GetUsersCompanyId(User), employeeId = item.Id })" title="View Employee" data-id="@item.Id">
+                        <i class="icon-search"></i></a>
+                    }
+                    if (User.IsInRole(Permissions.EditEmployeeRecords.ToString()))
+                    {
+                    <a class="editLink icon-edit" href="@Url.Action("Index", "Employee", new { companyId = Html.GetUsersCompanyId(User), employeeId = item.Id })" title="Edit Employee" data-id="@item.Id">
+                        </a>
+                    }
+                    if (User.IsInRole( Permissions.DeleteEmployeeRecords.ToString() ) && item.ShowDeleteButton)
+                    {
+                    <a class="icon-remove" href="#"title="Delete Employee" data-id="@item.Id"></a>
+                    }
+                }
+                else
+                {
+                    <a class="icon-share" href="#"title="Reinstate Deleted Employee" data-id="@item.Id"></a>    
+                }
+            </text>).Width(165);
+        }
+    ).Pageable(page => page.PageSize(10)).Sortable()

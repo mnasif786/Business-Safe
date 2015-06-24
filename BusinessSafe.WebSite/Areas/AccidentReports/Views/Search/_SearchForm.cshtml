@@ -1,0 +1,50 @@
+﻿@model BusinessSafe.WebSite.Areas.AccidentReports.ViewModels.AccidentRecordsIndexViewModel
+           
+<div class="well">
+    @using (Html.BeginForm("Index", "Search", FormMethod.Get, new { @class = "search-form", @id = "formAccidentRecords" }))
+    {
+        <fieldset>
+            <legend>Accident Records Search</legend>
+            <ul>
+                <li>
+                    <label class="x-wide" for="Site">Site</label>
+                    @Html.TextBox("Site", null, new { @class = "siteDropDownList", style = "width: 240px" })
+                    @Html.Hidden("SiteId", Model.SiteId)
+                </li>
+                <li>
+                    <label for="createdFrom" class="medium">Created From</label>
+                    @Html.TextBoxFor(model => model.CreatedFrom, new { id = "createdFrom", name = "createdFrom", @class = "calendar" })
+                </li>
+                <li>
+                    <label for="createdTo">To</label>
+                    @Html.TextBoxFor(model => model.CreatedTo, new { id = "createdTo", name = "createdTo", @class = "calendar" })
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <label for="InjuredPersonSurname" class="x-wide">Injured Person Forename</label>
+                    @Html.TextBoxFor(model => model.InjuredPersonForename, new { style = "width: 278px" })
+                </li>           
+                <li>
+                    <label for="InjuredPersonSurname" class="medium">Surname</label>
+                    @Html.TextBoxFor(model => model.InjuredPersonSurname, new { style = "width: 278px" })
+                </li>                           
+            </ul>
+            <ul>
+                <li>
+                    <label for="Title" class="x-wide">Title</label>
+                    @Html.TextBoxFor(model => model.Title, new { style = "width: 510px" })
+                </li>
+            </ul>          
+            <ul>
+                <li class="buttons thin" style="margin-left:166px;">
+                    <input type="submit"value="Search" class="btn btn-primary" id="searchButton" />
+                    @Html.ActionLink("Reset", "Index", "Search", new { @class = "btn btn-link", id = "ResetButton" })
+                </li>
+            </ul>
+        </fieldset>    
+
+        @Html.HiddenFor(m => m.IsShowDeleted)
+    }
+</div>
+

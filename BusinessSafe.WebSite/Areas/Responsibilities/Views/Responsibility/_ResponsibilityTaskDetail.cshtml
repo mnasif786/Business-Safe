@@ -1,0 +1,100 @@
+﻿@model BusinessSafe.WebSite.Areas.Responsibilities.ViewModels.CreateUpdateResponsibilityTaskViewModel
+@{
+    object htmlAttributes = null;
+    var recurringTaskCompletionDueDateLabel = "First Due Date";
+    if (Model.TaskId > 0)
+    {
+        htmlAttributes = new { @readonly = "readonly" };
+        recurringTaskCompletionDueDateLabel = "Next Due Date";
+    }
+}
+
+@Html.HiddenFor(m => m.CompanyId)
+@Html.HiddenFor(m => m.ResponsibilityId)                                     
+@Html.HiddenFor(m => m.TaskId)                                     
+@Html.HiddenFor(m => m.ResponsibilitySiteId)
+@Html.HiddenFor(m => m.ResponsibilitySite)
+<fieldset class="well">
+    <div class="validation-summary-errors hide">
+        <ul>
+            <li>Value required</li>
+        </ul>
+    </div>
+    <div class="row">
+        <label class="span2">Task Title:</label>
+        @Html.TextBoxFor(x => x.Title, new {maxlength = 100, @class = "span7"})
+    </div>
+    <div class="row">
+        <label class="span2">Description:</label>
+        @Html.TextAreaFor(x => x.Description, new {maxlength = 500, @class = "span7"})
+    </div>
+    <div class="row">
+        <label for="IsRecurring" class="span2">
+            Is Recurring</label>
+        @Html.CheckBoxFor(m => m.IsRecurring, htmlAttributes)
+    </div>
+    <div id="recurringDiv" class="@(Model.IsRecurring ? "" : "hide")">
+        <div class="row">
+            <label class="span2" for="Frequency">
+                Frequency</label>
+            @Html.TextBoxFor(m => m.TaskReoccurringType, new { @class = "span2" })
+            @Html.HiddenFor(x => x.TaskReoccurringTypeId)
+        </div>
+        <div class="row-fluid row">
+            <div class="span5">
+            <label for="ReoccurringStartDate" class="span2">@recurringTaskCompletionDueDateLabel</label>
+            @Html.TextBox("ReoccurringStartDate", Model.ReoccurringStartDate, new { id = "FirstDueDate", @class = "span2 calendar", placeholder = "dd/mm/yyyy" })
+            </div>
+            <div class="span5">
+            <label for="TaskReoccurringEndDate" class="span2">
+                Last Due Date</label>
+            @Html.TextBox("ReoccurringEndDate", Model.ReoccurringEndDate != null ? Model.ReoccurringEndDate.Value.ToShortDateString() : string.Empty, new { @class = "span2 calendar", placeholder = "dd/mm/yyyy" })
+            </div>
+        </div>
+    </div>
+    <div class="row @(!Model.IsRecurring ? "" : "hide")" id="nonReoccurringDiv">
+        <label class="span2">Completion Due Date:</label>
+        @Html.TextBox("CompletionDueDate", Model.CompletionDueDate, new {@class = "span2 calendar", placeholder = "dd/mm/yyyy"})
+    </div>
+    <div class="row"  >
+        <label class="span2">Site:</label>
+        @Html.TextBoxFor(m => m.ResponsibilityTaskSite, new { @class = "span3" })
+        @Html.HiddenFor(x => x.ResponsibilityTaskSiteId)
+    </div>
+    <div class="row">
+        <label class="span2">Assigned To:</label>
+        @Html.TextBoxFor(m => m.AssignedTo, new { @class = "span3" })
+        @Html.HiddenFor(x => x.AssignedToId)
+    </div>
+    <div class="row-fluid employee-not-user-alert-message hide">
+        @Html.Partial("_EmployeeNotAUserWarning")
+    </div>
+</fieldset>
+
+<div id="notificationEmail">
+    <fieldset>
+        <legend>
+            <h3>
+                Notification Emails</h3>
+        </legend>
+        <p class="alert" style="margin-bottom: 5px;">
+            If you do not want to send notification emails, please tick the type you do not
+            want to send.</p>
+        <label for="DoNotSendTaskAssignedNotification" class="span2">
+            Task Assigned
+            @Html.CheckBoxFor(m => m.DoNotSendTaskAssignedNotification, new { style = "display: inline-block;" })
+        </label>
+        <label for="DoNotSendTaskCompletedNotification" class="span2">
+            Task Completion
+            @Html.CheckBoxFor(m => m.DoNotSendTaskCompletedNotification, new { style = "display: inline-block;" })
+        </label>
+        <label for="DoNotSendTaskOverdueNotification" class="span2">
+            Task Overdue
+            @Html.CheckBoxFor(m => m.DoNotSendTaskOverdueNotification, new {style = "display: inline-block;"})
+        </label>
+         <label for="DoNotSendTaskDueTomorrowNotification" class="span2">
+            Task Due Tomorrow
+            @Html.CheckBoxFor(m => m.DoNotSendTaskDueTomorrowNotification, new { style = "display: inline-block;" })
+        </label>
+    </fieldset>
+</div>

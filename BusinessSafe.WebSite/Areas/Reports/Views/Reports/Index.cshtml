@@ -1,0 +1,31 @@
+﻿
+@using BusinessSafe.WebSite.Areas.Reports.ViewModels
+@using BusinessSafe.WebSite.Areas.SqlReports.Helpers
+@using BusinessSafe.WebSite.Extensions
+@model BusinessSafe.WebSite.Areas.Reports.ViewModels.ReportListViewModel
+
+@{
+    ViewBag.Title = "My Reports";
+}
+
+
+<div class="well">    
+    <div class="search-form">
+@using (Html.BeginForm(new { area = "Reports", controller = "Reports", Action = "View", FormMethod.Post } ) ) 
+{
+    <fieldset>
+    <legend>Reports</legend>
+        <ul>
+            <li>
+                <label class="thin" for="ReportDropDown">Report</label>
+                @Html.DropDownListFor(model => model.SelectedReport, new SelectList(Enum.GetValues(typeof(SqlReportHelper.ReportType))), new { @id = "ReportDropDown" })   
+            </li>
+
+            <li>
+                <input type="submit" id="submit" title="Get Report" value="Get Report"/>            
+            </li>
+        </ul>    
+    </fieldset>    
+}
+  </div>
+</div>

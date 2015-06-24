@@ -1,0 +1,143 @@
+﻿@model BusinessSafe.WebSite.Areas.Employees.ViewModels.EmergencyContactDetailViewModel 
+<form id="addEmergencyContactDetails" class="form-inline">
+    <fieldset>
+        <legend><h3>Contact Information</h3></legend>
+        <div class="row-fluid row">
+            <div class="span6">
+                <label for="Title" class="span2">Title</label>
+                @Html.TextBox("Title")
+                @Html.Hidden("TitleId", Model.ContactDetail.Title, new { @class = "span3" })
+            </div>
+        </div>
+        <div class="row-fluid row">
+            <div class="span6">
+                <label for="Forename" class="span2">Forename</label>
+                @Html.TextBox("Forename", Model.ContactDetail.Forename, new { @class = "span3" })
+            </div>
+            <div id="emergency-contact-surname" class="span6">
+                <label for="Reference" class="span2">Surname</label>
+                @Html.TextBox("Surname", Model.ContactDetail.Surname, new { @class = "span3" })
+            </div>
+        </div>
+        <div class="row-fluid row">
+            <div class="span6">
+                <label for="Relationship" class="span2">Relationship</label>
+                @Html.TextBox("Relationship", Model.ContactDetail.Relationship, new { @class = "input-large" })
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend><h3>Telephone Numbers</h3></legend>
+        <div class="row-fluid row">
+            <div class="span6">
+                <label for="WorkTelephone" class="span2">Work</label>
+                @Html.TextBox("WorkTelephone", Model.ContactDetail.WorkTelephone, new { @class = "span3" })
+                <input type="radio" name="PreferredContactNumber" value="1" class="preferredContactNumber" @Model.IsPreferredContactNumber("1") />
+            </div>
+        </div>
+        <div class="row-fluid row">
+            <div class="span6">
+                <label for="HomeTelephone" class="span2">Home</label>
+                @Html.TextBox("HomeTelephone", Model.ContactDetail.HomeTelephone, new { @class = "span3" })
+                <input type="radio" name="PreferredContactNumber" value="2" class="preferredContactNumber" @Model.IsPreferredContactNumber("2") />
+            </div>
+        </div>
+        <div class="row-fluid row">
+            <div class="span6">
+                <label for="MobileTelephone" class="span2">Mobile</label>
+                @Html.TextBox("MobileTelephone", Model.ContactDetail.MobileTelephone, new { @class = "span3" })
+                <input type="radio" name="PreferredContactNumber" value="3" class="preferredContactNumber" @Model.IsPreferredContactNumber("3") />
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend><h3>Address</h3></legend>
+        <div class="row-fluid row">
+            <div class="span12">
+                <label class="span2" for="SameAddressAsEmployee">Same as Employee Address</label>
+                @Html.CheckBox("SameAddressAsEmployee", Model.SameAddressAsEmployee)
+            </div>
+        </div>
+        
+        <div id="employee-address-details" class="row-fluid row">
+            <div class="span6">
+                <div>
+                    <label for="EmployeeAddress1" class="span2">Address</label>
+                    @Html.TextBox("EmployeeAddress1", Model.EmployeeAddress1, new { @class = "span3", @readonly = "readonly" })
+                </div>
+                <div>
+                    <label for="EmployeeAddress2" class="span2"></label>
+                    @Html.TextBox("EmployeeAddress2", Model.EmployeeAddress2, new { @class = "span3", @readonly = "readonly" })
+                </div>
+                <div>
+                    <label for="EmployeeAddress3" class="span2"></label>
+                        @Html.TextBox("EmployeeAddress3", Model.EmployeeAddress3, new { @class = "span3", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="span6">
+                <label for="EmployeeTown" class="span2">Town</label>
+                @Html.TextBox("EmployeeTown", Model.EmployeeTown, new { @class = "span3", @readonly = "readonly" })
+            </div>
+            <div class="span6">
+                <label for="EmployeeCounty" class="span2">County</label>
+                @Html.TextBox("EmployeeCounty", Model.EmployeeCounty, new { @class = "span3", @readonly = "readonly"})
+            </div>
+            <div class="span6">
+                <label for="EmployeeCountry" class="span2">Country</label>
+                @Html.TextBox("EmployeeCountry", "", new { @class = "span3"})
+                @Html.Hidden("EmployeeCountryId", Model.EmployeeCountryId)
+            </div>
+            <div class="span6">
+                <label for="EmployeePostcode" class="span2">Postcode</label>
+                @Html.TextBox("EmployeePostcode", Model.EmployeePostCode, new { @class = "span3", @readonly = "readonly" })
+            </div>
+        </div>
+        
+
+        <div id="address-details" class="row-fluid row hide">
+            <div class="span6">
+                <div>
+                    <label for="Address1" class="span2">Address</label>
+                    @Html.TextBox("Address1", Model.ContactDetail.Address1, new { @class = "span3" })
+                </div>
+                <div>
+                    <label for="Address2" class="span2"></label>
+                    @Html.TextBox("Address2", Model.ContactDetail.Address2, new { @class = "span3" })
+                </div>
+                <div>
+                    <label for="Address3" class="span2"></label>
+                        @Html.TextBox("Address3", Model.ContactDetail.Address3, new { @class = "span3" })
+                </div>
+            </div>
+            <div class="span6">
+                <label for="Town" class="span2">Town</label>
+                @Html.TextBox("Town", Model.ContactDetail.Town, new { @class = "span3" })
+            </div>
+            <div class="span6">
+                <label for="County" class="span2">County</label>
+                @Html.TextBox("County", Model.ContactDetail.County, new { @class = "span3" })
+            </div>
+            <div class="span6">
+                <label for="Country" class="span2">Country</label>
+                @Html.TextBox("EmergencyContactCountry", "", new { @class = "span3" })
+                @Html.Hidden("EmergencyContactCountryId", Model.ContactDetail.EmergencyContactCountryId)
+            </div>
+            <div class="span6">
+                <label for="Postcode" class="span2">Postcode</label>
+                @Html.TextBox("Postcode", Model.ContactDetail.PostCode, new { @class = "span3" })
+            </div>
+        </div>
+    </fieldset>
+    <div class="hide alert alert-error" id="errorContainer">
+        <ul>
+        </ul>
+    </div>
+        <div class="row-fluid row">
+            <div class="span6">
+    <label class="span2"></label>
+    <button type="submit" id="EmergencyContactDetailsSaveButton" class="btn btn-primary">@Model.GetSaveButtonText()</button>
+    <button id="EmergencyContactDetailsCancelButton" class="btn btn-link">Cancel</button>
+    </div>
+    </div>
+    @Html.Hidden("EmergencyContactId", Model.ContactDetail.EmergencyContactId)
+</form>

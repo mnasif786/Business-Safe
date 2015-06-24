@@ -1,0 +1,18 @@
+@using BusinessSafe.API.Areas.HelpPage.Models
+@model HelpPageApiModel
+
+@{
+    var description = Model.ApiDescription;
+    ViewBag.Title = description.HttpMethod.Method + " " + description.RelativePath;
+}
+
+    <nav>
+                @Html.ActionLink("Help Page Home", "Index")
+    </nav>
+    <section>
+        @Html.DisplayFor(m => Model)
+    </section>
+
+@section Scripts {
+    <link type="text/css" href="~/Areas/HelpPage/HelpPage.css" rel="stylesheet" />
+}

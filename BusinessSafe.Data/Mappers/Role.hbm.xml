@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="Role" table="`Role`">
+    <id name="Id" column="RoleId" type="Guid">
+      <generator class="assigned"/>
+    </id>
+    <property name="Description" column="`Description`" type="string" />
+    <property name="Name" column="`Name`" type="string" />
+    <property name="Deleted" type="bool" />
+    <property name="CreatedOn" type="DateTime" />
+    <many-to-one name="CreatedBy" class="UserForAuditing"/>
+    <property name="LastModifiedOn" type="DateTime" />
+    <many-to-one name="LastModifiedBy" class="UserForAuditing"/>
+    <property name="CompanyId" type="long" column="ClientId" />
+    
+    <bag name="Permissions" lazy="true" cascade="save-update" inverse="false" where="Deleted = 0">
+      <key column="RoleId"></key>
+      <one-to-many class="RolePermission" />
+    </bag>
+
+    <bag name="Users" table="Users" lazy="true" cascade="none">
+      <key column="RoleId" foreign-key="UserId" ></key>      
+      <one-to-many class="BusinessSafe.Domain.Entities.User, BusinessSafe.Domain.Entities"   />
+    </bag>
+    
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,62 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Extensions
+@using Telerik.Web.Mvc.UI
+@model BusinessSafe.WebSite.ViewModels.SearchRiskAssessmentsViewModel
+
+@Html.Partial("_SearchResultsGridTiteBar", Model)
+
+@Html.Telerik().Grid(Model.RiskAssessments).Name("GeneralRiskAssessmentsGrid").PrefixUrlParameters(false).EnableCustomBinding(true).DataKeys(keys => keys.Add(c => c.Id)).DataBinding(dataBinding => 
+    dataBinding.Server()
+                    .Select("Index", "RiskAssessment")).Columns(
+    columns => {
+        columns.Bound(o => o.Id).Visible(false);
+        columns.Bound(o => o.Reference).Width("12%");
+        columns.Bound(o => o.Title).Width("35%");
+        columns.Bound(o => o.Site).Width("12%");
+        columns.Bound(o => o.AssignedTo).Title("Assigned To").Width("12%");
+        columns.Bound(o => o.Status).Width("6%");
+        columns.Bound(o => o.AssessmentDateFormatted).Title("Assessment Date").Width("120");
+        columns.Bound(o => o.NextReviewDateFormatted).Title("Next Review").Width("7%");
+        columns.Template(@<text>
+            @if (!item.IsDeleted)
+            {
+                if (User.IsInRole(Permissions.ViewGeneralandHazardousSubstancesRiskAssessments.ToString()))
+                {
+                <a data-id="@item.Id" href="@Url.Action("View", "PremisesInformation", new { riskAssessmentId = @item.Id, companyId = @Html.GetUsersCompanyId(User) })" title="View Risk Assessment">
+                    <i class="icon-search"></i></a>
+                }
+                if (User.IsInRole(Permissions.EditGeneralandHazardousSubstancesRiskAssessments.ToString()) && !Model.IsShowArchived)
+                {
+                <a data-id="@item.Id" class="icon-edit" href="@Url.Action("Index", "Summary", new { riskAssessmentId = @item.Id, companyId = @Html.GetUsersCompanyId(User) })" title="Edit Risk Assessment">
+                    <i class="icon-edit"></i></a>
+                }
+                <a data-id="@item.Id" class="icon-print" href="@Url.Action("Index", "GeneralRiskAssessments", new { area = "SqlReports", riskAssessmentId = @item.Id })" title="Print Risk Assessment">
+                    <i class="icon-print"></i></a>
+                if (User.IsInRole(Permissions.DeleteGeneralandHazardousSubstancesRiskAssessments.ToString()))
+                {
+                <a class="deleteIcon icon-remove" data-id="@item.Id" href="" title="Delete Risk Assessment">
+                    <i class="icon-remove"></i></a>
+                }
+                if (User.IsInRole(Permissions.AddGeneralandHazardousSubstancesRiskAssessments.ToString()))
+                {
+                <a class="copy-risk-assessment-link icon-repeat" data-id="@item.Id" data-url="@Url.Action("Index", "Summary", new { riskAssessmentId = @item.Id, companyId = @Html.GetUsersCompanyId(User) })" href="#" title="Copy Risk Assessment">
+                    <i class="icon-repeat"></i></a>
+                }
+            }
+            else
+            {
+                if (User.IsInRole(Permissions.DeleteGeneralandHazardousSubstancesRiskAssessments.ToString()))
+                {
+                <a class="undeleteIcon icon-share" data-id="@item.Id" href="" title="Undelete General Risk Assessment">
+                    <i class="icon-share"></i></a>
+                }
+                if (User.IsInRole(Permissions.ViewGeneralandHazardousSubstancesRiskAssessments.ToString()))
+                {
+                <a data-id="@item.Id" href="@Url.Action("View", "PremisesInformation", new { riskAssessmentId = @item.Id, companyId = @Html.GetUsersCompanyId(User) })" title="View Risk Assessment">
+                    <i class="icon-search"></i></a>
+                }
+            }
+            </text>).Width("8%");
+    }).Pageable(page => { page.PageSize(Model.PageSize);
+                            page.Total(Model.Total);
+    }).Sortable()

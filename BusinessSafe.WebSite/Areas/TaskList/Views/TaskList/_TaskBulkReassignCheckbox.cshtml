@@ -1,0 +1,5 @@
+﻿@model BusinessSafe.WebSite.Areas.TaskList.ViewModels.TaskViewModel
+@if (Model.IsReassignEnabled(User))
+{
+    <input type="checkbox" class="bulk-reassign-checkbox" data-id="@Model.Id" data-task-guid="@Model.TaskGuid" />
+}

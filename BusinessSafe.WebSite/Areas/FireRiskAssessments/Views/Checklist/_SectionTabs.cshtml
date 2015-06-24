@@ -1,0 +1,18 @@
+﻿@model BusinessSafe.WebSite.Areas.FireRiskAssessments.ViewModels.FireRiskAssessmentChecklistViewModel
+<ul class="nav nav-tabs" id="checklistTabs">
+    @foreach (var section in Model.Sections)
+    {
+
+        var isSectionValid = section.IsSectionValid;
+        var validationErrorClass = "";
+        if (!isSectionValid)
+        {
+            validationErrorClass = "in-error";
+        }
+
+            
+        <li@if (section.Active){<text> class="active"</text> }>
+            <a id="checklist-@(section.Title.ToLower())-tab" href="#@(section.ControlId)" data-toggle="tab" class="@validationErrorClass">@(section.Title)</a>
+        </li>
+    }
+</ul>

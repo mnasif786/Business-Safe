@@ -1,0 +1,17 @@
+﻿@model BusinessSafe.WebSite.Areas.Company.ViewModels.AddEditRiskAssessorViewModel
+
+<div class="row-fluid row">
+    <div class="span6">
+        <label class="span2">
+        </label>
+        @if (Model.SaveButtonEnabled)
+        {
+            <button id="saveBtn" type="button" class="btn btn-primary ">
+                Save
+            </button>
+        }
+        <button id="cancelAddRiskAssessorBtn" class="btn btn-link">
+            Cancel
+        </button>
+    </div>
+</div>

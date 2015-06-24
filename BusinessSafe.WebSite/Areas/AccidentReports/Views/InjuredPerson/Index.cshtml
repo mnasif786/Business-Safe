@@ -1,0 +1,25 @@
+﻿@using BusinessSafe.WebSite.Areas.AccidentReports.ViewModels
+@model InjuredPersonViewModel
+
+@{
+    ViewBag.Title = "Injured Person";
+}
+
+@Html.Partial("_AccidentRecordSummary", ViewBag.AccidentRecordSummary as AccidentSummaryViewModel)
+
+<div class="container ipad-container">
+    @Html.Partial("_Tabs", ViewBag.TabViewModel as AccidentRecordTabsViewModel)
+    @Html.Partial("_Form")
+</div>
+
+@section JavaScriptSectionForPageInitialisation
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var employees = @Html.Raw(Json.Encode(Model.Employees));
+            var countries = @Html.Raw(Json.Encode(Model.Countries));
+            var othersInvolved = @Html.Raw(Json.Encode(Model.OthersInvolved));
+            BusinessSafe.AccidentRecord.InjuredPerson.initialise(employees, countries, othersInvolved);
+        });
+    </script>
+}

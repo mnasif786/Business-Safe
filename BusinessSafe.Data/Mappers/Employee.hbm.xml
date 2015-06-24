@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="Employee" table="`Employee`">
+    <id name="Id" column="Id" type="Guid">
+      <generator class="assigned" />
+    </id>
+    <property name="EmployeeReference" type="string" />
+    <property name="Forename" type="string" />
+    <property name="Surname" type="string" />
+    <property name="Title" type="string" />
+    <property name="PreviousSurname" type="string" />
+    <property name="MiddleName" type="string" />
+    <property name="DateOfBirth" type="datetime"/>
+    <many-to-one name="Nationality" class="Nationality" column="NationalityId" cascade="save-update" />
+    <property name="Sex" type="string" />
+    <property name="HasDisability" type="bool" />
+    <property name="DisabilityDescription" type="string" />
+    <property name="NINumber" type="string" />
+    <property name="DrivingLicenseNumber" type="string" />
+    <property name="DrivingLicenseExpirationDate" type="datetime" />
+    <property name="WorkVisaNumber" type="string" />
+    <property name="WorkVisaExpirationDate" type="datetime"  />
+    <property name="PPSNumber" type="string" />
+    <property name="PassportNumber" type="string" />
+    <property name="HasCompanyVehicle" type="bool" />
+    <property name="CompanyVehicleRegistration" type="string" />
+    <many-to-one name="Site" class="Site" column="SiteId" lazy="false" cascade="none"/>
+    
+    <property name="OrganisationalUnitId" type="long" />
+    <property name="CompanyId" type="long" column="ClientId" />
+    <property name="JobTitle" type="string" />
+    <many-to-one name="CompanyVehicleType" class="CompanyVehicleType" column="CompanyVehicleTypeId"/>
+    <many-to-one name="EmploymentStatus" class="EmploymentStatus" column="EmploymentStatusId"/>
+
+    <bag name="ContactDetails" table="EmployeeContactDetails"  cascade="save-update" inverse="true" >
+      <key column="EmployeeId"></key>
+      <one-to-many class="BusinessSafe.Domain.Entities.EmployeeContactDetail, BusinessSafe.Domain.Entities"  />
+    </bag>
+
+    <bag name="EmergencyContactDetails" table="EmployeeEmergencyContactDetails" cascade="save-update" inverse="true" where="deleted = 0" >
+      <key column="EmployeeId"></key>
+      <one-to-many class="BusinessSafe.Domain.Entities.EmployeeEmergencyContactDetail, BusinessSafe.Domain.Entities"  />
+    </bag>
+
+    <property name="NotificationType" column="NotificationType"/>
+    <property name="NotificationFrequecy"  type="int" column="NotificationFrequecy"/>
+
+    <many-to-one name="CreatedBy" class="UserForAuditing" column="CreatedBy" update="false" cascade="none"/>
+    <many-to-one name="LastModifiedBy" class="UserForAuditing" column="LastModifiedBy" cascade="none"/>
+    <property name="CreatedOn" type ="datetime" update="false"/>
+    <property name="Deleted" type ="bool"/>
+    
+    <property name="LastModifiedOn" type ="datetime"/>
+
+    <one-to-one name="User" class="User" property-ref="Employee" cascade="save-update"></one-to-one>
+    <!--<one-to-one name="RiskAssessor" class="RiskAssessor" property-ref="Employee" cascade="save-update" ></one-to-one>-->
+
+    <bag name="RiskAssessors" table="RiskAssessor" cascade="save-update" inverse="true"  >
+      <key column="EmployeeId"></key>
+      <one-to-many class="BusinessSafe.Domain.Entities.RiskAssessor, BusinessSafe.Domain.Entities"  />
+    </bag>
+
+    
+    
+  </class>
+</hibernate-mapping>

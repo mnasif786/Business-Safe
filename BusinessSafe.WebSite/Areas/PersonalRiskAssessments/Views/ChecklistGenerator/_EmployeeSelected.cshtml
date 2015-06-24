@@ -1,0 +1,28 @@
+﻿@using Telerik.Web.Mvc.UI
+@using BusinessSafe.WebSite.Areas.PersonalRiskAssessments.ViewModels
+
+@model List<SelectedEmployeeViewModel>
+  
+    @Html.Telerik().Grid(Model).Name("SelectedEmployeesGrid").DataKeys(keys => keys.Add(c => c.EmployeeId)).DataBinding(
+        dataBinding => dataBinding
+                           .Server()
+                           .Delete("Delete", "ResponsibilityPlanner")).Columns(
+                               columns =>
+                                   {
+                                       columns.Template(@<text> @item.Name <input type="hidden" id='@("MultiSelectedEmployeeId_" + @item.EmployeeId)' name='@("MultiSelectedEmployeeId_" + @item.EmployeeId)'  value="selected" /> </text>).Title("Name");
+                                       columns.Template(@<text>
+                                                             @if(string.IsNullOrEmpty(item.Email))
+                                                             {
+                                                                 <input type="text" id='@("MultiSelectedEmployeeEmail_" + @item.EmployeeId)' name='@("MultiSelectedEmployeeEmail_" + @item.EmployeeId)' class=".multi-selected-employee-new-email" />
+                                                             } 
+                                                             else
+                                                             {
+                                                                 @item.Email
+                                                             }
+                                                         </text>).HtmlAttributes(new {style = "text-align:left;"}).HeaderTemplate("Email");
+                                       columns.Template(@<text>
+                                                             <a class="icon-remove" href="#" title="Remove" data-id=@item.EmployeeId></a>
+                                                         </text>);
+                                       //columns.Bound(o => o.Email).HtmlAttributes(new { style = "text-align:left;" });
+                                   }
+           ).Sortable()

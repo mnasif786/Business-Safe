@@ -1,0 +1,21 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Extensions
+@using BusinessSafe.WebSite.HtmlHelpers
+@model BusinessSafe.WebSite.Areas.FireRiskAssessments.ViewModels.FireRiskAssessmentSummaryViewModel
+<h2>
+    <a class="btn" href="@Url.Action("Index", "RiskAssessment", new { area = "FireRiskAssessments", companyId = @Html.GetUsersCompanyId(User) })" title="Close Risk Assessment">
+        <i class="icon-remove"></i></a>
+    @if (FeatureSwitchChecker.Enabled(FeatureSwitches.FeatureSwitch_SqlReports_For_FRA, User.GetCustomPrinciple()))
+    {
+        <a class="btn" href="@Url.Action("Index", "FireRiskAssessments", new { area = "SqlReports", riskAssessmentId = @Model.Id })" title="Print Risk Assessment" title="Print General Risk Assessment">
+            <i class="icon-print"></i></a>
+    }
+    
+    @if (Model.IsEditEnabled(User) && !Model.IsArchived)
+    {
+        <a class="btn" href="@Url.Action("Index", @ViewBag.CurrentController, new { riskAssessmentId = Model.Id, companyId = @Html.GetUsersCompanyId(User) })" title="Edit Risk Assessment">
+            <i class="icon-edit"></i></a>
+    }
+    Fire Risk Assessment
+    @Html.Partial("_AssessmentStatus", Model.RiskAssessmentStatus)
+</h2>

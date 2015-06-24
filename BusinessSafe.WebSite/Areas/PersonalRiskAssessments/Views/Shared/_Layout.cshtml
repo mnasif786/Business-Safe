@@ -1,0 +1,34 @@
+﻿@using BusinessSafe.WebSite.HtmlHelpers
+@using Cassette.Views
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section StyleSheetSection
+{
+    @RenderSection("StyleSheetSection", false)
+}   
+<section>
+    <span class="legend">Personal Risk Assessments</span>
+    <div class="content">
+        <div class="tabs">
+            @Html.Partial("_AdviceLine")
+            @RenderBody()
+        </div>
+    </div>
+    @Html.Hidden("MarkRiskAssessmentDraftStatusUrl", Url.Action("MarkRiskAssessmentIsDraftStatus", "RiskAssessmentStatus", new { area = "" }))
+</section>
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("sharedriskassessment");
+        Bundles.Reference("personalriskassessment");
+        @Bundles.RenderScripts() 
+    }
+
+    @if (ViewBag.IsReadOnly != null)
+    {
+        @Html.Hidden("IsReadOnly", true)
+    }
+
+    @RenderSection("JavaScriptSection", false)
+}

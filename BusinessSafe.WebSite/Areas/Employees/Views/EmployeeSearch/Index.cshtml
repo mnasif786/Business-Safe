@@ -1,0 +1,50 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Extensions
+@using Cassette.Views
+@model BusinessSafe.WebSite.Areas.Employees.ViewModels.EmployeeSearchViewModel
+@{
+    ViewBag.Title = "Search Employees";
+}
+<div>
+    <section>
+        <span class="legend">Search Employees</span>
+        <div class="major-index-actions">
+            @if (User.IsInRole(Permissions.AddEmployeeRecords.ToString()))
+            {
+                <a id="EmployeeSearchAddEmployeeLink" class="btn-success btn btn-large" href="@Url.Action("Index", "Employee", new { companyId = Html.GetUsersCompanyId(User) })" title="Add New Employee">
+                    Add New Employee</a>
+            }
+        </div>
+        <div class="content">
+            @Html.Partial("_EmployeeSearchCriteria", Model)
+            @Html.Partial("_EmployeeSearchResults", Model)
+        </div>
+    </section>
+</div>
+<div class="hide">
+    <div id="dialogDeleteEmployee" title="Delete Employee">
+        <p>
+            Are you sure you want to delete this employee?</p>
+    </div>
+    <div id="dialogReinstateDeletedEmployee" title="Reinstate Deleted Employee">
+        <p>
+            Are you sure you want to reinstate this deleted employee?</p>
+    </div>
+    <div id="dialogCannotRemoveEmployee" title="<span id='warning'></span>Cannot Delete Employee!">
+        <p>
+            This employee cannot be removed as they have outstanding tasks assigned to them.</p>
+    </div>
+</div>
+@section JavaScriptSection
+{
+    @{
+        Bundles.Reference("employees");   
+        @Bundles.RenderScripts()  
+    }
+    <script type="text/javascript">
+        $(function () {
+            var sites = @Html.Raw(Json.Encode(Model.Sites));
+            employeeSearchForm.initialise(sites);
+        });
+    </script>
+}

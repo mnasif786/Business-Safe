@@ -1,0 +1,19 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Extensions
+@model BusinessSafe.WebSite.Areas.TaskList.ViewModels.TaskViewModel
+@if (Model.IsCompleteEnabled(User))
+{
+    if (Model.IsReviewTask())
+    {
+        if (Model.HasPermission(User))
+        {
+            <a class="icon-ok"  href="@Url.Action("Index", "Summary", new {area = Model.GetRiskAssessmentArea(), riskAssessmentId = Model.RiskAssessmentId, companyId = @Html.GetUsersCompanyId(User)})" title="Complete Task">
+            </a>
+        }
+    }
+    else
+    {
+    <a class="icon-ok complete-task-popup-link" data-id="@Model.Id" data-task-type="@Model.GetTaskType()"  href="" title="Complete Task">
+    </a>
+    }
+}

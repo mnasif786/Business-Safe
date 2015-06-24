@@ -1,0 +1,28 @@
+@using System.Web.Http
+@using System.Web.Http.Description
+@using System.Collections.ObjectModel
+@using BusinessSafe.API.Areas.HelpPage.Models
+@model Collection<ApiDescription>
+
+@{
+    ViewBag.Title = "SafeCheck API Help";
+
+    ILookup<string, ApiDescription> apiGroups = Model.ToLookup(api => api.ActionDescriptor.ControllerDescriptor.ControllerName);
+}
+
+<header>
+    <h1>@ViewBag.Title</h1>
+    <p>Use this API to access SafeCheck data.</p>
+</header>
+            
+<section class="content-wrapper main-content clear-fix">
+    <header><h1>Resources</h1></header>
+    @foreach (var group in apiGroups)
+    {
+        @Html.DisplayFor(m => group, "ApiGroup")
+    }
+</section>
+    
+@section Scripts {
+    <link type="text/css" href="~/Areas/HelpPage/HelpPage.css" rel="stylesheet" />
+}

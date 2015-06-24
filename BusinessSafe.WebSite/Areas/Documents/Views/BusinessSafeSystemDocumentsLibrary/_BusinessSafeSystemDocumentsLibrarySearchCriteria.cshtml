@@ -1,0 +1,35 @@
+﻿@using BusinessSafe.WebSite.Extensions
+@model BusinessSafe.WebSite.Areas.Documents.ViewModels.BusinessSafeSystemDocumentsLibraryViewModel
+<div class="well">
+    <form method="get" action="@Url.Action("Index", "BusinessSafeSystemDocumentsLibrary")" class="search-form">
+        <fieldset>
+            <legend>BusinessSafe System Document Search</legend>
+            <ul>
+                <li>
+                    <label for="DocumentType" class="wide">Document Type</label>
+                    @Html.TextBox("DocumentType")
+                    @Html.HiddenFor(x => x.DocumentTypeId)
+                    @*@Html.Hidden("DocumentTypeId", Model.DocumentTypeId)*@
+                </li>
+                <li>
+                    <label for="Title" class="thin">Title</label>
+                    @Html.TextBoxFor(model => model.Title, new { @class = "wide" })
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <label for="Site" class="wide">Sites</label>
+                    @Html.TextBox("Site")
+                    @Html.Hidden("SiteId", Model.SiteId)
+                </li>
+            </ul>
+            <ul>
+                <li class="buttons wide">
+                    <input id="Search" type="submit" class="btn btn-primary" value="Search" />
+                    <a class="btn-link" href="@Url.Action("Index", "BusinessSafeSystemDocumentsLibrary", new { companyId = Html.GetUsersCompanyId(User) })">Reset</a>
+                </li>
+            </ul>  
+        </fieldset>
+        @Html.Hidden("CompanyId", @Model.CompanyId)
+    </form>
+</div>

@@ -1,0 +1,13 @@
+﻿@using BusinessSafe.WebSite.Extensions
+@model BusinessSafe.WebSite.Areas.TaskList.ViewModels.TaskListViewModel
+
+<h2>
+    <a id="showDeletedLink" class="btn @(Model.IsShowDeleted ? "disabled" : string.Empty)" href="#">Show Deleted</a>
+    <a id="showCompletedLink" class="btn @(Model.IsShowCompleted ? "disabled" : string.Empty)" href="#">Show Completed</a>
+    <a id="btnBulkAssign" class="btn @(Model.IsBulkReassign ? "disabled" : string.Empty)" href="#">Bulk Reassign</a>
+    @if(Model.IsShowOutsandingVisible())
+    {
+        <a id="showOutstandingLink" class="btn" href="@Url.Action("Index", "TaskList", new { area = "TaskList", companyId = @Html.GetUsersCompanyId(User) })">Show Outstanding</a>
+    }
+    <span class="tick"></span>Tasks - @Model.GetAdditionalTitle()
+</h2>

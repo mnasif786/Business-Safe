@@ -1,0 +1,49 @@
+﻿@using BusinessSafe.Domain.Entities
+@model BusinessSafe.WebSite.Areas.FireRiskAssessments.ViewModels.QuestionViewModel
+
+        @{
+            var isQuestionValid = Model.IsQuestionValid;
+            var validationErrorClass = "";
+            if(!isQuestionValid)
+            {
+                validationErrorClass = "in-error";
+            }
+
+            var yesAnswerId = "Yes_"  + Model.Id;
+            var noAnswerId = "No_" + Model.Id;
+            var naAnswerId = "Na_" + Model.Id;
+        }
+
+        <li class="row ">
+            <label class="span6 @validationErrorClass"><span>@Model.ListOrder.</span> @Model.Text</label>
+            <div class="question span" data-question-id="@Model.Id">
+                <a class="icon-question-sign pull-right" data-title="@Model.Text" data-content="@Model.Information"></a>
+
+                <input type="radio" id="@yesAnswerId"  name="YesNoNotApplicable_@(Model.Id)" value="Yes" @(Model.Answer != null && Model.Answer.YesNoNotApplicableResponse.HasValue && Model.Answer.YesNoNotApplicableResponse.Value == YesNoNotApplicableEnum.Yes ? "checked" : "")  />
+                
+                <label for="@yesAnswerId">Yes</label>
+
+                <input type="radio" id="@noAnswerId"  name="YesNoNotApplicable_@(Model.Id)" value="No" @(Model.Answer != null && Model.Answer.YesNoNotApplicableResponse.HasValue && Model.Answer.YesNoNotApplicableResponse.Value == YesNoNotApplicableEnum.No ? "checked" : "")/>
+                
+                <label for="@noAnswerId">No</label>
+                
+                <input type="radio" id="@naAnswerId" name="YesNoNotApplicable_@(Model.Id)" value="NotApplicable" @(Model.Answer != null && Model.Answer.YesNoNotApplicableResponse.HasValue && Model.Answer.YesNoNotApplicableResponse.Value == YesNoNotApplicableEnum.NotApplicable ? "checked" : "")/>
+                
+                <label for="@naAnswerId">n/a</label>
+                
+                @{
+                    if(!isQuestionValid)
+                    {
+                        if(Model.Answer.YesNoNotApplicableResponse.Value == YesNoNotApplicableEnum.No)
+                        {
+                            <span class="field-validation-error">Please add further control measure task</span>
+                        }else if(Model.Answer.YesNoNotApplicableResponse.Value == YesNoNotApplicableEnum.Yes)
+                        {
+                            <span class="field-validation-error">Please enter a comment</span>
+                        }
+                    }
+                }
+
+                @Html.TextArea(string.Format("AdditionalInfo_{0}", Model.Id), @Model.Answer != null ? Model.Answer.AdditionalInfo : string.Empty, new { cols = "40", rows = "1", @class = "span max500chars" })
+            </div>
+        </li>

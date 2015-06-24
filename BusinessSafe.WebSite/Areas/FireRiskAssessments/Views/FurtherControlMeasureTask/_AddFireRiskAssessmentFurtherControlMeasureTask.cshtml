@@ -1,0 +1,9 @@
+﻿@model BusinessSafe.WebSite.Areas.FireRiskAssessments.ViewModels.AddEditFireRiskAssessmentFurtherControlMeasureTaskViewModel
+
+<form id="FurtherControlMeasureTaskForm" class="form-inline" method="POST" action="@Url.Action("NewFurtherControlMeasureTask", "FurtherControlMeasureTask")">
+    
+    @Html.HiddenFor(x => x.RiskAssessmentId)
+    @Html.HiddenFor(x => x.SignificantFindingId)
+    @Html.Partial("_FurtherControlMeasureDetails", Model)
+
+</form>

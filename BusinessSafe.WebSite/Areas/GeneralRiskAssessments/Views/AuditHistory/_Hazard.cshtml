@@ -1,0 +1,40 @@
+﻿@model BusinessSafe.WebSite.Areas.GeneralRiskAssessments.ViewModels.Hazard
+<div class="well">
+    <div class="page-header">
+    <h3>@Html.DisplayFor(m => m.Name)</h3></div>
+    <table class="table">
+        <tr>
+            <th>@Html.LabelFor(m => m.Description)</th>
+            <td>@Html.DisplayFor(m => m.Description)</td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(m => m.HazardAddedToRiskAssessment)</th>
+            <td>@Html.DisplayFor(m => m.HazardAddedToRiskAssessment)</td>
+        </tr>
+    </table>
+    <h4>Control Measures</h4>
+    <table class="table">
+        <tr>
+            <th>Description</th>
+            <th>Date Added</th>
+        </tr>
+        @foreach(var measure in Model.ControlMeasures)
+        {
+            @Html.Partial("_ControlMeasure", measure)
+        }
+    </table>
+    <h4>Further Control Measures</h4>
+    <table class="table">
+        <tr>
+            <th>Reference</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Date Added</th>
+            <th>Date Due</th>
+        </tr>
+        @foreach (var measure in Model.FurtherActionTasks)
+        {
+            @Html.Partial("_FurtherActionTask", measure)
+        }
+    </table>
+</div>

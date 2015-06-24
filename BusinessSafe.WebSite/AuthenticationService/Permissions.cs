@@ -1,0 +1,68 @@
+namespace BusinessSafe.WebSite.AuthenticationService
+{
+    public enum Permissions
+    {
+        ViewCompanyDetails = 1,
+
+        EditCompanyDetails = 3,
+
+        ViewSiteDetails = 5,
+        AddSiteDetails = 6,
+        EditSiteDetails = 7,
+        DeleteSiteDetails = 8,
+        ViewUsers = 9,
+        AddUsers = 10,
+        EditUsers = 11,
+        DeleteUsers = 12,
+        ViewEmployeeRecords = 13,
+        AddEmployeeRecords = 14,
+        EditEmployeeRecords = 15,
+        DeleteEmployeeRecords = 16,
+        ViewGeneralandHazardousSubstancesRiskAssessments = 17, 
+        AddGeneralandHazardousSubstancesRiskAssessments = 18,
+        EditGeneralandHazardousSubstancesRiskAssessments = 19,
+        DeleteGeneralandHazardousSubstancesRiskAssessments = 20,
+        ViewRiskAssessmentTasks = 21,
+        AddRiskAssessmentTasks = 22,
+        EditRiskAssessmentTasks = 23,
+        DeleteRiskAssessmentTasks = 24,
+        ViewAddedDocuments = 25,
+        AddAddedDocuments = 26,
+        EditAddedDocuments = 27,
+        DeleteAddedDocuments = 28,
+        ViewBusinessSafeSystem = 29,
+        ViewReferenceLibrary = 30,
+
+        ViewCompanyDefaults = 39,
+        AddCompanyDefaults = 40,
+        EditCompanyDefaults = 41,
+        DeleteCompanyDefaults = 42,
+        ViewHazardousSubstanceInventory = 43,
+        AddHazardousSubstanceInventory = 44,
+        EditHazardousSubstanceInventory = 45,
+        DeleteHazardousSubstanceInventory = 46,
+        ViewPersonalRiskAssessments = 47,
+        AddPersonalRiskAssessments = 48,
+        EditPersonalRiskAssessments = 49,
+        DeletePersonalRiskAssessments = 50,
+        ViewFireRiskAssessments = 51,
+        AddFireRiskAssessments = 52,
+        EditFireRiskAssessments = 53,
+        DeleteFireRiskAssessments = 54,
+        ViewResponsibilities = 55,
+        AddResponsibilities = 56,
+        EditResponsibilities = 57,
+        DeleteResponsibilities = 58,
+        ViewAccidentRecords = 59,
+        AddAccidentRecords = 60,
+        EditAccidentRecords = 61,
+        DeleteAccidentRecords = 62,
+
+        ViewActionPlan = 63,
+        AddActionPlan = 64,
+        EditActionPlan = 65,
+        DeleteActionPlan = 66,
+
+        ViewViewReports   = 67
+    }
+}

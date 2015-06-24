@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Data.Common"
+                   assembly="BusinessSafe.Data">
+  <class name="Audit" table="`Audit`">
+    <id name="Id" column="Id" type="long">
+      <generator class="identity"/>
+    </id>
+    <property name="Type" type="string" />
+    <property name="FieldName" type="string" />
+    <property name="OldValue" type="string" />
+    <property name="EntityName" type="string" />
+    <property name="NewValue" type="string" />
+    <property name="UserName" type="string" />
+    <property name="EntityId" type="string" />
+    <property name="UpdateDate" type="datetime"/>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,47 @@
+﻿@using BusinessSafe.WebSite.AuthenticationService
+@model BusinessSafe.WebSite.ViewModels.CompleteReviewViewModel
+@using (Html.BeginForm("Complete", "RiskAssessmentReview", new {area = "" }, FormMethod.Post, new { id = "CompleteReviewForm", @class="form-inline" }))
+{
+    @Html.Hidden("HasUncompletedTasks", @Model.HasUncompletedTasks)
+    @Html.ValidationSummary()
+    @Html.HiddenFor(m => m.CompanyId)
+    @Html.HiddenFor(m => m.RiskAssessmentId)
+    @Html.HiddenFor(m => m.RiskAssessmentReviewId)
+    @Html.HiddenFor(m => m.RiskAssessmentType)
+    <fieldset>
+        <legend><h3>Review Complete</h3></legend>
+        <div data-valmsg-summary="true" class="validation-summary-errors hide">
+            <ul>
+            </ul>
+        </div>
+        <div class="row">
+            <label for="IsComplete" class="span2">Review Completed</label>
+            @Html.CheckBoxFor(m => m.IsComplete)
+        </div>
+        <div class="row">
+            <label for="CompletedComments" class="span2">Comments</label>
+            @Html.TextAreaFor(m => m.CompletedComments, new { @class = "span7", maxlength = 500 })
+        </div>
+        <div class="row">
+            <label for="NextReviewDate" class="span2">Date of Next Review</label>
+            @Html.TextBoxFor(m => m.NextReviewDate, new { @class = "span2 calendar" })
+        </div>
+        <div class="row">
+            <label for="ReviewDate" class="span2">Archive</label>
+            @Html.CheckBoxFor(m => m.Archive)
+        </div>
+        <div id="outstanding-further-control-measure-tasks-message" class="row outstanding-further-control-measure-tasks-message hide">
+            <div class="alert">
+                Note: This risk assessment has outstanding further control measure tasks, please
+                be aware of this before you decide to archive it.</div>
+        </div>
+    </fieldset>
+    <div class="row">
+        <label class="span2"></label>
+        @if (User.IsInRole(Permissions.AddRiskAssessmentTasks.ToString()) || User.IsInRole(Permissions.EditRiskAssessmentTasks.ToString()))
+        {
+            <button type="submit" class="btn btn-primary" id="ReviewSaveButton">Save</button>
+        }
+        <button class="btn btn-link" id="ReviewCancelButton">Cancel</button>
+    </div>
+}

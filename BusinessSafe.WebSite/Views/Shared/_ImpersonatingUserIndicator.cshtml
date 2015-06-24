@@ -1,0 +1,20 @@
+﻿@using BusinessSafe.WebSite.HtmlHelpers
+@if (Html.IsImpersonatingUser())
+{
+    <div id="impersonating-user-banner">
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <br/>
+                    <p>
+                        <span class="label label-warning">Caution: You are logged in and impersonating @Html.GetLoginName()</span> 
+                        <span class=""> <a href="@Url.Action("LogOut","Account",new {area =""})" class="btn btn-info" style="text-decoration: none;">Stop Impersonating</a></span> 
+                    </p>
+                    
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+}

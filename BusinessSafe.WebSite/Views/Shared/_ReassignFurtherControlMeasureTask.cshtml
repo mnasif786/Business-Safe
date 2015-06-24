@@ -1,0 +1,40 @@
+﻿@model BusinessSafe.WebSite.ViewModels.ReassignFurtherControlMeasureTaskViewModel
+@using BusinessSafe.WebSite.AuthenticationService
+<form id="FurtherActionTask" method="POST" action="@Url.Action("ReassignTask", "TaskListAction", new { area = "" })">
+@Html.Hidden("FFurtherControlMeasureTaskId", Model.FurtherControlMeasureTaskId)
+@Html.HiddenFor(x => x.FurtherControlMeasureTaskId)
+@Html.HiddenFor(x => x.TaskGuid)
+@Html.HiddenFor(x => x.CompanyId)
+<div class="form-horizontal well">
+    <div class="row-fluid employee-not-user-alert-message hide">
+        @Html.Partial("_EmployeeNotAUserWarning")
+    </div>
+    <div class="row">
+        <div class="span2">
+            <label for="TaskAssignedTo">
+                Reassign To:
+            </label>
+        </div>
+        <div>
+            @Html.TextBox("ReassignTaskTo", "", new { @class = "input-xlarge" })
+            @Html.Hidden("ReassignTaskToId", Model.ReassignTaskToId)
+        </div>
+    </div>
+</div>
+@Html.Partial("_ReadOnlyTaskDetails", Model.ViewFurtherControlMeasureTaskViewModel)
+<div data-valmsg-summary="true" class="validation-summary-errors hide">
+    <ul>
+    </ul>
+</div>
+<div class="row">
+    <label class="span2">
+    </label>
+    @if (User.IsInRole(Permissions.AddRiskAssessmentTasks.ToString()) || User.IsInRole(Permissions.EditRiskAssessmentTasks.ToString()))
+    {
+        <button type="submit" class="btn btn-primary" id="FurtherActionTaskSaveButton">
+            Save</button>
+    }
+    <button class="btn btn-link" id="FurtherActionTaskCancelButton">
+        Cancel</button>
+</div>
+</form>

@@ -1,0 +1,38 @@
+﻿@using BusinessSafe.WebSite.Areas.PersonalRiskAssessments.ViewModels
+@model PersonalRiskAssessmentReviewsViewModel
+@{
+    ViewBag.Title = "Review";
+}
+@{
+    var tabViewModel = ViewBag.TabViewModel as PersonalRiskAssessmentTabViewModel;
+}
+@Html.Partial("_RiskAssessmentSummary", ViewBag.RiskAssessmentSummary as PersonalRiskAssessmentSummaryViewModel)
+<div class="container ipad-container">
+    @Html.Partial("_Tabs", tabViewModel as PersonalRiskAssessmentTabViewModel)
+    <div id="review-wrapper" class="fixed-content">
+        @Html.Partial("_TitleBar", ViewBag.RiskAssessmentSummary as PersonalRiskAssessmentSummaryViewModel)
+        <div class="risk-assessment-review-index">
+            @Html.Hidden("RiskAssessmentId", @Model.ReviewViewModel.RiskAssessmentId)
+            @Html.Hidden("CompanyId", @Model.ReviewViewModel.CompanyId)
+            @Html.Partial("_RiskAssessmentReviews", Model.ReviewViewModel)
+        </div>
+    </div>
+</div>
+<div class="hide">
+    <div id="AddRiskAssessmentReviewDialog" title="Add Risk Assessment Review">
+    </div>
+    <div id="completeTaskDialog" title="Risk Assessment Review">
+    </div>
+    <div id="sensitiveTaskDialog" title="Sensitive Personal Risk Assessment Review">
+        <p>This is a sensitive personal risk assessment record which means that if you re-assign the review
+         to a different person, you will no longer be able to complete the review or view this record.</p>
+    </div>
+</div>
+@section JavaScriptSection
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            riskAssessmentReviewsManager.initialize(window.globalajaxurls.savePersonalRiskAssessmentReviewUrl);
+        });
+    </script>
+}

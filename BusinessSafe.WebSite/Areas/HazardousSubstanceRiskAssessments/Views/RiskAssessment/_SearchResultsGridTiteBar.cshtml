@@ -1,0 +1,13 @@
+﻿@using BusinessSafe.WebSite.Extensions
+@using BusinessSafe.WebSite.ViewModels
+@model SearchRiskAssessmentsViewModel
+
+<h2>
+    <a id="showDeletedLink" class="btn @(Model.IsShowDeleted ? "disabled" : string.Empty)" href="#">Show Deleted</a>
+    <a id="ShowArchivedLink" class="btn @(Model.IsShowArchived ? "disabled" : string.Empty)" href="#" title="Show Archived Hazardous Substance Risk Assessments">Show Archived</a>
+    @if(Model.IsShowOpenVisible())
+    {
+        <a id="showOpenLink" class="btn" href="@Url.Action("Index", "RiskAssessment", new { companyId = Html.GetUsersCompanyId(User) })">Show Open</a>
+    }
+    <span class="tick"></span>My Hazardous Substances Risk Assessments - @Model.GetAdditionalTitle()
+</h2>

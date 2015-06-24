@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+  <class name="User" table="`User`">
+    <id name="Id" column="UserId" type="Guid">
+      <generator class="assigned"/>
+    </id>
+    <many-to-one name="Employee" class="Employee" column="EmployeeId" unique="true" cascade="save-update"/>
+    <many-to-one name="Role" class="Role" column="RoleId" lazy="proxy"  />
+    <property name="IsRegistered" column="IsActivated" />
+    <property name="Deleted" />
+    <property name="CreatedOn"/>
+    <many-to-one name="CreatedBy" class="UserForAuditing"/>
+    <property name="LastModifiedOn" />
+    <many-to-one name="LastModifiedBy" class="UserForAuditing"/>
+    <property name="CompanyId" column="ClientId" />
+    <property name="DateDeleted" />
+
+    <bag name="AuthenticationTokens" table="AuthenticationToken" lazy="true" cascade="save-update" where="IsEnabled='1'">
+      <key column="UserId" />
+      <one-to-many class="AuthenticationToken" />
+    </bag>
+    
+    <!-- I had to change this to lazy="false" because otherwise the Site is of type 'SiteProxy', and I can't see if it is a SiteGroup or a Site.-->
+    <!-- But then I changed it back because I think I've got round it with SiteStructureElement.Self, and this is causing performance issues. PTD -->
+    <!-- if you are getting the 'collection SiteStructureElement.Children was not processed by flush()', do not attempt to fix it by making this lazy="true", eager load it
+    in your query or initialise it in your code.-->
+    <many-to-one name="Site" class="SiteStructureElement" column="SiteId" lazy="proxy" />
+  </class>
+</hibernate-mapping>

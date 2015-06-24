@@ -1,0 +1,68 @@
+﻿@model EvaluationChecklist.Models.DocumentTemplateViewModel
+
+<div style="font-family: sans-serif; font-size:10px;">
+    <h2><u>Health &amp; Safety Site Assessment</u></h2>
+<br/>
+
+    <table cols="2" width="99.0%" align="left" cellpadding="3.0" cellspacing="1.0" borderwidth="0.5" left="false" right="false" top="true" bottom="false" red="89" green="96" blue="112">
+        <tr>
+            <td>
+                <span style="font-size:11px;"><b>Person Seen:</b></span> 
+            </td>
+            <td>
+                <span style="font-size:11px;">@Model.PersonSeen</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span style="font-size:11px;"><b>Visit Date:</b></span>
+            </td>
+            <td>
+                <span style="font-size:11px;">@Model.DateVisited.Date.ToLongDateString()</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span style="font-size:11px;"><b>Premises Description &amp; Areas Visited:</b></span>
+            </td>
+            <td>
+                <span style="font-size:11px;">@Model.AreaVisited</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span style="font-size:11px;"><b>Areas Not Visited or Access Restricted:</b></span>
+            </td>
+            <td>
+                <span style="font-size:11px;">@Model.AreaNotVisited</span>
+            </td>
+        </tr>
+    </table>
+   
+    @if (Model.CheckList != null)
+    {
+        
+            foreach (var category in Model.CheckList.Categories)
+            {
+                 <table cols="3" width="99.0%" align="left" cellpadding="3.0" cellspacing="1.0" borderwidth="0.5" left="false" right="false" top="true" bottom="false" red="89" green="96" blue="112">
+                       <tr> 
+                           <th> <b><span style="font-size:11px;">@category.Title</span></b></th> 
+                           <th style="max-width: 5px;"> <b><span style="font-size:11px;">Status</span></b> </th> 
+                           <th> <b><span style="font-size:11px; color:red;">Action Required</span></b></th> 
+                       </tr> 
+                       
+                       @foreach (var question in category.Questions)
+                       {
+                           <tr>
+                               <td><span style="font-size:11px;">@question.Question.Text</span></td>
+                               <td><span style="font-size:11px;">@question.Answer.Comment</span></td>
+                           </tr>
+                       }
+
+                 </table>
+            }    
+       
+    }
+    
+
+</div>

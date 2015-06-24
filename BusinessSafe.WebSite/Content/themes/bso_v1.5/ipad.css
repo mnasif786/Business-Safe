@@ -1,0 +1,387 @@
+﻿@media
+only screen and (-webkit-min-device-pixel-ratio: 1.5),
+only screen and (-o-min-device-pixel-ratio: 3/2),
+only screen and (min--moz-device-pixel-ratio: 1.5),
+only screen and (min-device-pixel-ratio: 1.5){
+
+  html, body{
+    width:100%;
+    overflow-x:hidden;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+    .navbar {
+         height: 64px;
+     }
+     
+     .navbar .nav {
+         width: 83%;
+     }
+
+     .navbar ul.nav li.dropdown:last-child {
+         width: 50%;
+     }
+
+     /* My Company profile / User Profile / User Permissions*/
+     #UserPermissionsSelection fieldset div.ipad-container {
+         width: 102%;
+     }
+}
+
+@media only screen and (max-width: 979px)  {
+       /* impersonating banner*/
+     .btn-info{
+         width: 8%;
+     }
+    
+     #impersonating-user-banner div.container {
+         width: 98%;
+     }
+
+     /* Navigation bar*/
+     .navbar {
+         height: 65px;
+     }
+     
+     .navbar .nav {
+         width: 96%;
+     }
+
+     .navbar .nav li:nth-child(5) {
+         clear: left;    
+     }
+
+     .dropdown-menu {
+         width: 232px !important;
+     }
+
+    /* Generic styles for all*/
+     .ipad-container {
+         width: 100%;  
+     }
+    
+     .ipad-container .nav-pills li{
+         width: 14%;
+         padding-left: 1px;
+     }
+
+     .ipad-container form fieldset legend {
+         width: 73% !important;
+     }
+
+
+      /* Search form */
+     .search-form label {
+         width: 14% !important;   
+     }
+
+     .search-form legend {
+         width: 70% !important;
+     }
+      .search-form ul li {
+          width: 100% !important;
+      }
+
+      #taskSummaryContainer {
+          display: none;
+      }
+
+     .ipad-risk-assessment-attached-document, .ipad-97-width{
+         width: 97% !important;
+     }
+     
+     /* /TasksList/_SearchForm.cshtml */ 
+     .search-form legend {
+         width: 70% !important;
+     }
+      .search-form ul li {
+          width: 100% !important;
+      }
+
+      #taskSummaryContainer {
+          display: none;
+      }
+
+     /*General risk assessment*/
+     #RiskAssessmentSummaryView .ipad-container div.row div.span6 {
+         width: 98%;
+     }
+
+      #newControlMeasureText {
+         width: 100%;
+     }
+
+     .ui-dialog {
+         left: 15px !important;
+         width: 732px !important;
+     }
+
+     
+     #hazardsPeopleWrapper ul, #hazardsPeopleWrapper select{
+         width: 24%;
+     }
+
+     #FurtherControlMeasureTaskForm input#Title,
+     #FurtherControlMeasureTaskForm textarea#Description {
+         width: 70%;
+     }
+
+     /*Fire Risk Assessment*/
+     #fire-checklists .checklists {
+         width: 96%;
+     }
+
+      #fire-checklists .checklists ul li{
+          font-size: 12px;
+     }
+
+     .ipad-container #significant-findings-wrapper fieldset legend {
+         width: 73%;
+     }
+
+     /*Personal Risk Assessment*/
+     #review-wrapper textarea {
+         width: 75%;
+     }
+
+     #review-wrapper ul {
+         width: 50%;
+     }
+
+     .ipad-container #hazardsPeopleWrapper fieldset legend {
+         width: 76%;
+     }
+
+     /* Hazardous Substance Risk Assessment*/
+     #RiskAssessmentAdviceLine {
+         margin-top: -18px;
+     }
+
+     #add-edit-risk-assessment-description-form #legend-people-involvement {
+         width: 94%;
+     }
+
+     .ipad-70-width {
+         width: 70%;
+     }
+
+     /*Hazardous Substance Inventory*/
+     #AddEditHazardousSubstanceForm fieldset div.row div.span12{
+         width: 97% !important;
+     }
+
+     #AddEditHazardousSubstanceForm fieldset #substance-hazard-symbols ul{
+         width: 50%;
+         margin-left: 9%;
+     }
+
+     #AddEditHazardousSubstanceForm fieldset div ul.available-options, 
+     #AddEditHazardousSubstanceForm fieldset div select.selected-options {
+          width: 32%;
+      }
+
+     /* Company Employees*/
+     #emergencyContactDetailsGrid {
+         width: 76% !important;
+     }
+
+     #add-emergency-contact {
+         margin-left: 30px;
+     }
+
+     #emergency-contact-surname {
+         margin-left: 0;
+     }
+
+     #addEmergencyContactDetails div.span6 {
+         width: 70% !important;
+     }
+
+     #addEmergencyContactDetails #employee-address-details div.span6, 
+     #addEmergencyContactDetails #address-details div.span6{
+         width: 48% !important;
+     }
+
+     #employee-address-details label.span2, #address-details label.span2{
+         width: 18% !important;
+     }
+
+     #personal-details fieldset legend,
+     #organisational-details fieldset legend,
+     #additional-details fieldset legend{
+         width: 75%
+     }
+     
+     #personal-details fieldset div.span6,
+     #organisational-details fieldset div.span6, 
+     #organisational-details fieldset div.span12,
+     #additional-details fieldset div.span6{
+         width: 70%;
+     }
+
+     #personal-details fieldset div.span8 {
+         width: 55%;
+     }
+
+     #employee-validation-summary {
+         width: 76%;
+     }
+
+     #personal-details fieldset div.span4 {
+         width: 19%;
+     }
+
+     #risk-assessor-details .row-fluid [class*="span"]:first-child {
+        width: 76%;
+     }
+
+     
+     #create-user div.span6 {
+         width: 97%;
+     }
+
+     #create-user div.span12 {
+         width: 76%;
+     }
+
+     #every-monday {
+         margin-left: 26px;
+     }
+
+     /*Accident Records*/
+
+     #AccidentRecordsGrid table tr th:nth-child(7), 
+     #AccidentRecordsGrid table tr td:nth-child(7), 
+     #AccidentRecordsGrid table tr th:nth-child(8), 
+     #AccidentRecordsGrid table tr td:nth-child(8) {
+         display: none;
+     }
+
+     .next-steps {
+         width: 96%;
+     }
+
+     #InjuryDetailsForm fieldset{
+         width: 100% !important;
+     }
+
+      #InjuryDetailsForm fieldset legend {
+          width: 97% !important;
+      }
+
+      #InjuryDetailsForm fieldset div ul.available-options, 
+      #InjuryDetailsForm fieldset div select.selected-options {
+          width: 32%;
+      }
+
+      #accident-reporting .ipad-container div.row div.span6 {
+          width: 98%;
+      }
+
+      #accident-reporting .form-inline div.span12,
+      #accident-reporting .form-inline div.span {
+          width: 99% !important;
+      }
+
+     /* My Company Profile*/
+     #company-details-form fieldset div.span12:first-child {
+         margin-left: 0;
+     }
+
+     #sitetreeviewcontainer {
+         width: 99%;
+     }
+
+     #addNewNonEmployeeForm div.row {
+         margin-left: 0;
+     }
+
+     #riskAssessorsDiv {
+         width: 95%;
+     }
+
+     #accidentRecordDistributionDiv {
+         width: 75%;
+     }
+
+     #EmployeeSelectionSection div div div div.search-and-multi-select ul {
+         width: 75%;
+     }
+
+     #EmployeeSelectionSection #SelectedEmployeesGrid table {
+         width: 75%;
+     }
+
+     #formAddNonEmployeeToDistributionList fieldset div.row {
+         margin-left: 0;
+     }
+
+     #EmployeeSelectionSection div div div .pull-right {
+         float: none !important;
+     }
+     
+     #accidentRecordDistributionValidationSummary, #accidentRecordDistributionSuccessMessage {
+         width: 95%;
+     }
+
+     #view-users-surname {
+         padding-left: 0;
+     }
+
+     #document-search fieldset ul li input#Title {
+         width: 50%;
+     }
+
+     /*My Responsibilities*/
+     #ResponsibilitiesGrid table tr th:nth-child(1), 
+     #ResponsibilitiesGrid table tr td:nth-child(1), 
+     #ResponsibilitiesGrid table tr th:nth-child(5), 
+     #ResponsibilitiesGrid table tr td:nth-child(5),
+     #ResponsibilitiesGrid table tr th:nth-child(8), 
+     #ResponsibilitiesGrid table tr td:nth-child(8) {
+         display: none;
+     }
+
+     #EditResponsibiltyDetail div.span12 input#Title,
+     #EditResponsibiltyDetail div.span12 textarea#Description {
+         width: 45%;
+     }
+
+     #EditResponsibiltyTasks div.tabs{
+         width: 74%;
+     }
+
+     #CreateResponsibilityTaskForm fieldset div.row input#Title,
+     #CreateResponsibilityTaskForm fieldset div.row textarea#Description {
+         width: 70%;
+     }
+
+     #ActionTask div fieldset div.row div.span7,
+     #TaskDialog fieldset div.row div.span7 {
+         width: 75%;
+     }
+     
+     #ActionTask fieldset div.row input#Title,
+     #ActionTask fieldset div.row textarea#Description,
+     #ActionTask fieldset div.row textarea.span8,
+     #TaskDialog fieldset div.row input#Title,
+     #TaskDialog fieldset div.row textarea#Description {
+         width: 75%
+     }
+
+     #TaskGrid table tr th.assigned-to, 
+     #TaskGrid table tr td.assigned-to,
+     #TaskGrid table tr th.created-date, 
+     #TaskGrid table tr td.created-date,
+     #TaskGrid table tr th.task-reference, 
+     #TaskGrid table tr td.task-reference {
+         display: none;
+     }
+
+     /*My Documentation*/
+     #DocumentsGrid table tr th:nth-child(4),
+     #DocumentsGrid table tr td:nth-child(4) {
+         display: none;
+     }
+}

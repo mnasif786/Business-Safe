@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain">
+
+  <class name="EmployeeEmergencyContactDetail" table="`EmployeeEmergencyContactDetails`">
+
+    <id name="Id" type="int" >
+      <generator class="native" />
+    </id>
+    <property name="Title" type="string" />
+    <property name="Forename" type="string" />
+    <property name="Surname" type="string" />
+    <property name="Relationship" type="string" />
+    <property name="SameAddressAsEmployee" type="bool" />
+    <property name="Address1" type="string" />
+    <property name="Address2" type="string" />
+    <property name="Address3" type="string" />
+    <property name="Town" type="string" />
+    <property name="County" type="string" />
+    <many-to-one name="Country" class="Country" column="CountryId"/>
+    <property name="PostCode" type="string" />
+    <property name="Telephone1" type="string" />
+    <property name="Telephone2" type="string" />
+    <property name="Telephone3" type="string" />
+    <property name="PreferedTelephone" type="int" />
+    <many-to-one name="Employee" class="Employee" column="EmployeeId"/>
+    <property name="Deleted" type ="bool"/>
+    <property name="CreatedOn" type ="datetime"/>
+
+    <property name="LastModifiedOn" type ="datetime"/>
+
+    <many-to-one name="CreatedBy" class="UserForAuditing"  column="CreatedBy"/>
+    <many-to-one name="LastModifiedBy" class="UserForAuditing" column="LastModifiedBy"/>
+
+  </class>
+</hibernate-mapping>

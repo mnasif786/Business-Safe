@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="DocumentTypeService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="WSHttpBinding_IDocumentTypeService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://pbswebtest2:8064/DocumentTypeService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://pbswebtest2:8064/DocumentTypeService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://pbswebtest2:8064/DocumentTypeService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ClientDocumentation.Application.DataTransferObjects.Documents" />
+      <xsd:import schemaLocation="http://pbswebtest2:8064/DocumentTypeService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/ClientDocumentation.Application.DataTransferObjects.Security" />
+      <xsd:import schemaLocation="http://pbswebtest2:8064/DocumentTypeService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IDocumentTypeService_GetAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAll" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentTypeService_GetAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentTypeService_GetForCurrentUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetForCurrentUser" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentTypeService_GetForCurrentUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetForCurrentUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentTypeService_GetByDepartmentId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetByDepartmentId" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentTypeService_GetByDepartmentId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetByDepartmentIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentTypeService_GetByIds_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetByIds" />
+  </wsdl:message>
+  <wsdl:message name="IDocumentTypeService_GetByIds_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetByIdsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IDocumentTypeService">
+    <wsdl:operation name="GetAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentTypeService/GetAll" message="tns:IDocumentTypeService_GetAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentTypeService/GetAllResponse" message="tns:IDocumentTypeService_GetAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetForCurrentUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentTypeService/GetForCurrentUser" message="tns:IDocumentTypeService_GetForCurrentUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentTypeService/GetForCurrentUserResponse" message="tns:IDocumentTypeService_GetForCurrentUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetByDepartmentId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentTypeService/GetByDepartmentId" message="tns:IDocumentTypeService_GetByDepartmentId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentTypeService/GetByDepartmentIdResponse" message="tns:IDocumentTypeService_GetByDepartmentId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetByIds">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDocumentTypeService/GetByIds" message="tns:IDocumentTypeService_GetByIds_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDocumentTypeService/GetByIdsResponse" message="tns:IDocumentTypeService_GetByIds_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSHttpBinding_IDocumentTypeService" type="tns:IDocumentTypeService">
+    <wsp:PolicyReference URI="#WSHttpBinding_IDocumentTypeService_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAll">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentTypeService/GetAll" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetForCurrentUser">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentTypeService/GetForCurrentUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetByDepartmentId">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentTypeService/GetByDepartmentId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetByIds">
+      <soap12:operation soapAction="http://tempuri.org/IDocumentTypeService/GetByIds" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DocumentTypeService">
+    <wsdl:port name="WSHttpBinding_IDocumentTypeService" binding="tns:WSHttpBinding_IDocumentTypeService">
+      <soap12:address location="http://pbswebtest2:8064/DocumentTypeService.svc" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://pbswebtest2:8064/DocumentTypeService.svc</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Dns>localhost</Dns>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

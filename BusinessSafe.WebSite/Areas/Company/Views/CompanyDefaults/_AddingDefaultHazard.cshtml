@@ -1,0 +1,28 @@
+﻿@using BusinessSafe.Domain.Entities
+@using BusinessSafe.WebSite.AuthenticationService
+@using BusinessSafe.WebSite.Helpers
+<fieldset class="text-input-and-command row">
+    <div class="span6">
+        <input type="text" class="span3" placeholder="@Model.TextInputWaterMark" />
+        @if (User.IsInRole(Permissions.AddCompanyDefaults.ToString()))
+        {
+            <button type="button" class="btn add btn-success">
+                Add</button>
+        }
+        <label>
+            <span class="label">Please select applicable risk assessment types for hazard</span></label>
+        <div class="row" style="margin-top: 2px;">
+            <div class="span4">
+                <label for="GRAHazard">
+                    <span class="label label-info">General</span></label>
+                <input id="GRAHazard" name="GRAHazard" type="checkbox" value="@EnumHelper.GetEnumValue(HazardTypeEnum.General.ToString())" />
+                <label for="PRAHazard">
+                    <span class="label label-info">Personal</span></label>
+                <input id="PRAHazard" name="PRAHazard" type="checkbox" value="@EnumHelper.GetEnumValue(HazardTypeEnum.Personal.ToString())" />
+@*                <label for="FRAHazard">
+                    <span class="label label-info">Fire</span></label>
+                <input id="FRAHazard" name="FRAHazard" type="checkbox" value="@EnumHelper.GetEnumValue(HazardTypeEnum.Fire.ToString())" />*@
+            </div>
+        </div>
+    </div>
+</fieldset>

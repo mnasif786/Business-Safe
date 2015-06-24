@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"  
+                   namespace="BusinessSafe.Domain.Entities"
+                   assembly="BusinessSafe.Domain" auto-import="false">
+  <class name="Question" table="`Question`" mutable="false">
+    <id name="Id" column="Id" type="long">
+      <generator class="identity"/>
+    </id>
+    <many-to-one name="Section" class="Section" column="SectionId" />
+    <property name="QuestionType" type="int" />
+    <property name="ListOrder" type="int" />
+    <property name="IsRequired" type="bool" />
+    <property name="Text" type="string" />
+	  <property name="Information" type="string" />
+    <property name="Deleted" type="bool" />
+    <property name="CreatedOn" type="DateTime" />
+    <many-to-one name="CreatedBy" class="UserForAuditing" column="CreatedBy"/>
+    <property name="LastModifiedOn" type="DateTime" />
+    <many-to-one name="LastModifiedBy" class="UserForAuditing" column="LastModifiedBy"/>
+  </class>
+</hibernate-mapping>
